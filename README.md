@@ -2,12 +2,11 @@ Quectel RGMII Configuration Notes
 =================================
 
 Many of Quectel's modems support directly connecting to a PCIe Ethernet chipset. This is useful to use the cellular connection as a WAN interface - you can just plug the modem into the WAN port on your router, do a bit of configuration, and you're good to go. Performance is good, and the modem's onboard connection management often works better than the scripts many routers use to try to keep the connection up.
+ - 
 
-Downsides are that it's more difficult to monitor the connection state, and, well, that's about it!
+> :warning: This is a living document. Changes may be made as more discoverys are made or more software is made
 
-> :warning: **WARNING**: This documentation is incomplete! I will try to get back to finish it up later; otherwise, pull requests are accepted!
-
-If you would like to support my work to document this, and help me purchase additional hardware for more hacking (without having to take one of my active modems down), you can click the link below. To be clear, please only do this if you actually want to; any future work I do will always be publicly available, and I'm not going to gate anything behind this! Well, unless you want remote support to set something up, I suppose.
+If you would like to support [Nate Carlson's](https://github.com/natecarlson) work to document this, and help them purchase additional hardware for more hacking (without having to take one of my active modems down), you can click the link below. To be clear, please only do this if you actually want to; any future work they do will always be publicly available. Questions and suggestions can be discussed under issues. 
 
 <a href="https://www.buymeacoffee.com/natecarlson" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
@@ -40,25 +39,21 @@ If you would like to support my work to document this, and help me purchase addi
 
 # Hardware Recommendations
 
-I've only used one adapter personally; it's sold on Aliexpress as "5G M.2 To RJ45", and can either be purchased as a bare board or as a kit including an enclosure, pigtails, and antennas (all of dubious quality.)
+I've only used one adapter personally; it's sold on Aliexpress as "5G to 2.5Gbps Ethernet(RJ45) board,USB3.0-C,DC5.5 input, support RM520N-GL RM510Q-GL RM500Q-GL/CN,RTL8125 case", and can either be purchased with or without an RM520N-GL. You can buy it as a bare board or as a kit, including an enclosure, pigtails, fan, heatsink, and antennas. The antennas and heatsink I don't realy care for. I'd recomend getting a higher quality copper heatsink and using antennas of your prefrence. I'd also recomend a 12v 5A power adapter to go along with this.
 
-The only labelling on the board is:
-```5G M.2 TO RJ45-KIT mini V2.0```
-As this is Aliexpress, there is no guarantee that the board will be the same when purchased from other sellers, or even the same seller.
 
-![](images/5G_M.2_TO_RJ45-KIT_mini_V2.0.webp)
+![](images/mcuzoneboard.webp)
+
+![](images/mcuzonekit.webp)
+
 
 Here's the seller I purchased from:
-https://www.aliexpress.us/item/3256804672394777.html
+https://a.aliexpress.com/_m0hVDKO
 
-Note that the descriptions all say gigabit, but the board that I (and others) received actually has the RTL8125 ethernet chipset, and works at 2.5gbit. Woohoo!
 
-The kit I linked above does include a heatsink. However, the enclosure doesn't allow any airflow, so the modem gets quite hot; I am running mine without the top on, and it does fine. It's also quite difficult to get the pieces of the case separated for the first time; I ended up using a putty knife to gently pry it apart (but be sure to pull the SIM tray first.) The SIM slot uses a standard "Mini SIM", and the tray is a pain to eject; I have been using the putty knife to pull that open too.
-
-You can install a 12V fan using the "12V/GND" PINs between the barrel connector and the PCIe slot.
-
-Side note - this is the same adapter that is/was used in early versions of the Invisagig product sold by Wireless Haven. Their product comes ready to go, in a larger case, including a 12V fan and a SIM card extender to make the sim card easier to deal with. They embed a custom GUI in the RM520N, which makes configuration simpler, no need for a USB connection at all. It's expensive compared to DIY, but they also offer a warranty and support. If you're interested:
+Side note - From what i understand, the InvisaGig product sold by Wireless Haven is an RGMII M.2 to Ethernet board with a custom case, copper heatsink on the RM520 coupled with a fan and proper ventilation on the case. They embed a custom GUI in the RM520N, which makes configuration simpler, no need for a USB connection at all. A guide on installing a community made version of a custom GUI will be covered later on in this document. The InvisaGig is expensive compared to DIY, but they also offer a warranty and support. If you're interested:
 https://thewirelesshaven.com/shop/modems-hotspots/invisagig/
+
 
 (If you are using an Invisagig, please don't do any of the stuff mentioned below. Use their UI, or ask for support instead. You're paying a premium to not have to deal with this.)
 
@@ -66,9 +61,18 @@ https://thewirelesshaven.com/shop/modems-hotspots/invisagig/
 
 ## Modem does not automatically connect at startup
 
-This is an issue that I'm working with two people on, both with RM520's.. when you reboot the modem, it will start in CFUN=0 (minimal function) mode. To get it to connect, you need to issue `AT+CFUN=1`.
+Some are reporting that when you reboot the modem, it will start in CFUN=0 (minimal function) mode. To get it to connect, you need to issue `AT+CFUN=1`.
 
-If you are running into this, a quick and easy hack is to install the ttl mod, but uncomment the line in `ttl-override` (which gets pushed to `/etc/initscripts/ttl-override`):
+I have experienced this myself, but I have found that running the following AT commands via the USB AT port fixes this.
+```bash
+AT+CFUN=1,1
+```
+Wait for the modem to reboot then run
+```bash
+AT+QPRTPARA=1
+```
+If you are running into this still and the above did not work, a quick and easy hack is to install the ttl mod, but uncomment the line in `ttl-override` (which gets pushed to `/etc/initscripts/ttl-override`):
+* Note that if this ttl mod is installed, then the simpleadmin web GUI's TTL will not work (covered later in this doc)
 
 ```bash
 # If your modem is starting in CFUN=0 mode, uncomment this to pass CFUN=1 to it. Hack, but we'll still keep working to figure out what is causing it.
@@ -79,7 +83,7 @@ Remove the `# ` from before the echo line.
 
 # Basic configuration
 
-It doesn't take much to get this going!
+It is recommended to Flash the latest firmware avalible before continuing. It will wipe any custom software previosly installed by adb. Use Qflash for windows or Qfirehose for Linux. This prosedure is documented for windows in my RM520 repository.
 
 ```
 AT+QCFG="data_interface",1,0
