@@ -6,7 +6,7 @@ Many of Quectel's modems support directly connecting to a PCIe Ethernet chipset.
 
 > :warning: This is a living document. Changes may be made as more discoverys are made or more software is made
 
-If you would like to support [Nate Carlson's](https://github.com/natecarlson) work to document this, and help them purchase additional hardware for more hacking (without having to take one of my active modems down), you can click the link below. To be clear, please only do this if you actually want to; any future work they do will always be publicly available. Questions and suggestions can be discussed under issues. 
+If you would like to support [Nate Carlson's](https://github.com/natecarlson) work to document this, and help them purchase additional hardware for more hacking (without having to take one of their active modems down), you can click the link below. To be clear, please only do this if you actually want to; any future work they do will always be publicly available. Questions and suggestions can be discussed under issues. 
 
 <a href="https://www.buymeacoffee.com/natecarlson" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
