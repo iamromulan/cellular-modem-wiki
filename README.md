@@ -6,23 +6,20 @@ Many of Quectel's modems support directly connecting to a PCIe Ethernet chipset.
 
 > :warning: This is a living document. Changes may be made as more discoverys are made or more software is made
 
-If you would like to support [Nate Carlson's](https://github.com/natecarlson) work to document this, and help them purchase additional hardware for more hacking (without having to take one of their active modems down), you can click the link below. To be clear, please only do this if you actually want to; any future work they do will always be publicly available. Questions and suggestions can be discussed under issues. 
-
-<a href="https://www.buymeacoffee.com/natecarlson" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
-
 # Table of Contents
 - [Quectel RGMII Configuration Notes](#quectel-rgmii-configuration-notes)
 - [Table of Contents](#table-of-contents)
 - [Hardware Recommendations](#hardware-recommendations)
 - [Known issues](#known-issues)
-  - [Modem does not automatically connect at startup](#modem-does-not-automatically-connect-at-startup)
+    - [I Can't get internet access from the Ethernet port (Common)](#I-Can't-get-internet-access-from-the-Ethernet-port-(Common))
+  - [Modem does not automatically connect at startup (Uncommon)](#modem-does-not-automatically-connect-at-startup-(Uncommon))
+- [RM520 Resource Repository](#RM520-Resource-Repository)
 - [Basic configuration](#basic-configuration)
-  - [Additional notes](#additional-notes)
-  - [AT over Ethernet](#at-over-ethernet)
+  - [First Time Setup](#First-Time-Setup)
+  - [After a firmware Flash; After first time setup](#After-a-firmware-Flash;-After-first-time-setup)
   - [Enabling IP Passthrough](#enabling-ip-passthrough)
     - [QMAP Method](#qmap-method)
     - [RGMII Method](#rgmii-method)
-  - [Specifying a custom APN](#specifying-a-custom-apn)
   - [Changing modem IP address with AT command](#changing-modem-ip-address-with-at-command)
 - [Advanced configuration](#advanced-configuration)
   - [Getting ADB Access](#getting-adb-access)
@@ -59,7 +56,24 @@ https://thewirelesshaven.com/shop/modems-hotspots/invisagig/
 
 # Known issues
 
-## Modem does not automatically connect at startup
+## I Can't get internet access from the Ethernet port (Common)
+
+Most of the time the issue is because of AT+QMAPWAC
+
+Since AT command documentation is vague and I don't know what the official function of this command is the most likely thing it does is serves as a master auto connect setting. Here are my observations with it: 
+
+ 
+ - To get current status of it run AT+QMAPWAC?
+
+ ****ON THE CARRIER I USED TO TEST THIS ****
+ - If AT+QMAPWAC=1 the Linux/adb shell , the USB NIC, and Ethernet port will request DHCP from the carrier automaticly, resulting in internet access and unique CGNAT IP addresses for each. So far at least in my experience, each have also led to a different public IP.
+
+ - If AT+QMAPWAC=0 then only the USB interface will have internet. In Windows if this doesn't appear while connected by USB then most likely you are in USB ECM mode (`AT+QCFG="usbnet",1` ) instead of USB RMNET mode (`AT+QCFG="usbnet",0`) check device manager. Otherwise you don't have the right driver installed. Install the right driver: [Quectel Windows USB Driver(Q) NDIS V2.4.6](https://drive.google.com/file/d/1nB-yBeqBCMLUXKLWNYVxs8VX6AXw9eOn/view?usp=sharing)
+ - A fresh firmware flash will do the following:  
+IPPT for both methods will be turned off back to default  
+AT+QMAPWAC=1 will go back to AT+QMAPWAC=0
+
+## Modem does not automatically connect at startup (Uncommon)
 
 Some are reporting that when you reboot the modem, it will start in CFUN=0 (minimal function) mode. To get it to connect, you need to issue `AT+CFUN=1`.
 
@@ -71,7 +85,7 @@ Wait for the modem to reboot then run
 ```bash
 AT+QPRTPARA=1
 ```
-If you are running into this still and the above did not work, a quick and easy hack is to install the ttl mod, but uncomment the line in `ttl-override` (which gets pushed to `/etc/initscripts/ttl-override`):
+If you are running into this still and the above did not work, a quick and easy hack is to install the [TTL Override:](#installing-ttl-override), but uncomment the line in `ttl-override` (which gets pushed to `/etc/initscripts/ttl-override`):
 * Note that if this ttl mod is installed, then the simpleadmin web GUI's TTL will not work (covered later in this doc)
 
 ```bash
@@ -81,80 +95,110 @@ If you are running into this still and the above did not work, a quick and easy 
 
 Remove the `# ` from before the echo line.
 
+# RM520 Resource Repository 
+It is recommended that you check out my  **[RM520N-GL Resource Repository](https://github.com/iamromulan/RM520N-GL)**
+
+There's an autoinstaller .cmd that will get you `Drivers`, `Qflash`, `Qnavigator`, and the last `2 firmwares` installed and put in the right spots. Checkout the C:/Quectel/firmware folder for the firmware after using the .cmd
+
+There's also a [Firmware Flashing Guide](https://github.com/iamromulan/RM520N-GL/tree/main#how-to-install-firmware-with-qflash-windows-) for Windows there 
+
+I will also be adding a how to use Qnavigator guide later there but for now:
+
+ - Basic use: open it up, hit next a bunch of times, press the plug icon at the top, press ok, uncheck automatic initialization, click connect, use the bottom right text box to type an AT command and press enter to send.
+
 # Basic configuration
 
-It is recommended to Flash the latest firmware avalible before continuing. It will wipe any custom software previosly installed by adb. Use Qflash for windows or Qfirehose for Linux. This prosedure is documented for windows in my RM520 repository.
+
+It is recommended to Flash the latest firmware available before continuing. 
+
+Check out my [RM520 Resource Repository](#RM520-Resource-Repository) 
+
+> Remember:
+
+A fresh flash will do the following:  
+
+ - IPPT for both methods will be turned off back to default  
+ - AT+QMAPWAC=1 will go back to AT+QMAPWAC=0
+ - Custom software/services installed by adb shell will be removed
+ 
+ ## First Time Setup
 
 ```
-AT+QCFG="data_interface",1,0
-AT+QCFG="pcie/mode",1
-AT+QETH="eth_driver","r8125",1
-AT+QMAPWAC=1
+AT+QCFG="data_interface",1,0  
+AT+QCFG="pcie/mode",1  
+AT+QCFG="usbnet",0  
+AT+QETH="eth_driver","r8125",1  
+AT+QMAPWAC=1  
+AT+CGDCONT=1,"IPV4V6","apn-here-inside-of-quotes"  
+Any other commands you want to run for proper cellular connection  
+AT+QPRTPARA=1
+AT+CFUN=1,1
 ```
 
 What these commands do:
 * `AT+QCFG="data_interface"`: Configures network port/diag port communication via PCIe and USB. First parameter is for network communication; 0 is USB and 1 is PCIe. Second parameter is for diagnostics port; only option is 0 for USB.
 * `AT+QCFG="pcie/mode"`: 1 = RC (Root Complex), IE host. 0 = EP (Endpoint), for use in a device that has the RC
+*  `AT+QCFG="usbnet",0`: NIC data call method in USB NIC mode. 0=RMNET
 * `AT+QETH="eth_driver","r8125",1`: This configures which ethernet driver to load at module boot. You can run `AT+QETH="eth_driver"` to get a list of options; I believe only one can be enabled. The first parameter is the name of the driver, and the second parameter is a bool to enable or disable.
+*  `AT+QMAPWAC`: enable or disable mobile AP auto dial: 0=disable 1=enable (reboot to take effect). You can run `AT+QMAPWAC?` to get what it is currently saved as/set to.
+*   `AT+CGDCONT`: Set APN command. Run `AT+CGDCONT` to see what APN profiles 1 through 8 are set to. To clear an APN just send = and the number of the profile you want to clear. For example, if i wanted to clear APN profile 1 I would send `AT+CGDCONT=1` To set an APN you specify the profile number, the protocol (IPV4, IPV6, or IPV4V6 for both) then the APN. For example if I wanted to set APN 1 as APNGOESHERE using both IPV4 and IPV6 i would send `AT+CGDCONT=1,"IPV4V6","APNGOESHERE"`
+* `AT+QPRTPARA=1`: Supposed to save current config to memory. l always run it.
 
-If you want to be able to send AT commands via Ethernet, you can also add:
+..after running `AT+CFUN=1,1` the modem will reboot
+
+## After a firmware Flash; After first time setup
+After a firmware Flash these commands need ran
 ```
-AT+QETH="eth_at","enable"
+AT+QCFG="usbnet",0  
+AT+QMAPWAC=1  
+AT+CFUN=1,1
 ```
 
-This will enable an AT interface on port 1555. See below section [AT over Ethernet](#at-over-ethernet) for more details.
+ - (optional, after reboot) Install Telnet and simpleadmin (Firmware flash gets rid of these)  
+ - (optional, after reboot) Set IP Passthrough (Firmware flash turns this off for both methods)
 
-..and then reboot the module with `AT+CFUN=1,1`.
 
-## Additional notes
-
-It looks like there are multiple ways to configure these modules. This is the most widely-referenced method I've seen referenced, including in Quectel's documentation for the M.2 EVB board. Similar methods of configuring this feature appear to be `AT+QETH="rgmii"` and various functions of `AT+QMAP`. If someone has a good understanding of which mode to use when, please open an issue or pull request!
-
-## AT over Ethernet
-
-If you enabled AT over Ethernet, anyone behind the modem will be able to send whatever AT commands they want to it -- there is no authentication for the protocol. Just to warn ya.
-
-Their interface is not like the Netgear Nighthawk interface, where you can just telnet into the port and start issuing commands; they use a not-complex-but-not-telnet protocol. They don't have official docs on it, and just released a sample C application. I have a hacked-up Python script that is a bit easier to use, available at:
-https://github.com/natecarlson/quectel-rgmii-at-command-client
 
 ## Enabling IP Passthrough
 
-By default, the modem acts as a true NAT router for IPv4, and serves addresses via IPv6. The modem's IPv4 address is 192.168.225.1 - this can't be changed via AT commands (and Quectel doesn't officially support changing it), but it is possible - see Advanced below.
+By default, the modem acts as a true NAT router for IPv4, and serves addresses via IPv6. The modem's IPv4 address is 192.168.225.1 - this CAN be changed via AT commands [See page 228: AT+QMAP="LANIP"](https://github.com/iamromulan/RM520N-GL/blob/main/Documents/Quectel_RG520N&RG525F&RG5x0F&RM5x0N_Series_AT_Commands_Manual_V1.0.0_Preliminary_20230731.pdf)
 
-In any case, if you want to pass through the IPv4 (and possibly IPv6? Not sure if the modem passes through the v6 address and lets you use the delegated subnet behind your router or not; I will have to test.) addresses that are assigned, you can!
+In any case, if you want to turn on IP passthrough where the IP address assigned form the cell carrier passes to what connects to the ethernet port, you can!
 
 As with enabling ethernet mode to start with, it appears there are multiple ways to enable IP Passthrough.
 
-> :warning: **BE CAREFUL**: I haven't managed to get either of these methods to work properly in my testing yet. If you have, feel free to share!
+### QMAP Method (Preferred)
 
-### QMAP Method
+This is the method that is documented in [on page 231](https://github.com/iamromulan/RM520N-GL/blob/main/Documents/Quectel_RG520N&RG525F&RG5x0F&RM5x0N_Series_AT_Commands_Manual_V1.0.0_Preliminary_20230731.pdf)
 
-> :warning: **BE CAREFUL**: I haven't managed to get either of these methods to work properly in my testing yet. If you have, feel free to share!
-
-This is the method that is documented in the RM520N AT command manual that I have, so I've tested this method.
-
-To enable IP passthrough:
+#### To enable IP passthrough (QMAP Method):
 ```
-at+qmap="mpdn_rule",0,1,1,1,1,"FF:FF:FF:FF:FF:FF"
+AT+QMAP="MPDN_rule",0,1,0,1,1,"FF:FF:FF:FF:FF:FF"
 ```
 
 Parameters:
 * First = mPDN rule number, range 0-3 (unless you're doing something complicated, you'll use 0.)
 * Second = APN Profile ID (CGDCONT) to use. You'll probably want 1.
-* Third = IP Passthrough mode. 0 = disabled, 1 = enabled for ethernet, 2 = enabled for WiFi, 3 = enabled for USB-ECM/RNDIS. You'll probably want 1.
-* Fourth = autoconnect. Use 1.
-* Fifth = IPPT Mode. If set to 0, disabled? 1 or 2 make the next field the MAC address you want to pass through to. If you don't specify this, but have IPPT enabled, the first computer to connect will get the pass-through address, and any additional computers will get a private NAT'd IP.
-* Sixth = MAC address to pass through to. `FF:FF:FF:FF:FF:FF` will select the first host that gets a DHCP lease.
+* Third = VLAN ID. This is typically 0 but you can run `AT+QMAP="VLAN"` to find out what it should be
+* Fourth = IPPT mode, use 1 for ethernet use 0 for disable
+* Fifth = Auto Connect. If set to 0=disabled 1=enabled 
+* Sixth = MAC address to pass through to. `FF:FF:FF:FF:FF:FF` will pass the IP to the last connected ethernet device. `”00:00:00:00:00:00”` will pass only to the first connected ethernet device. You can also specify a custom mac address instead. 
+
+#### To disable IP passthrough (QMAP Method):
+```
+AT+QMAP="MPDN_rule",0
+AT+QMAPWAC=1
+AT+CFUN=1,1
+```
+OR
+
+flash firmware---> follow [After a firmware Flash; After first time setup](#After-a-firmware-Flash;-After-first-time-setup)
 
 
-### RGMII Method
+### RGMII Method (Not preferred)
 
-> :warning: **BE CAREFUL**: I haven't managed to get either of these methods to work properly in my testing yet. If you have, feel free to share!
-
-If we were using `AT+QETH="rgmii"` to enable Ethernet mode, we'd probably want to use that for this too. Note that this mode is documented in the AT command guide for the older RM50x modules, and is not documented in the AT command guide for the RM520 modules - at least the versions of the manuals I have.
-
-If you want to go that route, you can try:
-
+> :warning: Older method, will not turn off unless you flash firmware
+#### To enable IP passthrough (RGMII Method):
 ```
 AT+QETH="ipptmac",XX:XX:XX:XX:XX:XX
 AT+QETH="rgmii","ENABLE",1,1,1
@@ -167,11 +211,12 @@ AT+QETH="rgmii","ENABLE",1,1,1
   * Optional fourth parameter is if you want to specify a CGDCONT profile to use for this. `0` = not configured, `1` = configured.
   * Optional fifth parameter is the CGDCONT profile ID, 1-8.
 
-## Specifying a custom APN
+#### To disable IP passthrough (RGMII Method):
 
-If the modem doesn't automatically connect, it's likely that you need to manually configure the APN. It's done the same way that you configure the APN on the modem when using it via USB/etc.
+flash firmware---> follow [After a firmware Flash; After first time setup](#After-a-firmware-Flash;-After-first-time-setup)
 
-> :warning: **TODO**: Finish filling out this section!
+# ********* Work In Progress below this line*********
+## Install Web interface and Telnet Daemon 
 
 ## Changing modem IP address with AT command
 
@@ -200,9 +245,12 @@ AT+QADBKEY?
 OK
 ```
 
-You then can head over to the Quectel forums (https://forums.quectel.com/), create an account, and post asking for the key. There are also tools available on the great wide internet that will generate the key for previous modems.. but they don't quite work for RM5XX's; the result is a little bit too long.
+You then can head over to [The Python ADB unlock key Generator](https://onecompiler.com/python/3znepjcsq)
+![pythonadbkey](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/qadbkeypython.png?raw=true)
 
-Once you have received the unlock key, you apply it like:
+**Replace the 12345678 with the response you got from running `AT+QADBKEY?`** then click run. Under output your unlock key will be generated.
+
+Once you have received the unlock key, you apply it like this:
 ```
 AT+QADBKEY="0jXKXQwSwMxYoeg"
 ```
@@ -503,3 +551,4 @@ Command shell:
 ```
 
 It appears that smd11 and at_mdm0 can also be used for this. On a default-ish modem, it appears that smd7 and at_mdm0 are both used by running daemons, so I picked smd11 for my AT daemon. There is a service called 'quectel-uart-smd.service', in it's unit file it disables the quectel_uart_smd, and says that smd11 is used by MCM_atcop_svc. However, I see no signs of that on the system.. so I think it's probably the safest to use.
+
