@@ -4,7 +4,7 @@ Quectel RGMII Configuration Notes
 Many of Quectel's modems support directly connecting to a PCIe Ethernet chipset. This is useful to use the cellular connection as a WAN interface - you can just plug the modem into the WAN port on your router, do a bit of configuration, and you're good to go. Performance is good, and the modem's onboard connection management often works better than the scripts many routers use to try to keep the connection up.
 
 
-> :warning: This is a living document. Changes may be made as more discoverys are made or more software is made
+> :warning: This is a living document. Changes may be made as more discoveries are made or more software is made
 
 # Table of Contents
 - [Quectel RGMII Configuration Notes](#quectel-rgmii-configuration-notes)
@@ -14,25 +14,29 @@ Many of Quectel's modems support directly connecting to a PCIe Ethernet chipset.
     - [I Can't get internet access from the Ethernet port (Common)](#i-cant-get-internet-access-from-the-ethernet-port-common)
   - [Modem does not automatically connect at startup (Uncommon)](#modem-does-not-automatically-connect-at-startup-uncommon)
 - [RM520 Resource Repository](#RM520-Resource-Repository)
-- [Basic configuration](#basic-configuration)
-  - [First Time Setup](#first-time-setup)
-  - [After a firmware Flash; After first time setup](#after-a-firmware-flash-after-first-time-setup)
-  - [Enabling IP Passthrough](#enabling-ip-passthrough)
-    - [QMAP Method](#qmap-method)
-    - [RGMII Method](#rgmii-method)
-  - [Changing modem IP address with AT command](#changing-modem-ip-address-with-at-command)
+  
+ - [Basic configuration](#basic-configuration)
+   - [First Time Setup](#first-time-setup)
+   - [After a firmware Flash; After first time setup](#after-a-firmware-flash-after-first-time-setup)
+   - [Changing modem IP address with AT command](#changing-modem-ip-address-with-at-command)
+   - [Enabling IP Passthrough](#enabling-ip-passthrough)
+     - [QMAP Method (Preferred)](#qmap-method-preferred)
+     - [RGMII Method (Not preferred)](#rgmii-method-not-preferred)
+  
 - [Advanced configuration](#advanced-configuration)
-  - [Getting ADB Access](#getting-adb-access)
+  - [Unlocking and Using ADB](#unlocking-and-using-adb)
+    - [Using ADB](#using-adb)
+  
+- [Other interesting things to check over ADB](#other-interesting-things-to-check-over-adb)
   - [Starting an FTP server](#starting-an-ftp-server)
-  - [Changing modem IP address](#changing-modem-ip-address)
-  - [TTL Modification](#ttl-modification)
+   - [Changing modem IP address by adb shell](#changing-modem-ip-address-by-adb-shell)
+   - [TTL Modification](#ttl-modification)
     - [Installing TTL Override:](#installing-ttl-override)
     - [Removing TTL Override](#removing-ttl-override)
   - [Enable Qualcomm Webserver](#enable-qualcomm-webserver)
   - [Enable journald logging](#enable-journald-logging)
-  - [Other interesting things to check over ADB](#other-interesting-things-to-check-over-adb)
-    - [Making sure you're connected to the right modem](#making-sure-youre-connected-to-the-right-modem)
-    - [AT Command Access from ADB](#at-command-access-from-adb)
+  - [Making sure you're connected to the right modem](#making-sure-youre-connected-to-the-right-modem)
+  - [AT Command Access from ADB](#at-command-access-from-adb)
 
 # Hardware Recommendations
 
@@ -65,13 +69,15 @@ Since AT command documentation is vague and I don't know what the official funct
  
  - To get current status of it run AT+QMAPWAC?
 
- ****ON THE CARRIER I USED TO TEST THIS ****
+ ****ON THE CARRIER I USED TO TEST THIS, WILL TEST FURTHER ****
  - If AT+QMAPWAC=1 the Linux/adb shell , the USB NIC, and Ethernet port will request DHCP from the carrier automaticly, resulting in internet access and unique CGNAT IP addresses for each. So far at least in my experience, each have also led to a different public IP.
 
  - If AT+QMAPWAC=0 then only the USB interface will have internet. In Windows if this doesn't appear while connected by USB then most likely you are in USB ECM mode (`AT+QCFG="usbnet",1` ) instead of USB RMNET mode (`AT+QCFG="usbnet",0`) check device manager. Otherwise you don't have the right driver installed. Install the right driver: [Quectel Windows USB Driver(Q) NDIS V2.4.6](https://drive.google.com/file/d/1nB-yBeqBCMLUXKLWNYVxs8VX6AXw9eOn/view?usp=sharing)
  - A fresh firmware flash will do the following:  
 IPPT for both methods will be turned off back to default  
 AT+QMAPWAC=1 will go back to AT+QMAPWAC=0
+
+ - Disabling either IPPT methods AT+QMAPWAC=1 will go back to AT+QMAPWAC=0
 
 ## Modem does not automatically connect at startup (Uncommon)
 
@@ -157,19 +163,29 @@ AT+CFUN=1,1
  - (optional, after reboot) Install Telnet and simpleadmin (Firmware flash gets rid of these)  
  - (optional, after reboot) Set IP Passthrough (Firmware flash turns this off for both methods)
 
+## Changing modem IP address with AT command
+By default, the modem acts as a true NAT router for IPv4, and serves addresses via IPv6. The modem's IPv4 address is 192.168.225.1 - this CAN be changed via AT commands [See page 228: AT+QMAP="LANIP"](https://github.com/iamromulan/RM520N-GL/blob/main/Documents/Quectel_RG520N&RG525F&RG5x0F&RM5x0N_Series_AT_Commands_Manual_V1.0.0_Preliminary_20230731.pdf)
+
+There are plenty of reasons that you might need to change the IP of the modem.. IE, you might have multiple modems connected to the same router for WAN load balancing or bonding, or it might conflict with your internal network IP ranges, or (other reasons.) On recent modems like the RM520, Quectel does have a command to do this!
+
+The command is:
+```
+AT+QMAP="LANIP",<dhcp-start>,<dhcp-end>,<router-ip>,<apply?>
+AT+QMAP="LANIP",192.168.227.20,192.168.227.100,192.168.227.1,1
+```
+
+The 'apply?' is if the router should apply the changes immediately, or wait until reboot.
 
 
 ## Enabling IP Passthrough
 
-By default, the modem acts as a true NAT router for IPv4, and serves addresses via IPv6. The modem's IPv4 address is 192.168.225.1 - this CAN be changed via AT commands [See page 228: AT+QMAP="LANIP"](https://github.com/iamromulan/RM520N-GL/blob/main/Documents/Quectel_RG520N&RG525F&RG5x0F&RM5x0N_Series_AT_Commands_Manual_V1.0.0_Preliminary_20230731.pdf)
+If you want to turn on IP passthrough where the IP address assigned form the cell carrier passes to what connects to the ethernet port, you can! The LAN IP addresses including the gateway are still accessible even while IPPT  (IP Passthrough) is enabled.
 
-In any case, if you want to turn on IP passthrough where the IP address assigned form the cell carrier passes to what connects to the ethernet port, you can!
-
-As with enabling ethernet mode to start with, it appears there are multiple ways to enable IP Passthrough.
+There are 2 ways to enable IP Passthrough.
 
 ### QMAP Method (Preferred)
 
-This is the method that is documented in [on page 231](https://github.com/iamromulan/RM520N-GL/blob/main/Documents/Quectel_RG520N&RG525F&RG5x0F&RM5x0N_Series_AT_Commands_Manual_V1.0.0_Preliminary_20230731.pdf)
+This is the method that is documented on page 231 of the  [ 2023-07-31 AT Manual](https://github.com/iamromulan/RM520N-GL/blob/main/Documents/Quectel_RG520N&RG525F&RG5x0F&RM5x0N_Series_AT_Commands_Manual_V1.0.0_Preliminary_20230731.pdf)
 
 #### To enable IP passthrough (QMAP Method):
 ```
@@ -197,7 +213,7 @@ flash firmware---> follow [After a firmware Flash; After first time setup](#Afte
 
 ### RGMII Method (Not preferred)
 
-> :warning: Older method, will not turn off unless you flash firmware
+> :warning: Older method,  in my experence it will not turn off unless you flash firmware
 #### To enable IP passthrough (RGMII Method):
 ```
 AT+QETH="ipptmac",XX:XX:XX:XX:XX:XX
@@ -212,40 +228,30 @@ AT+QETH="rgmii","ENABLE",1,1,1
   * Optional fifth parameter is the CGDCONT profile ID, 1-8.
 
 #### To disable IP passthrough (RGMII Method):
-
+In theory you should be able to just send `AT+QETH="rgmii","DISABLE"` to disable it. I personally couldn't get it to return to the default value without a firmware flash. If it does work for you you'll probably want to run `AT+QMAPWAC=1` and then reboot `AT+CFUN=1,1` right after.
+Otherwise:
 flash firmware---> follow [After a firmware Flash; After first time setup](#After-a-firmware-Flash;-After-first-time-setup)
 
-# ********* Work In Progress below this line*********
-## Install Web interface and Telnet Daemon 
-
-## Changing modem IP address with AT command
-
-There are plenty of reasons that you might need to change the IP of the modem.. IE, you might have multiple modems connected to the same router for WAN load balancing or bonding, or it might conflict with your internal network IP ranges, or (other reasons.) On recent modems, Quectel does have a command to do this!
-
-The command is:
-```
-AT+QMAP="LANIP",<dhcp-start>,<dhcp-end>,<router-ip>,<apply?>
-AT+QMAP="LANIP",192.168.227.20,192.168.227.100,192.168.227.1,1
-```
-
-The 'apply?' is if the router should apply the changes immediately, or wait until reboot.
 
 # Advanced configuration
 
 These modems are a full-fledged Linux router under the hood. Once you've got access, you can modify anything you want on the filesystem. It's pretty cool, and also kind of dangerous.. but neat. The access is via 'adb' - the same tool used to do fun stuff to Android phones.
 
-## Getting ADB Access
+## Unlocking and using ADB
 
-To get access, you need to get a key salt from the modem, get the result from Quectel, unlock the modem, and then enable ADB.
+To get access, you need to get a key salt from the modem, then give that to
+the python ADB unlock keygen, take that response to unlock ADB, and then actually enable ADB. This only needs to be done once, as this survives firmware flashing.
 
-To get the key, run the AT command "AT+QADBKEY?". The modem will reply with:
+To get the key salt, run the AT command "AT+QADBKEY?". The modem will reply with:
 ```
 AT+QADBKEY?
 +QADBKEY: 12345678
 OK
 ```
+12345678 being the key salt in this case
 
 You then can head over to [The Python ADB unlock key Generator](https://onecompiler.com/python/3znepjcsq)
+
 ![pythonadbkey](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/qadbkeypython.png?raw=true)
 
 **Replace the 12345678 with the response you got from running `AT+QADBKEY?`** then click run. Under output your unlock key will be generated.
@@ -265,17 +271,25 @@ AT+QCFG="usbcfg",0x2C7C,0x0801,1,1,1,1,1,1,0 // Enable ADB
 
 And reboot with `AT+CFUN=1,1` to actually apply.
 
-Once the modem is back online, you should be able to use ADB to manage the modem on the host connect to it with USB. Basic commands:
+### Using ADB
+# Incomplete will update later
+Once the modem is back online, you should be able to use ADB to manage the modem on the host connect to it with USB. You'll need to install the ADB drivers and the ADB command line tool before you can use it. The easiest way to do this is just to use the installer from here https://github.com/K3V1991/ADB-and-FastbootPlusPlus/releases
 
-- `adb shell` - root shell on the modem
+Basic commands:
+
+- `adb shell` - root linux shell on the modem
 - `adb pull /path/to/file` - download a file from the modem
 - `adb push /path/to/file` - upload a file to the modem
 
-So far, I have been unsuccessful with my attempts to get ADB to listen on the ethernet interface. Warning - `adb tcp <port>` will crash both ADB and all the other serial ports expoised via USB until the modem is restarted.
+So far, I have been unsuccessful with my attempts to get ADB to listen on the ethernet interface. Warning - `adb tcp <port>` will crash both ADB and all the other serial ports exposed via USB until the modem is restarted. So stick with using ADB over USB for now.
+## Installing the Telnet Daemon and simpleadmin web GUI
+After gaining adb acess You can install a simple web interface you'll be able to acess using the modems gateway address 
+
+# Other interesting things to check over ADB
 
 ## Starting an FTP server
 
-Once you have root access to the modem, if you want you can start a temporary FTP server to let you transfer files over the network instead of adb. It will run until you ctrl-c it. Be careful here, it allows full unauthenticated access to the filesystem to whoever can access any of the IPs (if you have a routed public IP, vi that too unless you add firewall rules!) You can change the IP to the modem's LAN address (192.168.225.1 by default) if you'd like.
+Once you have root access (adb) to the modem, if you want you can start a temporary FTP server to let you transfer files over the network instead of adb. It will run until you ctrl-c it. Be careful here, it allows full unauthenticated access to the filesystem to whoever can access any of the IPs (if you have a routed public IP, vi that too unless you add firewall rules!) You can change the IP to the modem's LAN address (192.168.225.1 by default) if you'd like.
 
 ```bash
 tcpsvd -vE 0.0.0.0 21 ftpd /
@@ -289,7 +303,7 @@ Note that the BusyBox binary on the modem is compiled without FTP write support.
 /usrdata/bin/busybox-armv7l tcpsvd -xE 0.0.0.0 21 /usrdata/bin/busybox-armv7l ftpd -wA /
 ```
 
-## Changing modem IP address
+## Changing modem IP address by adb shell
 
 **NOTE**: I am leaving this here for reference sake, but on modern modems, you can indeed change the IP with an AT command. Please reference: [Changing modem IP address with AT command
 ](#changing-modem-ip-address-with-at-command)
@@ -308,6 +322,8 @@ WARNING: You're modifying files on the modem's root filesystem here. If you brea
 Note that the 192.168.225.1 address is also referenced in `/etc/ql_nf_preload.conf`; I haven't modified that file and everything seems to work, but just so ya know.
 
 ## TTL Modification
+
+> :warning: Do not use this at the same time as the Simpleadmin TTL mod. Use either one or the other
 
 This is a Linux router using iptables - so you can add iptables rules to override the outgoing TTL. Certain cell plans may require this for various reasons.
 
@@ -372,6 +388,7 @@ adb shell systemctl daemon-reload
 ..no need to reboot.
 
 ## Enable Qualcomm Webserver
+> :warning: Do not use this and the Simpleadmin. Use either one or the other
 
 > :bowtie: This section was contributed by [GitHub user aesthernr](https://github.com/aesthernr). Thanks for the contribution!
 
@@ -484,7 +501,6 @@ adb shell ln -s /lib/systemd/system/systemd-journald-audit.socket /lib/systemd/s
 
 I am leaving systemd-journal-flush disabled (masked), as we don't want to write the logging data to persistent storage. Well - if you do you can change the Storage to "persistent" in the config file, and also symlink the systemd-journal-flush to actually switch from volitile to persistent storage on bootup.
 
-## Other interesting things to check over ADB
 
 ### Making sure you're connected to the right modem
 
@@ -551,4 +567,5 @@ Command shell:
 ```
 
 It appears that smd11 and at_mdm0 can also be used for this. On a default-ish modem, it appears that smd7 and at_mdm0 are both used by running daemons, so I picked smd11 for my AT daemon. There is a service called 'quectel-uart-smd.service', in it's unit file it disables the quectel_uart_smd, and says that smd11 is used by MCM_atcop_svc. However, I see no signs of that on the system.. so I think it's probably the safest to use.
+
 
