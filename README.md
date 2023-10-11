@@ -1,6 +1,9 @@
 Quectel RGMII Configuration Notes
 =================================
 
+> :heavy_check_mark: This guide will mainly focus on the Quectel RM520N-GL. 
+However, [Basic configuration](#basic-configuration), [Unlocking and Using ADB](#unlocking-and-using-adb), and [Other interesting things to check over ADB](#other-interesting-things-to-check-over-adb) (except for the  [Qualcomm Webserver](#enable-qualcomm-webserver)), should work on other Quectel 5G modems. (Untested on 4G Quectel modems)
+
 Many of Quectel's modems support directly connecting to a PCIe Ethernet chipset. This is useful to use the cellular connection as a WAN interface - you can just plug the modem into the WAN port on your router, do a bit of configuration, and you're good to go. Performance is good, and the modem's onboard connection management often works better than the scripts many routers use to try to keep the connection up.
 
 
@@ -26,7 +29,11 @@ Many of Quectel's modems support directly connecting to a PCIe Ethernet chipset.
 - [Advanced configuration](#advanced-configuration)
   - [Unlocking and Using ADB](#unlocking-and-using-adb)
     - [Using ADB](#using-adb)
-  
+    - [Basic Commands](#basic-commands)
+ - [Installing the Telnet Daemon and simpleadmin web GUI](#installing-the-telnet-daemon-and-simpleadmin-web-gui)  
+    - [Overview](#overview)
+    - [How to install](#how-to-install)
+    - [How to uninstall](#how-to-uninstall)
 - [Other interesting things to check over ADB](#other-interesting-things-to-check-over-adb)
   - [Starting an FTP server](#starting-an-ftp-server)
    - [Changing modem IP address by adb shell](#changing-modem-ip-address-by-adb-shell)
@@ -40,7 +47,7 @@ Many of Quectel's modems support directly connecting to a PCIe Ethernet chipset.
 
 # Hardware Recommendations
 
-I've only used one adapter personally; it's sold on Aliexpress as "5G to 2.5Gbps Ethernet(RJ45) board,USB3.0-C,DC5.5 input, support RM520N-GL RM510Q-GL RM500Q-GL/CN,RTL8125 case", and can either be purchased with or without an RM520N-GL. You can buy it as a bare board or as a kit, including an enclosure, pigtails, fan, heatsink, and antennas. The antennas and heatsink I don't realy care for. I'd recomend getting a higher quality copper heatsink and using antennas of your prefrence. I'd also recomend a 12v 5A power adapter to go along with this.
+I've only used one adapter personally; it's sold on Aliexpress as "5G to 2.5Gbps Ethernet(RJ45) board,USB3.0-C,DC5.5 input, support RM520N-GL RM510Q-GL RM500Q-GL/CN,RTL8125 case", and can either be purchased with or without an RM520N-GL. You can buy it as a bare board or as a kit, including an enclosure, pigtails, fan, heatsink, and antennas. The antennas and heatsink I don't really care for. I'd recommend getting a higher quality copper heatsink and using antennas of your preference. I'd also recommend a 12v 5A power adapter to go along with this.
 
 
 ![](images/mcuzoneboard.webp)
@@ -208,12 +215,12 @@ AT+CFUN=1,1
 ```
 OR
 
-flash firmware---> follow [After a firmware Flash; After first time setup](#After-a-firmware-Flash;-After-first-time-setup)
+flash firmware---> follow [After a firmware Flash; After first time setup](#after-a-firmware-flash-after-first-time-setup)
 
 
 ### RGMII Method (Not preferred)
 
-> :warning: Older method,  in my experence it will not turn off unless you flash firmware
+> :warning: Older method,  in my experience it will not turn off unless you flash firmware
 #### To enable IP passthrough (RGMII Method):
 ```
 AT+QETH="ipptmac",XX:XX:XX:XX:XX:XX
@@ -238,6 +245,8 @@ flash firmware---> follow [After a firmware Flash; After first time setup](#Afte
 These modems are a full-fledged Linux router under the hood. Once you've got access, you can modify anything you want on the filesystem. It's pretty cool, and also kind of dangerous.. but neat. The access is via 'adb' - the same tool used to do fun stuff to Android phones.
 
 ## Unlocking and using ADB
+
+> :bowtie: Thanks to [carp4](https://github.com/carp4) for their work on the [qadbkey-unlock python script](https://github.com/carp4/qadbkey-unlock) we can do this without Quectel's help now!
 
 To get access, you need to get a key salt from the modem, then give that to
 the python ADB unlock keygen, take that response to unlock ADB, and then actually enable ADB. This only needs to be done once, as this survives firmware flashing.
@@ -272,19 +281,66 @@ AT+QCFG="usbcfg",0x2C7C,0x0801,1,1,1,1,1,1,0 // Enable ADB
 And reboot with `AT+CFUN=1,1` to actually apply.
 
 ### Using ADB
-# Incomplete will update later
+
 Once the modem is back online, you should be able to use ADB to manage the modem on the host connect to it with USB. You'll need to install the ADB drivers and the ADB command line tool before you can use it. The easiest way to do this is just to use the installer from here https://github.com/K3V1991/ADB-and-FastbootPlusPlus/releases
 
-Basic commands:
+- Download the .exe non-portable version
+![downloadadb](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/downloadadb.png?raw=true)
+- Accept, yes, next, allow are pretty much everything you want to be pressing. If you get a security working like this, click more info ![secerror](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/secerror.png?raw=true)
+- During the install you'll want these selected for sure. ![adb1](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/adb1.png?raw=true)
+- Toward the end, make these are selected like this: ![adb2](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/adb2.png?raw=true)
+- The Universal Adb Driver installer will open after, go ahead and accept, yes, next, allow, finish it.
+- A window like this will open. ![adb3](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/adb3.png?raw=true)
 
-- `adb shell` - root linux shell on the modem
+- Any time you want to use this open ADB & Fastboot++
+![adbcmd](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/adbcmd.png?raw=true)
+
+> :warning: **The other icon/shortcuts are not needed for modems. They are however useful for Android phones. If you only need this for a Quectel modem the icon/shortcuts can be deleted** 
+> ![enter image description here](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/notneededadb.png?raw=true)
+
+### Basic commands:
+In a ADB & Fastboot++ type `adb devices` and press enter. If you have adb unlocked on  your modem and it is connected by usb, you should have at least one device show up on the list. This is a good way to test if adb is installed and properly recognizing your modem or android phone. 
+**Example:** 
+![adb3](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/adb3.png?raw=true)
+
 - `adb pull /path/to/file` - download a file from the modem
-- `adb push /path/to/file` - upload a file to the modem
+- `adb push /path/to/file /path/on/modem` - upload a file to the modem
+- `adb shell` - remote control the root linux shell/command line on the modem, type exit when done (note that while in the shell any commands you want to run that normally begin with `adb shell`, that part can be skipped 
+  - In the adb shell of a Quectel modem it will behave like a unix shell. Commands like `uname -a` will show you the name of the OS, the processor type, build date info, and more; `ls` will show you the file structure, and `systemctl list-units --type=service --all` will show all services installed running or not.
 
-So far, I have been unsuccessful with my attempts to get ADB to listen on the ethernet interface. Warning - `adb tcp <port>` will crash both ADB and all the other serial ports exposed via USB until the modem is restarted. So stick with using ADB over USB for now.
+So far, I have been unsuccessful with my attempts to get ADB to listen on the ethernet interface over IP. Warning the - `adb tcp <port>` command will crash both ADB and all the other serial ports exposed via USB until the modem is restarted. So stick with using ADB over USB for now.
 ## Installing the Telnet Daemon and simpleadmin web GUI
-After gaining adb acess You can install a simple web interface you'll be able to acess using the modems gateway address 
+### Overview
+After gaining adb acess, you can install a simple web interface you'll be able to access using the modems gateway IP address. You can see some basic signal stats, send AT commands from the browser, and change your TTL directly on the modem. By default this will be on port 8080 so if you didn't change the gateway IP address you'd go to http://192.168.225.1:8080/ and you'd find this...
+![Home Page](https://user-images.githubusercontent.com/22154114/271322119-ae5746d9-332e-4e34-90a0-3f96c3a19d9e.png)
+![AT Commands](https://user-images.githubusercontent.com/22154114/271322313-0e80bec2-37de-447e-8768-3f73dc62f6d6.png)
+![enter image description here](https://user-images.githubusercontent.com/22154114/271322413-65671dbf-81ba-44ef-88e1-218e740c0de7.png)
 
+Thanks to the work of [Nate Carlson](https://github.com/natecarlson) (Telnet Deamon, Original RGMII Notes), [aesthernr](https://github.com/aesthernr) (Original simpleadmin), and [rbflurry](https://github.com/rbflurry/) (Fixing simpleadmin not functioning) we can install something like this! In order to install it you must first install Nate Carlson's [AT Telnet Daemon](https://github.com/natecarlson/quectel-rgmii-at-command-client/tree/main/at_telnet_daemon) as the [simpleadmin](https://github.com/rbflurry/quectel-rgmii-simpleadmin) depends on it, (a dependency) to work  correctly. Its a Telnet to AT command server. With it, you can connect with a Telenet client like PuTTY on port 5000 to the modems gateway IP (Normaly 192.168.225.1) and send AT commands over Telnet!
+### How to install
+In order to simplify things I have combined both the [AT Telnet Daemon](https://github.com/natecarlson/quectel-rgmii-at-command-client/tree/main/at_telnet_daemon) and [simpleadmin](https://github.com/rbflurry/quectel-rgmii-simpleadmin) into one repository and one install .sh script file. 
+
+To install both the [AT Telnet Daemon](https://github.com/natecarlson/quectel-rgmii-at-command-client/tree/main/at_telnet_daemon) and [simpleadmin](https://github.com/rbflurry/quectel-rgmii-simpleadmin):
+ - Open ADB & Fastboot++ covered in [Using ADB](#using-adb)
+ - Make sure your modem is connected by USB to your computer
+ - Run `adb devices` to make sure your modem is detected by adb
+ - Run `adb shell ping 8.8.8.8` to make sure the shell can access the internet. If you get an error, make sure the modem is connected to a cellular network and make sure `AT+QMAPWAC=1` as covered in the known issue [I Can't get internet access from the Ethernet port (Common)](#i-cant-get-internet-access-from-the-ethernet-port-common)
+ - If you don't get an error you should be getting replies back endlessly, press `CTRL-C` to stop it.
+ - Run the following commands 
+ ```bash
+adb shell wget -P /tmp https://raw.githubusercontent.com/iamromulan/quectel-rgmii-simpleadmin-at-telnet-daemon/main/install_on_modem.sh
+adb shell chmod +x /tmp/install_on_modem.sh
+adb shell sh /tmp/install_on_modem.sh
+```
+When you run the last one you will be asked yes or no questions. Type yes and press enter for each and be patient. Once done, while connected by ethernet go to http://192.168.225.1:8080/
+
+That's it!! 
+### How to uninstall
+If you need to uninstall one or the other or both, view the uninstall section of my combo repo: [quectel-rgmii-simpleadmin-at-telnet-daemon](https://github.com/iamromulan/quectel-rgmii-simpleadmin-at-telnet-daemon#uninstallation-automated)
+
+OR
+
+flash firmware---> follow [After a firmware Flash; After first time setup](#after-a-firmware-flash-after-first-time-setup)
 # Other interesting things to check over ADB
 
 ## Starting an FTP server
@@ -567,5 +623,6 @@ Command shell:
 ```
 
 It appears that smd11 and at_mdm0 can also be used for this. On a default-ish modem, it appears that smd7 and at_mdm0 are both used by running daemons, so I picked smd11 for my AT daemon. There is a service called 'quectel-uart-smd.service', in it's unit file it disables the quectel_uart_smd, and says that smd11 is used by MCM_atcop_svc. However, I see no signs of that on the system.. so I think it's probably the safest to use.
+
 
 
