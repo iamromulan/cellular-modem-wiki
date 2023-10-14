@@ -69,6 +69,7 @@ https://thewirelesshaven.com/shop/modems-hotspots/invisagig/
 
 ## I Can't get internet access from the Ethernet port (Common)
 
+### AT+QMAPWAC
 Most of the time the issue is because of AT+QMAPWAC
 
 Since AT command documentation is vague and I don't know what the official function of this command is the most likely thing it does is serves as a master auto connect setting. Here are my observations with it: 
@@ -85,7 +86,8 @@ IPPT for both methods will be turned off back to default
 AT+QMAPWAC=1 will go back to AT+QMAPWAC=0
 
  - Disabling either IPPT methods AT+QMAPWAC=1 will go back to AT+QMAPWAC=0
-
+### Randomly no Internet while in IPPT mode
+Run`AT+QMAP="DHCPV4DNS","disable"` and see if it fixes it. Open an issue if not for discussion.
 ## Modem does not automatically connect at startup (Uncommon)
 
 Some are reporting that when you reboot the modem, it will start in CFUN=0 (minimal function) mode. To get it to connect, you need to issue `AT+CFUN=1`.
@@ -197,15 +199,20 @@ This is the method that is documented on page 231 of the  [ 2023-07-31 AT Manual
 #### To enable IP passthrough (QMAP Method):
 ```
 AT+QMAP="MPDN_rule",0,1,0,1,1,"FF:FF:FF:FF:FF:FF"
+AT+QMAP="DHCPV4DNS","disable"
+AT+CFUN=1,1
 ```
 
-Parameters:
+##### MPDN rule parameters:
 * First = mPDN rule number, range 0-3 (unless you're doing something complicated, you'll use 0.)
 * Second = APN Profile ID (CGDCONT) to use. You'll probably want 1.
 * Third = VLAN ID. This is typically 0 but you can run `AT+QMAP="VLAN"` to find out what it should be
 * Fourth = IPPT mode, use 1 for ethernet use 0 for disable
 * Fifth = Auto Connect. If set to 0=disabled 1=enabled 
 * Sixth = MAC address to pass through to. `FF:FF:FF:FF:FF:FF` will pass the IP to the last connected ethernet device. `”00:00:00:00:00:00”` will pass only to the first connected ethernet device. You can also specify a custom mac address instead. 
+##### DHCPV4DNS
+Turns the IPV4 DNS proxy on and off. 
+I'm pretty sure this causes problems if you use IPPT with a CGNAT address from the carrier. Best to disable this. (Needs more testing, turn off for now just to be safe)
 
 #### To disable IP passthrough (QMAP Method):
 ```
@@ -225,6 +232,7 @@ flash firmware---> follow [After a firmware Flash; After first time setup](#afte
 ```
 AT+QETH="ipptmac",XX:XX:XX:XX:XX:XX
 AT+QETH="rgmii","ENABLE",1,1,1
+
 ```
 * AT+QETH="ipptmac", the first parameter, formatted as `XX:XX:XX:XX:XX:XX`, should be the MAC address of the device you want to receive the IP passthrough.
 * AT+QETH="rgmii":
