@@ -357,7 +357,7 @@ flash firmware---> follow [After a firmware Flash; After first time setup](#afte
 
 Run the following commands in adb to install a daily reboot timer. The script should prompt you to enter a daily reboot time in 24 hour format. 
 ```bash
-adb shell wget -P /tmp https://github.com/iamromulan/quectel-rgmii-configuration-notes/files/install_daily_reboot.sh
+adb shell wget -P /tmp https://raw.githubusercontent.com/iamromulan/quectel-rgmii-configuration-notes/main/files/install_daily_reboot.sh
 adb shell chmod +x /tmp/install_daily_reboot.sh
 adb shell sh /tmp/install_daily_reboot.sh
 ```
