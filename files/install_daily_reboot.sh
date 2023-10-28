@@ -38,6 +38,10 @@ EOF
 # Remount root filesystem as read-only
 mount -o remount,ro /
 
+# Reload systemd to recognize the new service and timer
+systemctl daemon-reload
+sleep 2s
+
 # Enable and start the timer
 systemctl enable rebootmodem.timer
 systemctl start rebootmodem.timer
