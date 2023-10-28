@@ -35,6 +35,7 @@ Many of Quectel's modems support directly connecting to a PCIe Ethernet chipset.
     - [How to install](#how-to-install)
     - [How to uninstall](#how-to-uninstall)
 - [Other interesting things to check over ADB](#other-interesting-things-to-check-over-adb)
+  - [Enable Daily Reboot](#enable-daily-reboot)
   - [Starting an FTP server](#starting-an-ftp-server)
    - [Changing modem IP address by adb shell](#changing-modem-ip-address-by-adb-shell)
    - [TTL Modification](#ttl-modification)
@@ -87,7 +88,7 @@ AT+QMAPWAC=1 will go back to AT+QMAPWAC=0
 
  - Disabling either IPPT methods AT+QMAPWAC=1 will go back to AT+QMAPWAC=0
 ### Randomly no Internet while in IPPT mode
-Run`AT+QMAP="DHCPV4DNS","disable"` and see if it fixes it. Open an issue if not for discussion.
+Run`AT+QMAP="DHCPV4DNS","disable"` and see if it fixes it. This is now part of the IPPT  [QMAP Method (Preferred)](#qmap-method-preferred) section. I have also added an [Enable Daily Reboot](#enable-daily-reboot) section/option as a workaround, however I have not tested it on my own modem yet.
 ## Modem does not automatically connect at startup (Uncommon)
 
 Some are reporting that when you reboot the modem, it will start in CFUN=0 (minimal function) mode. To get it to connect, you need to issue `AT+CFUN=1`.
@@ -350,6 +351,16 @@ OR
 
 flash firmware---> follow [After a firmware Flash; After first time setup](#after-a-firmware-flash-after-first-time-setup)
 # Other interesting things to check over ADB
+
+## Enable Daily Reboot
+> :warning: I have not tested this on my own modem yet. If works let me know. If not....let me know.
+
+Run the following commands in adb to install a daily reboot timer. The script should prompt you to enter a daily reboot time in 24 hour format. 
+```bash
+adb shell wget -P /tmp https://github.com/iamromulan/quectel-rgmii-configuration-notes/files/install_daily_reboot.sh
+adb shell chmod +x /tmp/install_daily_reboot.sh
+adb shell sh /tmp/install_daily_reboot.sh
+```
 
 ## Starting an FTP server
 
@@ -631,6 +642,7 @@ Command shell:
 ```
 
 It appears that smd11 and at_mdm0 can also be used for this. On a default-ish modem, it appears that smd7 and at_mdm0 are both used by running daemons, so I picked smd11 for my AT daemon. There is a service called 'quectel-uart-smd.service', in it's unit file it disables the quectel_uart_smd, and says that smd11 is used by MCM_atcop_svc. However, I see no signs of that on the system.. so I think it's probably the safest to use.
+
 
 
 
