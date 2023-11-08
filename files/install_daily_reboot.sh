@@ -4,7 +4,7 @@
 mount -o remount,rw /
 
 # Prompt user for input
-read -p "Enter the time for daily reboot (24-hour format, HH:MM): " user_time
+read -p "Enter the time for daily reboot (24-hour format Coordinated Universal Time ‎(UTC)‎ HH:MM): " user_time
 
 # Check if the user input is valid
 if [[ ! "$user_time" =~ ^([01]?[0-9]|2[0-3]):[0-5][0-9]$ ]]; then
