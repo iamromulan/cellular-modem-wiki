@@ -2,9 +2,6 @@
 
 # Function to create systemd service and timer files with the user-specified time
 create_service_and_timer() {
-    # Remount root filesystem as read-write
-    mount -o remount,rw /
-
     # Create the systemd service file
     echo "[Unit]
 Description=Reboot Modem Daily
@@ -19,7 +16,6 @@ Description=Daily reboot timer
 
 [Timer]
 OnCalendar=*-*-* $user_time:00
-Persistent=true
 
 [Install]
 WantedBy=timers.target" > /lib/systemd/system/rebootmodem.timer
@@ -32,14 +28,14 @@ WantedBy=timers.target" > /lib/systemd/system/rebootmodem.timer
     systemctl enable rebootmodem.timer
     systemctl start rebootmodem.timer
 
-    # Remount root filesystem as read-only
-    mount -o remount,ro /
-
     # Confirmation
     echo "Reboot schedule set successfully. The modem will reboot daily at $user_time UTC (Coordinated Universal Time)."
 }
 
 # Main script starts here
+# Remount root filesystem as read-write
+mount -o remount,rw /
+
 # Check if the rebootmodem timer already exists
 if systemctl list-timers --all | grep -q 'rebootmodem.timer'; then
     printf "The daily reboot timer is already installed. Do you want to change or remove it? (change/remove): "
@@ -47,9 +43,6 @@ if systemctl list-timers --all | grep -q 'rebootmodem.timer'; then
 
     case $user_action in
         remove)
-            # Remount root filesystem as read-write
-            mount -o remount,rw /
-
             # Stop and disable the timer
             systemctl stop rebootmodem.timer
             systemctl disable rebootmodem.timer
@@ -60,9 +53,6 @@ if systemctl list-timers --all | grep -q 'rebootmodem.timer'; then
 
             # Reload systemd to apply changes
             systemctl daemon-reload
-
-            # Remount root filesystem as read-only
-            mount -o remount,ro /
 
             echo "Daily reboot timer removed successfully."
             ;;
@@ -98,6 +88,9 @@ else
         create_service_and_timer
     fi
 fi
+
+# Remount root filesystem as read-only
+mount -o remount,ro /
 
 # Delete this script
 rm -- "$0"
