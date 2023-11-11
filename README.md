@@ -353,7 +353,7 @@ flash firmware---> follow [After a firmware Flash; After first time setup](#afte
 # Other interesting things to check over ADB
 
 ## Enable Daily Reboot
-> :warning: I have not tested this on my own modem yet. If works let me know. If not....let me know.
+> :warning: Work in progress. Isn't persistent yet, it will install the reboot timer and it will reboot at the time you give it. After it reboots, it no longer exists? Feel free to PR
 
 Run the following commands in adb to install a daily reboot timer. The script should prompt you to enter a daily reboot time in 24 hour format. 
 ```bash
