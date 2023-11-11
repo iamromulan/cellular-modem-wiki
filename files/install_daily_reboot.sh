@@ -36,7 +36,7 @@ WantedBy=timers.target" > /lib/systemd/system/rebootmodem.timer
     mount -o remount,ro /
 
     # Confirmation
-    echo "Reboot schedule set successfully. The modem will reboot daily at $user_time."
+    echo "Reboot schedule set successfully. The modem will reboot daily at $user_time UTC (Coordinated Universal Time)."
 }
 
 # Main script starts here
@@ -67,7 +67,7 @@ if systemctl list-timers --all | grep -q 'rebootmodem.timer'; then
             echo "Daily reboot timer removed successfully."
             ;;
         change)
-            printf "Enter the new time for daily reboot (24-hour format, HH:MM): "
+            printf "Enter the new time for daily reboot (24-hour format in Coordinated Universal Time, HH:MM): "
             read new_time
 
             # Validate the new time format using grep
@@ -87,7 +87,7 @@ if systemctl list-timers --all | grep -q 'rebootmodem.timer'; then
     esac
 else
     # Prompt user for the time since timer doesn't exist
-    printf "Enter the time for daily reboot (24-hour format, HH:MM): "
+    printf "Enter the time for daily reboot (24-hour format in Coordinated Universal Time, HH:MM): "
     read user_time
 
     # Validate the time format using grep
