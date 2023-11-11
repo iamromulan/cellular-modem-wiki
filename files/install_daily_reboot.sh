@@ -20,16 +20,31 @@ OnCalendar=*-*-* $user_time:00
 [Install]
 WantedBy=timers.target" > /lib/systemd/system/rebootmodem.timer
 
+    # Create a service to ensure the timer starts on boot
+    echo "[Unit]
+Description=Ensure rebootmodem.timer is started on boot
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/systemctl start rebootmodem.timer
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target" > /etc/systemd/system/start-rebootmodem-timer.service
+
     # Reload systemd to recognize the new service and timer
     systemctl daemon-reload
     sleep 2s
 
-    # Enable and start the timer
+    # Enable and start the timer and its boot service
     systemctl enable rebootmodem.timer
     systemctl start rebootmodem.timer
+    systemctl enable start-rebootmodem-timer.service
+    systemctl start start-rebootmodem-timer.service
 
     # Confirmation
-    echo "Reboot schedule set successfully. The modem will reboot daily at $user_time UTC (Coordinated Universal Time)."
+    echo "Reboot schedule and boot service set successfully. The modem will reboot daily at $user_time UTC (Coordinated Universal Time)."
 }
 
 # Main script starts here
@@ -43,18 +58,21 @@ if systemctl list-timers --all | grep -q 'rebootmodem.timer'; then
 
     case $user_action in
         remove)
-            # Stop and disable the timer
+            # Stop and disable the timer and its boot service
             systemctl stop rebootmodem.timer
             systemctl disable rebootmodem.timer
+            systemctl stop start-rebootmodem-timer.service
+            systemctl disable start-rebootmodem-timer.service
 
-            # Remove the service and timer files
+            # Remove the service, timer, and boot service files
             rm /lib/systemd/system/rebootmodem.service
             rm /lib/systemd/system/rebootmodem.timer
+            rm /etc/systemd/system/start-rebootmodem-timer.service
 
             # Reload systemd to apply changes
             systemctl daemon-reload
 
-            echo "Daily reboot timer removed successfully."
+            echo "Daily reboot timer and boot service removed successfully."
             ;;
         change)
             printf "Enter the new time for daily reboot (24-hour format in Coordinated Universal Time, HH:MM): "
@@ -65,7 +83,7 @@ if systemctl list-timers --all | grep -q 'rebootmodem.timer'; then
                 echo "Invalid time format. Exiting."
                 exit 1
             else
-                # Set the user time to the new time
+                # Set the user time to the new time and recreate timer and boot service
                 user_time=$new_time
                 create_service_and_timer
             fi
