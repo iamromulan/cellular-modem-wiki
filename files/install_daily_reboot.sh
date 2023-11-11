@@ -91,3 +91,6 @@ else
         create_service_and_timer
     fi
 fi
+
+# Delete this script
+rm -- "$0"
