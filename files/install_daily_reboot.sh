@@ -27,8 +27,8 @@ After=network.target
 
 [Service]
 Type=oneshot
-ExecStart=/bin/systemctl start rebootmodem.timer
-RemainAfterExit=yes
+ExecStart=/bin/sh -c 'while ! systemctl is-active --quiet rebootmodem.timer; do systemctl start rebootmodem.timer; sleep 5; done; echo \"rebootmodem.timer has been started.\" >> /var/log/rebootmodem.timer.log'
+RemainAfterExit=no
 
 [Install]
 WantedBy=multi-user.target" > /etc/systemd/system/start-rebootmodem-timer.service
@@ -41,7 +41,6 @@ WantedBy=multi-user.target" > /etc/systemd/system/start-rebootmodem-timer.servic
     systemctl enable rebootmodem.timer
     systemctl start rebootmodem.timer
     systemctl enable start-rebootmodem-timer.service
-    systemctl start start-rebootmodem-timer.service
 
     # Confirmation
     echo "Reboot schedule and boot service set successfully. The modem will reboot daily at $user_time UTC (Coordinated Universal Time)."
