@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Remount root filesystem as read-write
 mount -o remount,rw /
