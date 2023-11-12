@@ -17,6 +17,7 @@ Description=Daily reboot timer
 
 [Timer]
 OnCalendar=*-*-* $user_time:00
+Persistent=false
 
 [Install]
 WantedBy=multi-user.target" > /lib/systemd/system/rebootmodem.timer
