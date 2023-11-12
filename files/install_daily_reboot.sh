@@ -8,7 +8,8 @@ Description=Reboot Modem Daily
 
 [Service]
 Type=oneshot
-ExecStart=/sbin/reboot" > /lib/systemd/system/rebootmodem.service
+ExecStart=/sbin/reboot
+RemainAfterExit=no" > /lib/systemd/system/rebootmodem.service
 
     # Create the systemd timer file with the user-specified time
     echo "[Unit]
