@@ -5,10 +5,15 @@ create_service_and_timer() {
     # Create the systemd service file
     echo "[Unit]
 Description=Reboot Modem Daily
+# Ensure the system has been up for at least 40 seconds
+ConditionKernelCommandLine=!reboot
+ConditionPathExists=!/var/run/reboot-required
+ConditionKernelTimestamp=!@40
 
 [Service]
 Type=oneshot
 ExecStart=/sbin/reboot
+Restart=no
 RemainAfterExit=no" > /lib/systemd/system/rebootmodem.service
 
     # Create the systemd timer file with the user-specified time
