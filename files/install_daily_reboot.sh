@@ -20,11 +20,10 @@ OnCalendar=*-*-* $user_time:00
 [Install]
 WantedBy=multi-user.target" > /lib/systemd/system/rebootmodem.timer
 
-    # Create symbolic links manually in multi-user.target.wants directory
+    # Manually create symbolic links for the timer in the wanted directory
     ln -sf /lib/systemd/system/rebootmodem.timer /lib/systemd/system/multi-user.target.wants/
-    ln -sf /lib/systemd/system/rebootmodem.service /lib/systemd/system/multi-user.target.wants/
 
-    # Reload systemd to recognize the new service and timer
+    # Reload systemd to recognize the new timer
     systemctl daemon-reload
     sleep 2s
 
@@ -32,22 +31,25 @@ WantedBy=multi-user.target" > /lib/systemd/system/rebootmodem.timer
     systemctl start rebootmodem.timer
 
     # Confirmation
-    echo "Reboot schedule set successfully. The modem will reboot daily at $user_time UTC (Coordinated Universal Time)."
+    echo "Reboot schedule set successfully. The modem will reboot daily at $user_time UTC."
 }
 
 # Main script starts here
 # Remount root filesystem as read-write
 mount -o remount,rw /
-# Check if the rebootmodem timer already exists
-if [ -L /lib/systemd/system/multi-user.target.wants/rebootmodem.timer ]; then
-    printf "The daily reboot timer is already installed. Do you want to change or remove it? (change/remove): "
+
+# Check if the rebootmodem service or timer already exists
+if [ -f /lib/systemd/system/rebootmodem.service ] || [ -f /lib/systemd/system/rebootmodem.timer ]; then
+    printf "The daily reboot service/timer is already installed. Do you want to change or remove it? (change/remove): "
     read user_action
 
     case $user_action in
         remove)
+            # Stop and disable timer by removing symlink
+            systemctl stop rebootmodem.timer
+
             # Remove symbolic links and files
             rm -f /lib/systemd/system/multi-user.target.wants/rebootmodem.timer
-            rm -f /lib/systemd/system/multi-user.target.wants/rebootmodem.service
             rm -f /lib/systemd/system/rebootmodem.service
             rm -f /lib/systemd/system/rebootmodem.timer
 
@@ -65,7 +67,10 @@ if [ -L /lib/systemd/system/multi-user.target.wants/rebootmodem.timer ]; then
                 echo "Invalid time format. Exiting."
                 exit 1
             else
-                # Set the user time to the new time and recreate the timer
+                # Remove old symlink
+                rm -f /lib/systemd/system/multi-user.target.wants/rebootmodem.timer
+                
+                # Set the user time to the new time and recreate the timer and service files
                 user_time=$new_time
                 create_service_and_timer
             fi
@@ -89,6 +94,8 @@ else
     fi
 fi
 
-# Remount root filesystem as read-only, delete this script
+# Remount root filesystem as read-only
 mount -o remount,ro /
+
+# Self-delete the script
 rm -- "$0"
