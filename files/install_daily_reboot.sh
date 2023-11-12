@@ -36,6 +36,8 @@ WantedBy=multi-user.target" > /lib/systemd/system/rebootmodem.timer
 }
 
 # Main script starts here
+# Remount root filesystem as read-write
+mount -o remount,rw /
 # Check if the rebootmodem timer already exists
 if [ -L /lib/systemd/system/multi-user.target.wants/rebootmodem.timer ]; then
     printf "The daily reboot timer is already installed. Do you want to change or remove it? (change/remove): "
