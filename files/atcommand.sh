@@ -10,33 +10,34 @@ if [ ! -c "$DEVICE_FILE" ]; then
 fi
 
 # Ask for the AT command from the user
-read -p "Enter AT command: " at_command
+printf "Enter AT command: "
+read at_command
 
 # Function to send the AT command to the device and read the response
 send_at_command() {
-    # Flush any existing content in the device buffer
-    cat $DEVICE_FILE > /dev/null 2>&1 & 
+    # Start background process to read the device output
+    (cat "$DEVICE_FILE" & sleep "$TIMEOUT" && pkill -P $$ cat) > /tmp/device_response &
     CAT_PID=$!
-    sleep 0.1
-    kill $CAT_PID
-    wait $CAT_PID 2>/dev/null
+    sleep 0.1  # Give it a moment to ensure the background process is set up
 
     # Send the AT command to the device
-    echo -e "${at_command}\r" > "$DEVICE_FILE"
+    printf "${at_command}\r" > "$DEVICE_FILE"
 
-    # Read the response for a certain time period
-    (cat "$DEVICE_FILE" & sleep "$TIMEOUT"; kill $!) | {
-        # Read from the pipe until there is no more data or timeout occurs
-        while IFS= read -r line; do
-            RESPONSE="${RESPONSE}${line}\n"
-        done
-        # After the subshell and background jobs are done, check if we got a response
-        if [ -z "$RESPONSE" ]; then
-            echo "Error: Response timed out."
-        else
-            echo "$RESPONSE"
-        fi
-    }
+    # Wait for the background process to complete or timeout
+    wait $CAT_PID
+    sleep 0.1  # Allow time for the output to be flushed to the temp file
+
+    # Output the response
+    RESPONSE=$(cat /tmp/device_response)
+    if [ -z "$RESPONSE" ]; then
+        echo "Error: No response received, or response timed out."
+    else
+        echo "Response from device:"
+        echo "$RESPONSE"
+    fi
+
+    # Clean up
+    rm -f /tmp/device_response
 }
 
 send_at_command
