@@ -1,6 +1,7 @@
 #!/bin/bash
 
 DEVICE_FILE="/dev/smd7"
+TIMEOUT=4
 
 # Check if the device file exists
 if [ ! -c "$DEVICE_FILE" ]; then
@@ -11,40 +12,47 @@ fi
 # Ask for the AT command from the user
 read -p "Enter AT command: " at_command
 
-# Function to display a waiting message and time out after 4 seconds
-wait_with_message() {
-    local timeout=$1
-    local waiting_time=0
-    local wait_interval=1
+# Function to start cat in the background, send the AT command, and output the response
+function send_at_command {
+    # Start 'cat' in the background and redirect output to a temporary file
+    cat "$DEVICE_FILE" > /tmp/device_output &
+    CAT_PID=$!
 
-    echo "Waiting for response..."
-    while [ $waiting_time -lt $timeout ]; do
-        if read -r line <&3; then
-            echo "$line"
-            return 0
-        fi
-        sleep $wait_interval
-        waiting_time=$((waiting_time + wait_interval))
-    done
-
-    echo "Error: Response timed out after ${timeout} seconds."
-    return 1
-}
-
-# Send the AT command and capture the response
-capture_response() {
-    # Start 'cat' in the background on the device file, redirected to file descriptor 3
-    exec 3< <(cat "$DEVICE_FILE")
+    # Wait a little bit to ensure 'cat' is ready
+    sleep 0.5
 
     # Send the AT command to the device
-    echo -e "$at_command\r" > "$DEVICE_FILE"
+    echo -e "${at_command}\r" > "$DEVICE_FILE"
 
-    # Call the wait_with_message function with a 4-second timeout
-    wait_with_message 4
+    # Show a waiting message
+    echo "Waiting for response..."
 
-    # Clean up background process
-    exec 3<&-
+    # Wait for response with a timeout
+    {
+        sleep "$TIMEOUT" && kill $CAT_PID
+    } &
+
+    WAIT_PID=$!
+
+    # Wait for either cat to finish or the timeout
+    wait $CAT_PID 2>/dev/null
+    EXIT_STATUS=$?
+
+    # Kill the sleep command if it's still running
+    kill $WAIT_PID 2>/dev/null
+
+    # Check if 'cat' was successful
+    if [ $EXIT_STATUS -eq 0 ]; then
+        # 'cat' exited normally, show the output
+        cat /tmp/device_output
+    else
+        # 'cat' failed or was killed, assume timeout
+        echo "Error: Response timed out."
+    fi
+
+    # Clean up
+    rm /tmp/device_output
 }
 
-# Run the capture_response function
-capture_response
+# Run the function
+send_at_command
