@@ -2,7 +2,7 @@
 
 # Function to create systemd service and timer files with the user-specified time
 create_service_and_timer() {
-    # Create the systemd service file
+    # Create the systemd service file for reboot
     echo "[Unit]
 Description=Reboot Modem Daily
 
@@ -14,26 +14,33 @@ RemainAfterExit=no" > /lib/systemd/system/rebootmodem.service
 
     # Create the systemd timer file with the user-specified time
     echo "[Unit]
-Description=Daily reboot timer
+Description=Starts rebootmodem.service daily at the specified time
 
 [Timer]
 OnCalendar=*-*-* $user_time:00
-Persistent=false
+Persistent=false" > /lib/systemd/system/rebootmodem.timer
 
-[Install]
-WantedBy=multi-user.target" > /lib/systemd/system/rebootmodem.timer
+    # Create a trigger service that starts the timer at boot
+    echo "[Unit]
+Description=Trigger the rebootmodem timer at boot
 
-    # Manually create symbolic links for the timer in the wanted directory
-    ln -sf /lib/systemd/system/rebootmodem.timer /lib/systemd/system/multi-user.target.wants/
+[Service]
+Type=oneshot
+ExecStart=/bin/systemctl start rebootmodem.timer
+RemainAfterExit=yes" > /lib/systemd/system/rebootmodem-trigger.service
 
-    # Reload systemd to recognize the new timer
+    # Create symbolic links for the trigger service in the wanted directory
+    ln -sf /lib/systemd/system/rebootmodem-trigger.service /lib/systemd/system/multi-user.target.wants/
+
+    # Reload systemd to recognize the new timer and trigger service
     systemctl daemon-reload
     sleep 2s
 
-    # Start the timer
-    systemctl start rebootmodem.timer
+    # Start the trigger service, which will start the timer
+    systemctl start rebootmodem-trigger.service
 
     # Confirmation
+    echo "Rebootmodem-trigger service created and started successfully."
     echo "Reboot schedule set successfully. The modem will reboot daily at $user_time UTC."
 }
 
@@ -41,25 +48,27 @@ WantedBy=multi-user.target" > /lib/systemd/system/rebootmodem.timer
 # Remount root filesystem as read-write
 mount -o remount,rw /
 
-# Check if the rebootmodem service or timer already exists
-if [ -f /lib/systemd/system/rebootmodem.service ] || [ -f /lib/systemd/system/rebootmodem.timer ]; then
-    printf "The daily reboot service/timer is already installed. Do you want to change or remove it? (change/remove): "
+# Check if the rebootmodem service, timer, or trigger already exists
+if [ -f /lib/systemd/system/rebootmodem.service ] || [ -f /lib/systemd/system/rebootmodem.timer ] || [ -f /lib/systemd/system/rebootmodem-trigger.service ]; then
+    printf "The rebootmodem service/timer/trigger is already installed. Do you want to change or remove it? (change/remove): "
     read user_action
 
     case $user_action in
         remove)
-            # Stop and disable timer by removing symlink
+            # Stop and disable timer and trigger service by removing symlinks
             systemctl stop rebootmodem.timer
+            systemctl stop rebootmodem-trigger.service
 
             # Remove symbolic links and files
-            rm -f /lib/systemd/system/multi-user.target.wants/rebootmodem.timer
+            rm -f /lib/systemd/system/multi-user.target.wants/rebootmodem-trigger.service
             rm -f /lib/systemd/system/rebootmodem.service
             rm -f /lib/systemd/system/rebootmodem.timer
+            rm -f /lib/systemd/system/rebootmodem-trigger.service
 
             # Reload systemd to apply changes
             systemctl daemon-reload
 
-            echo "Daily reboot timer removed successfully."
+            echo "Rebootmodem service, timer, and trigger removed successfully."
             ;;
         change)
             printf "Enter the new time for daily reboot (24-hour format in Coordinated Universal Time, HH:MM): "
@@ -70,10 +79,10 @@ if [ -f /lib/systemd/system/rebootmodem.service ] || [ -f /lib/systemd/system/re
                 echo "Invalid time format. Exiting."
                 exit 1
             else
-                # Remove old symlink
-                rm -f /lib/systemd/system/multi-user.target.wants/rebootmodem.timer
+                # Remove old symlinks
+                rm -f /lib/systemd/system/multi-user.target.wants/rebootmodem-trigger.service
                 
-                # Set the user time to the new time and recreate the timer and service files
+                # Set the user time to the new time and recreate the service, timer, and trigger
                 user_time=$new_time
                 create_service_and_timer
             fi
