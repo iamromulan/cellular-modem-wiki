@@ -3,50 +3,46 @@
 DEVICE_FILE="/dev/smd7"
 TIMEOUT=4
 
-# Check if the device file exists and is a character special file
-if [ ! -c "$DEVICE_FILE" ]; then
-    echo "Error: Device $DEVICE_FILE does not exist or is not a character special file."
-    exit 1
-fi
-
-# Function to clear the device buffer and ensure it's ready for new commands
-clear_device_buffer() {
-    # Send a blank AT command to clear the device buffer
-    printf "AT\r" > "$DEVICE_FILE"
-    sleep 1 # Wait a bit to let the device process the command
-}
-
-# Ask for the AT command from the user
-printf "Enter AT command: "
-read at_command
-
-# Function to send the AT command to the device and read the response
+# Function to send AT command and read response
 send_at_command() {
-    clear_device_buffer # Clear the device buffer first
-
-    # Start background process to read the device output
-    (cat "$DEVICE_FILE" & sleep "$TIMEOUT" && pkill -P $$ cat) > /tmp/device_response &
+    # Clear any previous output in the device file
+    cat "$DEVICE_FILE" > /dev/null 2>&1 & 
     CAT_PID=$!
-    sleep 0.1  # Give it a moment to ensure the background process is set up
+    sleep 0.2
+    kill -9 $CAT_PID
+    wait $CAT_PID 2>/dev/null
 
-    # Send the AT command to the device
-    printf "${at_command}\r" > "$DEVICE_FILE"
+    # Send the AT command
+    printf "$1\r" > "$DEVICE_FILE"
+    sleep 0.5  # Wait half a second to ensure the command is sent
 
-    # Wait for the background process to complete or timeout
-    wait $CAT_PID
-    sleep 0.1  # Allow time for the output to be flushed to the temp file
+    # Start reading the response
+    RESPONSE=""
+    exec 3<> "$DEVICE_FILE" # Open the device file for reading and writing
+    (sleep "$TIMEOUT"; echo) >&3 & # Send a delayed newline to unblock 'read'
+    while IFS= read -r line <&3; do
+        RESPONSE="${RESPONSE}${line}\n"
+        if [ -n "$line" ] && [ "$line" = "OK" ]; then
+            break
+        fi
+    done
 
     # Output the response
-    RESPONSE=$(cat /tmp/device_response)
     if [ -z "$RESPONSE" ]; then
         echo "Error: No response received, or response timed out."
     else
         echo "Response from device:"
         echo "$RESPONSE"
     fi
-
-    # Clean up
-    rm -f /tmp/device_response
+    exec 3<&- # Close the file descriptor
 }
 
-send_at_command
+# Main logic
+if [ ! -c "$DEVICE_FILE" ]; then
+    echo "Error: Device $DEVICE_FILE does not exist or is not a character special file."
+    exit 1
+fi
+
+echo "Enter AT command:"
+read at_command
+send_at_command "$at_command"
