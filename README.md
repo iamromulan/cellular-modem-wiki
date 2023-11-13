@@ -353,9 +353,8 @@ flash firmware---> follow [After a firmware Flash; After first time setup](#afte
 # Other interesting things to check over ADB
 
 ## Enable Daily Reboot
-> :warning: Work in progress. Isn't persistent yet, it will install the reboot timer and it will reboot at the time you give it. After it reboots, it no longer exists? Feel free to PR
 
-Run the following commands in adb to install a daily reboot timer. The script should prompt you to enter a daily reboot time in 24 hour format. 
+Run the following commands in adb to install a daily reboot timer. The script should prompt you to enter a daily reboot time in 24 hour format UTC time. If you want to chnage or remove the timer just run the script again.
 ```bash
 adb shell wget -P /tmp https://raw.githubusercontent.com/iamromulan/quectel-rgmii-configuration-notes/main/files/install_daily_reboot.sh
 adb shell chmod +x /tmp/install_daily_reboot.sh
