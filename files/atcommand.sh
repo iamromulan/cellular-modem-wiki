@@ -9,12 +9,21 @@ if [ ! -c "$DEVICE_FILE" ]; then
     exit 1
 fi
 
+# Function to clear the device buffer and ensure it's ready for new commands
+clear_device_buffer() {
+    # Send a blank AT command to clear the device buffer
+    printf "AT\r" > "$DEVICE_FILE"
+    sleep 1 # Wait a bit to let the device process the command
+}
+
 # Ask for the AT command from the user
 printf "Enter AT command: "
 read at_command
 
 # Function to send the AT command to the device and read the response
 send_at_command() {
+    clear_device_buffer # Clear the device buffer first
+
     # Start background process to read the device output
     (cat "$DEVICE_FILE" & sleep "$TIMEOUT" && pkill -P $$ cat) > /tmp/device_response &
     CAT_PID=$!
