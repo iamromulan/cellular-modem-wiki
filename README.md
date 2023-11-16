@@ -303,12 +303,12 @@ And reboot with `AT+CFUN=1,1` to actually apply.
 
 ### Using ADB
 
-Once the modem is back online, you should be able to use ADB to manage the modem on the host connect to it with USB. You'll need to install the ADB drivers and the ADB command line tool before you can use it. The easiest way to do this is just to use the installer from here https://github.com/K3V1991/ADB-and-FastbootPlusPlus/releases
+Once the modem is back online, you should be able to use ADB to manage the modem on the host connected to it with USB. You'll need to install the ADB drivers and the ADB command line tool before you can use it. The easiest way to do this is just to use the installer from here https://github.com/K3V1991/ADB-and-FastbootPlusPlus/releases
 
 - Download the .exe non-portable version
 
 ![downloadadb](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/downloadadb.png?raw=true)
-- Accept, yes, next, allow are pretty much everything you want to be pressing. If you get a security working like this, click more info 
+- Accept, yes, next, allow are pretty much everything you want to be pressing. If you get a security warning like this, click more info 
 
 ![secerror](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/secerror.png?raw=true)
 - During the install you'll want these selected for sure. 
@@ -323,7 +323,7 @@ Once the modem is back online, you should be able to use ADB to manage the modem
 
 ![adb3](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/adb3.png?raw=true)
 
-- Any time you want to use this open ADB & Fastboot++
+- Any time you want to use adb open ADB & Fastboot++
 
 ![adbcmd](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/adbcmd.png?raw=true)
 
@@ -332,17 +332,17 @@ Once the modem is back online, you should be able to use ADB to manage the modem
 ![enter image description here](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/notneededadb.png?raw=true)
 
 ### Basic commands:
-In a ADB & Fastboot++ type `adb devices` and press enter. If you have adb unlocked on  your modem and it is connected by usb, you should have at least one device show up on the list. This is a good way to test if adb is installed and properly recognizing your modem or android phone. 
+In a ADB & Fastboot++ type `adb devices` and press enter. If you have adb unlocked on your modem and it is connected by usb, you should have at least one device show up on the list. This is a good way to test if adb is installed and properly recognizing your modem or android phone. 
 **Example:** 
 
 ![adb3](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/adb3.png?raw=true)
 
-- `adb pull /path/to/file` - download a file from the modem
-- `adb push /path/to/file /path/on/modem` - upload a file to the modem
-- `adb shell` - remote control the root linux shell/command line on the modem, type exit when done (note that while in the shell any commands you want to run that normally begin with `adb shell`, that part can be skipped 
+- `adb pull /path/to/file` - download a file from the modem to the current working directory
+- `adb push /path/on/computer /path/on/modem` - upload a file to the modem
+- `adb shell` - remote control the root linux shell/command line on the modem, type exit when done (note that while in the shell any commands you want to run that normally begin with `adb shell`, that part needs to be be skipped)
   - In the adb shell of a Quectel modem it will behave like a unix shell. Commands like `uname -a` will show you the name of the OS, the processor type, build date info, and more; `ls` will show you the file structure, and `systemctl list-units --type=service --all` will show all services installed running or not.
 
-So far, I have been unsuccessful with my attempts to get ADB to listen on the ethernet interface over IP. Warning the - `adb tcp <port>` command will crash both ADB and all the other serial ports exposed via USB until the modem is restarted. So stick with using ADB over USB for now.
+So far, I have been unsuccessful with my attempts to get ADB to listen on the ethernet interface over IP. Warning the - `adb tcp <port>` command will crash both ADB and all the other serial ports exposed via USB until the modem is restarted. So stick with using ADB over USB for now. If anyone understands how adbd works on this device feel free to open an issue/discussion/PR.
 ## Installing the Telnet Daemon and simpleadmin web GUI
 ### Overview
 After gaining adb acess, you can install a simple web interface you'll be able to access using the modems gateway IP address. You can see some basic signal stats, send AT commands from the browser, and change your TTL directly on the modem. I also added a list of common commands you can just copy/paste on the AT Commands page. By default this will be on port 8080 so if you didn't change the gateway IP address you'd go to http://192.168.225.1:8080/ and you'd find this...
