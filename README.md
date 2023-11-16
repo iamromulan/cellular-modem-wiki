@@ -294,18 +294,30 @@ And reboot with `AT+CFUN=1,1` to actually apply.
 Once the modem is back online, you should be able to use ADB to manage the modem on the host connect to it with USB. You'll need to install the ADB drivers and the ADB command line tool before you can use it. The easiest way to do this is just to use the installer from here https://github.com/K3V1991/ADB-and-FastbootPlusPlus/releases
 
 - Download the .exe non-portable version
+
 ![downloadadb](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/downloadadb.png?raw=true)
-- Accept, yes, next, allow are pretty much everything you want to be pressing. If you get a security working like this, click more info ![secerror](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/secerror.png?raw=true)
-- During the install you'll want these selected for sure. ![adb1](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/adb1.png?raw=true)
-- Toward the end, make these are selected like this: ![adb2](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/adb2.png?raw=true)
+- Accept, yes, next, allow are pretty much everything you want to be pressing. If you get a security working like this, click more info 
+
+![secerror](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/secerror.png?raw=true)
+- During the install you'll want these selected for sure. 
+
+![adb1](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/adb1.png?raw=true)
+- Toward the end, make these are selected like this: 
+
+![adb2](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/adb2.png?raw=true)
 - The Universal Adb Driver installer will open after, go ahead and accept, yes, next, allow, finish it.
-- A window like this will open. ![adb3](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/adb3.png?raw=true)
+
+- A window like this will open. 
+
+![adb3](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/adb3.png?raw=true)
 
 - Any time you want to use this open ADB & Fastboot++
+
 ![adbcmd](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/adbcmd.png?raw=true)
 
 > :warning: **The other icon/shortcuts are not needed for modems. They are however useful for Android phones. If you only need this for a Quectel modem the icon/shortcuts can be deleted** 
-> ![enter image description here](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/notneededadb.png?raw=true)
+> 
+![enter image description here](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/notneededadb.png?raw=true)
 
 ### Basic commands:
 In a ADB & Fastboot++ type `adb devices` and press enter. If you have adb unlocked on  your modem and it is connected by usb, you should have at least one device show up on the list. This is a good way to test if adb is installed and properly recognizing your modem or android phone. 
@@ -641,6 +653,7 @@ Command shell:
 ```
 
 It appears that smd11 and at_mdm0 can also be used for this. On a default-ish modem, it appears that smd7 and at_mdm0 are both used by running daemons, so I picked smd11 for my AT daemon. There is a service called 'quectel-uart-smd.service', in it's unit file it disables the quectel_uart_smd, and says that smd11 is used by MCM_atcop_svc. However, I see no signs of that on the system.. so I think it's probably the safest to use.
+
 
 
 
