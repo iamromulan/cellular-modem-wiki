@@ -322,6 +322,7 @@ Once the modem is back online, you should be able to use ADB to manage the modem
 ### Basic commands:
 In a ADB & Fastboot++ type `adb devices` and press enter. If you have adb unlocked on  your modem and it is connected by usb, you should have at least one device show up on the list. This is a good way to test if adb is installed and properly recognizing your modem or android phone. 
 **Example:** 
+
 ![adb3](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/adb3.png?raw=true)
 
 - `adb pull /path/to/file` - download a file from the modem
