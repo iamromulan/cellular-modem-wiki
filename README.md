@@ -134,11 +134,18 @@ Check out my [RM520 Resource Repository](#RM520-Resource-Repository)
 A fresh flash will do the following:  
 
  - IPPT for both methods will be turned off back to default  
- - AT+QMAPWAC=1 will go back to AT+QMAPWAC=0
- - Custom software/services installed by adb shell will be removed
+ - AT+QMAPWAC=1 will go back to AT+QMAPWAC=0 turning off autoconnect
+ Send AT+QMAPWAC=1 and reboot to fix this. You can also do it through adb if you previously unlocked and enabled it like this:
+ 
+```
+adb shell "echo -e 'AT+QMAPWAC=1 \r' > /dev/smd7"
+adb shell reboot
+```
+
+ - Custom software/services installed by/through adb shell will be removed. You can reinstall the Telnet Daemon and Simple admin [with my Combo Installer](https://github.com/iamromulan/quectel-rgmii-simpleadmin-at-telnet-daemon)
  
  ## First Time Setup
-
+Run these AT Commands in Qnavigator. If you don't have Qnavigator or a way to send AT Commands check out my [RM520 Resource Repository](#RM520-Resource-Repository) 
 ```
 AT+QCFG="data_interface",1,0  
 AT+QCFG="pcie/mode",1  
@@ -163,15 +170,20 @@ What these commands do:
 ..after running `AT+CFUN=1,1` the modem will reboot
 
 ## After a firmware Flash; After first time setup
-After a firmware Flash these commands need ran
+After a firmware Flash these commands need ran to get back online
 ```
-AT+QCFG="usbnet",0  
 AT+QMAPWAC=1  
-AT+CFUN=1,1
+AT+CFUN=1,1 (or just reboot)
+```
+You can also do this throgh adb if you have already unlocked it
+```
+adb shell "echo -e 'AT+QMAPWAC=1 \r' > /dev/smd7"
+adb shell reboot
 ```
 
- - (optional, after reboot) Install Telnet and simpleadmin (Firmware flash gets rid of these)  
- - (optional, after reboot) Set IP Passthrough (Firmware flash turns this off for both methods)
+ - (optional, after reboot) You can reinstall the Telnet Daemon and Simple admin [with my Combo Installer](https://github.com/iamromulan/quectel-rgmii-simpleadmin-at-telnet-daemon) (Firmware flash gets rid of these)  
+ - (optional, after reboot) [Setup IP Passthrough](#enabling-ip-passthrough) (Firmware flash turns this off for both methods)
+ - (optional, after reboot) [Enable Daily Reboot](#enable-daily-reboot) (Firmware flash gets rid of this)  
 
 ## Changing modem IP address with AT command
 By default, the modem acts as a true NAT router for IPv4, and serves addresses via IPv6. The modem's IPv4 address is 192.168.225.1 - this CAN be changed via AT commands [See page 228: AT+QMAP="LANIP"](https://github.com/iamromulan/RM520N-GL/blob/main/Documents/Quectel_RG520N&RG525F&RG5x0F&RM5x0N_Series_AT_Commands_Manual_V1.0.0_Preliminary_20230731.pdf)
@@ -219,7 +231,7 @@ I'm pretty sure this causes problems if you use IPPT with a CGNAT address from t
 ```
 AT+QMAP="MPDN_rule",0
 AT+QMAPWAC=1
-AT+CFUN=1,1
+AT+CFUN=1,1 (reboot)
 ```
 OR
 
@@ -333,16 +345,16 @@ In a ADB & Fastboot++ type `adb devices` and press enter. If you have adb unlock
 So far, I have been unsuccessful with my attempts to get ADB to listen on the ethernet interface over IP. Warning the - `adb tcp <port>` command will crash both ADB and all the other serial ports exposed via USB until the modem is restarted. So stick with using ADB over USB for now.
 ## Installing the Telnet Daemon and simpleadmin web GUI
 ### Overview
-After gaining adb acess, you can install a simple web interface you'll be able to access using the modems gateway IP address. You can see some basic signal stats, send AT commands from the browser, and change your TTL directly on the modem. By default this will be on port 8080 so if you didn't change the gateway IP address you'd go to http://192.168.225.1:8080/ and you'd find this...
-![Home Page](https://user-images.githubusercontent.com/22154114/271322119-ae5746d9-332e-4e34-90a0-3f96c3a19d9e.png)
-![AT Commands](https://user-images.githubusercontent.com/22154114/271322313-0e80bec2-37de-447e-8768-3f73dc62f6d6.png)
-![enter image description here](https://user-images.githubusercontent.com/22154114/271322413-65671dbf-81ba-44ef-88e1-218e740c0de7.png)
+After gaining adb acess, you can install a simple web interface you'll be able to access using the modems gateway IP address. You can see some basic signal stats, send AT commands from the browser, and change your TTL directly on the modem. I also added a list of common commands you can just copy/paste on the AT Commands page. By default this will be on port 8080 so if you didn't change the gateway IP address you'd go to http://192.168.225.1:8080/ and you'd find this...
+![Home Page](https://raw.githubusercontent.com/iamromulan/quectel-rgmii-simpleadmin-at-telnet-daemon/main/iamromulansimpleindex.png)
+![AT Commands](https://raw.githubusercontent.com/iamromulan/quectel-rgmii-simpleadmin-at-telnet-daemon/main/iamromulanatcommands.png)
+![enter image description here](https://raw.githubusercontent.com/iamromulan/quectel-rgmii-simpleadmin-at-telnet-daemon/main/iamromulansimpleTTL.png)
 
 Thanks to the work of [Nate Carlson](https://github.com/natecarlson) (Telnet Deamon, Original RGMII Notes), [aesthernr](https://github.com/aesthernr) (Original simpleadmin), and [rbflurry](https://github.com/rbflurry/) (Fixing simpleadmin not functioning) we can install something like this! In order to install it you must first install Nate Carlson's [AT Telnet Daemon](https://github.com/natecarlson/quectel-rgmii-at-command-client/tree/main/at_telnet_daemon) as the [simpleadmin](https://github.com/rbflurry/quectel-rgmii-simpleadmin) depends on it, (a dependency) to work  correctly. Its a Telnet to AT command server. With it, you can connect with a Telenet client like PuTTY on port 5000 to the modems gateway IP (Normaly 192.168.225.1) and send AT commands over Telnet!
 ### How to install
-In order to simplify things I have combined both the [AT Telnet Daemon](https://github.com/natecarlson/quectel-rgmii-at-command-client/tree/main/at_telnet_daemon) and [simpleadmin](https://github.com/rbflurry/quectel-rgmii-simpleadmin) into one repository and one install .sh script file. 
+In order to simplify things I have combined both the [AT Telnet Daemon](https://github.com/natecarlson/quectel-rgmii-at-command-client/tree/main/at_telnet_daemon) and [Simpleadmin](https://github.com/rbflurry/quectel-rgmii-simpleadmin) into one repository and one install .sh script file. This will Install or give you the option to update or uninstall it if its already installed. [You can find that repo here.](https://github.com/iamromulan/quectel-rgmii-simpleadmin-at-telnet-daemon)
 
-To install both the [AT Telnet Daemon](https://github.com/natecarlson/quectel-rgmii-at-command-client/tree/main/at_telnet_daemon) and [simpleadmin](https://github.com/rbflurry/quectel-rgmii-simpleadmin):
+To install both the [AT Telnet Daemon](https://github.com/natecarlson/quectel-rgmii-at-command-client/tree/main/at_telnet_daemon) and [Simpleadmin](https://github.com/rbflurry/quectel-rgmii-simpleadmin):
  - Open ADB & Fastboot++ covered in [Using ADB](#using-adb)
  - Make sure your modem is connected by USB to your computer
  - Run `adb devices` to make sure your modem is detected by adb
@@ -350,24 +362,29 @@ To install both the [AT Telnet Daemon](https://github.com/natecarlson/quectel-rg
  - If you don't get an error you should be getting replies back endlessly, press `CTRL-C` to stop it.
  - Run the following commands 
  ```bash
-adb shell wget -P /tmp https://raw.githubusercontent.com/iamromulan/quectel-rgmii-simpleadmin-at-telnet-daemon/main/install_on_modem.sh
-adb shell chmod +x /tmp/install_on_modem.sh
-adb shell sh /tmp/install_on_modem.sh
+adb shell wget -P /tmp https://raw.githubusercontent.com/iamromulan/quectel-rgmii-simpleadmin-at-telnet-daemon/main/RM520_rgmii_toolkit.sh
+adb shell chmod +x /tmp/RM520_rgmii_toolkit.sh
+adb shell sh /tmp/RM520_rgmii_toolkit.sh
 ```
-When you run the last one you will be asked yes or no questions. Type yes and press enter for each and be patient. Once done, while connected by ethernet go to http://192.168.225.1:8080/
+Script will present a list of options:
+
+ 1.  AT Telnet Daemon
+ 2.  Simple Admin
+ 3. Exit
+
+
+If it is not installed and you press 1 or 2 it will install. If it is, it will prompt to uninstall or update. 
+
+Once done, while connected by ethernet go to http://192.168.225.1:8080/
 
 That's it!! 
 ### How to uninstall
-If you need to uninstall one or the other or both, view the uninstall section of my combo repo: [quectel-rgmii-simpleadmin-at-telnet-daemon](https://github.com/iamromulan/quectel-rgmii-simpleadmin-at-telnet-daemon#uninstallation-automated)
-
-OR
-
-flash firmware---> follow [After a firmware Flash; After first time setup](#after-a-firmware-flash-after-first-time-setup)
+If you need to uninstall run the commands again and chose what to uninstall or update
 # Other interesting things to check over ADB
 
 ## Enable Daily Reboot
 
-Run the following commands in adb to install a daily reboot timer. The script should prompt you to enter a daily reboot time in 24 hour format UTC time. If you want to chnage or remove the timer just run the script again.
+Run the following commands in adb to install a daily reboot timer. The script should prompt you to enter a daily reboot time in 24 hour format UTC time. If you want to change or remove the timer just run the script again.
 ```bash
 adb shell wget -P /tmp https://raw.githubusercontent.com/iamromulan/quectel-rgmii-configuration-notes/main/files/install_daily_reboot.sh
 adb shell chmod +x /tmp/install_daily_reboot.sh
@@ -603,7 +620,18 @@ Package Time: 2023-03-14,09:49
 ```
 
 ### AT Command Access from ADB
-
+To make this simpler I created a sh script you can use that will ask for an AT command and return the response. Download and install it like this:
+```
+adb shell mount -o remount,rw /
+adb shell wget -P /usrdata https://raw.githubusercontent.com/iamromulan/quectel-rgmii-configuration-notes/main/files/atcomm.sh
+adb shell chmod +x /usrdata/atcomm.sh
+adb shell mount -o remount,ro /
+```
+After its installed you can run it like this:
+```
+adb shell sh /usrdata/atcomm.sh
+```
+#### Findings
 It appears that the following processes are used to expose the serial ports via USB:
 ```
   155 root      0:00 /usr/bin/port_bridge at_mdm0 at_usb0 0
@@ -653,9 +681,4 @@ Command shell:
 /tmp # echo -e 'ATI \r' > /dev/smd7
 ```
 
-It appears that smd11 and at_mdm0 can also be used for this. On a default-ish modem, it appears that smd7 and at_mdm0 are both used by running daemons, so I picked smd11 for my AT daemon. There is a service called 'quectel-uart-smd.service', in it's unit file it disables the quectel_uart_smd, and says that smd11 is used by MCM_atcop_svc. However, I see no signs of that on the system.. so I think it's probably the safest to use.
-
-
-
-
-
+It appears that smd11 and at_mdm0 can also be used for this. On a default-ish modem, it appears that smd7 and at_mdm0 are both used by running daemons, so Nate picked smd11 for their AT daemon. There is a service called 'quectel-uart-smd.service', in it's unit file it disables the quectel_uart_smd, and says that smd11 is used by MCM_atcop_svc. However, I see no signs of that on the system.. so it's probably the safest to use.
