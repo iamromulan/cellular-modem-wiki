@@ -142,10 +142,10 @@ adb shell "echo -e 'AT+QMAPWAC=1 \r' > /dev/smd7"
 adb shell reboot
 ```
 
- - Custom software/services installed by/through adb shell will be removed. You can reinstall the Telnet Daemon and Simple admin [with my Combo Installer](https://github.com/iamromulan/quectel-rgmii-simpleadmin-at-telnet-daemon)
+ - Custom software/services installed by/through adb shell will be removed. You can reinstall the Telnet Daemon, Simple Admin, and Daily reboot [with my Combo Installer](https://github.com/iamromulan/quectel-rgmii-simpleadmin-at-telnet-daemon)
  
  ## First Time Setup
-Run these AT Commands in Qnavigator. If you don't have Qnavigator or a way to send AT Commands check out my [RM520 Resource Repository](#RM520-Resource-Repository) 
+Connect to the modem by USB and run these AT Commands in Qnavigator. If you don't have Qnavigator or another way to send AT Commands check out my [RM520 Resource Repository](#RM520-Resource-Repository) 
 ```
 AT+QCFG="data_interface",1,0  
 AT+QCFG="pcie/mode",1  
@@ -175,7 +175,7 @@ After a firmware Flash these commands need ran to get back online
 AT+QMAPWAC=1  
 AT+CFUN=1,1 (or just reboot)
 ```
-You can also do this throgh adb if you have already unlocked it
+You can also do this through adb if you have already unlocked it
 ```
 adb shell "echo -e 'AT+QMAPWAC=1 \r' > /dev/smd7"
 adb shell reboot
@@ -352,10 +352,10 @@ After gaining adb acess, you can install a simple web interface you'll be able t
 
 Thanks to the work of [Nate Carlson](https://github.com/natecarlson) (Telnet Deamon, Original RGMII Notes), [aesthernr](https://github.com/aesthernr) (Original simpleadmin), and [rbflurry](https://github.com/rbflurry/) (Fixing simpleadmin not functioning) we can install something like this! In order to install it you must first install Nate Carlson's [AT Telnet Daemon](https://github.com/natecarlson/quectel-rgmii-at-command-client/tree/main/at_telnet_daemon) as the [simpleadmin](https://github.com/rbflurry/quectel-rgmii-simpleadmin) depends on it, (a dependency) to work  correctly. Its a Telnet to AT command server. With it, you can connect with a Telenet client like PuTTY on port 5000 to the modems gateway IP (Normaly 192.168.225.1) and send AT commands over Telnet!
 ### How to install
-In order to simplify things I have combined both the [AT Telnet Daemon](https://github.com/natecarlson/quectel-rgmii-at-command-client/tree/main/at_telnet_daemon) and [Simpleadmin](https://github.com/rbflurry/quectel-rgmii-simpleadmin) into one repository and one install .sh script file. This will Install or give you the option to update or uninstall it if its already installed. [You can find that repo here.](https://github.com/iamromulan/quectel-rgmii-simpleadmin-at-telnet-daemon)
+In order to simplify things I have combined both the [AT Telnet Daemon](https://github.com/natecarlson/quectel-rgmii-at-command-client/tree/main/at_telnet_daemon) and [Simpleadmin](https://github.com/rbflurry/quectel-rgmii-simpleadmin) into one repository and one install RM520_rgmii_toolkit.sh script file. I also added the ability to install a daily reboot timer and an interactive AT command console to it.  [You can find the main repo for it here.](https://github.com/iamromulan/quectel-rgmii-simpleadmin-at-telnet-daemon)
 
-To install both the [AT Telnet Daemon](https://github.com/natecarlson/quectel-rgmii-at-command-client/tree/main/at_telnet_daemon) and [Simpleadmin](https://github.com/rbflurry/quectel-rgmii-simpleadmin):
- - Open ADB & Fastboot++ covered in [Using ADB](#using-adb)
+To install the web interface, the AT telnet daemon, and a daily reboot timer:
+ - Open ADB & Fastboot++ covered in [Using ADB](#using-adb) or just use adb
  - Make sure your modem is connected by USB to your computer
  - Run `adb devices` to make sure your modem is detected by adb
  - Run `adb shell ping 8.8.8.8` to make sure the shell can access the internet. If you get an error, make sure the modem is connected to a cellular network and make sure `AT+QMAPWAC=1` as covered in the known issue [I Can't get internet access from the Ethernet port (Common)](#i-cant-get-internet-access-from-the-ethernet-port-common)
@@ -368,12 +368,18 @@ adb shell sh /tmp/RM520_rgmii_toolkit.sh
 ```
 Script will present a list of options:
 
- 1.  AT Telnet Daemon
- 2.  Simple Admin
- 3. Exit
+ 1.  Send AT Commands
+ 2.  Install/Update or remove AT Telnet Daemon
+ 3. Install/Update or remove Simple Admin
+ 4. Install/Change or remove Daily Reboot Timer
+ 5. Exit
 
-
-If it is not installed and you press 1 or 2 it will install. If it is, it will prompt to uninstall or update. 
+The Simple Admin web interface depends on the AT Telnet Daemon so you'll need to install both. 
+Press 2, wait for it to install then press 3. 
+After that the web interface should be working. 
+If you press 4 it will create a daily reboot timer and ask you for the time it should reboot daily in UTC 24-hour format.
+If it is already installed and you press 2, 3, or 4 it will prompt to uninstall, update, or change. 
+If you press 1 you can send AT commands, sending exit in lower case will return you to the main menu.
 
 Once done, while connected by ethernet go to http://192.168.225.1:8080/
 
@@ -383,8 +389,9 @@ If you need to uninstall run the commands again and chose what to uninstall or u
 # Other interesting things to check over ADB
 
 ## Enable Daily Reboot
+> :warning: Your modem must already be connected to the internet for this to install
 
-Run the following commands in adb to install a daily reboot timer. The script should prompt you to enter a daily reboot time in 24 hour format UTC time. If you want to change or remove the timer just run the script again.
+Run the following commands in adb to install a daily reboot timer. The script should prompt you to enter a daily reboot time in 24 hour format UTC time. If you want to change or remove the timer just run the script again. This can also be achieved in the [Simple Admin install section](#how-to-install) as it is now apart of the RM520_rgmii_toolkit.sh as well. If you are only wanting the daily reboot the following is for it only:
 ```bash
 adb shell wget -P /tmp https://raw.githubusercontent.com/iamromulan/quectel-rgmii-configuration-notes/main/files/install_daily_reboot.sh
 adb shell chmod +x /tmp/install_daily_reboot.sh
