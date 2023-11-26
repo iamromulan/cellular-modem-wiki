@@ -185,13 +185,24 @@ remove_simple_admin() {
 
 # Function to create systemd service and timer files with the user-specified time
 create_service_and_timer() {
+    remount_rw
+    # Define the path for the modem reboot script
+    MODEM_REBOOT_SCRIPT="$USRDATA_DIR/reboot_modem.sh"
+
+    # Create the modem reboot script
+    echo "#!/bin/sh
+/bin/echo -e 'AT+CFUN=1,1 \r' > /dev/smd7" > "$MODEM_REBOOT_SCRIPT"
+
+    # Make the script executable
+    chmod +x "$MODEM_REBOOT_SCRIPT"
+
     # Create the systemd service file for reboot
     echo "[Unit]
 Description=Reboot Modem Daily
 
 [Service]
 Type=oneshot
-ExecStart=/bin/sh -c "/bin/echo -e 'AT+CFUN=1,1 \r' > /dev/smd7"
+ExecStart=/bin/sh /usrdata/reboot_modem.sh
 Restart=no
 RemainAfterExit=no" > /lib/systemd/system/rebootmodem.service
 
@@ -212,9 +223,8 @@ Type=oneshot
 ExecStart=/bin/systemctl start rebootmodem.timer
 RemainAfterExit=yes" > /lib/systemd/system/rebootmodem-trigger.service
 
-    # Create symbolic links for the trigger service in the wanted directory and give exe perm to service unit
+    # Create symbolic links for the trigger service in the wanted directory
     ln -sf /lib/systemd/system/rebootmodem-trigger.service /lib/systemd/system/multi-user.target.wants/
-    chmod +x /lib/systemd/system/rebootmodem.service
 
     # Reload systemd to recognize the new timer and trigger service
     systemctl daemon-reload
@@ -222,6 +232,7 @@ RemainAfterExit=yes" > /lib/systemd/system/rebootmodem-trigger.service
 
     # Start the trigger service, which will start the timer
     systemctl start rebootmodem-trigger.service
+    remount_ro
 
     # Confirmation
     echo "Rebootmodem-trigger service created and started successfully."
@@ -251,11 +262,12 @@ manage_reboot_timer() {
                 rm -f /lib/systemd/system/rebootmodem.service
                 rm -f /lib/systemd/system/rebootmodem.timer
                 rm -f /lib/systemd/system/rebootmodem-trigger.service
+                rm -f "$USRDATA_DIR/reboot_modem.sh"
 
                 # Reload systemd to apply changes
                 systemctl daemon-reload
 
-                echo "Rebootmodem service, timer, and trigger removed successfully."
+                echo "Rebootmodem service, timer, trigger, and script removed successfully."
                 ;;
             1)
                 printf "Enter the new time for daily reboot (24-hour format in Coordinated Universal Time, HH:MM): "
@@ -266,10 +278,11 @@ manage_reboot_timer() {
                     echo "Invalid time format. Exiting."
                     exit 1
                 else
-                    # Remove old symlinks
+                    # Remove old symlinks and script
                     rm -f /lib/systemd/system/multi-user.target.wants/rebootmodem-trigger.service
-                    
-                    # Set the user time to the new time and recreate the service, timer, and trigger
+                    rm -f "$USRDATA_DIR/reboot_modem.sh"
+
+                    # Set the user time to the new time and recreate the service, timer, trigger, and script
                     user_time=$new_time
                     create_service_and_timer
                 fi
