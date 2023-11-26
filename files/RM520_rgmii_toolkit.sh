@@ -191,7 +191,7 @@ Description=Reboot Modem Daily
 
 [Service]
 Type=oneshot
-ExecStart=/sbin/reboot
+ExecStart=/bin/echo -e 'AT+CFUN=1,1 \r' > /dev/smd7
 Restart=no
 RemainAfterExit=no" > /lib/systemd/system/rebootmodem.service
 
