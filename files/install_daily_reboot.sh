@@ -2,15 +2,26 @@
 
 # Function to create systemd service and timer files with the user-specified time
 create_service_and_timer() {
+    # Define the path for the modem reboot script
+     MODEM_REBOOT_SCRIPT="$USRDATA_DIR/reboot_modem.sh"
+     
+        # Create the modem reboot script
+    echo "#!/bin/sh
+/bin/echo -e 'AT+CFUN=1,1 \r' > /dev/smd7" > "$MODEM_REBOOT_SCRIPT"
+
+    # Make the script executable
+    chmod +x "$MODEM_REBOOT_SCRIPT"
+
     # Create the systemd service file for reboot
     echo "[Unit]
 Description=Reboot Modem Daily
 
 [Service]
 Type=oneshot
-ExecStart=/bin/sh -c "/bin/echo -e 'AT+CFUN=1,1 \r' > /dev/smd7"
+ExecStart=/bin/sh /usrdata/reboot_modem.sh
 Restart=no
 RemainAfterExit=no" > /lib/systemd/system/rebootmodem.service
+
 
     # Create the systemd timer file with the user-specified time
     echo "[Unit]
