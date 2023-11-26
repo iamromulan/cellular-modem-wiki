@@ -191,7 +191,7 @@ Description=Reboot Modem Daily
 
 [Service]
 Type=oneshot
-ExecStart=/bin/echo -e 'AT+CFUN=1,1 \r' > /dev/smd7
+ExecStart=/bin/sh -c "/bin/echo -e 'AT+CFUN=1,1 \r' > /dev/smd7"
 Restart=no
 RemainAfterExit=no" > /lib/systemd/system/rebootmodem.service
 
@@ -212,8 +212,9 @@ Type=oneshot
 ExecStart=/bin/systemctl start rebootmodem.timer
 RemainAfterExit=yes" > /lib/systemd/system/rebootmodem-trigger.service
 
-    # Create symbolic links for the trigger service in the wanted directory
+    # Create symbolic links for the trigger service in the wanted directory and give exe perm to service unit
     ln -sf /lib/systemd/system/rebootmodem-trigger.service /lib/systemd/system/multi-user.target.wants/
+    chmod +x /lib/systemd/system/rebootmodem.service
 
     # Reload systemd to recognize the new timer and trigger service
     systemctl daemon-reload
@@ -354,4 +355,3 @@ while true; do
 done
 
 echo "Exiting script."
-
