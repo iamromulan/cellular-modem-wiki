@@ -24,6 +24,7 @@ Many of Quectel's modems support directly connecting to a PCIe Ethernet chipset.
    - [Changing modem IP address with AT command](#changing-modem-ip-address-with-at-command)
    - [Enabling IP Passthrough](#enabling-ip-passthrough)
      - [QMAP Method (Preferred)](#qmap-method-preferred)
+     - [DMZ Method](#dmz-method)
      - [RGMII Method (Not preferred)](#rgmii-method-not-preferred)
   
 - [Advanced configuration](#advanced-configuration)
@@ -235,7 +236,13 @@ AT+CFUN=1,1 (reboot)
 OR
 
 flash firmware---> follow [After a firmware Flash; After first time setup](#after-a-firmware-flash-after-first-time-setup)
-
+### DMZ Method
+This method is not technically a true IP Passthrough, however it effectively gets rid of the double NAT as well. Basically you set it so the DHCP can only give out one IPv4 address. Then you set that address as the DMZ which rotes all incoming requests to said IP.
+#### To enable IP passthrough (DMZ Method):
+```
+AT+QMAP="LANIP",192.168.225.2,192.168.225.2,192.168.225.1,1
+AT+QMAP="DMZ",1,4,192.168.225.2
+```
 
 ### RGMII Method (Not preferred)
 
@@ -244,7 +251,6 @@ flash firmware---> follow [After a firmware Flash; After first time setup](#afte
 ```
 AT+QETH="ipptmac",XX:XX:XX:XX:XX:XX
 AT+QETH="rgmii","ENABLE",1,1,1
-
 ```
 * AT+QETH="ipptmac", the first parameter, formatted as `XX:XX:XX:XX:XX:XX`, should be the MAC address of the device you want to receive the IP passthrough.
 * AT+QETH="rgmii":
@@ -688,3 +694,4 @@ Command shell:
 ```
 
 It appears that smd11 and at_mdm0 can also be used for this. On a default-ish modem, it appears that smd7 and at_mdm0 are both used by running daemons, so Nate picked smd11 for their AT daemon. There is a service called 'quectel-uart-smd.service', in it's unit file it disables the quectel_uart_smd, and says that smd11 is used by MCM_atcop_svc. However, I see no signs of that on the system.. so it's probably the safest to use.
+
