@@ -237,7 +237,7 @@ OR
 
 flash firmware---> follow [After a firmware Flash; After first time setup](#after-a-firmware-flash-after-first-time-setup)
 ### DMZ Method
-This method is not technically a true IP Passthrough, however it effectively gets rid of the double NAT as well. Basically you set it so the DHCP can only give out one IPv4 address. Then you set that address as the DMZ which rotes all incoming requests to said IP.
+This method is not technically a true IP Passthrough, however it effectively gets rid of the double NAT as well. Basically you set it so the DHCP can only give out one IPv4 address. Then you set that address as the DMZ which routes all incoming requests to said IP.
 #### To enable IP passthrough (DMZ Method):
 ```
 AT+QMAP="LANIP",192.168.225.2,192.168.225.2,192.168.225.1,1
