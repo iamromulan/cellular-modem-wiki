@@ -360,10 +360,10 @@ To install the web interface, the AT telnet daemon, and a daily reboot timer:
  - Run `adb shell ping 8.8.8.8` to make sure the shell can access the internet. If you get an error, make sure the modem is connected to a cellular network and make sure `AT+QMAPWAC=1` as covered in the known issue [I Can't get internet access from the Ethernet port (Common)](#i-cant-get-internet-access-from-the-ethernet-port-common)
  - If you don't get an error you should be getting replies back endlessly, press `CTRL-C` to stop it.
  - Run the following commands 
- ```bash
-adb shell wget -P /tmp https://raw.githubusercontent.com/iamromulan/quectel-rgmii-simpleadmin-at-telnet-daemon/main/RM520_rgmii_toolkit.sh
-adb shell chmod +x /tmp/RM520_rgmii_toolkit.sh
-adb shell sh /tmp/RM520_rgmii_toolkit.sh
+```bash
+adb shell wget -P /tmp https://raw.githubusercontent.com/iamromulan/quectel-rgmii-toolkit/main/RMxxx_rgmii_toolkit.sh
+adb shell chmod +x /tmp/RMxxx_rgmii_toolkit.sh
+adb shell sh /tmp/RMxxx_rgmii_toolkit.sh
 ```
 Script will present a list of options:
 
