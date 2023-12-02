@@ -117,10 +117,8 @@ It is recommended that you check out my  **[RM520N-GL Resource Repository](https
 There's an autoinstaller .cmd that will get you `Drivers`, `Qflash`, `Qnavigator`, and the last `2 firmwares` installed and put in the right spots. Checkout the C:/Quectel/firmware folder for the firmware after using the .cmd
 
 There's also a [Firmware Flashing Guide](https://github.com/iamromulan/RM520N-GL/tree/main#how-to-install-firmware-with-qflash-windows-) for Windows there 
+There's also a [AT Commands from Windows Guide](https://github.com/iamromulan/RM520N-GL#how-to-use-qnavigator-to-send-at-commands)
 
-I will also be adding a how to use Qnavigator guide later there but for now:
-
- - Basic use: open it up, hit next a bunch of times, press the plug icon at the top, press ok, uncheck automatic initialization, click connect, use the bottom right text box to type an AT command and press enter to send.
 
 # Basic configuration
 
