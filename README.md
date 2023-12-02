@@ -2,7 +2,7 @@ Quectel RGMII Configuration Notes
 =================================
 
 > :heavy_check_mark: This guide was written using the Quectel RM520N-GL. 
-However, many are saying this is all working for all RM5xx modules.
+However, many are saying this is working for all RM5xx modules.
 
 Many of Quectel's modems support directly connecting to a PCIe Ethernet chipset. This is useful to use the cellular connection as a WAN interface - you can just plug the modem into the WAN port on your router, do a bit of configuration, and you're good to go. Performance is good, and the modem's onboard connection management often works better than the scripts many routers use to try to keep the connection up.
 
