@@ -99,7 +99,7 @@ install_update_at_telnet() {
     wget $GITHUB_URL -O main.zip
     unzip -o main.zip
     cp -Rf quectel-rgmii-simpleadmin-at-telnet-daemon-main/attelnetdaemon/at-telnet $USRDATA_DIR
-	cp -Rf quectel-rgmii-simpleadmin-at-telnet-daemon-main/attelnetdaemon/micropython $USRDATA_DIR
+    cp -Rf quectel-rgmii-simpleadmin-at-telnet-daemon-main/attelnetdaemon/micropython $USRDATA_DIR
 
     # Set execute permissions
     chmod +x $MICROPYTHON_DIR/micropython
@@ -107,21 +107,78 @@ install_update_at_telnet() {
     chmod +x $AT_TELNET_DIR/socat-armel-static
     chmod +x $AT_TELNET_DIR/picocom
 
-    # Copy systemd unit files & reload
-    cp -f $AT_TELNET_DIR/systemd_units/*.service /lib/systemd/system
+    # User prompt for selecting device
+    echo "Which device should AT over Telnet use?"
+    echo "This will create virtual tty ports (serial ports) that will use either smd11 or smd7"
+    echo "1) Use smd11 (default)"
+    echo "2) Use smd7 (use this if another application is using smd11)"
+    read -p "Enter your choice (1 or 2): " device_choice
+
+    # Stop and disable existing services before installing new ones
+    systemctl stop at-telnet-daemon
+    systemctl disable at-telnet-daemon
+    systemctl stop socat-smd11
+    systemctl stop socat-smd11-to-ttyIN
+    systemctl stop socat-smd11-from-ttyIN
+    systemctl stop socat-smd7
+    systemctl stop socat-smd7-to-ttyIN
+    systemctl stop socat-smd7-from-ttyIN
+    rm /lib/systemd/system/at-telnet-daemon.service
+    rm /lib/systemd/system/socat-smd11.service
+    rm /lib/systemd/system/socat-smd11-to-ttyIN.service
+    rm /lib/systemd/system/socat-smd11-from-ttyIN.service
+    rm /lib/systemd/system/socat-smd7.service
+    rm /lib/systemd/system/socat-smd7-to-ttyIN.service
+    rm /lib/systemd/system/socat-smd7-from-ttyIN.service
     systemctl daemon-reload
 
-    # Link systemd files
-    ln -sf /lib/systemd/system/at-telnet-daemon.service /lib/systemd/system/multi-user.target.wants/
-    ln -sf /lib/systemd/system/socat-smd11.service /lib/systemd/system/multi-user.target.wants/
-    ln -sf /lib/systemd/system/socat-smd11-to-ttyIN.service /lib/systemd/system/multi-user.target.wants/
-    ln -sf /lib/systemd/system/socat-smd11-from-ttyIN.service /lib/systemd/system/multi-user.target.wants/
-    # Start Services
-    systemctl start socat-smd11
-    sleep 2s
-    systemctl start socat-smd11-to-ttyIN
-    systemctl start socat-smd11-from-ttyIN
-    systemctl start at-telnet-daemon
+    # Depending on the choice, copy the respective systemd unit files
+    case $device_choice in
+        2)
+            cp -f $AT_TELNET_DIR/smd7_systemd_units/*.service /lib/systemd/system
+			ln -sf /lib/systemd/system/socat-smd7.service /lib/systemd/system/multi-user.target.wants/
+			ln -sf /lib/systemd/system/socat-smd7-to-ttyIN.service /lib/systemd/system/multi-user.target.wants/
+			ln -sf /lib/systemd/system/socat-smd7-from-ttyIN.service /lib/systemd/system/multi-user.target.wants/
+			systemctl daemon-reload
+			systemctl start socat-smd7
+			sleep 2s
+			systemctl start socat-smd7-to-ttyIN
+			systemctl start socat-smd7-from-ttyIN
+            ;;
+        1)
+            cp -f $AT_TELNET_DIR/systemd_units/*.service /lib/systemd/system
+			ln -sf /lib/systemd/system/socat-smd11.service /lib/systemd/system/multi-user.target.wants/
+			ln -sf /lib/systemd/system/socat-smd11-to-ttyIN.service /lib/systemd/system/multi-user.target.wants/
+			ln -sf /lib/systemd/system/socat-smd11-from-ttyIN.service /lib/systemd/system/multi-user.target.wants/
+			systemctl daemon-reload
+			systemctl start socat-smd11
+			sleep 2s
+			systemctl start socat-smd11-to-ttyIN
+			systemctl start socat-smd11-from-ttyIN
+            ;;
+    esac
+
+    
+
+    # User prompt for enabling Telnet server
+    echo "-Telnet server is not required for simpleadmin"
+    echo "-Simpleadmin uses the tty port created in the previous step"
+    echo "-If enabled a telnet server will listen on the gateway address on port 5000"
+    echo "-It isn't password protceted though so it is recommended to only enable if you need it" 
+    echo "Enable Telnet server?"
+    echo "1) Yes"
+    echo "2) No"
+    read -p "Enter your choice (1 or 2): " telnet_choice
+
+    # Link or remove systemd files based on user choice
+    if [ "$telnet_choice" = "1" ]; then
+        ln -sf /lib/systemd/system/at-telnet-daemon.service /lib/systemd/system/multi-user.target.wants/
+		
+        # Start Services
+        systemctl start at-telnet-daemon
+    else
+        
+    fi
 
     remount_ro
 }
@@ -129,17 +186,57 @@ install_update_at_telnet() {
 # Function to remove AT Telnet Daemon
 remove_at_telnet() {
     remount_rw
+    # Stop and disable all possible services related to AT Telnet Daemon
     systemctl stop at-telnet-daemon
     systemctl disable at-telnet-daemon
-    rm -rf $MICROPYTHON_DIR
-	rm -rf $AT_TELNET_DIR
+    systemctl stop socat-smd11
+    systemctl stop socat-smd11-to-ttyIN
+    systemctl stop socat-smd11-from-ttyIN
+    systemctl stop socat-smd7
+    systemctl stop socat-smd7-to-ttyIN
+    systemctl stop socat-smd7-from-ttyIN
+
+    # Remove all systemd service files for both smd11 and smd7 configurations
     rm /lib/systemd/system/at-telnet-daemon.service
     rm /lib/systemd/system/socat-smd11.service
     rm /lib/systemd/system/socat-smd11-to-ttyIN.service
     rm /lib/systemd/system/socat-smd11-from-ttyIN.service
+    rm /lib/systemd/system/socat-smd7.service
+    rm /lib/systemd/system/socat-smd7-to-ttyIN.service
+    rm /lib/systemd/system/socat-smd7-from-ttyIN.service
+
+    # Reload systemd to apply changes
     systemctl daemon-reload
+
+    # Prompt user before removing micropython
+    echo "Do you want to remove MicroPython?"
+    echo "1) Yes"
+    echo "2) No"
+    read -p "Enter your choice: " choice
+
+    case $choice in
+        1 )
+            rm -rf $MICROPYTHON_DIR
+            echo "MicroPython directory removed."
+            ;;
+        2 )
+            echo "MicroPython directory not removed."
+            ;;
+        * )
+            echo "Invalid choice. MicroPython directory not removed."
+            ;;
+    esac
+
+    # Remove the AT Telnet Daemon directory
+    rm -rf $AT_TELNET_DIR
+
+    # Additional cleanup if necessary
+    # (Add any other file or directory removals here if needed)
+
     remount_ro
+    echo "AT Telnet Daemon removed successfully."
 }
+
 
 # Function to install/update Simple Admin
 install_update_simple_admin() {
@@ -311,6 +408,7 @@ manage_reboot_timer() {
 
 # Main menu
 while true; do
+    echo "Welcome to iamromulan's RGMII Toolkit script for Quectel RMxxx Series modems!"
     echo "Select an option:"
     echo "1) Send AT Commands"
     echo "2) Install/Update or remove AT Telnet Daemon"
@@ -368,3 +466,4 @@ while true; do
 done
 
 echo "Exiting script."
+
