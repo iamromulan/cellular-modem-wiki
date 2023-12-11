@@ -157,7 +157,7 @@ Since AT command documentation is vague and I don't know what the official funct
  ****ON THE CARRIER I USED TO TEST THIS, WILL TEST FURTHER ****
  - If AT+QMAPWAC=1 the Linux/adb shell , the USB NIC, and Ethernet port will request DHCP from the carrier automaticly, resulting in internet access and unique CGNAT IP addresses for each. So far at least in my experience, each have also led to a different public IP.
 
- - If AT+QMAPWAC=0 then only the USB interface will have internet. In Windows if this doesn't appear while connected by USB then most likely you are in USB ECM mode (`AT+QCFG="usbnet",1` ) instead of USB RMNET mode (`AT+QCFG="usbnet",0`) check device manager. Otherwise you don't have the right driver installed. Install the right driver: [Quectel Windows USB Driver(Q) NDIS V2.4.6](https://drive.google.com/file/d/1nB-yBeqBCMLUXKLWNYVxs8VX6AXw9eOn/view?usp=sharing)
+ - If AT+QMAPWAC=0 then only the USB interface will have internet. In Windows if this doesn't appear while connected by USB then most likely you are in USB ECM mode (`AT+QCFG="usbnet",1` ) instead of USB RMNET mode (`AT+QCFG="usbnet",0`) check device manager. Otherwise you don't have the right driver installed. Uninstall all other Quectel drivers and Install the right driver: [Quectel Windows USB Driver(Q) NDIS V2.6.0](https://mega.nz/file/GVMS1D7K#ogA1oLOwhkRlLWDDhisG9p0k1H_jhcAJOesHHV-XKUg)
  - A fresh firmware flash will do the following:  
 IPPT for both methods will be turned off back to default  
 AT+QMAPWAC=1 will go back to AT+QMAPWAC=0
@@ -190,7 +190,7 @@ Remove the `# ` from before the echo line.
 # RM520 Resource Repository 
 It is recommended that you check out my  **[RM520N-GL Resource Repository](https://github.com/iamromulan/RM520N-GL)**
 
-There's an autoinstaller .cmd that will get you `Drivers`, `Qflash`, `Qnavigator`, and the last `2 firmwares` installed and put in the right spots. Checkout the C:/Quectel/firmware folder for the firmware after using the .cmd
+There's an autoinstaller .cmd that will get you everything you need for windows installed and put in the right spots. Checkout the C:/Quectel/firmware folder for the firmware after using the .cmd
 
 There's also a [Firmware Flashing Guide](https://github.com/iamromulan/RM520N-GL/tree/main#how-to-install-firmware-with-qflash-windows-) for Windows there 
 
