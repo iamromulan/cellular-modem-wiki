@@ -164,7 +164,7 @@ AT+QMAPWAC=1 will go back to AT+QMAPWAC=0
 
  - Disabling either IPPT methods AT+QMAPWAC=1 will go back to AT+QMAPWAC=0
 ### Randomly no Internet while in IPPT mode
-Run`AT+QMAP="DHCPV4DNS","disable"` and see if it fixes it. This is now part of the IPPT  [QMAP Method (Preferred)](#qmap-method-preferred) section. I have also added an [Enable Daily Reboot](#enable-daily-reboot) section/option as a workaround, however I have not tested it on my own modem yet.
+Run`AT+QMAP="DHCPV4DNS","disable"` and see if it fixes it. This is now part of the IPPT  [QMAP Method (Preferred)](#qmap-method-preferred) section. I have also added an [Enable Daily Reboot](#enable-daily-reboot) section/option as a workaround.
 ## Modem does not automatically connect at startup (Uncommon)
 
 Some are reporting that when you reboot the modem, it will start in CFUN=0 (minimal function) mode. To get it to connect, you need to issue `AT+CFUN=1`.
