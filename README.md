@@ -12,8 +12,12 @@ Many of Quectel's modems support directly connecting to a PCIe Ethernet chipset.
 # Table of Contents
 - [Quectel RGMII Configuration Notes](#quectel-rgmii-configuration-notes)
 - [Table of Contents](#table-of-contents)
-- [Hardware Recommendations](#hardware-recommendations)
-- [Known issues](#known-issues)
+- [Hardware Recommendations](#hardware-recommendations) 
+  - [Proper Assembly](#proper-assembly)
+  - [Recommended 12v 5A power supply](#recommended-12v-5a-power-supply)
+  - [Other Known M.2 to RJ45 PCBs](#other-known-m.2-to-rj45-pcbs)
+  - [Outdoor antenna enclosure combo setups](#outdoor-antenna-enclosure-combo-setups)
+- [Troubleshooting](#troubleshooting)
     - [I Can't get internet access from the Ethernet port (Common)](#i-cant-get-internet-access-from-the-ethernet-port-common)
   - [Modem does not automatically connect at startup (Uncommon)](#modem-does-not-automatically-connect-at-startup-uncommon)
 - [RM520 Resource Repository](#RM520-Resource-Repository)
@@ -52,22 +56,93 @@ Many of Quectel's modems support directly connecting to a PCIe Ethernet chipset.
 I've only used one adapter personally; it's sold on Aliexpress as "5G to 2.5Gbps Ethernet(RJ45) board,USB3.0-C,DC5.5 input, support RM520N-GL RM510Q-GL RM500Q-GL/CN,RTL8125 case", and can either be purchased with or without an RM520N-GL. You can buy it as a bare board or as a kit, including an enclosure, pigtails, fan, heatsink, and antennas. The antennas and heatsink I don't really care for. I'd recommend getting a higher quality copper heatsink and using antennas of your preference. I'd also recommend a 12v 5A power adapter to go along with this.
 
 
-![](images/mcuzoneboard.webp)
-
 ![](images/mcuzonekit.webp)
+
+
+![](images/mcuzoneboard.webp)
 
 
 Here's the seller I purchased from:
 https://a.aliexpress.com/_m0hVDKO
+## Proper Assembly
+
+**When you receive the hardware from MCUzone you should end up with this:**
+![pythonadbkey](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/hw1.jpg?raw=true)
+ 
+ ![pythonadbkey](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/hw2.jpg?raw=true)
 
 
-Side note - From what i understand, the InvisaGig product sold by Wireless Haven is an RGMII M.2 to Ethernet board with a custom case, copper heatsink on the RM520 coupled with a fan and proper ventilation on the case. They embed a custom GUI in the RM520N, which makes configuration simpler, no need for a USB connection at all. A guide on installing a community made version of a custom GUI will be covered later on in this document. The InvisaGig is expensive compared to DIY, but they also offer a warranty and support. If you're interested:
+**Remove the 4 screws on the back:**
+
+![pythonadbkey](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/hw3.jpg?raw=true)
+
+**The board should just slide out:**
+
+![pythonadbkey](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/hw4.jpg?raw=true)
+
+**Remove/scrape the QA sticker from the modem if there is one:**
+
+![pythonadbkey](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/hw5.jpg?raw=true)
+
+![pythonadbkey](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/hw6.jpg?raw=true)
+
+**Apply a heatsink to the modem. Do not block the vent hole in the lower left. I personally choose to use a copper heatsink instead of the one they sent. Check them out side-by-side:**
+
+![pythonadbkey](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/hw7.jpg?raw=true)
+
+![pythonadbkey](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/hw8.jpg?raw=true)
+
+**Just peel off the adhesive cover and stick it on:**
+
+![pythonadbkey](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/hw9.jpg?raw=true)
+
+**Remove the 4 nuts on the standoffs for the fan:**
+
+![pythonadbkey](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/hw10_1.jpg?raw=true)
+
+**Place the fan on the standoffs:**
+
+![pythonadbkey](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/hw11.jpg?raw=true)
+
+**Connect the fan to the 3.8v connector and tighten the nuts down:**
+
+![pythonadbkey](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/hw12.jpg?raw=true)
+
+**Make sure the SMA nuts are snug but not overtightened, I had to tighten each one a little bit:**
+
+![pythonadbkey](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/hw13.jpg?raw=true)
+
+**Line the board back up with the bottom rail on the case (circled), slide it back in, and replace the 4 screws on the back:**
+
+![pythonadbkey](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/hw14.jpg?raw=true)
+
+**That's pretty much it! Screw your antennas on have a SIM card handy for the rest of the setup.**
+
+![pythonadbkey](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/hw15.jpg?raw=true)
+
+## Recommended 12v 5A power supply
+
+The power supply I use with this is [this 12v 5A one from Amazon](https://www.amazon.com/gp/product/B015G8E1Q4/ref=ppx_yo_dt_b_asin_title_o02_s00?ie=UTF8&th=1)
+I'm sure a 12v 2A adapter would work as well.
+The USB-C port also works to provide the unit power.
+
+## Other Known M.2 to RJ45 PCBs
+
+Single Sim version: [Aliexpress Link](https://www.aliexpress.us/item/3256804672394777.html)
+Waveshare version: [Waveshare.com 5G M.2 to Gigabit Ethernet](https://www.waveshare.com/5g-m.2-to-gigabit-eth.htm?fbclid=IwAR2sVyEBkmWIamCWfgtngInfI43R9E1yw5KPvqrtHiQlcBEerlhKU3ipNVc)
+
+**Side note:**
+From what i understand, the InvisaGig product sold by Wireless Haven is an RGMII M.2 to Ethernet board with a custom case, copper heatsink on the RM520 coupled with a fan and proper ventilation on the case. They embed a custom GUI in the RM520N, which makes configuration simpler, no need for a USB connection at all. A guide on installing a community made version of a custom GUI will be covered later on in this document. The InvisaGig is expensive compared to DIY, but they also offer a warranty and support. If you're interested:
 https://thewirelesshaven.com/shop/modems-hotspots/invisagig/
 
 
 (If you are using an Invisagig, please don't do any of the stuff mentioned below. Use their UI, or ask for support instead. You're paying a premium to not have to deal with this.)
 
-# Known issues
+## Outdoor antenna enclosure combo setups
+
+*Coming soon!*
+
+# Troubleshooting
 
 ## I Can't get internet access from the Ethernet port (Common)
 
@@ -694,4 +769,5 @@ Command shell:
 ```
 
 It appears that smd11 and at_mdm0 can also be used for this. On a default-ish modem, it appears that smd7 and at_mdm0 are both used by running daemons, so Nate picked smd11 for their AT daemon. There is a service called 'quectel-uart-smd.service', in it's unit file it disables the quectel_uart_smd, and says that smd11 is used by MCM_atcop_svc. However, I see no signs of that on the system.. so it's probably the safest to use.
+
 
