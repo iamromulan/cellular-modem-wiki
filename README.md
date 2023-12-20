@@ -20,27 +20,28 @@ Many of Quectel's modems support directly connecting to a PCIe Ethernet chipset.
 - [Troubleshooting](#troubleshooting)
     - [I Can't get internet access from the Ethernet port (Common)](#i-cant-get-internet-access-from-the-ethernet-port-common)
   - [Modem does not automatically connect at startup (Uncommon)](#modem-does-not-automatically-connect-at-startup-uncommon)
-- [RM520 Resource Repository](#RM520-Resource-Repository)
+- [RM520 Resource Repository](#rm520-resource-repository)
   
  - [Basic configuration](#basic-configuration)
    - [First Time Setup](#first-time-setup)
    - [After a firmware Flash; After first time setup](#after-a-firmware-flash-after-first-time-setup)
    - [Changing modem IP address with AT command](#changing-modem-ip-address-with-at-command)
    - [Enabling IP Passthrough](#enabling-ip-passthrough)
-     - [QMAP Method (Preferred)](#qmap-method-preferred)
      - [DMZ Method](#dmz-method)
-     - [RGMII Method (Not preferred)](#rgmii-method-not-preferred)
+     - [Actual IP Passthrough](#actual-ip-passthrough)
+     
   
 - [Advanced configuration](#advanced-configuration)
   - [Unlocking and Using ADB](#unlocking-and-using-adb)
     - [Using ADB](#using-adb)
     - [Basic Commands](#basic-commands)
- - [Installing the Telnet Daemon and simpleadmin web GUI](#installing-the-telnet-daemon-and-simpleadmin-web-gui)  
+ - [Web GUI and Toolkit](#web-gui-and-toolkit)  
     - [Overview](#overview)
     - [How to install](#how-to-install)
+    - [Tailscale Installation and Config](#tailscale-installation-and-config)
+    -  [Enable Daily Reboot](#enable-daily-reboot)
     - [How to uninstall](#how-to-uninstall)
 - [Other interesting things to check over ADB](#other-interesting-things-to-check-over-adb)
-  - [Enable Daily Reboot](#enable-daily-reboot)
   - [Starting an FTP server](#starting-an-ftp-server)
    - [Changing modem IP address by adb shell](#changing-modem-ip-address-by-adb-shell)
    - [TTL Modification](#ttl-modification)
@@ -128,6 +129,7 @@ The USB-C port also works to provide the unit power.
 
 ## Other Known M.2 to RJ45 PCBs
 
+MCUZone PoE version: https://a.aliexpress.com/_mrUgImG
 Single Sim version: [Aliexpress Link](https://www.aliexpress.us/item/3256804672394777.html)
 Waveshare version: [Waveshare.com 5G M.2 to Gigabit Ethernet](https://www.waveshare.com/5g-m.2-to-gigabit-eth.htm?fbclid=IwAR2sVyEBkmWIamCWfgtngInfI43R9E1yw5KPvqrtHiQlcBEerlhKU3ipNVc)
 
@@ -140,31 +142,34 @@ https://thewirelesshaven.com/shop/modems-hotspots/invisagig/
 
 ## Outdoor antenna enclosure combo setups
 
-*Coming soon!*
+*Coming soon! Work in Progress*
+I favor PoE setups so that's probably all you'll see from me
+[4x4 600-6000 MHz QuPanel Directional Antenna Enclosure combo](https://www.quwireless.com/product/qupanel-5glte-global-mimo-4x4-nf?variant=Nf)
+Send them an email, ask for MHF4 connectors inside and you plan to place the modem directly inside the enclosure and power it by PoE so you need an RJ45 bulkhead. 4 3M standoffs and a mounting bracket included. Quoted price should be around $320.
+
+Using the MCUZone PoE version: https://a.aliexpress.com/_mrUgImG for this. It doesn't come bundled with an RM520 or 21 so you'll need one too: https://a.aliexpress.com/_mKawdfE
+
+Using this [Dual SIM Extender Bulkhead](https://asiarf.com/product/dual-sim-card-extender-m16-ip67-extra-tiny-waterproof-for-cabinet-chassis-case-frame-envelope-outdoor/?attribute_1st-sim-card-slot-real-card-type=PCB-Nano%20SIM&attribute_1st-mock-card-type-broken-corner-direction=Nano%20SIM-reversed&attribute_1st-total-length=315mm&attribute_2nd-sim-card-slot-real-card-type=PCB-Nano%20SIM&attribute_2nd-mock-card-type-broken-corner-direction=Nano%20SIM-reversed&attribute_2nd-total-length=315mm)
+Using this [USB C Bulkhead](https://www.amazon.com/OBVIS-Waterproof-Accessories-Converter-Motorcycle/dp/B09HWSFRP1/ref=sr_1_1_sspa?crid=1NXBV7Y4F2OR3&keywords=USB%2bC%2bbulkhead&qid=1703046225&sprefix=usb%2bc%2bbulkhead,aps,107&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&th=1)
+
 
 # Troubleshooting
 
 ## I Can't get internet access from the Ethernet port (Common)
 
 ### AT+QMAPWAC
-Most of the time the issue is because of AT+QMAPWAC
+*At startup no Internet*
 
-Since AT command documentation is vague and I don't know what the official function of this command is the most likely thing it does is serves as a master auto connect setting. Here are my observations with it: 
+If you are not in ECM mode this could very well be your issue. Run `AT+QMAPWAC?` to find out what it is set to. If it says 0 then its set to off and your modem will not automaticly request an IP from the provider/carrier. To fix it enable it:  
+```
+AT+QMAPWAC=1  
+AT+CFUN=1,1 (or just reboot)
+```
+### Ethernet port stops responding
+*During usage randomly, switching towers/loosing signal, and certain other scenarios*
 
- 
- - To get current status of it run AT+QMAPWAC?
+This was an issue I was contending with for a while until I found that using the `AT+QETH="rgmii"` command was a bad idea. Originally this is how you would set up IPPT on firmware where the QMAP commands hadn't been added yet. Run `AT+QETH="rgmii"` to check what it is set to. If it says `AT+QETH="RGMII","ENABLE",1,-1` then that's probably the problem. Run `AT+QETH="RGMII","DISABLE",1` to fix it and then reboot.
 
- ****ON THE CARRIER I USED TO TEST THIS, WILL TEST FURTHER ****
- - If AT+QMAPWAC=1 the Linux/adb shell , the USB NIC, and Ethernet port will request DHCP from the carrier automaticly, resulting in internet access and unique CGNAT IP addresses for each. So far at least in my experience, each have also led to a different public IP.
-
- - If AT+QMAPWAC=0 then only the USB interface will have internet. In Windows if this doesn't appear while connected by USB then most likely you are in USB ECM mode (`AT+QCFG="usbnet",1` ) instead of USB RMNET mode (`AT+QCFG="usbnet",0`) check device manager. Otherwise you don't have the right driver installed. Uninstall all other Quectel drivers and Install the right driver: [Quectel Windows USB Driver(Q) NDIS V2.6.0](https://mega.nz/file/GVMS1D7K#ogA1oLOwhkRlLWDDhisG9p0k1H_jhcAJOesHHV-XKUg)
- - A fresh firmware flash will do the following:  
-IPPT for both methods will be turned off back to default  
-AT+QMAPWAC=1 will go back to AT+QMAPWAC=0
-
- - Disabling either IPPT methods AT+QMAPWAC=1 will go back to AT+QMAPWAC=0
-### Randomly no Internet while in IPPT mode
-Run`AT+QMAP="DHCPV4DNS","disable"` and see if it fixes it. This is now part of the IPPT  [QMAP Method (Preferred)](#qmap-method-preferred) section. I have also added an [Enable Daily Reboot](#enable-daily-reboot) section/option as a workaround.
 ## Modem does not automatically connect at startup (Uncommon)
 
 Some are reporting that when you reboot the modem, it will start in CFUN=0 (minimal function) mode. To get it to connect, you need to issue `AT+CFUN=1`.
@@ -222,48 +227,53 @@ adb shell reboot
  ## First Time Setup
 Connect to the modem by USB and run these AT Commands in Qnavigator. If you don't have Qnavigator or another way to send AT Commands check out my [RM520 Resource Repository](#RM520-Resource-Repository) 
 ```
-AT+QCFG="data_interface",1,0  
-AT+QCFG="pcie/mode",1  
-AT+QCFG="usbnet",0  
-AT+QETH="eth_driver","r8125",1  
-AT+QMAPWAC=1  
-AT+CGDCONT=1,"IPV4V6","apn-here-inside-of-quotes"  
-Any other commands you want to run for proper cellular connection  
-AT+QPRTPARA=1
+AT+QCFG="data_interface",1,0
+AT+QETH="eth_driver","r8125",1
+AT+QCFG="pcie/mode",1
+AT+QCFG="usbnet",1  #[if you need to be in a different USB mode for whatever reason remember to send AT+QMAPWAC=1]
+AT+QMAPWAC=1  #[optional if in ECM mode, as this will happen on its own anyways.]
+AT+CGDCONT=1,"IPV4V6","apn-here-inside-of-quotes"
+Any other *magic* commands you want to run for proper cellular connection
+AT+QPRTPARA=1 [optional]
 AT+CFUN=1,1
 ```
 
 What these commands do:
-* `AT+QCFG="data_interface"`: Configures network port/diag port communication via PCIe and USB. First parameter is for network communication; 0 is USB and 1 is PCIe. Second parameter is for diagnostics port; only option is 0 for USB.
+* `AT+QCFG="data_interface"`: Configures network port/diag port communication via PCIe and USB. First parameter is for network communication; 0 is USB and 1 is PCIe. Second parameter is for diagnostics port; only option is 0 for USB. Note that even when in PCIe mode for network, the USB port is still available for a connection. It seems that the modem will request a second IP address from the carrier using a different APN profile. There's a command though that's supposed to enable using the same APN on page 41/42 of the 07-31-2023 AT Doc in the [RM520N-GL Resource Repository](https://github.com/iamromulan/RM520N-GL) This *should* all work of course if your cell carrier will allow a second IP to be assigned to the SIM/LINE. I will have to play with this more.
+*  `AT+QETH="eth_driver","r8125",1`: This configures which ethernet driver to load at module boot. This is the correct driver for the RTL8125 ethernet chipset. You can run `AT+QETH="eth_driver"` to get a list of options; I believe only one can be enabled. The first parameter is the name of the driver, and the second parameter is a bool to enable or disable.
 * `AT+QCFG="pcie/mode"`: 1 = RC (Root Complex), IE host. 0 = EP (Endpoint), for use in a device that has the RC
-*  `AT+QCFG="usbnet",0`: NIC data call method in USB NIC mode. 0=RMNET
-* `AT+QETH="eth_driver","r8125",1`: This configures which ethernet driver to load at module boot. You can run `AT+QETH="eth_driver"` to get a list of options; I believe only one can be enabled. The first parameter is the name of the driver, and the second parameter is a bool to enable or disable.
-*  `AT+QMAPWAC`: enable or disable mobile AP auto dial: 0=disable 1=enable (reboot to take effect). You can run `AT+QMAPWAC?` to get what it is currently saved as/set to.
+*  `AT+QCFG="usbnet",1`: NIC data call method in USB ECM mode. 1=ECM (Ethernet Control Model) Internally, even if there wasn't a physical ethernet port for it to use, the modem sets itself up to maintain the connection itself in this mode. Look into what ECM is to know why.
+*  `AT+QMAPWAC`: enable or disable mobile AP auto dial: 0=disable 1=enable (reboot to take effect). You can run `AT+QMAPWAC?` to get what it is currently saved as/set to. My findings: Think of it as a universal auto connect setting. If its set to 0 the radio will connect (or does it?) so you can see signal stats, but will not get an IP address from the carrier. In most USB modes (except ECM) its up to the device it's connected to in order to finish that process. If you set it to 1, it will always request an IP after registering with the network.
 *   `AT+CGDCONT`: Set APN command. Run `AT+CGDCONT` to see what APN profiles 1 through 8 are set to. To clear an APN just send = and the number of the profile you want to clear. For example, if i wanted to clear APN profile 1 I would send `AT+CGDCONT=1` To set an APN you specify the profile number, the protocol (IPV4, IPV6, or IPV4V6 for both) then the APN. For example if I wanted to set APN 1 as APNGOESHERE using both IPV4 and IPV6 i would send `AT+CGDCONT=1,"IPV4V6","APNGOESHERE"`
-* `AT+QPRTPARA=1`: Supposed to save current config to memory. l always run it.
+	* Note: Your APN will be auto filled either way based on the SIM and what the modems built in MDM profile knows about it. Sometimes you want to use a different APN than what it uses. Normally you can just manually set this by running the command and it will stick. In certain scenarios though like when you switch from SIM1 to SIM2 then back to SIM1 or vice versa, the APN will go back to the one in its MBN profile. Run `AT+CGDCONT?"` to find out. A script that locks an ICCID to an APN is on my hit list.
+* `AT+QPRTPARA=1`: Supposed to save current config to memory. Not that you need to, but l always run it just in case.
 
-..after running `AT+CFUN=1,1` the modem will reboot
+..after running `AT+CFUN=1,1` the modem will reboot and you should get a local IP address assigned from the ethernet port.  192.168.225.x normally. 
 
 ## After a firmware Flash; After first time setup
-After a firmware Flash these commands need ran to get back online
+
+### After a firmware Flash these commands need ran to get back online
+#
+#### If you are not in ECM mode (AT+QCFG="usbnet",1) then you need to do this first:
 ```
 AT+QMAPWAC=1  
 AT+CFUN=1,1 (or just reboot)
 ```
-You can also do this through adb if you have already unlocked it
-```
-adb shell "echo -e 'AT+QMAPWAC=1 \r' > /dev/smd7"
-adb shell reboot
-```
+#
 
- - (optional, after reboot) You can reinstall the Telnet Daemon and Simple admin [with my Combo Installer](https://github.com/iamromulan/quectel-rgmii-simpleadmin-at-telnet-daemon) (Firmware flash gets rid of these)  
- - (optional, after reboot) [Setup IP Passthrough](#enabling-ip-passthrough) (Firmware flash turns this off for both methods)
- - (optional, after reboot) [Enable Daily Reboot](#enable-daily-reboot) (Firmware flash gets rid of this)  
+  #### Run my [ Toolkit](https://github.com/iamromulan/quectel-rgmii-toolkit) 
+  A firmware flash removes what the toolkit does:
+  -  Install Telnet Daemon
+  - Install the Simpleadmin web interface
+  - Install and configure Tailscale
+  - Set a reboot timer if you want to
+  - Send an AT command or 2 if you want
+
 
 ## Changing modem IP address with AT command
-By default, the modem acts as a true NAT router for IPv4, and serves addresses via IPv6. The modem's IPv4 address is 192.168.225.1 - this CAN be changed via AT commands [See page 228: AT+QMAP="LANIP"](https://github.com/iamromulan/RM520N-GL/blob/main/Documents/Quectel_RG520N&RG525F&RG5x0F&RM5x0N_Series_AT_Commands_Manual_V1.0.0_Preliminary_20230731.pdf)
+By default, the modem acts as a true NAT router for IPv4, and serves addresses via IPv6. The modem's IPv4 address is 192.168.225.1 - this CAN be changed via AT commands [See page 228: AT+QMAP="LANIP"](https://mega.nz/file/zEEmCYTb#Y_YVlSEWNn9tz9dpHvY1rSZuDR_gEB6XEVIQ0nGrCJQ)
 
-There are plenty of reasons that you might need to change the IP of the modem.. IE, you might have multiple modems connected to the same router for WAN load balancing or bonding, or it might conflict with your internal network IP ranges, or (other reasons.) On recent modems like the RM520, Quectel does have a command to do this!
+There are plenty of reasons that you might need to change the IP of the modem.. IE, you might have multiple modems connected to the same router for WAN load balancing or bonding, or it might conflict with your internal network IP ranges, or (other reasons.) On recent firmware revisions a command can do this!
 
 The command is:
 ```
@@ -271,102 +281,93 @@ AT+QMAP="LANIP",<dhcp-start>,<dhcp-end>,<router-ip>,<apply?>
 AT+QMAP="LANIP",192.168.227.20,192.168.227.100,192.168.227.1,1
 ```
 
-The 'apply?' is if the router should apply the changes immediately, or wait until reboot.
+The 'apply?' is if the router should apply the changes immediately, or wait until reboot. 1 is yes 0 is no.
 
 
 ## Enabling IP Passthrough
 
 If you want to turn on IP passthrough where the IP address assigned form the cell carrier passes to what connects to the ethernet port, you can! The LAN IP addresses including the gateway are still accessible even while IPPT  (IP Passthrough) is enabled.
 
-There are 2 ways to enable IP Passthrough.
+**There are 3 stages of IP Passthrough:** 
 
-### QMAP Method (Preferred)
+#
+
+### DMZ Method
+This method is not technically a true IP Passthrough, however it effectively gets rid of the double NAT as well. Basically what you are doing here is limiting your DHCP to assign only 1 IP address  and then setting that as the DMZ, effectivity port forwarding every port to that internal IP.
+
+#### To enable IP passthrough (DMZ Method):
+```
+AT+QMAP="LAN",192.168.225.2
+AT+QMAP="DMZ",1,4,192.168.225.2
+AT+CFUN=1,1 (reboot)
+```
+If the "LAN" command doesn't work then use "LANIP" to define the start range, end range, gateway,1
+Make start and end range the same
+#
+### Actual IP Passthrough
 
 This is the method that is documented on page 231 of the  [ 2023-07-31 AT Manual](https://github.com/iamromulan/RM520N-GL/blob/main/Documents/Quectel_RG520N&RG525F&RG5x0F&RM5x0N_Series_AT_Commands_Manual_V1.0.0_Preliminary_20230731.pdf)
 
 #### To enable IP passthrough (QMAP Method):
 ```
 AT+QMAP="MPDN_rule",0,1,0,1,1,"FF:FF:FF:FF:FF:FF"
-AT+QMAP="DHCPV4DNS","disable"
-AT+CFUN=1,1
 ```
 
+As soon as you send this command the Ethernet port should shut off for a second or 2 then come back up with IPV4 passthrough. Note: IPV6 assigns sometimes too? Was it just the DHCP IPV6? I'll look into this.
+
 ##### MPDN rule parameters:
-* First = mPDN rule number, range 0-3 (unless you're doing something complicated, you'll use 0.)
+* First = MPDN rule number, range 0-3 (unless you're doing something complicated, you'll use 0.) [Hint: Multiple data call rules]
 * Second = APN Profile ID (CGDCONT) to use. You'll probably want 1.
-* Third = VLAN ID. This is typically 0 but you can run `AT+QMAP="VLAN"` to find out what it should be
-* Fourth = IPPT mode, use 1 for ethernet use 0 for disable
+* Third = VLAN ID. This is typically 0 but you can run `AT+QMAP="VLAN"` to find out what it should be.
+* Fourth = IPPT mode, use 1 for ethernet use 0 for disable (more modes in the AT PDF)
 * Fifth = Auto Connect. If set to 0=disabled 1=enabled 
 * Sixth = MAC address to pass through to. `FF:FF:FF:FF:FF:FF` will pass the IP to the last connected ethernet device. `”00:00:00:00:00:00”` will pass only to the first connected ethernet device. You can also specify a custom mac address instead. 
 ##### DHCPV4DNS
-Turns the IPV4 DNS proxy on and off. 
-I'm pretty sure this causes problems if you use IPPT with a CGNAT address from the carrier. Best to disable this. (Needs more testing, turn off for now just to be safe)
-
+Turns the IPV4 DNS proxy on and off so the DNS from the carrier will passthrough as well.
+So...
+Internally there's a DNS server/proxy for setting the domain name by AT command and having it actually work. There's a way by adb shell/ssh shell to set a DNS override yourself to nameservers of your own. Tailscale does this on its own which I will talk about later.
+```
+AT+QMAP="DHCPV4DNS","disable"
+```
 #### To disable IP passthrough (QMAP Method):
 ```
-AT+QMAP="MPDN_rule",0
-AT+QMAPWAC=1
-AT+CFUN=1,1 (reboot)
+AT+QMAP="MPDN_rule",0 (Ethernet port will shutoff and come back up)
+AT+QMAPWAC=1 (if not in ECM mode)
+AT+CFUN=1,1 (reboot)(optional)
 ```
 OR
 
 flash firmware---> follow [After a firmware Flash; After first time setup](#after-a-firmware-flash-after-first-time-setup)
-### DMZ Method
-This method is not technically a true IP Passthrough, however it effectively gets rid of the double NAT as well. Basically you set it so the DHCP can only give out one IPv4 address. Then you set that address as the DMZ which routes all incoming requests to said IP.
-#### To enable IP passthrough (DMZ Method):
-```
-AT+QMAP="LANIP",192.168.225.2,192.168.225.2,192.168.225.1,1
-AT+QMAP="DMZ",1,4,192.168.225.2
-```
 
-### RGMII Method (Not preferred)
-
-> :warning: Older method,  in my experience it will not turn off unless you flash firmware
-#### To enable IP passthrough (RGMII Method):
-```
-AT+QETH="ipptmac",XX:XX:XX:XX:XX:XX
-AT+QETH="rgmii","ENABLE",1,1,1
-```
-* AT+QETH="ipptmac", the first parameter, formatted as `XX:XX:XX:XX:XX:XX`, should be the MAC address of the device you want to receive the IP passthrough.
-* AT+QETH="rgmii":
-  * First parameter is "ENABLE" or "DISABLE", to enable or disable RGMII mode.
-  * Second parameter is the voltage to use for RGMII. `0`=1.8v and `1`=2.5v. I would recommend running `AT+QETH="rgmii"`, and get the current version from the first line it prints: `+QETH: "RGMII","DISABLE",1,-1` -- it's the '1' after the disable.
-  * Third parameter is for IP Passthrough. `-1` = no data call, `0` = COMMON-RGMII (not passthrough), `1` = IP Passthrough-RGMII
-  * Optional fourth parameter is if you want to specify a CGDCONT profile to use for this. `0` = not configured, `1` = configured.
-  * Optional fifth parameter is the CGDCONT profile ID, 1-8.
-
-#### To disable IP passthrough (RGMII Method):
-In theory you should be able to just send `AT+QETH="rgmii","DISABLE"` to disable it. I personally couldn't get it to return to the default value without a firmware flash. If it does work for you you'll probably want to run `AT+QMAPWAC=1` and then reboot `AT+CFUN=1,1` right after.
-Otherwise:
-flash firmware---> follow [After a firmware Flash; After first time setup](#After-a-firmware-Flash;-After-first-time-setup)
-
+### Disable NAT to VLAN
+After enabling your MDPN rule with IPPT on, you can disable NAT to VLAN0 (192.168.225.x addresses and go full passthrough (I wouldn't recommended this though unless you don't need/want local access to the gateway) You should be able to use Tailscale to get to the gateway address still though.
 
 # Advanced configuration
 
-These modems are a full-fledged Linux router under the hood. Once you've got access, you can modify anything you want on the filesystem. It's pretty cool, and also kind of dangerous.. but neat. The access is via 'adb' - the same tool used to do fun stuff to Android phones.
+These modems are a full-fledged Linux router under the hood. Once you've got access, you can modify anything you want on the filesystem. It's pretty cool, and also kind of dangerous.. but neat. The access is via 'adb' - the same tool used to do fun stuff to Android phones. If you install Tailscale you can also use SSH over Tailscale. I'll talk more about that later.
 
 ## Unlocking and using ADB
-
+By default, these modems do not have ADB over USB turned on, and they need to be unlocked to do so. Once this happens its unlocked unless you disable it.
+#
 > :bowtie: Thanks to [carp4](https://github.com/carp4) for their work on the [qadbkey-unlock python script](https://github.com/carp4/qadbkey-unlock) we can do this without Quectel's help now!
 
-To get access, you need to get a key salt from the modem, then give that to
-the python ADB unlock keygen, take that response to unlock ADB, and then actually enable ADB. This only needs to be done once, as this survives firmware flashing.
-
-To get the key salt, run the AT command "AT+QADBKEY?". The modem will reply with:
+To get access, you need to get a lock code from the modem, then give that to the python ADB unlock keygen, take the unlock key code it gives you, unlock ADB, and then actually enable ADB over USB. This only needs to be done once, as this survives firmware flashing.
+#
+To get the lock code, run the AT command "AT+QADBKEY?". The modem will reply with:
 ```
 AT+QADBKEY?
 +QADBKEY: 12345678
 OK
 ```
-12345678 being the key salt in this case
+12345678 being the lock code in this case
 
 You then can head over to [The Python ADB unlock key Generator](https://onecompiler.com/python/3znepjcsq)
 
 ![pythonadbkey](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/qadbkeypython.png?raw=true)
 
 **Replace the 12345678 with the response you got from running `AT+QADBKEY?`** then click run. Under output your unlock key will be generated.
-
-Once you have received the unlock key, you apply it like this:
+#
+Once you have received the unlock key, you apply the key like this:
 ```
 AT+QADBKEY="0jXKXQwSwMxYoeg"
 ```
@@ -383,7 +384,7 @@ And reboot with `AT+CFUN=1,1` to actually apply.
 
 ### Using ADB
 
-Once the modem is back online, you should be able to use ADB to manage the modem on the host connected to it with USB. You'll need to install the ADB drivers and the ADB command line tool before you can use it. The easiest way to do this is just to use the installer from here https://github.com/K3V1991/ADB-and-FastbootPlusPlus/releases
+Once the modem is back online, you should be able to use ADB to manage the modem on the host connected to it with USB. You'll need to install the ADB drivers and the ADB command line tool before you can use it. The easiest way to do this is just to use my RM520 repo script. Or do it on your own: https://github.com/K3V1991/ADB-and-FastbootPlusPlus/releases
 
 - Download the .exe non-portable version
 
@@ -422,8 +423,8 @@ In a ADB & Fastboot++ type `adb devices` and press enter. If you have adb unlock
 - `adb shell` - remote control the root linux shell/command line on the modem, type exit when done (note that while in the shell any commands you want to run that normally begin with `adb shell`, that part needs to be be skipped)
   - In the adb shell of a Quectel modem it will behave like a unix shell. Commands like `uname -a` will show you the name of the OS, the processor type, build date info, and more; `ls` will show you the file structure, and `systemctl list-units --type=service --all` will show all services installed running or not.
 
-So far, I have been unsuccessful with my attempts to get ADB to listen on the ethernet interface over IP. Warning the - `adb tcp <port>` command will crash both ADB and all the other serial ports exposed via USB until the modem is restarted. So stick with using ADB over USB for now. If anyone understands how adbd works on this device feel free to open an issue/discussion/PR.
-## Installing the Telnet Daemon and simpleadmin web GUI
+So far, I have been unsuccessful with my attempts to get ADB to listen on the ethernet interface over IP. Warning the - `adb tcp <port>` command will crash both ADB and all the other serial ports exposed via USB until the modem is restarted. So stick with using ADB over USB for now. If anyone understands how adbd works on this device feel free to open an issue/discussion/PR. For now you can SSH over tailscale.
+## Web GUI and Toolkit
 ### Overview
 After gaining adb acess, you can install a simple web interface you'll be able to access using the modems gateway IP address. You can see some basic signal stats, send AT commands from the browser, and change your TTL directly on the modem. I also added a list of common commands you can just copy/paste on the AT Commands page. By default this will be on port 8080 so if you didn't change the gateway IP address you'd go to http://192.168.225.1:8080/ and you'd find this...
 ![Home Page](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/iamromulansimpleindex.png?raw=true)
@@ -432,9 +433,11 @@ After gaining adb acess, you can install a simple web interface you'll be able t
 
 Thanks to the work of [Nate Carlson](https://github.com/natecarlson) (Telnet Deamon, Original RGMII Notes), [aesthernr](https://github.com/aesthernr) (Original simpleadmin), and [rbflurry](https://github.com/rbflurry/) (Fixing simpleadmin not functioning) we can install something like this! In order to install it you must first install Nate Carlson's [AT Telnet Daemon](https://github.com/natecarlson/quectel-rgmii-at-command-client/tree/main/at_telnet_daemon) as the [simpleadmin](https://github.com/rbflurry/quectel-rgmii-simpleadmin) depends on it, (a dependency) to work  correctly. Its a Telnet to AT command server. With it, you can connect with a Telenet client like PuTTY on port 5000 to the modems gateway IP (Normaly 192.168.225.1) and send AT commands over Telnet!
 ### How to install
-In order to simplify things I have combined both the [AT Telnet Daemon](https://github.com/natecarlson/quectel-rgmii-at-command-client/tree/main/at_telnet_daemon) and [Simpleadmin](https://github.com/rbflurry/quectel-rgmii-simpleadmin) into one repository and one install RM520_rgmii_toolkit.sh script file. I also added the ability to install a daily reboot timer and an interactive AT command console to it.  [You can find the main repo for it here.](https://github.com/iamromulan/quectel-rgmii-simpleadmin-at-telnet-daemon)
+In order to simplify things I have combined both the [AT Telnet Daemon](https://github.com/natecarlson/quectel-rgmii-at-command-client/tree/main/at_telnet_daemon) and [Simpleadmin](https://github.com/rbflurry/quectel-rgmii-simpleadmin) into one repository and one install `RM5xxx_rgmii_toolkit.sh` script file. 
 
-To install the web interface, the AT telnet daemon, and a daily reboot timer:
+Also included: daily reboot timer, interactive AT command console, and Tailscale installation and configuration. You can find the  [Toolkit Repo here.](https://github.com/iamromulan/quectel-rgmii-simpleadmin-at-telnet-daemon)
+#
+**To run the Toolkit:**
  - Open ADB & Fastboot++ covered in [Using ADB](#using-adb) or just use adb
  - Make sure your modem is connected by USB to your computer
  - Run `adb devices` to make sure your modem is detected by adb
@@ -446,27 +449,55 @@ adb shell wget -P /tmp https://raw.githubusercontent.com/iamromulan/quectel-rgmi
 adb shell chmod +x /tmp/RMxxx_rgmii_toolkit.sh
 adb shell sh /tmp/RMxxx_rgmii_toolkit.sh
 ```
-Script will present a list of options:
+**After running that last command:**
+![Toolkit](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/iamromulantoolkit.png?raw=true)
 
- 1.  Send AT Commands
- 2.  Install/Update or remove AT Telnet Daemon
- 3. Install/Update or remove Simple Admin
- 4. Install/Change or remove Daily Reboot Timer
- 5. Exit
 
 The Simple Admin web interface depends on the AT Telnet Daemon so you'll need to install both. 
-Press 2, wait for it to install then press 3. 
-After that the web interface should be working. 
-If you press 4 it will create a daily reboot timer and ask you for the time it should reboot daily in UTC 24-hour format.
-If it is already installed and you press 2, 3, or 4 it will prompt to uninstall, update, or change. 
+Press 2, choose smd11 or smd7, wait, then press 3, and pick what version you want.
+
+Once done, while connected by ethernet go to http://192.168.225.1:8080/ 
+
+ - Note: This will not work locally if you disabled `IPPT_NAT`
+ - This is accessible over Tailscale 
+
+
+If you press 5 it will create a daily reboot timer and ask you for the time it should reboot daily in UTC 24-hour format.
+
+If it is already installed and you press 2, 3, or 5 from the main menu it will prompt to uninstall, update, or change if they are installed.
+
 If you press 1 you can send AT commands, sending exit in lower case will return you to the main menu.
+ 
 
-Once done, while connected by ethernet go to http://192.168.225.1:8080/
+## Tailscale Installation and Config
 
-That's it!! 
-### How to uninstall
-If you need to uninstall run the commands again and chose what to uninstall or update
-# Other interesting things to check over ADB
+> :warning: Your modem must already be connected to the internet for this to install
+### Installation:
+Open up the toolkit main menu and press 4 to enter the Tailscale menu
+![Toolkit](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/tailscalemenu.png?raw=true)
+**Press 1, wait for it to install. This is a very large file for the system so give it some time. Once done and it says tailscaled is started press 2 to configure it.**
+![Toolkit](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/tailscaleconfig.png?raw=true)
+
+First time connecting you'll be given a link to login with
+ - Press 1 to just connect only.
+ - Press 2 to connect and enable SSH access (remote command line) over tailscale.
+ - Press 3 to reconnect with SSH off while connected with SSH on
+ - Press 4 to disconnect
+ - Press 5 to Logout
+
+**Important**
+
+**You will want to go to your Tailscale DNS settings at https://login.tailscale.com/admin/dns and turn on Override local DNS and add a DNS provider to avoid loosing internet connectivity on your modem.** 
+
+This happens because the Tailscale binary creates  `/etc/reslov.conf` to override the modems DNS to use the one from your Tailnet instead. If you don't have a public DNS you won't be able to use the internet. I use Cloudflare and Google. I will add an option to the Toolkit to connect with DNS off later, its on the hit list.
+
+That's it! From another device running tailscale you should be able to access your modem through the IP assigned to it by your tailnet. To access SSH from another device on the tailnet, open a terminal/command prompt and type
+
+    tailscale ssh root@(IP or Hostname)
+IP or Hostname being the IP or hostname assigned to it in your tailnet
+
+ - Note that your SSH client must be able to give you a link to sign in with upon connecting. That's how the session is authorized. Works fine in Windows CMD or on Android use JuiceSSH.
+
 
 ## Enable Daily Reboot
 > :warning: Your modem must already be connected to the internet for this to install
@@ -477,6 +508,13 @@ adb shell wget -P /tmp https://raw.githubusercontent.com/iamromulan/quectel-rgmi
 adb shell chmod +x /tmp/install_daily_reboot.sh
 adb shell sh /tmp/install_daily_reboot.sh
 ```
+
+### How to uninstall
+If you need to uninstall run the toolkit again and chose what to uninstall or update.
+
+
+# Other interesting things to check over ADB
+
 
 ## Starting an FTP server
 
@@ -769,5 +807,6 @@ Command shell:
 ```
 
 It appears that smd11 and at_mdm0 can also be used for this. On a default-ish modem, it appears that smd7 and at_mdm0 are both used by running daemons, so Nate picked smd11 for their AT daemon. There is a service called 'quectel-uart-smd.service', in it's unit file it disables the quectel_uart_smd, and says that smd11 is used by MCM_atcop_svc. However, I see no signs of that on the system.. so it's probably the safest to use.
+
 
 
