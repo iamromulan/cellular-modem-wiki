@@ -29,6 +29,7 @@ Many of Quectel's modems support directly connecting to a PCIe Ethernet chipset.
    - [Enabling IP Passthrough](#enabling-ip-passthrough)
      - [DMZ Method](#dmz-method)
      - [Actual IP Passthrough](#actual-ip-passthrough)
+     - Disable NAT to VLAN in IPPT mode(#disable-nat-to-vlan)
      
   
 - [Advanced configuration](#advanced-configuration)
