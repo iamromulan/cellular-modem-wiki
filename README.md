@@ -183,15 +183,8 @@ Wait for the modem to reboot then run
 ```bash
 AT+QPRTPARA=1
 ```
-If you are running into this still and the above did not work, a quick and easy hack is to install the [TTL Override:](#installing-ttl-override), but uncomment the line in `ttl-override` (which gets pushed to `/etc/initscripts/ttl-override`):
-* Note that if this ttl mod is installed, then the simpleadmin web GUI's TTL will not work (covered later in this doc)
-
-```bash
-# If your modem is starting in CFUN=0 mode, uncomment this to pass CFUN=1 to it. Hack, but we'll still keep working to figure out what is causing it.
-# echo -e "AT+CFUN=1\r\n" > /dev/smd7
-```
-
-Remove the `# ` from before the echo line.
+If you are running into this still and the above did not work, a quick and easy hack is to install the fix thats now included in the [Toolkit](https://github.com/iamromulan/quectel-rgmii-toolkit)
+If anyone knows why this happening for some people please let me know!
 
 # RM520 Resource Repository 
 It is recommended that you check out my  **[RM520N-GL Resource Repository](https://github.com/iamromulan/RM520N-GL)**
