@@ -66,6 +66,10 @@ I've only used one adapter personally; it's sold on Aliexpress as "5G to 2.5Gbps
 
 Here's the seller I purchased from:
 https://a.aliexpress.com/_m0hVDKO
+
+*Bundling with a modem is no longer available from the above link.  The seller is listing the below listing as the **New** MR5210 board.
+https://www.aliexpress.us/item/3256806590217279.html
+
 ## Proper Assembly
 
 **When you receive the hardware from MCUzone you should end up with this:**
