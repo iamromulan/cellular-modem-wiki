@@ -147,6 +147,9 @@ https://thewirelesshaven.com/shop/modems-hotspots/invisagig/
 I favor PoE setups so that's probably all you'll see from me
 [4x4 600-6000 MHz QuPanel Directional Antenna Enclosure combo](https://www.quwireless.com/product/qupanel-5glte-global-mimo-4x4-nf?variant=Nf)
 Send them an email, ask for MHF4 connectors inside and you plan to place the modem directly inside the enclosure and power it by PoE so you need an RJ45 bulkhead. 4 3M standoffs and a mounting bracket included. Quoted price should be around $320.
+An alternative antenna enclosure is [Ponyting EPNT-2](https://poynting.tech/antennas/epnt-2/) at around $250. It has 4x4 MIMO for sub 6Ghz 5G and 2x2 MIMO for WiFi.
+
+
 
 Using the MCUZone PoE version: https://a.aliexpress.com/_mrUgImG for this. It doesn't come bundled with an RM520 or 21 so you'll need one too: https://a.aliexpress.com/_mKawdfE
 
