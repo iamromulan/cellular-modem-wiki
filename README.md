@@ -55,76 +55,10 @@ Many of Quectel's modems support directly connecting to a PCIe Ethernet chipset.
 
 # Hardware Recommendations
 
-I've only used one adapter personally; it's sold on Aliexpress as "5G to 2.5Gbps Ethernet(RJ45) board,USB3.0-C,DC5.5 input, support RM520N-GL RM510Q-GL RM500Q-GL/CN,RTL8125 case", and can either be purchased with or without an RM520N-GL. You can buy it as a bare board or as a kit, including an enclosure, pigtails, fan, heatsink, and antennas. The antennas and heatsink I don't really care for. I'd recommend getting a higher quality copper heatsink and using antennas of your preference. I'd also recommend a 12v 5A power adapter to go along with this.
-
-
-![](images/mcuzonekit.webp)
-
-
-![](images/mcuzoneboard.webp)
-
 
 Here's the seller I purchased from:
-https://a.aliexpress.com/_m0hVDKO
+https://a.aliexpress.com/_mOCizU2
 
-*Bundling with a modem is no longer available from the above link.  The seller is listing the below listing as the **New** MR5210 board.
-https://www.aliexpress.us/item/3256806590217279.html
-
-## Proper Assembly
-
-**When you receive the hardware from MCUzone you should end up with this:**
-![pythonadbkey](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/hw1.jpg?raw=true)
- 
- ![pythonadbkey](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/hw2.jpg?raw=true)
-
-
-**Remove the 4 screws on the back:**
-
-![pythonadbkey](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/hw3.jpg?raw=true)
-
-**The board should just slide out:**
-
-![pythonadbkey](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/hw4.jpg?raw=true)
-
-**Remove/scrape the QA sticker from the modem if there is one:**
-
-![pythonadbkey](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/hw5.jpg?raw=true)
-
-![pythonadbkey](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/hw6.jpg?raw=true)
-
-**Apply a heatsink to the modem. Do not block the vent hole in the lower left. I personally choose to use a copper heatsink instead of the one they sent. Check them out side-by-side:**
-
-![pythonadbkey](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/hw7.jpg?raw=true)
-
-![pythonadbkey](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/hw8.jpg?raw=true)
-
-**Just peel off the adhesive cover and stick it on:**
-
-![pythonadbkey](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/hw9.jpg?raw=true)
-
-**Remove the 4 nuts on the standoffs for the fan:**
-
-![pythonadbkey](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/hw10_1.jpg?raw=true)
-
-**Place the fan on the standoffs:**
-
-![pythonadbkey](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/hw11.jpg?raw=true)
-
-**Connect the fan to the 3.8v connector and tighten the nuts down:**
-
-![pythonadbkey](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/hw12.jpg?raw=true)
-
-**Make sure the SMA nuts are snug but not overtightened, I had to tighten each one a little bit:**
-
-![pythonadbkey](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/hw13.jpg?raw=true)
-
-**Line the board back up with the bottom rail on the case (circled), slide it back in, and replace the 4 screws on the back:**
-
-![pythonadbkey](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/hw14.jpg?raw=true)
-
-**That's pretty much it! Screw your antennas on have a SIM card handy for the rest of the setup.**
-
-![pythonadbkey](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/hw15.jpg?raw=true)
 
 ## Recommended 12v 5A power supply
 
@@ -132,11 +66,6 @@ The power supply I use with this is [this 12v 5A one from Amazon](https://www.am
 I'm sure a 12v 2A adapter would work as well.
 The USB-C port also works to provide the unit power.
 
-## Other Known M.2 to RJ45 PCBs
-
-MCUZone PoE version: https://a.aliexpress.com/_mrUgImG
-Single Sim version: [Aliexpress Link](https://www.aliexpress.us/item/3256804672394777.html)
-Waveshare version: [Waveshare.com 5G M.2 to Gigabit Ethernet](https://www.waveshare.com/5g-m.2-to-gigabit-eth.htm?fbclid=IwAR2sVyEBkmWIamCWfgtngInfI43R9E1yw5KPvqrtHiQlcBEerlhKU3ipNVc)
 
 **Side note:**
 From what i understand, the InvisaGig product sold by Wireless Haven is an RGMII M.2 to Ethernet board with a custom case, copper heatsink on the RM520 coupled with a fan and proper ventilation on the case. They embed a custom GUI in the RM520N, which makes configuration simpler, no need for a USB connection at all. A guide on installing a community made version of a custom GUI will be covered later on in this document. The InvisaGig is expensive compared to DIY, but they also offer a warranty and support. If you're interested:
@@ -152,13 +81,6 @@ I favor PoE setups so that's probably all you'll see from me
 [4x4 600-6000 MHz QuPanel Directional Antenna Enclosure combo](https://www.quwireless.com/product/qupanel-5glte-global-mimo-4x4-nf?variant=Nf)
 Send them an email, ask for MHF4 connectors inside and you plan to place the modem directly inside the enclosure and power it by PoE so you need an RJ45 bulkhead. 4 3M standoffs and a mounting bracket included. Quoted price should be around $320.
 An alternative antenna enclosure is [Ponyting EPNT-2](https://poynting.tech/antennas/epnt-2/) at around $250. It has 4x4 MIMO for sub 6Ghz 5G and 2x2 MIMO for WiFi.
-
-
-
-Using the MCUZone PoE version: https://a.aliexpress.com/_mrUgImG for this. It doesn't come bundled with an RM520 or 21 so you'll need one too: https://a.aliexpress.com/_mKawdfE
-
-Using this [Dual SIM Extender Bulkhead](https://asiarf.com/product/dual-sim-card-extender-m16-ip67-extra-tiny-waterproof-for-cabinet-chassis-case-frame-envelope-outdoor/?attribute_1st-sim-card-slot-real-card-type=PCB-Nano%20SIM&attribute_1st-mock-card-type-broken-corner-direction=Nano%20SIM-reversed&attribute_1st-total-length=315mm&attribute_2nd-sim-card-slot-real-card-type=PCB-Nano%20SIM&attribute_2nd-mock-card-type-broken-corner-direction=Nano%20SIM-reversed&attribute_2nd-total-length=315mm)
-Using this [USB C Bulkhead](https://www.amazon.com/OBVIS-Waterproof-Accessories-Converter-Motorcycle/dp/B09HWSFRP1/ref=sr_1_1_sspa?crid=1NXBV7Y4F2OR3&keywords=USB%2bC%2bbulkhead&qid=1703046225&sprefix=usb%2bc%2bbulkhead,aps,107&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&th=1)
 
 
 # Troubleshooting
