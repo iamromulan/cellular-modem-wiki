@@ -57,14 +57,19 @@ Many of Quectel's modems support directly connecting to a PCIe Ethernet chipset.
 
 
 Here's the seller I purchased from:
-https://a.aliexpress.com/_mOCizU2
+https://rework.network/
+
+(They are on vacation until 7/26/25)
+
+Wireless Haven sells it for $60 ($10 more)
+https://store.thewirelesshaven.com/products/rj45-usb3-poe-m2-modem-adapter-v8?fbclid=IwZXh0bgNhZW0CMTEAAR3oESwzAro3aIZy0JJG4RPxCvWLM-OVCe0dd4b1peQqU5yddO_Xx-WQtbo_aem_aq4DAMRkiWmRUxnufgGx9w
 
 
 ## Recommended 12v 5A power supply
 
 The power supply I use with this is [this 12v 5A one from Amazon](https://www.amazon.com/gp/product/B015G8E1Q4/ref=ppx_yo_dt_b_asin_title_o02_s00?ie=UTF8&th=1)
 I'm sure a 12v 2A adapter would work as well.
-The USB-C port also works to provide the unit power.
+The USB-C port also works to provide the unit power, however minimum power needed from USB will be 5v 3a.
 
 
 **Side note:**
