@@ -59,7 +59,7 @@ Many of Quectel's modems support directly connecting to a PCIe Ethernet chipset.
 Here's the seller I purchased from:
 https://rework.network/
 
-(They are on vacation until 7/26/25)
+(They are on vacation until 7/26/24)
 
 Wireless Haven sells it for $60 ($10 more)
 https://store.thewirelesshaven.com/products/rj45-usb3-poe-m2-modem-adapter-v8?fbclid=IwZXh0bgNhZW0CMTEAAR3oESwzAro3aIZy0JJG4RPxCvWLM-OVCe0dd4b1peQqU5yddO_Xx-WQtbo_aem_aq4DAMRkiWmRUxnufgGx9w
