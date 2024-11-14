@@ -569,7 +569,7 @@ adb push qcmap_web_client.service /lib/systemd/system
 
 ```bash
 adb push lighttpd.user /data/www
-adb shell chmod www-data:www-data /data/www/lighttpd.user
+adb shell chown www-data:www-data /data/www/lighttpd.user
 ```
 
 - Symlink the systemd unit, reload systemd, start the service, and remount root as ro again:
