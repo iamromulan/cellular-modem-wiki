@@ -1,26 +1,23 @@
-Quectel RGMII Configuration Notes
+Quectel Modem Wiki
 =================================
+> :warning: This is a living document. Changes may be made as more discoveries are made or more community software is made. If you feel like you have information to contribute to this wiki please open a pull request.
 
-> :heavy_check_mark: This guide was written using the Quectel RM520N-GL. 
-However, many are saying this is working for all RM5xx modules.
+> :heavy_check_mark: This wiki focuses on Quectel's M.2 form factor cellular modems.
+
+# Direct M.2 Modem to Ethernet Guide
 
 Many of Quectel's modems support directly connecting to a PCIe Ethernet chipset. This is useful to use the cellular connection as a WAN interface - you can just plug the modem into the WAN port on your router, do a bit of configuration, and you're good to go. Performance is good, and the modem's onboard connection management often works better than the scripts many routers use to try to keep the connection up.
 
-
-> :warning: This is a living document. Changes may be made as more discoveries are made or more software is made
-
 # Table of Contents
-- [Quectel RGMII Configuration Notes](#quectel-rgmii-configuration-notes)
-- [Table of Contents](#table-of-contents)
+
+
 - [Hardware Recommendations](#hardware-recommendations) 
   - [Proper Assembly](#proper-assembly)
   - [Recommended 12v 5A power supply](#recommended-12v-5a-power-supply)
   - [Other Known M.2 to RJ45 PCBs](#other-known-m.2-to-rj45-pcbs)
   - [Outdoor antenna enclosure combo setups](#outdoor-antenna-enclosure-combo-setups)
-- [Troubleshooting](#troubleshooting)
-    - [I Can't get internet access from the Ethernet port (Common)](#i-cant-get-internet-access-from-the-ethernet-port-common)
-  - [Modem does not automatically connect at startup (Uncommon)](#modem-does-not-automatically-connect-at-startup-uncommon)
-- [RM520 Resource Repository](#rm520-resource-repository)
+
+- [Modem Resource Repository](#rm520-resource-repository)
   
  - [Basic configuration](#basic-configuration)
    - [First Time Setup](#first-time-setup)
@@ -56,71 +53,103 @@ Many of Quectel's modems support directly connecting to a PCIe Ethernet chipset.
 # Hardware Recommendations
 
 
-Here's the seller I purchased from:
-https://rework.network/
+Essentially what we are doing is placing the modem in PCIe Root Complex mode so it can utilize an ethernet chipset via PCIe. You will need a board that has an M.2 B-Key slot with Power, Ethernet, SIM slot(s), and USB on it along with a way to provide the modems 4 MHF4 connectors with the cell signal.
+## Indoor
 
-(They are on vacation until 7/26/24)
+**Here's the hardware I recommend for an indoor or on the go scenario:**
 
-Wireless Haven sells it for $60 ($10 more)
-https://store.thewirelesshaven.com/products/rj45-usb3-poe-m2-modem-adapter-v8?fbclid=IwZXh0bgNhZW0CMTEAAR3oESwzAro3aIZy0JJG4RPxCvWLM-OVCe0dd4b1peQqU5yddO_Xx-WQtbo_aem_aq4DAMRkiWmRUxnufgGx9w
+![rework-5G2PHYmain](https://www.rework.network/cdn/shop/files/5G2PHY_bottom_W_antenna_1024x1024@2x.jpg?v=1719465175)
+
+![enter image description here](https://www.rework.network/cdn/shop/files/5G2PHY_inside_with_modem_1024x1024@2x.jpg?v=1719465175)
+
+**Purchase Links:**
+
+Without modem:
+[Dual-Q 5G2PHY](https://rework.network/collections/lte-home-gateway/products/5g2phy)
+
+**OR**
+
+With x62 RM520N-GL (AP version modified/converted to normal AA).
+Custom Arixolink firmware pre-flashed (Flash latest stock firmware if you want Simpleadmin 2.0 instead)
+[Dual-Q 5G2PHY-RM520](https://www.rework.network/collections/lte-home-gateway/products/5g2phy-rm520)
+
+**Includes:**
+- Board and Case
+
+- 40cm USB3.0 A Micro B Cable
+
+- 2x 10cm MHF4 to SMA cable.
+
+- 2x 15cm MHF4 to SMA cable.
+
+- 1x 3x3.5x0.15 Silicone pad
+
+- 1x 3x3x0.02 Silicone pad
+
+- Mounting Hardware
+- Small Heatsink for the onboard RTL8125 chipset
+
+**Does not include**
+- Power adapter
+- Passive PoE injector/adapter
+- Antennae
+
+**Key Features:** 
+
+- 2.5 Gigabit RTL8125 single RJ45 port
+- **Passive PoE supported**, I use a 24v passive injector 
+  - :warning: **Active PoE like 802.11 will not work** :warning: as it does not negotiate
+- USB 3.0
+- 5.5x2.5mm DC port accepts a wide voltage range of 12-50V
+- The built in thick aluminum heatsink is placed underneath the modem and extends under the board itself, keeping it nice and cool even under heavy load.
+- The placement of the M.2 slot near the very edge of the board allows easy access to the contact points on the back of the modem in case you need to get it into EDL mode.
+
+## Outdoor
+
+(Work in Progress)
+Just a link for now :smile::
+https://www.rework.network/collections/lte-home-gateway/products/5g-rgm-o
+
+## Recommended Accessories
+
+- DC adapter: [12v 5A one from Amazon](https://www.amazon.com/gp/product/B01GEA8PQA/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1)
+
+- Passive PoE: The one included with the outdoor antenna is best but any  adapter with a voltage between 19 and 60v should be fine
+
+- [MicroB to USB C converter 2-Pack](https://www.amazon.com/gp/product/B09LS3728B/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1)
+
+- Indoor antennae [4 Pack from Amazon](https://www.amazon.com/dp/B0C58V4Y3B/ref=sspa_dk_detail_1?psc=1&pd_rd_i=B0C58V4Y3B&pd_rd_w=0g4A7&content-id=amzn1.sym.f2f1cf8f-cab4-44dc-82ba-0ca811fb90cc&pf_rd_p=f2f1cf8f-cab4-44dc-82ba-0ca811fb90cc&pf_rd_r=QSXJ1GHVACPJ42PEANDH&pd_rd_wg=9Y5yj&pd_rd_r=5f2a8db9-81a5-4f3a-97b4-654548e56cbf&s=aht&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWxfdGhlbWF0aWM) (Untested; pick what you like)
+
+- Home WiFi router: [GL.iNet Flint 2](https://www.amazon.com/GL-iNet-GL-MT6000-Multi-Gig-Connectivity-WireGuard/dp/B0CP7S3117?pd_rd_w=lAXSz&content-id=amzn1.sym.59910fa8-b73c-408a-aa5f-d0b4e0aa42cb&pf_rd_p=59910fa8-b73c-408a-aa5f-d0b4e0aa42cb&pf_rd_r=J8P5E4BQEY676GT05NP3&pd_rd_wg=QQO8w&pd_rd_r=f3fae9ae-ab4a-45d1-97bf-e43d119674bf&pd_rd_i=B0CP7S3117&psc=1&ref_=pd_bap_d_grid_rp_0_1_ec_nped_pd_rhf_cr_s_rp_c_d_sccl_1_2_t)
+
+## Example Builds:
+
+### Stationary
+
+#### [GL.iNet Flint 2 Router](https://www.amazon.com/dp/B0CP7S3117?ref=ppx_yo2ov_dt_b_fed_asin_title) plus [Indoor Modem](#indoor)
+
+### To-Go
+
+#### [Beryl AX](https://www.amazon.com/GL-iNet-GL-MT3000-Pocket-Sized-Wireless-Gigabit/dp/B0BPSGJN7T/ref=pd_dp_d_dp_dealz_related_hxwDSD_sspa_dk_detail_d_sccl_1_4/143-6202989-9416117?pd_rd_w=gyXrF&content-id=amzn1.sym.718c0e9e-df60-4a61-87d8-27ff0362dee1&pf_rd_p=718c0e9e-df60-4a61-87d8-27ff0362dee1&pf_rd_r=717MSS1MXJGNVW36931C&pd_rd_wg=vCfwG&pd_rd_r=69dba604-feb1-4a18-9faa-fae36dbd6813&pd_rd_i=B0BPSGJN7T&psc=1&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWxfdGhlbWF0aWM=) plus [Indoor Modem](#indoor)
+
+- [Indoor Modem](#indoor)
+
+- Travel WiFi Router: [GL.iNet Beryl AX](https://www.amazon.com/GL-iNet-GL-MT3000-Pocket-Sized-Wireless-Gigabit/dp/B0BPSGJN7T/ref=pd_dp_d_dp_dealz_related_hxwDSD_sspa_dk_detail_d_sccl_1_4/143-6202989-9416117?pd_rd_w=gyXrF&content-id=amzn1.sym.718c0e9e-df60-4a61-87d8-27ff0362dee1&pf_rd_p=718c0e9e-df60-4a61-87d8-27ff0362dee1&pf_rd_r=717MSS1MXJGNVW36931C&pd_rd_wg=vCfwG&pd_rd_r=69dba604-feb1-4a18-9faa-fae36dbd6813&pd_rd_i=B0BPSGJN7T&psc=1&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWxfdGhlbWF0aWM=)
+  - Rubber bands or zip ties :trollface:
+  - [Short USBC to A cable](https://www.amazon.com/etguuds-Charging-Charger-Braided-Compatible/dp/B08933P982/ref=sr_1_3?crid=J131ZX2M386O&dib=eyJ2IjoiMSJ9.GywjpYp2bc5-8SJISwTc6W3kwgchqqXWTqo1Fo1FAXDa7-ieJoPDahrWkyWIC758tSzKuE3xykGy2XwQxcMk6IEHljpIgOvSpUME-TlAuGkmYSmTu01wFvSUN51DnWZRnKFiFQH8DpxEVZWLL6WRZXGvzUVdrOzs3vcKwnUn01DvZ9OvjfCyoxBFuLhveA0EqhQqz4LkotsyZqbp7-fQbgRAQdqvlXsRVJb7-038TVg.e31Plwf8cD1vndpIeQazjeQWFrPOC_vuTjInix2aobg&dib_tag=se&keywords=USBC+to+A+short&qid=1732753798&sprefix=usbc+to+a+shor%2Caps%2C197&sr=8-3)
+  - [This Battery](https://www.amazon.com/gp/product/B0CQNQ7K8K/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1) 12v3A DC out, USB 5v3A out with passthrough charging
+
+  - [5.5x2.1mm DC to 5.5x2.5mm DC adapter](https://www.amazon.com/gp/product/B07YWQ9N5S/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1)
+ 
+ Result: 
+![:trollface:](https://raw.githubusercontent.com/iamromulan/quectel-rgmii-configuration-notes/main/images/to-go_bad.jpg)
 
 
-## Recommended 12v 5A power supply
-
-The power supply I use with this is [this 12v 5A one from Amazon](https://www.amazon.com/gp/product/B015G8E1Q4/ref=ppx_yo_dt_b_asin_title_o02_s00?ie=UTF8&th=1)
-I'm sure a 12v 2A adapter would work as well.
-The USB-C port also works to provide the unit power, however minimum power needed from USB will be 5v 3a.
 
 
-**Side note:**
-From what i understand, the InvisaGig product sold by Wireless Haven is an RGMII M.2 to Ethernet board with a custom case, copper heatsink on the RM520 coupled with a fan and proper ventilation on the case. They embed a custom GUI in the RM520N, which makes configuration simpler, no need for a USB connection at all. A guide on installing a community made version of a custom GUI will be covered later on in this document. The InvisaGig is expensive compared to DIY, but they also offer a warranty and support. If you're interested:
-https://thewirelesshaven.com/shop/modems-hotspots/invisagig/
 
 
-(If you are using an Invisagig, please don't do any of the stuff mentioned below. Use their UI, or ask for support instead. You're paying a premium to not have to deal with this.)
-
-## Outdoor antenna enclosure combo setups
-
-*Coming soon! Work in Progress*
-I favor PoE setups so that's probably all you'll see from me
-[4x4 600-6000 MHz QuPanel Directional Antenna Enclosure combo](https://www.quwireless.com/product/qupanel-5glte-global-mimo-4x4-nf?variant=Nf)
-Send them an email, ask for MHF4 connectors inside and you plan to place the modem directly inside the enclosure and power it by PoE so you need an RJ45 bulkhead. 4 3M standoffs and a mounting bracket included. Quoted price should be around $320.
-An alternative antenna enclosure is [Ponyting EPNT-2](https://poynting.tech/antennas/epnt-2/) at around $250. It has 4x4 MIMO for sub 6Ghz 5G and 2x2 MIMO for WiFi.
-
-
-# Troubleshooting
-
-## I Can't get internet access from the Ethernet port (Common)
-
-### AT+QMAPWAC
-*At startup no Internet*
-
-If you are not in ECM mode this could very well be your issue. Run `AT+QMAPWAC?` to find out what it is set to. If it says 0 then its set to off and your modem will not automaticly request an IP from the provider/carrier. To fix it enable it:  
-```
-AT+QMAPWAC=1  
-AT+CFUN=1,1 (or just reboot)
-```
-### Ethernet port stops responding
-*During usage randomly, switching towers/loosing signal, and certain other scenarios*
-
-This was an issue I was contending with for a while until I found that using the `AT+QETH="rgmii"` command was a bad idea. Originally this is how you would set up IPPT on firmware where the QMAP commands hadn't been added yet. Run `AT+QETH="rgmii"` to check what it is set to. If it says `AT+QETH="RGMII","ENABLE",1,-1` then that's probably the problem. Run `AT+QETH="RGMII","DISABLE",1` to fix it and then reboot.
-
-## Modem does not automatically connect at startup (Uncommon)
-
-Some are reporting that when you reboot the modem, it will start in CFUN=0 (minimal function) mode. To get it to connect, you need to issue `AT+CFUN=1`.
-
-I have experienced this myself, but I have found that running the following AT commands via the USB AT port fixes this.
-```bash
-AT+CFUN=1,1
-```
-Wait for the modem to reboot then run
-```bash
-AT+QPRTPARA=1
-```
-If you are running into this still and the above did not work, a quick and easy hack is to install the fix thats now included in the [Toolkit](https://github.com/iamromulan/quectel-rgmii-toolkit)
-If anyone knows why this happening for some people please let me know!
-
-# RM520 Resource Repository 
+# QuecDeploy and modem resources 
 It is recommended that you check out my  **[RM520N-GL Resource Repository](https://github.com/iamromulan/RM520N-GL)**
 
 There's an autoinstaller .cmd that will get you everything you need for windows installed and put in the right spots. Checkout the C:/Quectel/firmware folder for the firmware after using the .cmd
@@ -311,6 +340,9 @@ AT+QCFG="usbcfg",0x2C7C,0x0801,1,1,1,1,1,1,0 // Enable ADB
 And reboot with `AT+CFUN=1,1` to actually apply.
 
 ### Using ADB
+:warning: To be restructured soon
+:warning: adb is now insatlled with QFlash 7.1+ from QuecDeploy
+:warning: Outdated
 
 Once the modem is back online, you should be able to use ADB to manage the modem on the host connected to it with USB. You'll need to install the ADB drivers and the ADB command line tool before you can use it. The easiest way to do this is just to use my RM520 repo script. Or do it on your own: https://github.com/K3V1991/ADB-and-FastbootPlusPlus/releases
 
@@ -353,48 +385,28 @@ In a ADB & Fastboot++ type `adb devices` and press enter. If you have adb unlock
 
 So far, I have been unsuccessful with my attempts to get ADB to listen on the ethernet interface over IP. Warning the - `adb tcp <port>` command will crash both ADB and all the other serial ports exposed via USB until the modem is restarted. So stick with using ADB over USB for now. If anyone understands how adbd works on this device feel free to open an issue/discussion/PR. For now you can SSH over tailscale.
 ## Web GUI and Toolkit
+:warning: To be restructured soon
 ### Overview
-After gaining adb acess, you can install a simple web interface you'll be able to access using the modems gateway IP address. You can see some basic signal stats, send AT commands from the browser, and change your TTL directly on the modem. I also added a list of common commands you can just copy/paste on the AT Commands page. By default this will be on port 8080 so if you didn't change the gateway IP address you'd go to http://192.168.225.1:8080/ and you'd find this...
-![Home Page](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/iamromulansimpleindex.png?raw=true)
-![AT Commands](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/iamromulanatcommands.png?raw=true)
-![TTL](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/iamromulansimpleTTL.png?raw=true)
+After gaining adb acess, you can install a simple web interface you'll be able to access using the modems gateway IP address. You can see some basic signal stats, send AT commands from the browser, and change your TTL directly on the modem. By default this will be on https on port 443 with a redirect from 80 to 443. So if you didn't change the gateway IP address you'd go to https://192.168.225.1/ (SDXLEMUR) and you'd find this...
+![Home Page](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/dev_home.png?raw=true)
+![AT Commands](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/dev_simplenetwork.png?raw=true)
+![TTL](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/dev_simplescan.png?raw=true)
+![TTL](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/dev_simplesettings.png?raw=true)
+![TTL](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/dev_sms.png?raw=true)
+Console:
+![TTL](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/dev_console.png?raw=true)
+![TTL](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/dev_deviceinfo.png?raw=true)
 
-Thanks to the work of [Nate Carlson](https://github.com/natecarlson) (Telnet Deamon, Original RGMII Notes), [aesthernr](https://github.com/aesthernr) (Original simpleadmin), and [rbflurry](https://github.com/rbflurry/) (Fixing simpleadmin not functioning) we can install something like this! In order to install it you must first install Nate Carlson's [AT Telnet Daemon](https://github.com/natecarlson/quectel-rgmii-at-command-client/tree/main/at_telnet_daemon) as the [simpleadmin](https://github.com/rbflurry/quectel-rgmii-simpleadmin) depends on it, (a dependency) to work  correctly. Its a Telnet to AT command server. With it, you can connect with a Telenet client like PuTTY on port 5000 to the modems gateway IP (Normaly 192.168.225.1) and send AT commands over Telnet!
+^^^ Simple Admin 2.0 on the SDXLEMUR Branch ^^^
+Thanks to the work of [dr-dolomite](github.com/dr-dolomite) we can install something like this! 
+
 ### How to install
-In order to simplify things I have combined both the [AT Telnet Daemon](https://github.com/natecarlson/quectel-rgmii-at-command-client/tree/main/at_telnet_daemon) and [Simpleadmin](https://github.com/rbflurry/quectel-rgmii-simpleadmin) into one repository and one install `RM5xxx_rgmii_toolkit.sh` script file. 
+- For the **RM500/502/520/521/530** (SDXLEMUR and SDXPRAIRIE platforms armv7 32-bit)
+	- Use the [SDXLEMUR Branch](https://github.com/iamromulan/quectel-rgmii-toolkit/tree/SDXLEMUR) (to be renamed to SDXLEMUR soon) instead of main, it has the latest changes and is ready for general use. :)
 
-Also included: daily reboot timer, interactive AT command console, and Tailscale installation and configuration. You can find the  [Toolkit Repo here.](https://github.com/iamromulan/quectel-rgmii-simpleadmin-at-telnet-daemon)
-#
-**To run the Toolkit:**
- - Open ADB & Fastboot++ covered in [Using ADB](#using-adb) or just use adb
- - Make sure your modem is connected by USB to your computer
- - Run `adb devices` to make sure your modem is detected by adb
- - Run `adb shell ping 8.8.8.8` to make sure the shell can access the internet. If you get an error, make sure the modem is connected to a cellular network and make sure `AT+QMAPWAC=1` as covered in the known issue [I Can't get internet access from the Ethernet port (Common)](#i-cant-get-internet-access-from-the-ethernet-port-common)
- - If you don't get an error you should be getting replies back endlessly, press `CTRL-C` to stop it.
- - Run the following commands 
-```bash
-adb shell wget -P /tmp https://raw.githubusercontent.com/iamromulan/quectel-rgmii-toolkit/main/RMxxx_rgmii_toolkit.sh
-adb shell chmod +x /tmp/RMxxx_rgmii_toolkit.sh
-adb shell sh /tmp/RMxxx_rgmii_toolkit.sh
-```
-**After running that last command:**
-![Toolkit](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/iamromulantoolkit.png?raw=true)
+- For the **RM550/551** (SDXPINN platform OpenWRT system armv8-A 64-bit)
+	- Use the [SDXPINN Branch](https://github.com/iamromulan/quectel-rgmii-toolkit/tree/SDXPINN)
 
-
-The Simple Admin web interface depends on the AT Telnet Daemon so you'll need to install both. 
-Press 2, choose smd11 or smd7, wait, then press 3, and pick what version you want.
-
-Once done, while connected by ethernet go to http://192.168.225.1:8080/ 
-
- - Note: This will not work locally if you disabled `IPPT_NAT`
- - This is accessible over Tailscale 
-
-
-If you press 5 it will create a daily reboot timer and ask you for the time it should reboot daily in UTC 24-hour format.
-
-If it is already installed and you press 2, 3, or 5 from the main menu it will prompt to uninstall, update, or change if they are installed.
-
-If you press 1 you can send AT commands, sending exit in lower case will return you to the main menu.
  
 
 ## Tailscale Installation and Config
@@ -428,21 +440,20 @@ IP or Hostname being the IP or hostname assigned to it in your tailnet
 
 
 ## Enable Daily Reboot
+:warning: To be restructured soon
+:warning: Outdated
 > :warning: Your modem must already be connected to the internet for this to install
 
-Run the following commands in adb to install a daily reboot timer. The script should prompt you to enter a daily reboot time in 24 hour format UTC time. If you want to change or remove the timer just run the script again. This can also be achieved in the [Simple Admin install section](#how-to-install) as it is now apart of the RM520_rgmii_toolkit.sh as well. If you are only wanting the daily reboot the following is for it only:
-```bash
-adb shell wget -P /tmp https://raw.githubusercontent.com/iamromulan/quectel-rgmii-configuration-notes/main/files/install_daily_reboot.sh
-adb shell chmod +x /tmp/install_daily_reboot.sh
-adb shell sh /tmp/install_daily_reboot.sh
-```
+See the Modem AP Toolkit Project
 
 ### How to uninstall
-If you need to uninstall run the toolkit again and chose what to uninstall or update.
+
+See the Modem AP Toolkit Project
 
 
 # Other interesting things to check over ADB
-
+ :warning: To be restructured soon
+:warning: Outdated
 
 ## Starting an FTP server
 
@@ -461,7 +472,8 @@ Note that the BusyBox binary on the modem is compiled without FTP write support.
 ```
 
 ## Changing modem IP address by adb shell
-
+:warning: To be restructured soon
+:warning: Outdated
 **NOTE**: I am leaving this here for reference sake, but on modern modems, you can indeed change the IP with an AT command. Please reference: [Changing modem IP address with AT command
 ](#changing-modem-ip-address-with-at-command)
 
@@ -481,6 +493,8 @@ Note that the 192.168.225.1 address is also referenced in `/etc/ql_nf_preload.co
 ## TTL Modification
 
 > :warning: Do not use this at the same time as the Simpleadmin TTL mod. Use either one or the other
+> :warning: To be restructured soon
+:warning: Outdated
 
 This is a Linux router using iptables - so you can add iptables rules to override the outgoing TTL. Certain cell plans may require this for various reasons.
 
@@ -548,6 +562,9 @@ adb shell systemctl daemon-reload
 > :warning: Do not use this and the Simpleadmin. Use either one or the other
 
 > :bowtie: This section was contributed by [GitHub user aesthernr](https://github.com/aesthernr). Thanks for the contribution!
+
+:warning: To be restructured soon
+:warning: Outdated
 
 Qualcomm provides their OEMs with a tool called QCMAP, which is used to manage the WAN connection, modem IP configuration, etc. They also provide a simple web interface that is supposed to be able to manage some features of the modem. On RM500Q's, it was enable by default, but didn't actually work. The pieces for it are present on the RM520, and it does work, it just needs some work to enable it!
 
@@ -673,6 +690,8 @@ Package Time: 2023-03-14,09:49
 ```
 
 ### AT Command Access from ADB
+:warning: To be restructured soon
+:warning: Outdated
 To make this simpler I created a sh script you can use that will ask for an AT command and return the response. Download and install it like this:
 ```
 adb shell mount -o remount,rw /
@@ -685,6 +704,9 @@ After its installed you can run it like this:
 adb shell sh /usrdata/atcomm.sh
 ```
 #### Findings
+
+:warning: To be restructured soon
+:warning: Outdated
 It appears that the following processes are used to expose the serial ports via USB:
 ```
   155 root      0:00 /usr/bin/port_bridge at_mdm0 at_usb0 0
@@ -737,4 +759,40 @@ Command shell:
 It appears that smd11 and at_mdm0 can also be used for this. On a default-ish modem, it appears that smd7 and at_mdm0 are both used by running daemons, so Nate picked smd11 for their AT daemon. There is a service called 'quectel-uart-smd.service', in it's unit file it disables the quectel_uart_smd, and says that smd11 is used by MCM_atcop_svc. However, I see no signs of that on the system.. so it's probably the safest to use.
 
 
+# Troubleshooting
 
+:warning: To be restructured soon
+:warning: Outdated
+
+## I Can't get internet access from the Ethernet port (Common)
+
+### AT+QMAPWAC
+*At startup no Internet*
+
+If you are not in ECM mode this could very well be your issue. Run `AT+QMAPWAC?` to find out what it is set to. If it says 0 then its set to off and your modem will not automaticly request an IP from the provider/carrier. To fix it enable it:  
+```
+AT+QMAPWAC=1  
+AT+CFUN=1,1 (or just reboot)
+```
+### Ethernet port stops responding
+*During usage randomly, switching towers/loosing signal, and certain other scenarios*
+
+:warning: This info assumes you read Nate's orginal guide
+:warning: If you have this issue and this is disabled then you may have an old MCUZONE board or different board with PCIe eye pattern quality issues.
+
+This was an issue I was contending with for a while until I found that using the `AT+QETH="rgmii"` command was a bad idea. Originally this is how you would set up IPPT on firmware where the QMAP commands hadn't been added yet. Run `AT+QETH="rgmii"` to check what it is set to. If it says `AT+QETH="RGMII","ENABLE",1,-1` then that's probably the problem. Run `AT+QETH="RGMII","DISABLE",1` to fix it and then reboot.
+
+## Modem does not automatically connect at startup (Uncommon)
+
+Some are reporting that when you reboot the modem, it will start in CFUN=0 (minimal function) mode. To get it to connect, you need to issue `AT+CFUN=1`.
+
+I have experienced this myself, but I have found that running the following AT commands via the USB AT port fixes this.
+```bash
+AT+CFUN=1,1
+```
+Wait for the modem to reboot then run
+```bash
+AT+QPRTPARA=1
+```
+If you are running into this still and the above did not work, a quick and easy hack is to install the fix thats now included in the [Toolkit](https://github.com/iamromulan/quectel-rgmii-toolkit)
+If anyone knows why this happening for some people please let me know!
