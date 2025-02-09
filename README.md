@@ -184,7 +184,7 @@ adb shell reboot
  ## First Time Setup
 Connect to the modem by USB and run these AT Commands in Qnavigator. If you don't have Qnavigator or another way to send AT Commands check out my [RM520 Resource Repository](#RM520-Resource-Repository) 
 ```
-AT+QCFG="data_interface",0,0
+AT+QCFG="data_interface",1,0
 AT+QETH="eth_driver","r8125",1
 AT+QCFG="pcie/mode",1
 AT+QCFG="usbnet",1  #[if you need to be in a different USB mode for whatever reason remember to send AT+QMAPWAC=1]
