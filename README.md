@@ -142,7 +142,7 @@ https://www.rework.network/collections/lte-home-gateway/products/5g-rgm-o
   - [5.5x2.1mm DC to 5.5x2.5mm DC adapter](https://www.amazon.com/gp/product/B07YWQ9N5S/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1)
  
  Result: 
-![:trollface:](https://raw.githubusercontent.com/iamromulan/quectel-rgmii-configuration-notes/main/images/to-go_bad.jpg)
+![:trollface:](./images/to-go_bad.jpg)
 
 
 
