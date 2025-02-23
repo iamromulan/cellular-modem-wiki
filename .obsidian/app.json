@@ -1,1 +1,6 @@
-{}
+{
+  "newLinkFormat": "absolute",
+  "useMarkdownLinks": true,
+  "showUnsupportedFiles": true,
+  "strictLineBreaks": true
+}
