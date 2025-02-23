@@ -8,7 +8,13 @@ It is my hope that this repo can serve as a universal wiki for all cellular mode
 
 To keeps things nice, this wiki will be organized into sub-wikis based on modem manufacture
 
-**Note: This repo originally was the guide for setting up an ethernet connection directly to a Quectel M.2 modem. This guide still exists! Each modem now has a customized version of the guide tailored to each. Scroll down to the directory and choose your modem to find it.** :arrow_heading_down:
+**Note: This repo originally was the guide for setting up an ethernet connection directly to a Quectel M.2 modem. This guide still exists! Each modem platform now has a customized version of the guide tailored to each. Scroll down to the directory and choose your manufacture to find it.** :arrow_heading_down:
+
+# Directory
+
+### :arrow_right: [Quectel Modem Wiki](./quectel/README.md) :arrow_left: 
+  
+### :arrow_right: [Fibocom Modem Wiki](./fibocom/README.md) :arrow_left: 
 
 # Contributing
 
@@ -19,15 +25,66 @@ If you'd like to help contribute to this wiki the easiest way on Windows is to:
 3. Clone your Fork in Github desktop
 4. Install [Obsidian](https://obsidian.md/download) and choose Open Folder as Vault, navigate to the location of the clone (normally ``%USERPROFILE%\Documents\GitHub\cellular-modem-wiki`` )
 5. Use Obsidian to edit and use Github desktop to keep changes synced with your fork on Github. When you are ready to contribute to this project, open a pull request from your fork to this repo.
-# Directory
 
-- [Quectel Modem Wiki](./quectel/README.md) (:arrow_left: Basics/Getting Started and more)
-	- Jump to modem:
-	     - [RM502Q-AE](./quectel/RM502Q-AE/README.md)
-	     - [RM520N-GL](./quectel/RM520N-GL/README.md)
-	     - [RM521F-GL](./quectel/RM521F-GL/README.md)
-	     - [RM551E-GL](./quectel/RM551E-GL/README.md)
-  
-- [Fibocom Modem Wiki](./fibocom/README.md) (:arrow_left: Basics/Getting Started and more)
-	- Jump to modem:
-	     - [FM190W-GL](./fibocom/FM190W-GL/README.md)
+```
+                             .%+:                              
+                                  .*@@@-.                         
+                                       :@@@@-                     
+                                          @@@@#.                  
+                                           -@@@@#.                
+            :.                               %@@@@: -#            
+           .+-                                #@@@@%.+@-          
+           .#- .                               +@@@@# #@-         
+         -@*@*@%                                @@@@@::@@=        
+     .+%@@@@@@@@@%=.                            =@@@@# #@@- ..    
+         .@@@@@:                                :@@@@@ =@@@..%=   
+         -::@-.+.                                @@@@@.=@@@- =@-  
+           .@-                                  .@@@@@:.@@@*  @@. 
+           .%-                                  -@@@@@:=@@@@  @@# 
+           .#-         .%@@@@@@#.               +@@@@@.#@@@@  @@@.
+           .*-            .@@@@@@@@@@=.         @@@@@@ @@@@@  @@@:
+            :.             .%@@@@@@@@@@@%.     .@@@@@+:@@@@@  @@@-
+                             -@@@@@@@@@@@@@@@..@@@@@@.-@@@@@ .@@@-
+                              -@@@@@@@@@@%.  .@@@@@@. @@@@@+ =@@@=
+                                =@@@@@@@@*  .@@@@@@. @@@@@@..@@@@-
+                                 #@@@@@@@@-*@@@@@%..@@@@@@+ #@@@@-
+                                 @@@@@@:.-@@@@@@.  @@@@@@= %@@@@@.
+                                .@@@@. *@@@@@@- .+@@@@@@-.@@@@@@+ 
+                                %@@. =@@@@@*.  +@@@@@@%.-@@@@@@%  
+                               .@@ .@@@@@=  :@@@@@@@@..@@@@@@@=   
+                               =@.+@@@@@. -@@@@@@@*.:@@@@@@@*.    
+                               %.*@@@@= .@@@@@@@-.:@@@@@@@+.      
+                               ..@@@@= .@@@@@@: #@@@@@@@:         
+                                .@@@@  +@@@@..%@@@@@+.            
+                                .@@@.  @@@@.:@@@@+.               
+                                 @@@.  @@@. @@@*    .@.           
+                                 :@@@  %@@..@@#.    *@            
+                              -*: .@@* :@@. @@.  -..@@            
+                            =@@@@@@.*@- :@%  @* =@:=@#            
+                           .@@@-+@@@@:%@..%- ...@%:@@:            
+                           .@@.  @@-%@:      .%@@*@@%.            
+                            :@@ :+   *@     *@@#*@@@.             
+                                          =@@@.@@@@               
+                                       .*@@@:=@@@@:               
+                                     .@@@@:.@@@@@:                
+                                   .@@@@#.-@@@@@.                 
+                                  #@@@@: =@@@@@-                  
+                                .@@@@@..@@@@@@*                   
+                               -@@@@@. @@@@@@#.                   
+                              -@@@@@  @@@@@@%                     
+                              @@@@@. #@@@@@@.                     
+                             :@@@@# =@@@@@@%                      
+                             @@@@@: @@@@@@@:                      
+                             *@@@@  @@@@@@@.                      
+                             .@@@@  @@@@@@@                       
+                              #@@@. @@@@@@*                       
+                               @@@# @@@@@@@                       
+                                .@@+=@@@@@@.                      
+                                     *@@@@@@                      
+                                      :@@@@@=                     
+                                       .@@@@@@.                   
+                                         :@@@@@*.                 
+                                           .=@@@@@-               
+                                                :+##+.            
+
+```
