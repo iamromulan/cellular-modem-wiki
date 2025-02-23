@@ -8,7 +8,7 @@ It is my hope that this repo can serve as a universal wiki for all cellular mode
 
 To keeps things nice, this wiki will be organized into sub-wikis based on modem manufacture
 
-> Note: This repo originally was the guide for setting up an ethernet connection directly to a Quectel M.2 modem. This guide still exists! Each modem now has a customized version of the guide tailored to each. Scroll down to the directory and choose your modem to find it. :arrow_heading_down:
+**Note: This repo originally was the guide for setting up an ethernet connection directly to a Quectel M.2 modem. This guide still exists! Each modem now has a customized version of the guide tailored to each. Scroll down to the directory and choose your modem to find it.** :arrow_heading_down:
 
 # Contributing
 
