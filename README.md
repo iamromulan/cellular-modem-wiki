@@ -12,9 +12,9 @@ To keeps things nice, this wiki will be organized into sub-wikis based on modem 
 
 # Directory
 
-### :arrow_right: [Quectel Modem Wiki](./quectel/README.md) :arrow_left: 
+# arrow_right: [Quectel Modem Wiki](./quectel/README.md) :arrow_left: 
   
-### :arrow_right: [Fibocom Modem Wiki](./fibocom/README.md) :arrow_left: 
+# arrow_right: [Fibocom Modem Wiki](./fibocom/README.md) :arrow_left: 
 
 # Contributing
 
