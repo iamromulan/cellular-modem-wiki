@@ -19,8 +19,8 @@ Welcome to the Quectel Modem Wiki! For each modem I am in possession of I create
 	- Linux/OpenWRT 
 - [Form Factors](./formfactors.md)
 	- [Quectel M.2 Modems](./m.2_formfactor.md) (:arrow_left: Basics/Getting Started and more)
-		- [SDXLEMUR Platform](./sdxlemur/README.md):
-			- [SDXLEMUR M.2 Direct to Ethernet Guide](./sdxlemur/sdxlemur_m.2_to_eth.md)
+		- [SDXLEMUR and SDXPRAIRIE Platform](./sdxlemur/README.md):
+			- [SDXLEMUR and SDXPRAIRIE M.2 Direct to Ethernet Guide](./sdxlemur/sdxlemur_m.2_to_eth.md)
 			- Modems
 				- RM500Q-GL 
 			     - [RM502Q-AE](./RM502Q-AE/README.md)
