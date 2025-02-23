@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "507e6377e5ec7c7d",
+        "id": "08094fa375b68125",
         "type": "tabs",
         "children": [
           {
-            "id": "e1597ffebe073919",
+            "id": "6e77b2041c845a75",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -168,14 +168,48 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "e1597ffebe073919",
+  "active": "6e77b2041c845a75",
   "lastOpenFiles": [
-    "the-basics/README.md",
-    "LICENSE.md",
+    "quectel/RM502Q-AE/README.md",
     "README.md",
-    "LICENSE.txt",
-    "modems/quectel/Direct M.2 Modem to Ethernet Guide.md",
-    "guides",
-    "images/to-go_bad.jpg"
+    "quectel/README.md",
+    "fibocom/README.md",
+    "fibocom/FM190W-GL/README.md",
+    "fibocom/FM190W-GL/FM190W-GL_to_RM551E-GL.md",
+    "modems/quectel/README.md",
+    "modems/quectel",
+    "modems",
+    "fibocom/images",
+    "fibocom/New folder",
+    "quectel/images/to-go_bad.jpg",
+    "quectel/images/tailscalemenu.png",
+    "quectel/images/tailscaleconfig.png",
+    "quectel/images/selectprogfirehose.png",
+    "quectel/images/secerror.png",
+    "quectel/images/repocmd.png",
+    "quectel/images/qnavsec.png",
+    "quectel/images/qnavport.png",
+    "quectel/images/qnavfirst.png",
+    "quectel/images/qnavat.png",
+    "quectel/images",
+    "fibocom/FM190W-GL",
+    "fibocom",
+    "quectel/RM551E-GL/RM551_4CA_fix.md",
+    "quectel/RM551E-GL/README.md",
+    "quectel/RM551E-GL/M.2 to Ethernet Guide.md",
+    "quectel/RM551E-GL/images",
+    "quectel/RM521F-GL/README.md",
+    "quectel/RM521F-GL/M.2 to Ethernet Guide.md",
+    "quectel/RM521F-GL/images",
+    "quectel/RM520N-GL/README.md",
+    "quectel/RM520N-GL/M.2 to Ethernet Guide.md",
+    "quectel/RM520N-GL/images",
+    "quectel/RM502Q-AE/M.2 to Ethernet Guide.md",
+    "modems/quectel/the-basics/README.md",
+    "modems/fibocom/the-basics/README.md",
+    "the-basics/README.md",
+    "modems/quectel/Quectel_DirectM.2toEth_Guide.md",
+    "LICENSE.md",
+    "modems/quectel/Direct M.2 Modem to Ethernet Guide.md"
   ]
 }
