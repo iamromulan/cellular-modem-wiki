@@ -56,9 +56,9 @@ Essentially what we are doing is placing the modem in PCIe Root Complex mode so 
 
 **Here's the hardware I recommend for an indoor or on the go scenario:**
 
-![rework-5G2PHYmain](https://www.rework.network/cdn/shop/files/5G2PHY_bottom_W_antenna_1024x1024@2x.jpg?v=1719465175)
+![rework-5G2PHYmain](../images/5G2PHY_bottom_W_antenna.webp)
 
-![enter image description here](https://www.rework.network/cdn/shop/files/5G2PHY_inside_with_modem_1024x1024@2x.jpg?v=1719465175)
+![enter image description here](../images/5G2PHY_inside_with_modem.webp)
 
 **Purchase Links:**
 
@@ -140,7 +140,7 @@ https://www.rework.network/collections/lte-home-gateway/products/5g-rgm-o
   - [5.5x2.1mm DC to 5.5x2.5mm DC adapter](https://www.amazon.com/gp/product/B07YWQ9N5S/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1)
  
  Result: 
-![:trollface:](./images/to-go_bad.jpg)
+![:trollface:](../images/to-go_bad.jpg)
 
 
 
@@ -318,7 +318,7 @@ OK
 
 You then can head over to [The Python ADB unlock key Generator](https://onecompiler.com/python/3znepjcsq)
 
-![pythonadbkey](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/qadbkeypython.png?raw=true)
+![pythonadbkey](../images/qadbkeypython.png)
 
 **Replace the 12345678 with the response you got from running `AT+QADBKEY?`** then click run. Under output your unlock key will be generated.
 #
@@ -342,39 +342,11 @@ And reboot with `AT+CFUN=1,1` to actually apply.
 :warning: adb is now insatlled with QFlash 7.1+ from QuecDeploy
 :warning: Outdated
 
-Once the modem is back online, you should be able to use ADB to manage the modem on the host connected to it with USB. You'll need to install the ADB drivers and the ADB command line tool before you can use it. The easiest way to do this is just to use my RM520 repo script. Or do it on your own: https://github.com/K3V1991/ADB-and-FastbootPlusPlus/releases
-
-- Download the .exe non-portable version
-
-![downloadadb](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/downloadadb.png?raw=true)
-- Accept, yes, next, allow are pretty much everything you want to be pressing. If you get a security warning like this, click more info 
-
-![secerror](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/secerror.png?raw=true)
-- During the install you'll want these selected for sure. 
-
-![adb1](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/adb1.png?raw=true)
-- Toward the end, make these are selected like this: 
-
-![adb2](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/adb2.png?raw=true)
-- The Universal Adb Driver installer will open after, go ahead and accept, yes, next, allow, finish it.
-
-- A window like this will open. 
-
-![adb3](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/adb3.png?raw=true)
-
-- Any time you want to use adb open ADB & Fastboot++
-
-![adbcmd](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/adbcmd.png?raw=true)
-
-> :warning: **The other icon/shortcuts are not needed for modems. They are however useful for Android phones. If you only need this for a Quectel modem the icon/shortcuts can be deleted** 
-> 
-![enter image description here](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/notneededadb.png?raw=true)
-
+Once the modem is back online, you should be able to use ADB to manage the modem on the host connected to it with USB. You'll need to install the ADB drivers and the ADB command line tool before you can use it. The easiest way to do this is just to use my RM520 repo script. 
 ### Basic commands:
 In a ADB & Fastboot++ type `adb devices` and press enter. If you have adb unlocked on your modem and it is connected by usb, you should have at least one device show up on the list. This is a good way to test if adb is installed and properly recognizing your modem or android phone. 
 **Example:** 
 
-![adb3](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/adb3.png?raw=true)
 
 - `adb pull /path/to/file` - download a file from the modem to the current working directory
 - `adb push /path/on/computer /path/on/modem` - upload a file to the modem
@@ -386,14 +358,14 @@ So far, I have been unsuccessful with my attempts to get ADB to listen on the et
 :warning: To be restructured soon
 ### Overview
 After gaining adb acess, you can install a simple web interface you'll be able to access using the modems gateway IP address. You can see some basic signal stats, send AT commands from the browser, and change your TTL directly on the modem. By default this will be on https on port 443 with a redirect from 80 to 443. So if you didn't change the gateway IP address you'd go to https://192.168.225.1/ (SDXLEMUR) and you'd find this...
-![Home Page](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/dev_home.png?raw=true)
-![AT Commands](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/dev_simplenetwork.png?raw=true)
-![TTL](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/dev_simplescan.png?raw=true)
-![TTL](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/dev_simplesettings.png?raw=true)
-![TTL](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/dev_sms.png?raw=true)
+![Home Page](../images/dev_home.png)
+![AT Commands](../images/dev_simplenetwork.png)
+![scan](../images/dev_simplescan.png)
+![TTL](../images/dev_simplesettings.png)
+![TTL](../images/dev_sms.png)
 Console:
-![TTL](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/dev_console.png?raw=true)
-![TTL](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/dev_deviceinfo.png?raw=true)
+![TTL](../images/dev_console.png)
+![TTL](../images/dev_deviceinfo.png)
 
 ^^^ Simple Admin 2.0 on the SDXLEMUR Branch ^^^
 Thanks to the work of [dr-dolomite](github.com/dr-dolomite) we can install something like this! 
@@ -412,9 +384,9 @@ Thanks to the work of [dr-dolomite](github.com/dr-dolomite) we can install somet
 > :warning: Your modem must already be connected to the internet for this to install
 ### Installation:
 Open up the toolkit main menu and press 4 to enter the Tailscale menu
-![Toolkit](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/tailscalemenu.png?raw=true)
+![Toolkit](images/tailscalemenu.png)
 **Press 1, wait for it to install. This is a very large file for the system so give it some time. Once done and it says tailscaled is started press 2 to configure it.**
-![Toolkit](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/tailscaleconfig.png?raw=true)
+![Toolkit](../images/tailscaleconfig.png)
 
 First time connecting you'll be given a link to login with
  - Press 1 to just connect only.

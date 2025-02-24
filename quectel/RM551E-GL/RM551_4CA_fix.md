@@ -33,6 +33,3 @@ Always give the modem a few reboot cycles if you are having connection issues af
  - After reboot confirm CFUN is set to 1 by sending **AT+CFUN?** command.
  - If modem returns 0, send **AT+CFUN=1**
  
-
-
-> Written with [StackEdit](https://stackedit.io/).
