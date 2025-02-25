@@ -4,7 +4,6 @@ Quectel Modem Wiki
 
 # RM502Q-AE
 ![](https://github.com/iamromulan/RM502Q-AE/blob/main/Images/RM502.png?raw=tru)
-
 The Quectel RM502Q-AE is a cellular NR/LTE (5G/4G) M.2 B-Key modem module specially optimized for a variety of applications and usage scenarios utilizing the Qualcomm x55 platform.
 
 You will find Tools, Docs, and Firmware for it here, as well as a .exe (QuecDeploy) that installs everything for windows.
