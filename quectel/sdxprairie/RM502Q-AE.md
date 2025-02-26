@@ -4,6 +4,7 @@ Quectel Modem Wiki
 
 # RM502Q-AE
 ![](./images/RM502.png)
+
 The Quectel RM502Q-AE is a cellular NR/LTE (5G/4G) M.2 B-Key modem module specially optimized for a variety of applications and usage scenarios utilizing the Qualcomm x55 platform.
 
 You will find Tools, Docs, and Firmware for it here, as well as a .exe (QuecDeploy) that installs everything for windows.
@@ -22,7 +23,7 @@ You will find Tools, Docs, and Firmware for it here, as well as a .exe (QuecDepl
 - [Description of antenna connection](#description-of-antenna-connection)
 - [Specification](#specification)
 
-## Connection Methods
+# Connection Methods
 The modems M.2 B-Key interface is a combination of both USB 3.1 and PCIe 4.0 along with additional pins for things like the SIM slots. For exact information about what pin is what, see the hardware design document. The modem supports being used in 3 different ways:
 - USB 3.1
 - PCIe EP (Endpoint)
@@ -41,7 +42,7 @@ The modems M.2 B-Key interface is a combination of both USB 3.1 and PCIe 4.0 alo
 - :x:It is recommended to not use PCIe and USB both in a TE mode at the same time. This causes the modem to request 2 IPv4 and IPv6 addresses from the cell carrier. While this is posable, and I have seen it work, it tends to be pretty unstable.
 - In AP modes the modems onboard DHCP server is used by default. If you want to enable IP passthrough in AP mode then ``AT+QMAP="mpdn_rule"`` must be used to specify where you want the IP to passthrough to. You have a choice between passing it to a USB device (using an AP protocol) or the PCIe RC's endpoint, like the ethernet chipset of a RJ45/PHY board for example. 
 
-### USB modes
+# USB modes
 - When presented as a USB  modem to a device/host there are 4 different USB modes (protocols/standards) that it can present itself as. 2 of them, the modem is presented as a full cellular modem to the host and the host will be in charge (TE). Those modes are NDIS (Referred to as QMI in the past) and MBIM. The other 2; ECM and RNDIS; the modem is in charge (AP) and the host will view it as a USB ethernet port. It will simply ask for an IP address and that's it.
 - You can view what USB mode the modem is in with the AT command: ``AT+QCFG="usbnet"``
   - To set it to a particular USB mode:
@@ -51,17 +52,17 @@ The modems M.2 B-Key interface is a combination of both USB 3.1 and PCIe 4.0 alo
     - ``AT+QCFG="usbnet",3`` (RNDIS) (AP)
 - :bulb: After setting a USB mode reboot to have it  take effect with ``AT+CFUN=1,1``
 
-### PCIe modes
+## PCIe modes
 - PCIe devices can take 2 different roles. Its either an endpoint device or a root complex (host) device. For example, a desktop computer/PC has a graphics card or WiFi card installed to a PCIe slot. The computer would be (have) the Root Complex, while the Graphics Card or WiFi card would be the endpoint device.
 - To check what PCIe mode the modem is currently in run the AT command ``AT+QCFG="pcie/mode"``
   - To set the PCIe mode to Endpoint mode (TE) run the AT command ``AT+QCFG="pcie/mode",0`` 
   - To set the PCIe mode to Root complex mode (AP) run the AT command ``AT+QCFG="pcie/mode",1``
-#### PCIe EP (Endpoint Mode)(TE)
+### PCIe EP (Endpoint Mode)(TE)
 - In PCIe endpoint mode (default) the modem will act as a PCIe endpoint device. It can be installed as a device to system with a PCIe slot/Root Complex.
 - :v: I personally have never used the modem in this mode, however I have recently ordered a PCIe adapter to see how the modem works in this mode so I can provide more details here. [Here is what I ordered to test out PCIe EP mode](https://www.aliexpress.us/item/3256805348610910.html?spm=a2g0o.order_list.order_list_main.5.495c1802OmVmY4&gatewayAdapt=glo2usa)
 - You will need special [PCIe drivers for windows](https://mega.nz/file/qVlQFTaL#Fdpcf7jpl-Cg_eoauRU0U1k2jUcF2Zqv88F6SaOf8ig) to use the modem over PCIe EP
 
-#### PCIe RC (Root Complex Mode)(AP)
+### PCIe RC (Root Complex Mode)(AP)
 - In PCIe root complex mode the modem will act as a PCIe host/root complex device. In this way the modem can be provided with an endpoint device like an Ethernet chipset or a WiFi chipset for it to use. On the RM50x, RM52x, and RM530 modems, after setting this mode you must enable the correct driver for the endpoint device you are using. 
   - For Ethernet chipsets you'll use the ``AT+QETH="eth_driver"`` command to see what driver is currently enabled, and for a list of supported drivers. 
       - For example: ``AT+QETH="eth_driver","r8125",1`` would enable the driver for the RTL8125 ethernet chipset. A good example of a ready to use board with the 2.5Gig RTL8125 ethernet chipset would be the [Rework.Network PHY Board](https://rework.network/collections/lte-home-gateway/products/5g2phy)
@@ -70,7 +71,7 @@ The modems M.2 B-Key interface is a combination of both USB 3.1 and PCIe 4.0 alo
        - "fc64e","fc06e","fc06e-33","fc60e","fc08e"
       - :v: I Personaly have not seen a board on the market offering a WiFi chip other than the Quectel EVB kits.
 
-## QuecDeploy:
+# QuecDeploy:
 ![](https://github.com/iamromulan/QuecDeploy/blob/main/images/quecdeploy_main_menu.png?raw=tru)
 
 **[QuecDeploy DOWNLOAD](https://github.com/iamromulan/QuecDeploy/releases)**
@@ -84,10 +85,10 @@ If you would prefer to simply explore all of the downloads I can give you; take 
 It is a menu style Powershell script that will let you install Qflash and Qnav. ADB and fastboot are now automatically included with Qflash! It will also let you download firmware and view PDFs for several modems (by linking you to the correct repo). It heavily relies on megatools, a cli for downloading files from mega.nz
 All files installed/downloaded will go to C:\Quectel\
 
-## Where To Buy
+# Where To Buy
 The cheapest I have found so far is at [Coming Soon](.)
 
-## Toolz:
+# Toolz:
 <details>
    <summary>Windows | View</summary>
 
@@ -130,7 +131,7 @@ The cheapest I have found so far is at [Coming Soon](.)
 
 </details>
 
-## Firmware:
+# Firmware:
 <details>
    <summary>Stock | View</summary>
 
@@ -148,9 +149,9 @@ The cheapest I have found so far is at [Coming Soon](.)
 
 </details>
 
-## Firmware update instructions:
+# Firmware update instructions:
 
-### Windows
+## Windows
 
 Step 1.
 > Install modem drivers [Quectel Windows USB Driver(Q) NDIS V2.7](https://mega.nz/file/zJd1CYbL#OuzK4SaghBZuQ_RLstw--I38179sZM7TkkktL2IIsm4)  on your system. The [QuecDeploy](#quecdeploy) tool will help you do this as well. If you don't already have QFlash 7.1 install it from the [QuecDeploy](#quecdeploy) tool or the respective link in [Toolz](#toolz)
@@ -190,7 +191,7 @@ Step 6.
 
 ![](./images/qflash_start.png)
 
-### Linux:
+## Linux:
 
 Step 1.
 > Install the qfirehose package.
@@ -213,9 +214,9 @@ Step 3.
 
 
 
-## EDL Mode
+# EDL Mode
   
-### If  for some reason something gets messed up on your modem and you are not able to see the DM port to flash firmware, theres a way to enter EDL mode (Emergency Download Mode)
+## If  for some reason something gets messed up on your modem and you are not able to see the DM port to flash firmware, there's a way to enter EDL mode (Emergency Download Mode)
 
 Typically when you flash firmware the [normal method](#firmware-update-instructions) you use Qflash and select the DM port. When you click start, Qflash tells the DM port (Diagnostics port) to reboot into EDL mode. When the module comes back up only one port will exist: The QDLoader port. This means the modem has entered EDL mode. Qflash will then proceed to flash.
 

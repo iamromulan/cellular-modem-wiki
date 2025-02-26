@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "quectel/sdxprairie/RM502Q-AE.md",
+                "file": "quectel/sdxlemur/RM520N-GL.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "RM502Q-AE"
+              "title": "RM520N-GL"
             }
           }
         ]
@@ -170,8 +170,9 @@
   },
   "active": "6e77b2041c845a75",
   "lastOpenFiles": [
-    "quectel/sdxprairie/sdxprairie_m.2_to_eth.md",
     "quectel/sdxprairie/RM502Q-AE.md",
+    "quectel/sdxlemur/RM520N-GL.md",
+    "quectel/sdxprairie/sdxprairie_m.2_to_eth.md",
     "quectel/sdxprairie/images/qnavsec.png",
     "quectel/sdxprairie/images/qnavport.png",
     "quectel/sdxprairie/images/qnavfirst.png",
@@ -184,7 +185,6 @@
     "quectel/sdxlemur/images/qnavport.png",
     "quectel/README.md",
     "quectel/m.2_formfactor.md",
-    "quectel/sdxlemur/RM520N-GL.md",
     "quectel/sdxpinn/RM551E-GL.md",
     "quectel/sdxlemur/RM521F-GL.md",
     "quectel/sdxlemur/README.md",
