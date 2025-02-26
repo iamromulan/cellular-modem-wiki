@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "quectel/RM502Q-AE/README.md",
+                "file": "quectel/sdxpinn/sdxpinn_m.2_to_eth.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "README"
+              "title": "sdxpinn_m.2_to_eth"
             }
           }
         ]
@@ -98,7 +98,7 @@
         "state": {
           "type": "backlink",
           "state": {
-            "file": "quectel/RM502Q-AE/README.md",
+            "file": "quectel/sdxpinn/sdxpinn_m.2_to_eth.md",
             "collapseAll": false,
             "extraContext": false,
             "sortOrder": "alphabetical",
@@ -155,18 +155,21 @@
   },
   "active": "e4f27ed1691dcb3c",
   "lastOpenFiles": [
-    "2025-02-24.md",
+    "quectel/formfactors.md",
+    "quectel/introduction.md",
+    "quectel/m.2_formfactor.md",
+    "quectel/README.md",
+    "LICENSE.md",
     "README.md",
-    "quectel/RM551E-GL/README.md",
     "quectel/RM502Q-AE/README.md",
+    "2025-02-24.md",
+    "quectel/RM551E-GL/README.md",
     "fibocom/README.md",
     "quectel/sdxpinn/README.md",
     "fibocom/sdxpinn/README.md",
     "quectel/RM520N-GL/README.md",
     "quectel/sdxlemur/README.md",
     "fibocom/FM190W-GL/README.md",
-    "LICENSE.md",
-    "quectel/RM521F-GL/README.md",
-    "quectel/README.md"
+    "quectel/RM521F-GL/README.md"
   ]
 }
