@@ -3,7 +3,7 @@ Quectel Modem Wiki
 > :book: This is a living Wiki. Changes may be made as more discoveries are made or more community software is made. If you feel like you have information to contribute to this wiki please open a pull request.
 
 # RM502Q-AE
-![](https://github.com/iamromulan/RM502Q-AE/blob/main/Images/RM502.png?raw=tru)
+![](./images/RM502.png)
 The Quectel RM502Q-AE is a cellular NR/LTE (5G/4G) M.2 B-Key modem module specially optimized for a variety of applications and usage scenarios utilizing the Qualcomm x55 platform.
 
 You will find Tools, Docs, and Firmware for it here, as well as a .exe (QuecDeploy) that installs everything for windows.
@@ -31,7 +31,7 @@ The modems M.2 B-Key interface is a combination of both USB 3.1 and PCIe 4.0 alo
 >:x: Technically there is a 4th (RGMII) thats similar to PCIe RC, however this method is rarely utilized and will not be covered here. For a while I incorrectly referred to PCIe RC as RGMII, however they are indeed different from each other.
 
 **To further understand; take a look at the following graph:**
-![](https://github.com/iamromulan/RM502Q-AE/blob/main/Images/connection_methods.png?raw=tru)
+![](./images/connection_methods.png)
 
 - Initiators refers to what is in charge of initially connecting and keeping the connection up. 
      - TE refers to the host (whatever the modem is hooked up to) will be in charge of connection management 
@@ -71,9 +71,9 @@ The modems M.2 B-Key interface is a combination of both USB 3.1 and PCIe 4.0 alo
       - :v: I Personaly have not seen a board on the market offering a WiFi chip other than the Quectel EVB kits.
 
 ## QuecDeploy:
-![Screenshot 2024-07-31 130755](https://github.com/user-attachments/assets/dc351b48-3682-4181-b33c-843136221d1c)
+![](https://github.com/iamromulan/QuecDeploy/blob/main/images/quecdeploy_main_menu.png?raw=tru)
 
-**[QuecDeploy DOWNLOAD](https://github.com/iamromulan/rm520n-gl/releases)**
+**[QuecDeploy DOWNLOAD](https://github.com/iamromulan/QuecDeploy/releases)**
 
 > :bulb: **Note:**
 
@@ -85,7 +85,7 @@ It is a menu style Powershell script that will let you install Qflash and Qnav. 
 All files installed/downloaded will go to C:\Quectel\
 
 ## Where To Buy
-The cheapest I have found so far is at [AliExpress](https://www.aliexpress.us/item/3256806691999300.html?spm=a2g0o.productlist.main.95.5221236daDW2Vv&algo_pvid=b200b863-127e-49c0-ab82-96d23718795c&algo_exp_id=b200b863-127e-49c0-ab82-96d23718795c-53&pdp_npi=4%40dis%21USD%21269.33%21269.33%21%21%211922.41%211922.41%21%402101fb0c17234235954754366e260e%2112000038597589012%21sea%21US%210%21ABX&curPageLogUid=ENV9kqQEPME4&utparam-url=scene%3Asearch%7Cquery_from%3A) for $269.33
+The cheapest I have found so far is at [Coming Soon](.)
 
 ## Toolz:
 <details>
@@ -150,8 +150,7 @@ The cheapest I have found so far is at [AliExpress](https://www.aliexpress.us/it
 
 ## Firmware update instructions:
 
-<details>
-   <summary>Windows | View</summary>
+### Windows
 
 Step 1.
 > Install modem drivers [Quectel Windows USB Driver(Q) NDIS V2.7](https://mega.nz/file/zJd1CYbL#OuzK4SaghBZuQ_RLstw--I38179sZM7TkkktL2IIsm4)  on your system. The [QuecDeploy](#quecdeploy) tool will help you do this as well. If you don't already have QFlash 7.1 install it from the [QuecDeploy](#quecdeploy) tool or the respective link in [Toolz](#toolz)
@@ -162,7 +161,7 @@ Step 2.
 Step 3.
 > Go to device manager and check if the new COM ports are visible in the system. Restart your computer if the new COM ports are not visible.
 
-![](https://github.com/iamromulan/RM502Q-AE/blob/main/Images/devman_ports.png?raw=tru)
+![](./images/devman_ports.png)
 
 > Remember the number of the COM port described as "DM Port".
 
@@ -172,29 +171,26 @@ Step 4.
 > Remember to avoid spaces in the path where QFlash is installed to and firmware location
 > :bulb: Example: C:\Quectel\Q flash\ is bad while C:\Quectel\Qflash\ is good (If you installed Qflash and downloaded your firmware with [QuecTool](#quectool) then you don't need to worry about this.)
 > Click Load FW Files.
-![](https://github.com/iamromulan/RM502Q-AE/blob/main/Images/qflash_loadfw.png?raw=tru)
+![](./images/qflash_loadfw.png)
 
 > In the new window, go to the `\update\firehose` folder of the firmware and select the `partition_complete` file. Then click the Open button. 
 
->If you downloaded your firmware with [QuecTool](#quectool) then go to C:\Quectel\firmware\RM520NGL\type\fimrware\update\firehose\
+>If you downloaded your firmware with [QuecDeploy](#quecdeploy) then go to C:\Quectel\firmware\RM520NGL\type\fimrware\update\firehose\
 
-![](https://github.com/iamromulan/RM502Q-AE/blob/main/Images/qflash_sel_fw.png?raw=tru)
+![](./images/qflash_sel_fw.png)
 
 Step 5.
 
 > Select the COM port number as the DM port from step 3 and set the baud rate to `460800`
 
-![](https://github.com/iamromulan/RM502Q-AE/blob/main/Images/portbaudqflash.png?raw=tru)
+![](./images/portbaudqflash.png)
 
 Step 6.
 > Start updating modem firmware.
 
-![](https://github.com/iamromulan/RM502Q-AE/blob/main/Images/qflash_start.png?raw=tru)
+![](./images/qflash_start.png)
 
-</details>
-
-<details>
-   <summary>Linux (OpenWrt) | View</summary>
+### Linux:
 
 Step 1.
 > Install the qfirehose package.
@@ -215,12 +211,9 @@ Step 3.
 /usr/bin/qfirehose -f /tmp/firmware_folder_name
 ```
 
-</details>
+
 
 ## EDL Mode
-
-<details>
-   <summary> View</summary>
   
 ### If  for some reason something gets messed up on your modem and you are not able to see the DM port to flash firmware, theres a way to enter EDL mode (Emergency Download Mode)
 
@@ -242,43 +235,40 @@ It is also possible to take a regular M.2 to USB adapter and cut the board so th
 ### Step 3
 
 For the RM500-RM530 series modems, you'll need a small wire or cable tie. I ended up striping the ends off a cable tie. See below.....
-![](https://github.com/iamromulan/RM502Q-AE/blob/main/Images/edl_tool.png?raw=tru)
+![](./images/edl_tool.png)
 
 ### Step 4
 Open Device manager on your PC and keep and eye on the ports section.
 Using the tool from step 3, trip the 2 contacts on the back of the modem **at the same time as plugging the USB to your PC**.  If you are successful, the QDLoader port should instantly appear. You do not need to keep the 2 contacts on the back tripped after you plug it in and see the QDLoader port. If the QDLoader port doesn't show up within 3 seconds, unplug the USB and try again.
 
 For the RM500-RM530 modems these are the correct ports to jump:
-![](https://github.com/iamromulan/RM502Q-AE/blob/main/Images/edl1.jpg?raw=tru)
+![](./images/edl1.jpg)
 **Here is how I did it. Remember plug the USB in at the same time as doing this:**
-![](https://github.com/iamromulan/RM502Q-AE/blob/main/Images/502_edl.png?raw=tru)
+![](./images/502_edl.png)
 
 ### Step 5
 
 At this point you should see the QDLoader port in device manager:
- ![](https://github.com/iamromulan/RM502Q-AE/blob/main/Images/qdloader.png?raw=tru)
+ ![](./images/qdloader.png)
 
 Follow the steps from the [normal method](#firmware-update-instructions) and treat the QDLoader port as the DM port.
-</details>
+
 
 ## How to use Qnavigator to send AT commands
 
-<details>
-   <summary> View</summary>
 
 Connect your modem to your computer by USB. Either through a USB to m.2 B-key sled (should have a sim slot as well) from Amazon or by using a PCIe RC (RJ45 sled) board's USB C port.
 ### If you installed by using [QuecDeploy](#quecdeploy): 
 You should already have a desktop icon and start menu shortcut for Qnavigator.
 #### 1. Open Qnavagator, you'll be presented with this screen, just press escape (ESC) to skip their directions. 
-![COM ports](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/qnavfirst.png?raw=true)
+![COM ports](./images/qnavfirst.png)
 #### 2. Uncheck Automatic initialization (circled in red) and click the COM plug icon (circled in green)
-![COM ports](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/qnavsec.png?raw=true)
+![COM ports](./images/qnavsec.png)
 #### 3. Click ok, the correct port will already be auto selected
-![qnavCOMport](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/qnavport.png?raw=true)
+![qnavCOMport](./images/qnavport.png)
 #### 4. Click Connect to module, then in the lower right type your AT command and press send. The response will be shown above.
-![at](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/qnavat.png?raw=true)
+![at](./images/qnavat.png)
 
-</details>
 
 ## AT commands:
 <details>
@@ -302,9 +292,9 @@ https://mega.nz/folder/vEFyHK5J#vklUZdUyb65ovLyFXICcVw
 
 ## Description of antenna connection:
  
-![](https://github.com/iamromulan/RM502Q-AE/blob/main/Images/502_ant_pairs.png?raw=tru)
+![](./images/502_ant_pairs.png)
 
 ## Specification:
 
-![](https://github.com/iamromulan/RM502Q-AE/blob/main/Images/rm502_salesdoc.png?raw=tru)
-![](https://github.com/iamromulan/RM502Q-AE/blob/main/Images/rm502_specs.png?raw=tru)
+![](./images/rm502_salesdoc.png)
+![](./images/rm502_specs.png)
