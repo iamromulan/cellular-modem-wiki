@@ -19,20 +19,23 @@ Welcome to the Quectel Modem Wiki! For each modem I am in possession of I create
 	- Linux/OpenWRT 
 - [Form Factors](./formfactors.md)
 	- [Quectel M.2 Modems](./m.2_formfactor.md) (:arrow_left: Basics/Getting Started and more)
-		- [SDXLEMUR and SDXPRAIRIE Platform](./sdxlemur/README.md):
-			- [SDXLEMUR and SDXPRAIRIE M.2 Direct to Ethernet Guide](./sdxlemur/sdxlemur_m.2_to_eth.md)
+		- [SDXPRAIRIE Platform](./sdxprairie/README.md):
+			- [SDXPRAIRIE M.2 Direct to Ethernet Guide](./sdxprairie/sdxprairie_m.2_to_eth.md)
 			- Modems
-				- RM500Q-GL 
-			     - [RM502Q-AE](./RM502Q-AE/README.md)
-			     - [RM520N-GL](./RM520N-GL/README.md)
-			     - [RM521F-GL](./RM521F-GL/README.md)
+				- RM500Q-GL (No page yet)
+				- [RM502Q-AE](./sdxprairie/RM502Q-AE.md)
+		- [SDXLEMUR Platform](./sdxlemur/README.md):
+			- [SDXLEMUR M.2 Direct to Ethernet Guide](./sdxlemur/sdxlemur_m.2_to_eth.md)
+			- Modems
+			     - [RM520N-GL](./sdxlemur/RM520N-GL.md)
+			     - [RM521F-GL](./sdxlemur/RM521F-GL.md)
 		- [SDXPINN Platform](./sdxpinn/README.md):
 			- [SDXPINN M.2 Direct to Ethernet Guide](./sdxpinn/sdxpinn_m.2_to_eth.md)
 			- Modems
-				- RM550V-GL 
-				- [RM551E-GL](./RM551E-GL/README.md)
+				- RM550V-GL (No page yet)
+				- [RM551E-GL](./sdxpinn/RM551E-GL.md)
 	  
-- Community Projects
+- Community Projects (No Pages yet)
 	- QuecDeploy
 	- PCIe RC Toolkit
 	- QuecManager

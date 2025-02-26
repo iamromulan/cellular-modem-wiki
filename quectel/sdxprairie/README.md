@@ -2,13 +2,13 @@ Quectel Modem Wiki
 =================================
 > :book: This is a living Wiki. Changes may be made as more discoveries are made or more community software is made. If you feel like you have information to contribute to this wiki please open a pull request.
 
-# SDXLEMUR and SDXPRAIRIE Platform (Quectel)
+# SDXPRAIRIE Platform (Quectel)
 
-To do: Add info about the SDXLEMUR platform
+To do: Add info about the SDXPRAIRIE platform
 
 # Directory
 
-- [SDXLEMUR M.2 Direct to Ethernet Guide](./sdxlemur_m.2_to_eth.md)
+- [SDXPRAIRIE M.2 Direct to Ethernet Guide](./sdxprairie_m.2_to_eth.md)
 - Modems
-     - [RM520N-GL](./RM520N-GL.md)
-     - [RM521F-GL](./RM521F-GL.md)
+	- RM500Q-GL (No page yet)
+	- [RM502Q-AE](./RM502Q-AE.md)
