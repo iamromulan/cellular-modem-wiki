@@ -39,7 +39,7 @@ The modems M.2 B-Key interface is a combination of both USB 3.1 and PCIe 4.0 alo
      - AP refers to the Linux OS running on the modem itself (the modem will be in charge of itself)
 - Both USB and PCIe can be used at the same time to connect. In PCIe Endpoint mode only the TE initiator is available to be used.
 - In TE modes the IP address(es) is always passed through to the host.
-- :x:It is recommended to not use PCIe and USB both in a TE mode at the same time. This causes the modem to request 2 IPv4 and IPv6 addresses from the cell carrier. While this is posable, and I have seen it work, it tends to be pretty unstable.
+- :x: It is recommended to not use PCIe and USB both in a TE mode at the same time. This causes the modem to request 2 IPv4 and IPv6 addresses from the cell carrier. While this is posable, and I have seen it work, it tends to be pretty unstable.
 - In AP modes the modems onboard DHCP server is used by default. If you want to enable IP passthrough in AP mode then ``AT+QMAP="mpdn_rule"`` must be used to specify where you want the IP to passthrough to. You have a choice between passing it to a USB device (using an AP protocol) or the PCIe RC's endpoint, like the ethernet chipset of a RJ45/PHY board for example. 
 
 ### USB modes
@@ -282,7 +282,7 @@ For the RM500-RM530 modems these are the correct ports to jump:
 
 At this point you should see the QDLoader port in device manager:
 
- ![](./images/qdloader.png)
+![](./images/qdloader.png)
 
 Follow the steps from the [normal method](#firmware-update-instructions) and treat the QDLoader port as the DM port.
 
