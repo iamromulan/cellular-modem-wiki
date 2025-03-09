@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "quectel/sdxlemur/RM521F-GL.md",
+                "file": "quectel/sdxpinn/verizon_connection.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "RM521F-GL"
+              "title": "verizon_connection"
             }
           }
         ]
@@ -170,8 +170,14 @@
   },
   "active": "6e77b2041c845a75",
   "lastOpenFiles": [
-    "quectel/sdxlemur/RM520N-GL.md",
+    "quectel/mbn_profiles.md",
+    "quectel/README.md",
+    "quectel/sdxpinn/verizon_connection.md",
+    "quectel/m.2_formfactor.md",
+    "quectel/formfactors.md",
+    "quectel/introduction.md",
     "quectel/sdxlemur/RM521F-GL.md",
+    "quectel/sdxlemur/RM520N-GL.md",
     "quectel/sdxlemur/sdxlemur_m.2_to_eth.md",
     "quectel/sdxprairie/RM502Q-AE.md",
     "quectel/sdxprairie/sdxprairie_m.2_to_eth.md",
@@ -185,13 +191,9 @@
     "quectel/sdxpinn/images/qnavat.png",
     "quectel/sdxlemur/images/qnavsec.png",
     "quectel/sdxlemur/images/qnavport.png",
-    "quectel/README.md",
-    "quectel/m.2_formfactor.md",
     "quectel/sdxpinn/RM551E-GL.md",
     "quectel/sdxlemur/README.md",
     "quectel/sdxprairie/README.md",
-    "quectel/formfactors.md",
-    "quectel/introduction.md",
     "README.md",
     "LICENSE.md",
     "RM521F-GL/README.md",
@@ -213,7 +215,6 @@
     "quectel/RM551E-GL/RM551_4CA_fix.md",
     "quectel/sdxpinn/sdxpinn_m.2_to_eth.md",
     "quectel/images/5G2PHY_inside_with_modem.webp.crdownload",
-    "fibocom/README.md",
     "FM190-GL",
     "quectel/Untitled.canvas"
   ]
