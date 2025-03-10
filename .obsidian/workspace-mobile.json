@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "quectel/sdxpinn/sdxpinn_m.2_to_eth.md",
+                "file": "quectel/sdxpinn/verizon_connection.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "sdxpinn_m.2_to_eth"
+              "title": "verizon_connection"
             }
           }
         ]
@@ -98,7 +98,7 @@
         "state": {
           "type": "backlink",
           "state": {
-            "file": "quectel/sdxpinn/sdxpinn_m.2_to_eth.md",
+            "file": "quectel/sdxpinn/verizon_connection.md",
             "collapseAll": false,
             "extraContext": false,
             "sortOrder": "alphabetical",
@@ -155,6 +155,7 @@
   },
   "active": "e4f27ed1691dcb3c",
   "lastOpenFiles": [
+    "quectel/sdxpinn/sdxpinn_m.2_to_eth.md",
     "quectel/formfactors.md",
     "quectel/introduction.md",
     "quectel/m.2_formfactor.md",
