@@ -6,6 +6,7 @@ Quectel Modem Wiki
 
 Welcome to the Quectel Modem Wiki! For each modem I am in possession of I create a dedicated wiki page of it. Previously these were their own repos and have been relocated here.
 
+# :arrow_right: [Mega Public Folder](https://mega.nz/folder/CRFWlIpQ#grOByBgkfZe5uLMkX2M2XA) :arrow_left:
 # Directory
 
 > :point_down: Looking for the M.2 modem direct to ethernet guide? There's now a separate guide for each platform!
@@ -26,15 +27,15 @@ Welcome to the Quectel Modem Wiki! For each modem I am in possession of I create
 				- [RM502Q-AE](./sdxprairie/RM502Q-AE.md)
 		- [SDXLEMUR Platform](./sdxlemur/README.md):
 			- [SDXLEMUR M.2 Direct to Ethernet Guide](./sdxlemur/sdxlemur_m.2_to_eth.md)
-			- Modems
+			- Modems 
 			     - [RM520N-GL](./sdxlemur/RM520N-GL.md)
 			     - [RM521F-GL](./sdxlemur/RM521F-GL.md)
 		- [SDXPINN Platform](./sdxpinn/README.md):
 			- [SDXPINN M.2 Direct to Ethernet Guide](./sdxpinn/sdxpinn_m.2_to_eth.md)
 			- Modems
-				- RM550V-GL (No page yet)
+				- RM550V-GL (No page yet)(quite ignored by quectel so far)
 				- [RM551E-GL](./sdxpinn/RM551E-GL.md)
-	  
+- [A Propper Verizon Connection](./verizon_connection.md)	  
 - Community Projects (No Pages yet)
 	- QuecDeploy
 	- PCIe RC Toolkit

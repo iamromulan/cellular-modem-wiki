@@ -2,54 +2,53 @@ Quectel Modem Wiki
 =================================
 > :warning: This is a living document. Changes may be made as more discoveries are made or more community software is made. If you feel like you have information to contribute to this wiki please open a pull request.
 
-# SDXLEMUR/SDXPRAIRIE Direct M.2 Modem to Ethernet Guide
+# SDXLEMUR Direct M.2 Modem to Ethernet Guide
 
 
 Many of Quectel's modems support directly connecting to a PCIe Ethernet chipset. This is useful to use the cellular connection as a WAN interface - you can just plug the modem into the WAN port on your router, do a bit of configuration, and you're good to go. Performance is good, and the modem's onboard connection management often works better than the scripts many routers use to try to keep the connection up.
 
+**This guide is written for the following modems:**
+
+[RM520N-GL](./RM520N-GL.md)
+[RM521F-GL](./RM521F-GL.md)
+***In theory any Quectel SDXLEMUR system utilized in an AP mode***
+
 # Table of Contents
 
-
-- [Hardware Recommendations](#hardware-recommendations) 
-  - [Proper Assembly](#proper-assembly)
-  - [Recommended 12v 5A power supply](#recommended-12v-5a-power-supply)
-  - [Other Known M.2 to RJ45 PCBs](#other-known-m.2-to-rj45-pcbs)
-  - [Outdoor antenna enclosure combo setups](#outdoor-antenna-enclosure-combo-setups)
-
-- [Modem Resource Repository](#rm520-resource-repository)
-  
- - [Basic configuration](#basic-configuration)
-   - [First Time Setup](#first-time-setup)
-   - [After a firmware Flash; After first time setup](#after-a-firmware-flash-after-first-time-setup)
-   - [Changing modem IP address with AT command](#changing-modem-ip-address-with-at-command)
-   - [Enabling IP Passthrough](#enabling-ip-passthrough)
-     - [DMZ Method](#dmz-method)
-     - [Actual IP Passthrough](#actual-ip-passthrough)
-     - [Disable NAT to VLAN in IPPT mode](#disable-nat-to-vlan)
-     
-  
-- [Advanced configuration](#advanced-configuration)
-  - [Unlocking and Using ADB](#unlocking-and-using-adb)
+ - [Hardware and Assembly](#hardware-and-assembly)
+	- [Indoor](#indoor)
+	- [Outdoor](#outdoor)
+	- [Portable](#Portable)
+	- [Other Accessories](#other-accessories) 
+	
+- [Software and Setup](#software-and-setup)
+	- [QuecDeploy](#quecdeploy)
+	
+	- [Basic initial setup](#basic-initial-setup)
+	- [After a firmware Flash; After first time setup](#after-a-firmware-flash-after-first-time-setup)
+	- [Unlocking and Using ADB](#unlocking-and-using-adb)
     - [Using ADB](#using-adb)
     - [Basic Commands](#basic-commands)
- - [Web GUI and Toolkit](#web-gui-and-toolkit)  
+	 - [Web GUI and Toolkit](#web-gui-and-toolkit)  
     - [Overview](#overview)
     - [How to install](#how-to-install)
     - [Tailscale Installation and Config](#tailscale-installation-and-config)
     -  [Enable Daily Reboot](#enable-daily-reboot)
     - [How to uninstall](#how-to-uninstall)
+
+- Advanced and other good stuff
+  
 - [Other interesting things to check over ADB](#other-interesting-things-to-check-over-adb)
   - [Starting an FTP server](#starting-an-ftp-server)
    - [Changing modem IP address by adb shell](#changing-modem-ip-address-by-adb-shell)
-   - [TTL Modification](#ttl-modification)
-    - [Installing TTL Override:](#installing-ttl-override)
-    - [Removing TTL Override](#removing-ttl-override)
   - [Enable Qualcomm Webserver](#enable-qualcomm-webserver)
   - [Enable journald logging](#enable-journald-logging)
   - [Making sure you're connected to the right modem](#making-sure-youre-connected-to-the-right-modem)
   - [AT Command Access from ADB](#at-command-access-from-adb)
 
-# Hardware Recommendations
+
+# Hardware and Assembly
+
 
 
 Essentially what we are doing is placing the modem in PCIe Root Complex mode so it can utilize an ethernet chipset via PCIe. You will need a board that has an M.2 B-Key slot with Power, Ethernet, SIM slot(s), and USB on it along with a way to provide the modems 4 MHF4 connectors with the cell signal.
@@ -61,18 +60,22 @@ Essentially what we are doing is placing the modem in PCIe Root Complex mode so 
 
 ![enter image description here](../images/5G2PHY_inside_with_modem.webp)
 
+**Assembly Video:**
+
+*(coming soon!)*
+
 **Purchase Links:**
 
-Without modem:
+Indoor Eth enclosure kit without modem:
 [Dual-Q 5G2PHY](https://rework.network/collections/lte-home-gateway/products/5g2phy)
 
 **OR**
 
-With x62 RM520N-GL (AP version modified/converted to normal AA).
+With x62 [RM520N-GL](./RM520N-GL.md) (AP version modified/converted to normal AA).
 Custom Arixolink firmware pre-flashed (Flash latest stock firmware if you want Simpleadmin 2.0 instead)
-[Dual-Q 5G2PHY-RM520](https://www.rework.network/collections/lte-home-gateway/products/5g2phy-rm520)
+[Dual-Q 5G2PHY-RM520](https://www.rework.network/collections/lte-home-gateway/products/5g2phy-rm520) **(Currently Out of stock)**
 
-**Includes:**
+**Standard Kit Includes:**
 - Board and Case
 
 - 40cm USB3.0 A Micro B Cable
@@ -93,6 +96,10 @@ Custom Arixolink firmware pre-flashed (Flash latest stock firmware if you want S
 - Passive PoE injector/adapter
 - Antennae
 
+> You can buy the kit with the passive PoE adapter now included: https://www.rework.network/collections/lte-home-gateway/products/5g2phy-poe
+
+> Rework.network sells a **set of antennae** separately here: https://www.rework.network/collections/antenna-accessories/products/lot-of-4-quectel-ye0007aa
+
 **Key Features:** 
 
 - 2.5 Gigabit RTL8125 single RJ45 port
@@ -105,83 +112,67 @@ Custom Arixolink firmware pre-flashed (Flash latest stock firmware if you want S
 
 ## Outdoor
 
-(Work in Progress)
-Just a link for now :smile::
+
 https://www.rework.network/collections/lte-home-gateway/products/5g-rgm-o
 
-## Recommended Accessories
+*(Additional Photos and info coming soon)*
 
-- DC adapter: [12v 5A one from Amazon](https://www.amazon.com/gp/product/B01GEA8PQA/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1)
+**Assembly Video:**
 
-- Passive PoE: The one included with the outdoor antenna is best but any  adapter with a voltage between 19 and 60v should be fine
+*(coming soon!)*
 
-- [MicroB to USB C converter 2-Pack](https://www.amazon.com/gp/product/B09LS3728B/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1)
+## Portable:
 
-- Indoor antennae [4 Pack from Amazon](https://www.amazon.com/dp/B0C58V4Y3B/ref=sspa_dk_detail_1?psc=1&pd_rd_i=B0C58V4Y3B&pd_rd_w=0g4A7&content-id=amzn1.sym.f2f1cf8f-cab4-44dc-82ba-0ca811fb90cc&pf_rd_p=f2f1cf8f-cab4-44dc-82ba-0ca811fb90cc&pf_rd_r=QSXJ1GHVACPJ42PEANDH&pd_rd_wg=9Y5yj&pd_rd_r=5f2a8db9-81a5-4f3a-97b4-654548e56cbf&s=aht&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWxfdGhlbWF0aWM) (Untested; pick what you like)
-
-- Home WiFi router: [GL.iNet Flint 2](https://www.amazon.com/GL-iNet-GL-MT6000-Multi-Gig-Connectivity-WireGuard/dp/B0CP7S3117?pd_rd_w=lAXSz&content-id=amzn1.sym.59910fa8-b73c-408a-aa5f-d0b4e0aa42cb&pf_rd_p=59910fa8-b73c-408a-aa5f-d0b4e0aa42cb&pf_rd_r=J8P5E4BQEY676GT05NP3&pd_rd_wg=QQO8w&pd_rd_r=f3fae9ae-ab4a-45d1-97bf-e43d119674bf&pd_rd_i=B0CP7S3117&psc=1&ref_=pd_bap_d_grid_rp_0_1_ec_nped_pd_rhf_cr_s_rp_c_d_sccl_1_2_t)
-
-## Example Builds:
-
-### Stationary
-
-#### [GL.iNet Flint 2 Router](https://www.amazon.com/dp/B0CP7S3117?ref=ppx_yo2ov_dt_b_fed_asin_title) plus [Indoor Modem](#indoor)
-
-### To-Go
-
-#### [Beryl AX](https://www.amazon.com/GL-iNet-GL-MT3000-Pocket-Sized-Wireless-Gigabit/dp/B0BPSGJN7T/ref=pd_dp_d_dp_dealz_related_hxwDSD_sspa_dk_detail_d_sccl_1_4/143-6202989-9416117?pd_rd_w=gyXrF&content-id=amzn1.sym.718c0e9e-df60-4a61-87d8-27ff0362dee1&pf_rd_p=718c0e9e-df60-4a61-87d8-27ff0362dee1&pf_rd_r=717MSS1MXJGNVW36931C&pd_rd_wg=vCfwG&pd_rd_r=69dba604-feb1-4a18-9faa-fae36dbd6813&pd_rd_i=B0BPSGJN7T&psc=1&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWxfdGhlbWF0aWM=) plus [Indoor Modem](#indoor)
-
+#### [Beryl AX](https://www.amazon.com/GL-iNet-GL-MT3000-Pocket-Sized-Wireless-Gigabit/dp/B0BPSGJN7T/ref=pd_dp_d_dp_dealz_related_hxwDSD_sspa_dk_detail_d_sccl_1_4/143-6202989-9416117?pd_rd_w=gyXrF&content-id=amzn1.sym.718c0e9e-df60-4a61-87d8-27ff0362dee1&pf_rd_p=718c0e9e-df60-4a61-87d8-27ff0362dee1&pf_rd_r=717MSS1MXJGNVW36931C&pd_rd_wg=vCfwG&pd_rd_r=69dba604-feb1-4a18-9faa-fae36dbd6813&pd_rd_i=B0BPSGJN7T&psc=1&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWxfdGhlbWF0aWM=) plus [Indoor Modem](#indoor) plus Battery
 - [Indoor Modem](#indoor)
 
 - Travel WiFi Router: [GL.iNet Beryl AX](https://www.amazon.com/GL-iNet-GL-MT3000-Pocket-Sized-Wireless-Gigabit/dp/B0BPSGJN7T/ref=pd_dp_d_dp_dealz_related_hxwDSD_sspa_dk_detail_d_sccl_1_4/143-6202989-9416117?pd_rd_w=gyXrF&content-id=amzn1.sym.718c0e9e-df60-4a61-87d8-27ff0362dee1&pf_rd_p=718c0e9e-df60-4a61-87d8-27ff0362dee1&pf_rd_r=717MSS1MXJGNVW36931C&pd_rd_wg=vCfwG&pd_rd_r=69dba604-feb1-4a18-9faa-fae36dbd6813&pd_rd_i=B0BPSGJN7T&psc=1&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWxfdGhlbWF0aWM=)
-  - Rubber bands or zip ties :trollface:
+  - Rubber bands, zip ties, tape, velcro, pick your favorite  :trollface:
   - [Short USBC to A cable](https://www.amazon.com/etguuds-Charging-Charger-Braided-Compatible/dp/B08933P982/ref=sr_1_3?crid=J131ZX2M386O&dib=eyJ2IjoiMSJ9.GywjpYp2bc5-8SJISwTc6W3kwgchqqXWTqo1Fo1FAXDa7-ieJoPDahrWkyWIC758tSzKuE3xykGy2XwQxcMk6IEHljpIgOvSpUME-TlAuGkmYSmTu01wFvSUN51DnWZRnKFiFQH8DpxEVZWLL6WRZXGvzUVdrOzs3vcKwnUn01DvZ9OvjfCyoxBFuLhveA0EqhQqz4LkotsyZqbp7-fQbgRAQdqvlXsRVJb7-038TVg.e31Plwf8cD1vndpIeQazjeQWFrPOC_vuTjInix2aobg&dib_tag=se&keywords=USBC+to+A+short&qid=1732753798&sprefix=usbc+to+a+shor%2Caps%2C197&sr=8-3)
   - [This Battery](https://www.amazon.com/gp/product/B0CQNQ7K8K/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1) 12v3A DC out, USB 5v3A out with passthrough charging
+  - Eth Patch cable or short ethernet cable 
 
   - [5.5x2.1mm DC to 5.5x2.5mm DC adapter](https://www.amazon.com/gp/product/B07YWQ9N5S/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1)
  
  Result: 
 ![:trollface:](../images/to-go_bad.jpg)
 
+## Other Accessories
 
+- DC adapter: [12v 5A one from Amazon](https://www.amazon.com/gp/product/B01GEA8PQA/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1)
 
+- Passive PoE: The one included with the outdoor antenna and indoor bundle is the best choice as they will link at 2.5gbps, but I would use a 24v passive injector if not.
 
+- [MicroB to USB C converter 2-Pack](https://www.amazon.com/gp/product/B09LS3728B/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1)
 
+- Indoor antennae [4 Pack from Rework.Network](https://www.rework.network/collections/antenna-accessories/products/lot-of-4-quectel-ye0007aa) (Untested; pick what you like)
 
-# QuecDeploy and modem resources 
-It is recommended that you check out my  **[RM520N-GL Resource Repository](https://github.com/iamromulan/RM520N-GL)**
+- Home WiFi router: [GL.iNet Flint 2](https://www.amazon.com/GL-iNet-GL-MT6000-Multi-Gig-Connectivity-WireGuard/dp/B0CP7S3117?pd_rd_w=lAXSz&content-id=amzn1.sym.59910fa8-b73c-408a-aa5f-d0b4e0aa42cb&pf_rd_p=59910fa8-b73c-408a-aa5f-d0b4e0aa42cb&pf_rd_r=J8P5E4BQEY676GT05NP3&pd_rd_wg=QQO8w&pd_rd_r=f3fae9ae-ab4a-45d1-97bf-e43d119674bf&pd_rd_i=B0CP7S3117&psc=1&ref_=pd_bap_d_grid_rp_0_1_ec_nped_pd_rhf_cr_s_rp_c_d_sccl_1_2_t)
 
-There's an autoinstaller .cmd that will get you everything you need for windows installed and put in the right spots. Checkout the C:/Quectel/firmware folder for the firmware after using the .cmd
+# Software and Setup
 
-There's also a [Firmware Flashing Guide](https://github.com/iamromulan/RM520N-GL/tree/main#how-to-install-firmware-with-qflash-windows-) for Windows there 
+Now that you have your modem setup assembled we can move on to setting it up the software and settings portion. 
 
-There's also a [AT Commands from Windows Guide](https://github.com/iamromulan/RM520N-GL#how-to-use-qnavigator-to-send-at-commands)
+For this process you'll need a Windows computer to set the modem up. I use Windows 11 for this but in theory this should work all the same for other versions.
+# QuecDeploy
 
+**:arrow_right: [Download QuecDeploy](https://github.com/iamromulan/QuecDeploy/releases):arrow_left:**
 
-# Basic configuration
+To makes things easier for everyone I created an exe called QuecDeploy. It's a very basic tool that gives you a list of options to pick from to Quickly Install/Deploy Quectel Software/Firmware. Eventually I'll improve it to do even more.
 
+What you need from QuecDeploy to be successful:
+- Install the NDIS driver and the ECM driver
+- Install Qflash (adb is automatically installed along with it)
+- Install Navigator
+- Download the latest stock firmware for your modem
 
-It is recommended to Flash the latest firmware available before continuing. 
+You can find guides on how to flash firmware with Qflash and how to send AT commands with Qnavagator  
+## Basic initial setup
 
-Check out my [RM520 Resource Repository](#RM520-Resource-Repository) 
+> :bulb: **It is recommended to Flash the latest firmware available before continuing.** 
+### Windows
 
-> Remember:
-
-A fresh flash will do the following:  
-
- - IPPT for both methods will be turned off back to default  
- - AT+QMAPWAC=1 will go back to AT+QMAPWAC=0 turning off autoconnect
- Send AT+QMAPWAC=1 and reboot to fix this. You can also do it through adb if you previously unlocked and enabled it like this:
- 
-```
-adb shell "echo -e 'AT+QMAPWAC=1 \r' > /dev/smd7"
-adb shell reboot
-```
-
- - Custom software/services installed by/through adb shell will be removed. You can reinstall the Telnet Daemon, Simple Admin, and Daily reboot [with my Combo Installer](https://github.com/iamromulan/quectel-rgmii-simpleadmin-at-telnet-daemon)
- 
- ## First Time Setup
-Connect to the modem by USB and run these AT Commands in Qnavigator. If you don't have Qnavigator or another way to send AT Commands check out my [RM520 Resource Repository](#RM520-Resource-Repository) 
+Connect to the modem by USB and run these AT Commands in Qnavigator. If you don't have Qnavigator or another way to send AT Commands check out my **[QuecDeploy Repo](https://github.com/iamromulan/QuecDeploy)
 ```
 AT+QCFG="data_interface",0,0
 AT+QETH="eth_driver","r8125",1
@@ -195,20 +186,18 @@ AT+CFUN=1,1
 ```
 
 What these commands do:
-* `AT+QCFG="data_interface"`: Configures network port/diag port communication via PCIe and USB. First parameter is for network communication; 0 is USB and 1 is PCIe. Second parameter is for diagnostics port; only option is 0 for USB. Note that even when in PCIe mode for network, the USB port is still available for a connection. It seems that the modem will request a second IP address from the carrier using a different APN profile. There's a command though that's supposed to enable using the same APN on page 41/42 of the 07-31-2023 AT Doc in the [RM520N-GL Resource Repository](https://github.com/iamromulan/RM520N-GL) This *should* all work of course if your cell carrier will allow a second IP to be assigned to the SIM/LINE. I will have to play with this more.
+* `AT+QCFG="data_interface"`: Configures network port/diag port communication via PCIe and USB. First parameter is for network communication; 0 is USB and 1 is PCIe. Second parameter is for diagnostics port; only option is 0 for USB. Note that even when in PCIe mode for network, the USB port is still available for a connection. 
 *  `AT+QETH="eth_driver","r8125",1`: This configures which ethernet driver to load at module boot. This is the correct driver for the RTL8125 ethernet chipset. You can run `AT+QETH="eth_driver"` to get a list of options; I believe only one can be enabled. The first parameter is the name of the driver, and the second parameter is a bool to enable or disable.
 * `AT+QCFG="pcie/mode"`: 1 = RC (Root Complex), IE host. 0 = EP (Endpoint), for use in a device that has the RC
 *  `AT+QCFG="usbnet",1`: NIC data call method in USB ECM mode. 1=ECM (Ethernet Control Model) Internally, even if there wasn't a physical ethernet port for it to use, the modem sets itself up to maintain the connection itself in this mode. Look into what ECM is to know why.
 *  `AT+QMAPWAC`: enable or disable mobile AP auto dial: 0=disable 1=enable (reboot to take effect). You can run `AT+QMAPWAC?` to get what it is currently saved as/set to. My findings: Think of it as a universal auto connect setting. If its set to 0 the radio will connect (or does it?) so you can see signal stats, but will not get an IP address from the carrier. In most USB modes (except ECM) its up to the device it's connected to in order to finish that process. If you set it to 1, it will always request an IP after registering with the network.
 *   `AT+CGDCONT`: Set APN command. Run `AT+CGDCONT` to see what APN profiles 1 through 8 are set to. To clear an APN just send = and the number of the profile you want to clear. For example, if i wanted to clear APN profile 1 I would send `AT+CGDCONT=1` To set an APN you specify the profile number, the protocol (IPV4, IPV6, or IPV4V6 for both) then the APN. For example if I wanted to set APN 1 as APNGOESHERE using both IPV4 and IPV6 i would send `AT+CGDCONT=1,"IPV4V6","APNGOESHERE"`
-	* Note: Your APN will be auto filled either way based on the SIM and what the modems built in MDM profile knows about it. Sometimes you want to use a different APN than what it uses. Normally you can just manually set this by running the command and it will stick. In certain scenarios though like when you switch from SIM1 to SIM2 then back to SIM1 or vice versa, the APN will go back to the one in its MBN profile. Run `AT+CGDCONT?"` to find out. A script that locks an ICCID to an APN is on my hit list.
+	* Note: Your APN will be auto filled either way based on the SIM and what the modems built in MDM profile knows about it. Sometimes you want to use a different APN than what it uses. Normally you can just manually set this by running the command and it will stick. In certain scenarios though like when you switch from SIM1 to SIM2 then back to SIM1 or vice versa, the APN will go back to the one in its MBN profile. Run `AT+CGDCONT?"` to find out.
 * `AT+QPRTPARA=1`: Supposed to save current config to memory. Not that you need to, but l always run it just in case.
 
 ..after running `AT+CFUN=1,1` the modem will reboot and you should get a local IP address assigned from the ethernet port.  192.168.225.x normally. 
 
-## After a firmware Flash; After first time setup
-
-### After a firmware Flash these commands need ran to get back online
+## After a firmware Flash; After first time setup 
 #
 #### If you are not in ECM mode (AT+QCFG="usbnet",1) then you need to do this first:
 ```
@@ -218,14 +207,8 @@ AT+CFUN=1,1 (or just reboot)
 #
 
   #### Run my [ Toolkit](https://github.com/iamromulan/quectel-rgmii-toolkit) 
-  A firmware flash removes what the toolkit does:
-  -  Install Telnet Daemon
-  - Install the Simpleadmin web interface
-  - Install and configure Tailscale
-  - Set a reboot timer if you want to
-  - Send an AT command or 2 if you want
 
-
+%%  %%
 ## Changing modem IP address with AT command
 By default, the modem acts as a true NAT router for IPv4, and serves addresses via IPv6. The modem's IPv4 address is 192.168.225.1 - this CAN be changed via AT commands [See page 228: AT+QMAP="LANIP"](https://mega.nz/file/zEEmCYTb#Y_YVlSEWNn9tz9dpHvY1rSZuDR_gEB6XEVIQ0nGrCJQ)
 

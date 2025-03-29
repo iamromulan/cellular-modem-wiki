@@ -2,6 +2,7 @@ Quectel Modem Wiki
 =================================
 > :book: This is a living Wiki. Changes may be made as more discoveries are made or more community software is made. If you feel like you have information to contribute to this wiki please open a pull request.
 
+> :warning: AI had a big hand in this article.   
 
 MBN (Mobile Broadband Network) profiles are configuration files used on Quectel cellular modems to define and manage the network connection parameters for different mobile carriers and service scenarios.
 
