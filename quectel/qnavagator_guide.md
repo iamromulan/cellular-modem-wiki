@@ -5,12 +5,13 @@ Quectel Modem Wiki
 # How to use Qnavigator to send AT commands
 
 
-Connect your modem to your computer by USB. Either through a USB to m.2 B-key sled (should have a sim slot as well) from Amazon or by using a PCIe RC (RJ45 sled) USB C port.
+Connect your modem to your computer by USB. Either through a USB to m.2 B-key sled (should have a sim slot as well) from Amazon or by using a PCIe RC (RJ45 sled) USB port.
 ### If you installed by using [QuecDeploy](#quecdeploy): 
 You should already have a desktop icon and start menu shortcut for Qnavigator.
 #### 1. Open Qnavagator, you'll be presented with this screen, just press escape (ESC) to skip their directions. 
 ![COM ports](./images/qnavfirst.png)
 #### 2. Uncheck Automatic initialization (circled in red) and click the COM plug icon (circled in green)
+***:warning: This is super important. If you leave it checked a bunch of unwanted commands will automatically be sent.***
 ![COM ports](./images/qnavsec.png)
 #### 3. Click ok, the correct port will already be auto selected
 ![qnavCOMport](./images/qnavport.png)
@@ -20,3 +21,4 @@ You should already have a desktop icon and start menu shortcut for Qnavigator.
 
 # Helpful AT commands:
 
+***(coming soon!)***

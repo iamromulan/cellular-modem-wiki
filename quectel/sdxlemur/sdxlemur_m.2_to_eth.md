@@ -10,6 +10,7 @@ Many of Quectel's modems support directly connecting to a PCIe Ethernet chipset.
 **This guide is written for the following modems:**
 
 [RM520N-GL](./RM520N-GL.md)
+RM530N-GL (untested)
 [RM521F-GL](./RM521F-GL.md)
 ***In theory any Quectel SDXLEMUR system utilized in an AP mode***
 
@@ -158,32 +159,85 @@ For this process you'll need a Windows computer to set the modem up. I use Windo
 
 **:arrow_right: [Download QuecDeploy](https://github.com/iamromulan/QuecDeploy/releases):arrow_left:**
 
-To makes things easier for everyone I created an exe called QuecDeploy. It's a very basic tool that gives you a list of options to pick from to Quickly Install/Deploy Quectel Software/Firmware. Eventually I'll improve it to do even more.
+To makes things easier for everyone I created an exe called QuecDeploy. It's a very basic tool that gives you a list of options to pick from to Quickly Install/Deploy Quectel Software/Firmware. Eventually I'll improve it to do even more so be sure to add it to your watchlist.
 
 What you need from QuecDeploy to be successful:
 - Install the NDIS driver and the ECM driver
 - Install Qflash (adb is automatically installed along with it)
-- Install Navigator
+- Install Qnavigator
 - Download the latest stock firmware for your modem
 
-You can find guides on how to flash firmware with Qflash and how to send AT commands with Qnavagator  
+You can find guides on [how to flash firmware with Qflash](../flash_firmware_windows.md) and [how to send AT commands with Qnavagator](../qnavagator_guide.md)
 ## Basic initial setup
 
-> :bulb: **It is recommended to Flash the latest firmware available before continuing.** 
+> :bulb: **It is recommended to [Flash the latest stock firmware](../flash_firmware_windows.md) available before continuing.** 
 ### Windows
 
-Connect to the modem by USB and run these AT Commands in Qnavigator. If you don't have Qnavigator or another way to send AT Commands check out my **[QuecDeploy Repo](https://github.com/iamromulan/QuecDeploy)
+Ensure you have the latest NDIS driver installed, Qflash, and Qnavagator installed. 
+
+Connect to the modem by USB and run these AT Commands in Qnavagator.
+
+**To get the Ethernet port working:**
+
 ```
 AT+QCFG="data_interface",0,0
 AT+QETH="eth_driver","r8125",1
 AT+QCFG="pcie/mode",1
-AT+QCFG="usbnet",1  #[if you need to be in a different USB mode for whatever reason remember to send AT+QMAPWAC=1]
-AT+QMAPWAC=1  #[optional if in ECM mode, as this will happen on its own anyways.]
-AT+CGDCONT=1,"IPV4V6","apn-here-inside-of-quotes"
-Any other *magic* commands you want to run for proper cellular connection
-AT+QPRTPARA=1 [optional]
+AT+QCFG="usbnet",1
 AT+CFUN=1,1
 ```
+
+**To get your cellular connection up:**
+
+This process is dependent on the requirements of your provider and plan.  
+
+Generally here are some helpful commands to diagnose and get your connection up. 
+
+Basic:
+```
+AT+CGDCONT=1,"IPV4V6","apn-here-inside-of-quotes"
+AT+EGMR=0,7 [Reads currently set IMEI to you]
+AT+EGMR=1,7,"imeinumberhere" [Repairs the IMEI to something else if incorrect]
+AT+CFUN=1,1
+```
+
+Sometimes after a reboot a default MBN Profile will override the APN you set. Here are a few useful commands to help you figure out what's going on. By default the data call will happen with PDP context 1 (APN 1).
+
+```
+AT+QENG="servingcell"
+[Will show you the signal info and connection status to the provider. NOCONN is normal and LIMSERV is not. LIMSERV usualy means the APN is wrong]
+
+AT+QMAP="WWAN"
+[Will show if you have an IP address assigned from your provider]
+
+AT+CDGCONT?
+[Will list currently set APN's in each PDP context]
+
+AT+CGDCONT=1,"IPV4V6","apn-here-inside-of-quotes"
+[Sets the APN you want in PDP Context 1]
+
+AT+QMBNCFG="list"
+[Lists the MBN profiles avalble to pick. The first one is usualy the last used one or current.]
+
+AT+QMBNCFG="AutoSel"
+[Check to see if automatic MBN selection is enabled. 1 yes 0 no]
+
+AT+QMBNCFG="deactivate"
+[Will deactivate the currently active MBN profile]
+
+AT+QMBNCFG="select","mbn_profile_name_here"
+[Will set an MBN profile as active from the list]
+
+AT+CFUN=0
+[Module minimum function mode, will disconnect the radio]
+
+AT+CFUN=1
+[Module full function mode, will connect the radio]
+
+```
+
+
+It can be very useful to cfun 0 then 1 after changing the APN to avoid a full reboot. MBN edits need AT+CFUN=1,1 (full reboot) to take effect.
 
 What these commands do:
 * `AT+QCFG="data_interface"`: Configures network port/diag port communication via PCIe and USB. First parameter is for network communication; 0 is USB and 1 is PCIe. Second parameter is for diagnostics port; only option is 0 for USB. Note that even when in PCIe mode for network, the USB port is still available for a connection. 
