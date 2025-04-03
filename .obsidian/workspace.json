@@ -170,9 +170,10 @@
   },
   "active": "6e77b2041c845a75",
   "lastOpenFiles": [
-    "quectel/flash_firmware_windows.md",
+    "quectel/images/WinTerm1.png",
     "quectel/sdxlemur/sdxlemur_m.2_to_eth.md",
     "quectel/qnavagator_guide.md",
+    "quectel/flash_firmware_windows.md",
     "quectel/README.md",
     "quectel/sdxlemur/RM520N-GL.md",
     "README.md",
@@ -195,7 +196,6 @@
     "quectel/sdxprairie/images/qnavsec.png",
     "quectel/sdxprairie/images/qnavport.png",
     "quectel/sdxprairie/images/qnavfirst.png",
-    "quectel/sdxprairie/images/qnavat.png",
     "quectel/sdxpinn/RM551E-GL.md",
     "quectel/sdxprairie/README.md",
     "RM521F-GL/README.md",
@@ -213,7 +213,6 @@
     "fibocom/sdxpinn/FM190W-GL/FM190W-GL_to_RM551E-GL.md",
     "fibocom/sdxpinn/FM190W-GL",
     "RM521F-GL",
-    "quectel/RM551E-GL/README.md",
     "quectel/images/5G2PHY_inside_with_modem.webp.crdownload",
     "FM190-GL",
     "quectel/Untitled.canvas"
