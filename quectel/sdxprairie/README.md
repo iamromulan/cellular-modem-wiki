@@ -12,3 +12,4 @@ To do: Add info about the SDXPRAIRIE platform
 - Modems
 	- RM500Q-GL (No page yet)
 	- [RM502Q-AE](./RM502Q-AE.md)
+- [SDXPRAIRIE Advanced](./sdxprairie_advanced.md)

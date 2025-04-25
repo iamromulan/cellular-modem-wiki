@@ -1,18 +1,17 @@
 Quectel Modem Wiki
 =================================
-> :warning: This is a living document. Changes may be made as more discoveries are made or more community software is made. If you feel like you have information to contribute to this wiki please open a pull request.
+> :book: This is a living Wiki. Changes may be made as more discoveries are made or more community software is made. If you feel like you have information to contribute to this wiki please open a pull request.
 
-# SDXLEMUR Direct M.2 Modem to Ethernet Guide
+# SDXPINN Direct M.2 Modem to Ethernet Guide
 
 
 Many of Quectel's modems support directly connecting to a PCIe Ethernet chipset. This is useful to use the cellular connection as a WAN interface - you can just plug the modem into the WAN port on your router, do a bit of configuration, and you're good to go. Performance is good, and the modem's onboard connection management often works better than the scripts many routers use to try to keep the connection up.
 
 **This guide is written for the following modems:**
 
-[RM520N-GL](./RM520N-GL.md)
-RM530N-GL (untested)
-[RM521F-GL](./RM521F-GL.md)
-***In theory any Quectel SDXLEMUR system utilized in an AP mode***
+[RM550V-GL](./RM550V-GL.md)
+[RM551E-GL](./RM551E-GL.md)
+***In theory any Quectel SDXPINN system utilized in an AP mode***
 
 # Table of Contents
 
@@ -33,7 +32,6 @@ RM530N-GL (untested)
 
 
 # Hardware and Assembly
-
 
 
 Essentially what we are doing is placing the modem in PCIe Root Complex mode so it can utilize an ethernet chipset via PCIe. You will need a board that has an M.2 B-Key slot with Power, Ethernet, SIM slot(s), and USB on it along with a way to provide the modems 4 MHF4 connectors with the cell signal.
@@ -58,7 +56,7 @@ Indoor Eth enclosure kit without modem:
 
 With x62 [RM520N-GL](./RM520N-GL.md) (AP version modified/converted to normal AA).
 Custom Arixolink firmware pre-flashed (Flash latest stock firmware if you want Simpleadmin 2.0 instead)
-[Dual-Q 5G2PHY-RM520](https://www.rework.network/collections/lte-home-gateway/products/5g2phy-rm520) **(Currently Out of stock)**
+[Dual-Q 5G2PHY-RM520](https://www.rework.network/collections/lte-home-gateway/products/5g2phy-rm520) 
 
 **Standard Kit Includes:**
 - Board and Case
@@ -172,8 +170,6 @@ Connect to the modem by USB and run these AT Commands in Qnavagator.
 **To get the Ethernet port working:**
 
 ```
-AT+QCFG="data_interface",0,0
-AT+QETH="eth_driver","r8125",1
 AT+QCFG="pcie/mode",1
 AT+QCFG="usbnet",1
 AT+CFUN=1,1
@@ -327,51 +323,14 @@ adb shell
 Then copy paste (right click in window to paste)
 
 ```
-cd /tmp && wget -O RMxxx_rgmii_toolkit.sh https://raw.githubusercontent.com/iamromulan/quectel-rgmii-toolkit/SDXLEMUR/RMxxx_rgmii_toolkit.sh && chmod +x RMxxx_rgmii_toolkit.sh && ./RMxxx_rgmii_toolkit.sh && cd /
+cd /tmp && wget -O rcPCIe_SDXPINN_toolkit.sh https://raw.githubusercontent.com/iamromulan/quectel-rgmii-toolkit/SDXPINN/rcPCIe_SDXPINN_toolkit.sh && chmod +x rcPCIe_SDXPINN_toolkit.sh && ./rcPCIe_SDXPINN_toolkit.sh && cd /
 ```
 
 **You should see:**
 
-![Toolkit](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/iamromulantoolkit.png?raw=true)
+![Toolkit](reserved)
 
-You can set your TTL via option 3 (Simple Firewall Management) if needed but mainly, choose option 2 to install simpleadmin 2.0 
 
-There will be 2 points it asks you to set a password. It won't look like you are typing anything but you are. One is the admin password for login to simpleadmin and the other is the root password for accessing the console. You may set the same or different. Up to you.
-
-Once that completes you should be able to go to https://192.168.225.1/ (ignore the security warning/proceed anyways) and use simpleadmin 2.0
-
-## Tailscale Installation and Config
-
-> :warning: Your modem must already be connected to the internet for this to install
-### Installation:
-Open up the toolkit main menu and **press 4** to enter the Tailscale menu
-
-![Toolkit](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/tailscalemenu.png?raw=true)
-
-**Press 1, wait for it to install. This is a very large file for the system so give it some time.**
-
-**Once done and it says Tailscale installed successfully press 2/enter to configure it.**
-
-![Toolkit](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/tailscaleconfig.png?raw=true)
-
-If you want to, enable the Tailscale Web UI on port 8088 for configuration from the browser later by **pressing 1/enter**.
-
-To do it in the toolkit:
-First time connecting you'll be given a link to login with
- - Press 3 to just connect only.
- - Press 4 to connect and enable SSH access (remote command line) over tailscale.
- - Press 5 to reconnect with SSH off while connected with SSH on
- - Press 6 to disconnect
- - Press 7 to Logout
-
-That's it! From another device running tailscale you should be able to access your modem through the IP assigned to it by your tailnet. To access SSH from another device on the tailnet, open a terminal/command prompt and type
-
-    tailscale ssh root@(IP or Hostname)
-IP or Hostname being the IP or hostname assigned to it in your tailnet
-
- - Note that your SSH client must be able to give you a link to sign in with upon connecting. That's how the session is authorized. Works fine in Windows CMD or on Android use JuiceSSH.
 ## Ending notes
 
-Simpleadmin 2.0 is going away eventually when I have time to revisit SDXLEMUR/SDXPRAIRIE. The plan is to improve the userspace and bring as much as I can from our adventures on SDXPINN. Hopefully I will even have a flash-able firmware out for these modems so we can skip adb.
-
-If you are looking for the advanced stuff and some of the things I removed from this guide check out [SDXLEMUR Advanced](./sdxlemur_advanced.md)
+If you are looking for the advanced stuff and some of the things I removed from this guide check out [SDXPINN Advanced](./sdxpinn_advanced.md)

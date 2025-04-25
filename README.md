@@ -16,6 +16,8 @@ To keeps things nice, this wiki will be organized into sub-wikis based on modem 
   
 # :arrow_right: [Fibocom Modem Wiki](./fibocom/README.md) :arrow_left: 
 
+# [News/Blog/Announcements](https://github.com/iamromulan/cellular-modem-wiki/discussions/categories/announcements)
+
 # Contributing
 
 If you'd like to help contribute to this wiki the easiest way on Windows is to:

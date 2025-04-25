@@ -5,7 +5,7 @@ Fibocom Modem Wiki
 > :heavy_check_mark: This wiki focuses on Fibocom's M.2 form factor cellular modems.
 
 Welcome to the Fibocom Modem Wiki!
-
+This is largely incomplete and could use some help from a Fibocom expert via PR!
 # Directory
 
 > :point_down: Looking for the M.2 modem direct to ethernet guide? There's now a separate guide for each platform!
