@@ -9,6 +9,7 @@ To do: Add info about the SDXPINN Platform
 # Directory
 
 - [SDXPINN M.2 Direct Ethernet Setup](./sdxpinn_m.2_to_eth.md)
+- [How to manually enter EDL mode](./sdxpinn_enter_EDL_mode.md)
 - [SDXPINN Advanced](./sdxpinn_advanced.md)
 - [T-Mobile RM551E-GL 4xCA Patches](./T-Mobile_RM551EGL_patches.md)
 - Modems

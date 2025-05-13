@@ -9,6 +9,7 @@ To do: Add info about the SDXLEMUR platform
 # Directory
 
 - [SDXLEMUR M.2 Direct to Ethernet Guide](./sdxlemur_m.2_to_eth.md)
+- [Manually Entering EDL mode](./sdxlemur_m.2_to_eth.md)
 - [SDXLEMUR Advanced](./sdxlemur_advanced.md)
 - Modems
      - [RM520N-GL](./RM520N-GL.md)

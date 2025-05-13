@@ -2,6 +2,7 @@ Quectel Modem Wiki
 =================================
 > :book: This is a living Wiki. Changes may be made as more discoveries are made or more community software is made. If you feel like you have information to contribute to this wiki please open a pull request.
 
+> :bulb: This wiki page could use some help.
 # Advanced system diving on sdxprairie
 
 Over the course of poking and prodding, many things were discovered. This will serve as a place to preserve that knowledge.
