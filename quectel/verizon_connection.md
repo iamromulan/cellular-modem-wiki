@@ -7,6 +7,7 @@ Quectel Modem Wiki
 
 Verizon's registration process is much different than what we are normally used to where the first APN is used for the data connection.
 
+> :warning: This has only been tested on the RM551E-GL so far.
 ## Quectel's Officially provided knowledge on this is: 
 
 >[Source]([quick start guide by kasper 2024 05 07a.pdf](https://cnquectel-my.sharepoint.com/:b:/g/personal/america-fae_quectel_com/ERJ819aGZCZAuKNsaIUKYFMB0ITDWIdUUZg0WGGVv_-yAA?e=EFua1W)) on page 30

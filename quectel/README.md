@@ -6,8 +6,6 @@ Quectel Modem Wiki
 
 Welcome to the Quectel Modem Wiki! For each modem I am in possession of I create a dedicated wiki page of it. Previously these were their own repos and have been relocated here.
 
-# :arrow_right: [Mega Public Folder](https://mega.nz/folder/CRFWlIpQ#grOByBgkfZe5uLMkX2M2XA) :arrow_left:
-
 # Directory
 
 > :point_down: Looking for the M.2 modem direct to ethernet guide? There's now a separate guide for each platform!

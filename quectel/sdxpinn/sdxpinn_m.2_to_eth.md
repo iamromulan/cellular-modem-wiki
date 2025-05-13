@@ -22,6 +22,8 @@ Many of Quectel's modems support directly connecting to a PCIe Ethernet chipset.
 	- [Other Accessories](#other-accessories) 
 	
 - [Software and Setup](#software-and-setup)
+- [Video Guides](#video-guides)
+- [Written Guide](#software-and-setup)
 	- [QuecDeploy](#quecdeploy)
 	- [Basic initial setup](#basic-initial-setup)
 	- [Unlocking ADB](#unlocking-adb)
@@ -45,43 +47,13 @@ Essentially what we are doing is placing the modem in PCIe Root Complex mode so 
 
 **Assembly Video:**
 
-*(coming soon!)*
+[![IndoorBuild](https://img.youtube.com/vi/ENQ-iCg4j4Q/0.jpg)](https://www.youtube.com/watch?v=ENQ-iCg4j4Q)
+[Watch on YouTube](https://www.youtube.com/watch?v=ENQ-iCg4j4Q)
 
 **Purchase Links:**
 
 Indoor Eth enclosure kit without modem:
 [Dual-Q 5G2PHY](https://rework.network/collections/lte-home-gateway/products/5g2phy)
-
-**OR**
-
-With x62 [RM520N-GL](./RM520N-GL.md) (AP version modified/converted to normal AA).
-Custom Arixolink firmware pre-flashed (Flash latest stock firmware if you want Simpleadmin 2.0 instead)
-[Dual-Q 5G2PHY-RM520](https://www.rework.network/collections/lte-home-gateway/products/5g2phy-rm520) 
-
-**Standard Kit Includes:**
-- Board and Case
-
-- 40cm USB3.0 A Micro B Cable
-
-- 2x 10cm MHF4 to SMA cable.
-
-- 2x 15cm MHF4 to SMA cable.
-
-- 1x 3x3.5x0.15 Silicone pad
-
-- 1x 3x3x0.02 Silicone pad
-
-- Mounting Hardware
-- Small Heatsink for the onboard RTL8125 chipset
-
-**Does not include**
-- Power adapter
-- Passive PoE injector/adapter
-- Antennae
-
-> You can buy the kit with the passive PoE adapter now included: https://www.rework.network/collections/lte-home-gateway/products/5g2phy-poe
-
-> Rework.network sells a **set of antennae** separately here: https://www.rework.network/collections/antenna-accessories/products/lot-of-4-quectel-ye0007aa
 
 **Key Features:** 
 
@@ -95,15 +67,14 @@ Custom Arixolink firmware pre-flashed (Flash latest stock firmware if you want S
 
 ## Outdoor
 
-
 https://www.rework.network/collections/lte-home-gateway/products/5g-rgm-o
-
-*(Additional Photos and info coming soon)*
 
 **Assembly Video:**
 
-*(coming soon!)*
+[![IndoorBuild](https://img.youtube.com/vi/ABP5xVWEKfQ/0.jpg)](https://www.youtube.com/watch?v=ABP5xVWEKfQ)
+[Watch on YouTube](https://www.youtube.com/watch?v=ABP5xVWEKfQ)
 
+https://www.rework.network/collections/lte-home-gateway/products/5g-rgm-o
 ## Portable:
 
 #### [Beryl AX](https://www.amazon.com/GL-iNet-GL-MT3000-Pocket-Sized-Wireless-Gigabit/dp/B0BPSGJN7T/ref=pd_dp_d_dp_dealz_related_hxwDSD_sspa_dk_detail_d_sccl_1_4/143-6202989-9416117?pd_rd_w=gyXrF&content-id=amzn1.sym.718c0e9e-df60-4a61-87d8-27ff0362dee1&pf_rd_p=718c0e9e-df60-4a61-87d8-27ff0362dee1&pf_rd_r=717MSS1MXJGNVW36931C&pd_rd_wg=vCfwG&pd_rd_r=69dba604-feb1-4a18-9faa-fae36dbd6813&pd_rd_i=B0BPSGJN7T&psc=1&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWxfdGhlbWF0aWM=) plus [Indoor Modem](#indoor) plus Battery
@@ -133,6 +104,20 @@ https://www.rework.network/collections/lte-home-gateway/products/5g-rgm-o
 - Home WiFi router: [GL.iNet Flint 2](https://www.amazon.com/GL-iNet-GL-MT6000-Multi-Gig-Connectivity-WireGuard/dp/B0CP7S3117?pd_rd_w=lAXSz&content-id=amzn1.sym.59910fa8-b73c-408a-aa5f-d0b4e0aa42cb&pf_rd_p=59910fa8-b73c-408a-aa5f-d0b4e0aa42cb&pf_rd_r=J8P5E4BQEY676GT05NP3&pd_rd_wg=QQO8w&pd_rd_r=f3fae9ae-ab4a-45d1-97bf-e43d119674bf&pd_rd_i=B0CP7S3117&psc=1&ref_=pd_bap_d_grid_rp_0_1_ec_nped_pd_rhf_cr_s_rp_c_d_sccl_1_2_t)
 
 # Software and Setup
+
+> :mega: New! I have made a custom firmware for the RM551E-GL with one for the RM550V-GLAA coming soon as well! You can skip this guide simply by watching the video below:
+
+# Video Guides:
+
+> :warning: Custom firmware is only available for the RM551E-GL for now. An RM550V-GLAA firmware will be available soon. 
+
+[![IndoorBuild](https://img.youtube.com/vi/SdNEyDfTIKk/0.jpg)](https://www.youtube.com/watch?v=SdNEyDfTIKk)
+[Watch on YouTube](https://www.youtube.com/watch?v=SdNEyDfTIKk)
+
+# Written Guide:
+
+
+> :bulb: You can skip most of the steps below
 
 Now that you have your modem setup assembled we can move on to setting it up the connection, then the software and settings portion. 
 
@@ -328,8 +313,9 @@ cd /tmp && wget -O rcPCIe_SDXPINN_toolkit.sh https://raw.githubusercontent.com/i
 
 **You should see:**
 
-![Toolkit](reserved)
+*work in progress!*
 
+*just flash my custom firmware its way faster*
 
 ## Ending notes
 
