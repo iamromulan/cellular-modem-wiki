@@ -29,7 +29,7 @@ If you'd like to help contribute to this wiki the easiest way on Windows is to:
 3. Clone your Fork in Github desktop
 4. Install [Obsidian](https://obsidian.md/download) and choose Open Folder as Vault, navigate to the location of the clone (normally ``%USERPROFILE%\Documents\GitHub\cellular-modem-wiki`` )
 5. Use Obsidian to edit and use Github desktop to keep changes synced with your fork on Github. When you are ready to contribute to this project, open a pull request from your fork to this repo.
-
+~
 ```
                              .%+:                              
                                   .*@@@-.                         

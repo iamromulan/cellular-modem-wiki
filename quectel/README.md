@@ -17,6 +17,7 @@ Welcome to the Quectel Modem Wiki! For each modem I am in possession of I create
 - Sending AT Commands
 	- [Windows](qnavagator_guide.md)
 	- Linux/OpenWRT (needs added)
+- [Common AT Commands](./Quectel_AT_list.md) 
 - [Form Factors](./formfactors.md)
 	- [Quectel M.2 Modems](./m.2_formfactor.md) (:arrow_left: Basics/Getting Started and more)
 		- [SDXPRAIRIE Platform](./sdxprairie/README.md):
@@ -34,6 +35,7 @@ Welcome to the Quectel Modem Wiki! For each modem I am in possession of I create
 			- Modems
 				- [RM550V-GL](./sdxpinn/RM550V-GL.md)
 				- [RM551E-GL](./sdxpinn/RM551E-GL.md)
+- [MBN Profiles](./mbn_profiles.md)
 - [A Propper Verizon Connection](./verizon_connection.md)	  
 - Community Projects (No Pages yet)
 	- QuecDeploy

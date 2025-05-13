@@ -15,6 +15,7 @@ The Quectel RM551E-GL is a cellular NR/LTE (5G/4G) M.2 B-Key modem module specia
 - [Where To Buy](#where-to-buy)
 - [QuecDeploy](#quecdeploy)
 - [Drivers, tools, AT Command PDFs, and firmware](#drivers-tools-at-command-pdfs-and-firmware)
+- [Special Notes](#special-notes)
 - [Related Pages](#related-pages)
 
 # Tech Specs
@@ -42,6 +43,10 @@ If you would prefer to simply explore all of the downloads I can give you; take 
 
 Use **[QuecDeploy](https://github.com/iamromulan/QuecDeploy/releases)** or browse my [Mega Public Folder](https://mega.nz/folder/CRFWlIpQ#grOByBgkfZe5uLMkX2M2XA) to get anything you need.
 
+# Special Notes
+
+- For this module to be recognized over USB it must power on by USB initially. Additional power may be provided after. 
+- I have created a custom firmware for this modem meant for usage in an AP mode (see the [M.2 Form Factor page](../m.2_formfactor.md))
 # Related Pages
 
 [How to Flash Firmware on Windows](../flash_firmware_windows.md)

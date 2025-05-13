@@ -35,8 +35,6 @@ RM502Q-GL (untested)
 
 # Hardware and Assembly
 
-
-
 Essentially what we are doing is placing the modem in PCIe Root Complex mode so it can utilize an ethernet chipset via PCIe. You will need a board that has an M.2 B-Key slot with Power, Ethernet, SIM slot(s), and USB on it along with a way to provide the modems 4 MHF4 connectors with the cell signal.
 ## Indoor
 
@@ -48,7 +46,8 @@ Essentially what we are doing is placing the modem in PCIe Root Complex mode so 
 
 **Assembly Video:**
 
-*(coming soon!)*
+[![IndoorBuild](https://img.youtube.com/vi/ENQ-iCg4j4Q/0.jpg)](https://www.youtube.com/watch?v=ENQ-iCg4j4Q)
+[Watch on YouTube](https://www.youtube.com/watch?v=ENQ-iCg4j4Q)
 
 **Purchase Links:**
 
@@ -59,32 +58,8 @@ Indoor Eth enclosure kit without modem:
 
 With x62 [RM520N-GL](./RM520N-GL.md) (AP version modified/converted to normal AA).
 Custom Arixolink firmware pre-flashed (Flash latest stock firmware if you want Simpleadmin 2.0 instead)
-[Dual-Q 5G2PHY-RM520](https://www.rework.network/collections/lte-home-gateway/products/5g2phy-rm520) **(Currently Out of stock)**
+[Dual-Q 5G2PHY-RM520](https://www.rework.network/collections/lte-home-gateway/products/5g2phy-rm520) 
 
-**Standard Kit Includes:**
-- Board and Case
-
-- 40cm USB3.0 A Micro B Cable
-
-- 2x 10cm MHF4 to SMA cable.
-
-- 2x 15cm MHF4 to SMA cable.
-
-- 1x 3x3.5x0.15 Silicone pad
-
-- 1x 3x3x0.02 Silicone pad
-
-- Mounting Hardware
-- Small Heatsink for the onboard RTL8125 chipset
-
-**Does not include**
-- Power adapter
-- Passive PoE injector/adapter
-- Antennae
-
-> You can buy the kit with the passive PoE adapter now included: https://www.rework.network/collections/lte-home-gateway/products/5g2phy-poe
-
-> Rework.network sells a **set of antennae** separately here: https://www.rework.network/collections/antenna-accessories/products/lot-of-4-quectel-ye0007aa
 
 **Key Features:** 
 
@@ -98,14 +73,12 @@ Custom Arixolink firmware pre-flashed (Flash latest stock firmware if you want S
 
 ## Outdoor
 
-
-https://www.rework.network/collections/lte-home-gateway/products/5g-rgm-o
-
-*(Additional Photos and info coming soon)*
-
 **Assembly Video:**
 
-*(coming soon!)*
+[![IndoorBuild](https://img.youtube.com/vi/ABP5xVWEKfQ/0.jpg)](https://www.youtube.com/watch?v=ABP5xVWEKfQ)
+[Watch on YouTube](https://www.youtube.com/watch?v=ABP5xVWEKfQ)
+
+https://www.rework.network/collections/lte-home-gateway/products/5g-rgm-o
 
 ## Portable:
 
@@ -333,7 +306,7 @@ cd /tmp && wget -O RMxxx_rgmii_toolkit.sh https://raw.githubusercontent.com/iamr
 
 **You should see:**
 
-![Toolkit](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/iamromulantoolkit.png?raw=true)
+![Toolkit](./images/iamromulantoolkit.png)
 
 You can set your TTL via option 3 (Simple Firewall Management) if needed but mainly, choose option 2 to install simpleadmin 2.0 
 
@@ -347,13 +320,13 @@ Once that completes you should be able to go to https://192.168.225.1/ (ignore t
 ### Installation:
 Open up the toolkit main menu and **press 4** to enter the Tailscale menu
 
-![Toolkit](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/tailscalemenu.png?raw=true)
+![Toolkit](../images/tailscalemenu.png)
 
 **Press 1, wait for it to install. This is a very large file for the system so give it some time.**
 
 **Once done and it says Tailscale installed successfully press 2/enter to configure it.**
 
-![Toolkit](https://github.com/iamromulan/quectel-rgmii-configuration-notes/blob/main/images/tailscaleconfig.png?raw=true)
+![Toolkit](../images/tailscaleconfig.png)
 
 If you want to, enable the Tailscale Web UI on port 8088 for configuration from the browser later by **pressing 1/enter**.
 

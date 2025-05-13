@@ -67,7 +67,6 @@ Indoor Eth enclosure kit without modem:
 
 ## Outdoor
 
-https://www.rework.network/collections/lte-home-gateway/products/5g-rgm-o
 
 **Assembly Video:**
 

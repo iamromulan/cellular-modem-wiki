@@ -19,6 +19,4 @@ You should already have a desktop icon and start menu shortcut for Qnavigator.
 ![at](./images/qnavat.png)
 
 
-# Helpful AT commands:
-
-***(coming soon!)***
+Looking for AT Commands? Check out the [Helpful Quectel AT Command list][./Quectel_AT_list.md]
