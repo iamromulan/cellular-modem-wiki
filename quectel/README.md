@@ -19,7 +19,7 @@ Welcome to the Quectel Modem Wiki! For each modem I am in possession of I create
 	- Linux/OpenWRT (needs added)
 - [Common AT Commands](./Quectel_AT_list.md) 
 - [Form Factors](./formfactors.md)
-	- [Quectel M.2 Modems](./m.2_formfactor.md) (:arrow_left: Basics/Getting Started and more)
+	- [Quectel M.2 Modems](./m.2_formfactor.md) ( :arrow_left: Basics/Getting Started and more)
 		- [SDXPRAIRIE Platform](./sdxprairie/README.md):
 			- [SDXPRAIRIE M.2 Direct to Ethernet Guide](./sdxprairie/sdxprairie_m.2_to_eth.md)
 			- Modems

@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "README.md",
+                "file": "quectel/README.md",
                 "mode": "source",
                 "source": false
               },
@@ -171,8 +171,8 @@
   },
   "active": "8f9d3ac052428f77",
   "lastOpenFiles": [
-    "quectel/README.md",
     "README.md",
+    "quectel/README.md",
     "quectel/qnavagator_guide.md",
     "quectel/sdxlemur/README.md",
     "quectel/sdxlemur/RM520N-GL.md",
