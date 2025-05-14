@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "507e6377e5ec7c7d",
+        "id": "08094fa375b68125",
         "type": "tabs",
         "children": [
           {
-            "id": "4cf43e0014324f34",
+            "id": "8f9d3ac052428f77",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "README.md",
+                "file": "quectel/README.md",
                 "mode": "source",
                 "source": false
               },
@@ -53,7 +53,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "tag:#FirstTime",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "README.md",
+                "file": "quectel/sdxprairie/RM502Q-AE.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for README"
+              "title": "Backlinks for RM502Q-AE"
             }
           },
           {
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "README.md",
+                "file": "quectel/sdxprairie/RM502Q-AE.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from README"
+              "title": "Outgoing links from RM502Q-AE"
             }
           },
           {
@@ -151,7 +151,8 @@
               "title": "Outline of README"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -168,6 +169,54 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "4cf43e0014324f34",
-  "lastOpenFiles": []
+  "active": "8f9d3ac052428f77",
+  "lastOpenFiles": [
+    "README.md",
+    "quectel/README.md",
+    "quectel/qnavagator_guide.md",
+    "quectel/sdxlemur/README.md",
+    "quectel/sdxlemur/RM520N-GL.md",
+    "quectel/sdxlemur/RM521F-GL.md",
+    "quectel/sdxlemur/sdxlemur_advanced.md",
+    "quectel/sdxpinn/sdxpinn_m.2_to_eth.md",
+    "quectel/sdxprairie/sdxprairie_advanced.md",
+    "quectel/sdxprairie/sdxprairie_enter_EDL_mode.md",
+    "quectel/sdxprairie/sdxprairie_m.2_to_eth.md",
+    "quectel/introduction.md",
+    "quectel/m.2_formfactor.md",
+    "quectel/mbn_profiles.md",
+    "quectel/Quectel_AT_list.md",
+    "quectel/verizon_connection.md",
+    "LICENSE.md",
+    "quectel/sdxprairie/README.md",
+    "quectel/sdxprairie/RM502Q-AE.md",
+    "quectel/sdxpinn/T-Mobile_RM551EGL_patches.md",
+    "quectel/sdxpinn/sdxpinn_enter_EDL_mode.md",
+    "quectel/sdxpinn/sdxpinn_advanced.md",
+    "quectel/sdxpinn/RM551E-GL.md",
+    "quectel/sdxpinn/RM550V-GL.md",
+    "quectel/sdxpinn/README.md",
+    "quectel/sdxlemur/sdxlemur_m.2_to_eth.md",
+    "quectel/sdxlemur/images/iamromulantoolkit.png",
+    "quectel/sdxlemur/images/iamromulantoolkit.png.crdownload",
+    "quectel/sdxprairie/images/iamromulantoolkit.png",
+    "quectel/sdxprairie/images/iamromulantoolkit.png.crdownload",
+    "quectel/sdxpinn/images/RM550VGLAA.jpg.~tmp",
+    "quectel/sdxpinn/images/RM550VGLAA.jpg",
+    "quectel/sdxpinn/images/RM550VGLAA.jpg.crdownload",
+    "quectel/sdxpinn/images/551_ant_specs2.png",
+    "quectel/sdxpinn/images/551_ant_specs2.png.crdownload",
+    "quectel/sdxpinn/images/551_ant_specs.png",
+    "quectel/sdxpinn/images/551_ant_specs.png.crdownload",
+    "quectel/images/connection_methods.png",
+    "quectel/images/atcmd_internal.png",
+    "quectel/images/WinTerm1.png",
+    "quectel/images/qflash_sel_fw.png",
+    "quectel/images/qflash_loadfw.png",
+    "fibocom/sdxpinn/images",
+    "fibocom/sdxpinn/FM190W-GL/images",
+    "fibocom/sdxpinn/FM190W-GL/New folder",
+    "fibocom/sdxpinn/FM190W-GL/New shortcut.lnk~RF2cf8da77.TMP",
+    "quectel/Untitled.canvas"
+  ]
 }
