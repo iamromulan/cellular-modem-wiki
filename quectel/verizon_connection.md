@@ -35,7 +35,7 @@ In the past to fix this we would:
 2. Deactivate the currently selected profile with ``AT+QMBNCFG="deactivate"``
 3. Then select the generic MBN profile ``AT+QMBNCFG="select","ROW_Commercial"`` 
 4. From there, reboot, then manually set the VZWINTERNET APN in PDP context 1 with ``AT+CGDCONT=1,"IPV4V6","VZWINTERNET"``
-5. Disconnect ``AT+CFUN=0`` then reconnect ``AT+CFUN=0`` and your up and running.
+5. Disconnect by running ``AT+CFUN=0`` then reconnect with ``AT+CFUN=1`` and your up and running.
 The downside to doing this is SMS needs the IMS APN set to work, along with other important things that come with the Verizon MBN profile. I also noticed connection stability isn't quite where it should be either. 
 
 # How to make it work with the default MBN
