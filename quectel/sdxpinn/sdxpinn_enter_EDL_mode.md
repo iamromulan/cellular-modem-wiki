@@ -24,7 +24,7 @@ It is also possible to take a regular M.2 to USB adapter and cut the board so th
 ### Step 3
 
 For the RM550/551 modems, you can use a paper clip. Be sure to bend the ends so the sides the paper clip can be used instead of the tips. See below.....
-![](./Images/edl_tool.png)
+![](./images/edl_tool.png)
 
 ### Step 4
 Open Device manager on your PC and keep and eye on the ports section.
@@ -33,12 +33,12 @@ Using the tool from step 3, trip the 2 contacts on the back of the modem **at th
 For the RM550/551 modems these are the correct ports to jump:
 
 **Here is how I did it. Remember plug the USB in at the same time as doing this:**
-![](./Images/551_edl.png)
+![](./images/551_edl.png)
 
 ### Step 5
 
 At this point you should see the QDLoader port in device manager:
 
- ![](./Images/qdloader.png)
+ ![](./images/qdloader.png)
 
 Follow the steps from the [normal method](#firmware-update-instructions) and treat the QDLoader port as the DM port.
