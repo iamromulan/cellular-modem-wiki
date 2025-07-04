@@ -65,7 +65,7 @@ Custom Arixolink firmware pre-flashed (Flash latest stock firmware if you want S
 
 - 2.5 Gigabit RTL8125 single RJ45 port
 - **Passive PoE supported**, I use a 24v passive injector 
-  - :warning: **Active PoE like 802.11 will not work** :warning: as it does not negotiate
+  - :warning: **Active PoE like 802.3af/at will not work** :warning: as it does not negotiate
 - USB 3.0
 - 5.5x2.5mm DC port accepts a wide voltage range of 12-50V
 - The built in thick aluminum heatsink is placed underneath the modem and extends under the board itself, keeping it nice and cool even under heavy load.
