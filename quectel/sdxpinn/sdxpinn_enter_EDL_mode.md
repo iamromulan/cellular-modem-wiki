@@ -24,6 +24,7 @@ It is also possible to take a regular M.2 to USB adapter and cut the board so th
 ### Step 3
 
 For the RM550/551 modems, you can use a paper clip. Be sure to bend the ends so the sides the paper clip can be used instead of the tips. See below.....
+
 ![](./images/edl_tool.png)
 
 ### Step 4

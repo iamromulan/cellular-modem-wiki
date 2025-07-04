@@ -38,6 +38,7 @@ For the RM500-RM530 modems these are the correct ports to jump:
 ### Step 5
 
 At this point you should see the QDLoader port in device manager:
+
  ![](./images/qdloader.png)
 
 Follow the steps from the [normal method](#firmware-update-instructions) and treat the QDLoader port as the DM port.
