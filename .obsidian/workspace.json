@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "README.md",
+                "file": "quectel/sdxpinn/sdxpinn_enter_EDL_mode.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "README"
+              "title": "sdxpinn_enter_EDL_mode"
             }
           }
         ]
@@ -171,7 +171,10 @@
   },
   "active": "8f9d3ac052428f77",
   "lastOpenFiles": [
+    "quectel/Quectel_AT_list.md",
     "quectel/README.md",
+    "quectel/verizon_connection.md",
+    "LICENSE.md",
     "README.md",
     "quectel/qnavagator_guide.md",
     "quectel/sdxlemur/README.md",
@@ -185,9 +188,6 @@
     "quectel/introduction.md",
     "quectel/m.2_formfactor.md",
     "quectel/mbn_profiles.md",
-    "quectel/Quectel_AT_list.md",
-    "quectel/verizon_connection.md",
-    "LICENSE.md",
     "quectel/sdxprairie/README.md",
     "quectel/sdxprairie/RM502Q-AE.md",
     "quectel/sdxpinn/T-Mobile_RM551EGL_patches.md",
