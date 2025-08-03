@@ -100,9 +100,8 @@ folder and select the "prog_firehose" file.\
 > AT+CFUN?\
 > AT+CFUN=1\
 > +CFUN: 1\
-> +CME ERROR: 4 // in case you receive this errore make sure you flagged "Allow ESN mismatch" in QPST Restoring.
+> +CME ERROR: 4 // in case you receive this error make sure you flagged "Allow ESN mismatch" in QPST Restoring.
 
 > Double backup (qFil+Qpst) new modem firmware RM551E-GL now!
-
 
 > AT+CFUN=1,1
