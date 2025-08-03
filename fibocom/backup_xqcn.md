@@ -1,4 +1,4 @@
-WIP
+WIP images needed
 
 # Backup factory firmware with QPST
 
