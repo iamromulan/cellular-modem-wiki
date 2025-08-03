@@ -28,7 +28,6 @@ Step 3.
 Step 4.
 > Open QFIL
 
-
 > Ensure your firmware is downloaded and extracted from the zip and no spaces are in the path to it/where its saved. Click Load FW Files.
 ![](./images/qflash_loadfw.png)
 
