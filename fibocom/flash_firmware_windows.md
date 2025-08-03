@@ -92,11 +92,10 @@ folder and select the "prog_firehose" file.\
 > +CFUN: 5
 
 > It means it's missing its xqcn and the radio won't work until a compatible one is restored. You'll grab the xqcn I made available in my mega share I backed up from a real RM551 "https://mega.nz/folder/CRFWlIpQ#grOByBgkfZe5uLMkX2M2XA/file/LZ80TZLD" and restore it in QPST under the restore tab with following steps:
-
-> Launch Qpst Configuration -> Add new port (if not detected automatically) -> Look for DM port\
-> Go to Software Donwload tab -> Restore\
->  Check allow ESN mismatch\
->  Select the xqcn you downloaded from my mega and click Start. During  the restore process you can see the modem status throught TeraTerm serial sessions (CFUN: 5 > CFUN: 7 > Disconnected > READY). The module will automatically reboot, after it completes "Memory Restore Completed" message.
+  > Launch Qpst Configuration -> Add new port (if not detected automatically) -> Look for DM port\
+  > Go to Software Donwload tab -> Restore\
+  >  Check allow ESN mismatch\
+  >  Select the xqcn you downloaded from my mega and click Start. During  the restore process you can see the modem status throught TeraTerm serial sessions (CFUN: 5 > CFUN: 7 > Disconnected > READY). The module will automatically reboot, after it completes "Memory Restore Completed" message.
 
 > Check CFUN again to confirm you can enter CFUN=1 now and that should be it.\
 > AT+CFUN?\
