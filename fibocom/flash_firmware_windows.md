@@ -29,6 +29,7 @@ Step 4.
 > Open QFIL
 
 > Ensure your firmware is downloaded and extracted from the zip and no spaces are in the path to it/where its saved. Click Load FW Files.
+
 ![](./images/qfil1open.png)
 
 > In the new window, go to the `\update\firehose` folder of the firmware and select the `partition_complete` file or the `prog_firehose` file. Then click the Open button. 
