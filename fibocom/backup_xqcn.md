@@ -1,6 +1,6 @@
 WIP
 
-# Backup factory firmware with Qpst
+# Backup factory firmware with QPST
 
 > Open Qpst Configuration and use the AutoAdd function to autoconnect to proper serial port (COM6) AutoAdd DEADD00D sn 4ec33ae0 [DIAGnostic]. Just ignore the other ports: (COM3) USB NMEA, (COM4) USB Modem, (COM5) AT. (Select Ports tab > Add New Port > (Show serial and USB/QC diagnostic port only: NO)).
 
@@ -10,7 +10,7 @@ WIP
 
 > Next close QPST completely even from the system tray.
 
-# Backup factory firmware with qFil as well
+# Backup factory firmware with QFIL as well
 (to backup few other things, like IMEI)
 
 > Open QFIL. 
