@@ -6,8 +6,7 @@ Fibocom Modem Wiki
 ![](./images/fm190wgl_front.jpg)
 ![](./images/fm190wgl_back.jpg)
 
-The FM190W-GL is brand new and is currently in 01 phase (Production)\
-My modem the the above picture is Rev4.
+The FM190W-GL is brand new and is currently in 01 phase (Production). The aboce pictures show a Rev4 modem.
 
 The Fibocom FM190W-GL is a cellular NR/LTE (5G/4G) M.2 B-Key modem module specially optimized for a variety of applications and usage scenarios utilizing the Qualcomm x75 platform.
 
