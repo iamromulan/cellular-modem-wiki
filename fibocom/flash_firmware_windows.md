@@ -57,27 +57,13 @@ The zip file will be downloaded to "C:\Quectel\firmware\RM551EGL\Custom\RM551EGL
 
 > If you downloaded your firmware with [QuecDeploy](https://github.com/iamromulan/QuecDeploy/releases) then go to C:\Fibocom\firmware\<modem>\<type>\<firmware>\update\firehose\
 
-Step 7.
-> Start updating modem firmware.
-
 ![](./images/qfil4flash.png)
+
+Step 7.
+> Start updating modem firmware Clicking on Donwload button.
+
+Once the flash completes wait for the ports to come back up in device manager. Once they come back, wait about 30 seconds +/- for the second reboot to occur. AT+QCFG= pcie/mode,1 and AT+QCFG=usbnet,1 are sent then it reboots. Once the second reboot occurs ethernet will be working with Luci and SSH acess at 192.168.224.1. Pre-set root password is iamromulan. Based on Stock firmware: RM551EGL00AAR01A02M8G (2024-12-23)
 
 At the end of the flash process the modem will automatically reboot and QFlash shoudl say PASS!
 
 If you get any errors ensure the USB connection is stable or try a different computer. Once the flash process makes it past the beginning loading bar phase do not interrupt the process or you could leave the modem in an unusable bricked state. You'll have to enter EDL manually to revive it if this happens.
-
-# Advanced
-
-# Using QFIL to flash a modem
-
-(coming soon)
-
-
-
-
-
-GIO
-
-# Using QFIL to flash a modem
-
-(coming soon)
