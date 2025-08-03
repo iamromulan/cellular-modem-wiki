@@ -4,5 +4,3 @@ Fibocom Modem Wiki
 # Introduction to Fibocom Modems
 
 To do: Add info here
-
-> :heavy_check_mark: This wiki focuses on Fibocom's M.2 form factor cellular modems.
