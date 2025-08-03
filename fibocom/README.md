@@ -12,7 +12,7 @@ This is largely incomplete and could use some help from a Fibocom expert via PR!
 
 - [Introduction](./introduction.md)
 - Flashing Firmware
-	- Windows
+	- [Windows](./flash_firmware_windows.md)
 	- Linux/OpenWRT
 - Sending AT Commands
 	- Windows
