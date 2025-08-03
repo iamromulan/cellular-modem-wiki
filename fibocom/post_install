@@ -8,74 +8,76 @@ Iif you plan to use the RM551E-GL in an ethernet sled you need to edit some mode
   AT+QCFG="pcie/mode"
   AT+QCFG="pcie/mode",1
   +QCFG: "pcie/mode",1
+
   AT+QCFG="usbnet"
   AT+QCFG="usbnet",1
   +QCFG: "usbnet",1
   AT+CFUN=1,1
 
-AT+CGDCONT?
->+CGDCONT: 1,"IPV4V6","","0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0",0,0,0,0,,,,,,,,,,"",,,,0
->+CGDCONT: 2,"IPV4V6","ims","0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0",0,0,0,0,,,,,,,,,,"",,,,0
->+CGDCONT: 3,"IPV4V6","sos","0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0",0,0,0,1,,,,,,,,,,"",,,,0
+  AT+CGDCONT?
+  +CGDCONT: 1,"IPV4V6","YOUR_APN_HERE","0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0",0,0,0,0,,,,,,,,,,"",,,,0
+  +CGDCONT: 2,"IPV4V6","ims","0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0",0,0,0,0,,,,,,,,,,"",,,,0
+  +CGDCONT: 3,"IPV4V6","sos","0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0",0,0,0,1,,,,,,,,,,"",,,,0
 
-AT+CGDCONT=1,"IP","web"
-AT+CGDCONT=1,"IPV4V6","internet.it"
+  AT+EGMR=0,7 # read IMEI or AT+GSN
+  +EGMR: "###############"
 
-AT+EGMR=0,7 # read IMEI oppure AT+GSN
->+EGMR: "869710030002905"
-AT+EGMR=1,7,"863438070010754" # [Repairs the IMEI to something else if incorrect]
-AT+CFUN=1,1
+  AT+EGMR=1,7,"###############" # [Repairs the IMEI to something else if incorrect]
+  AT+CFUN=1,1
 
-AT+QMAP="WWAN" (Show currently assigned IPv4 and IPv6 from the provider)
->+QMAP: "WWAN",1,1,"IPV4","100.74.45.189"
->+QMAP: "WWAN",0,1,"IPV6","0:0:0:0:0:0:0:0"
+  AT+QMAP="WWAN" (Show currently assigned IPv4 and IPv6 from the provider)
+  +QMAP: "WWAN",1,1,"IPV4","100.74.45.189"
+  +QMAP: "WWAN",0,1,"IPV6","0:0:0:0:0:0:0:0"
 
-AT+QMAP="LANIP",IP_start_range,IP_end_range,Gateway_IP  (Set IPv4 Start/End range and Gateway IP of DHCP for VLAN0)
+  AT+QMAP="LANIP",IP_start_range,IP_end_range,Gateway_IP  (Set IPv4 Start/End range and Gateway IP of DHCP for VLAN0)
 
-AT+QMAP="LANIP"
-+QMAP: "LANIP",192.168.224.100,192.168.227.99,192.168.224.1
+  AT+QMAP="LANIP"
+  +QMAP: "LANIP",192.168.224.100,192.168.227.99,192.168.224.1
 
-AT+QMAP="auto_connect"
-AT+QMAP="MPDN_status"
+  AT+QMAP="auto_connect"
+  AT+QMAP="MPDN_status"
 
-AT+QMBNCFG="AutoSel",0;+QMBNCFG="Deactivate"
+  AT+QMBNCFG="AutoSel",0;+QMBNCFG="Deactivate"
 
-AT+QMBNCFG="list"
-AT+QMBNCFG="select","ROW_Commercial"
-AT+CFUN=0
-AT+CFUN=1
+  AT+QMBNCFG="list"
+  AT+QMBNCFG="select","ROW_Commercial"
+  AT+CFUN=0
+  AT+CFUN=1
 
-AT+QCAINFO
->+QCAINFO: "PCC",400,50,"LTE BAND 1",1,201,-75,-11,-44,15
->+QCAINFO: "SCC",3350,100,"LTE BAND 7",1,20,-95,-15,-70,0,0,-,-
->+QCAINFO: "SCC",1500,50,"LTE BAND 3",1,201,-87,-13,-65,0,0,-,-
->+QCAINFO: "SCC",1650,100,"LTE BAND 3",1,201,-89,-15,-64,0,0,-,-
 
-AT+QNWPREFCFG="mode_pref"
->+QNWPREFCFG: "mode_pref",AUTO # default cambiato in 
-AT+QNWPREFCFG="mode_pref",NR5G:LTE
+Some diagnostic queries
 
-AT+QNWPREFCFG="nr5g_disable_mode"
->+QNWPREFCFG: "nr5g_disable_mode",0
+  AT+QCAINFO
+  +QCAINFO: "PCC",400,50,"LTE BAND 1",1,201,-75,-11,-44,15
+  +QCAINFO: "SCC",3350,100,"LTE BAND 7",1,20,-95,-15,-70,0,0,-,-
+  +QCAINFO: "SCC",1500,50,"LTE BAND 3",1,201,-87,-13,-65,0,0,-,-
+  +QCAINFO: "SCC",1650,100,"LTE BAND 3",1,201,-89,-15,-64,0,0,-,-
 
-AT+CEREG?
->+CREG: 0,0
-AT+CEREG=1 # invia richiesta registrazione cella 4G/LTE
+  AT+QNWPREFCFG="mode_pref"
+  +QNWPREFCFG: "mode_pref",AUTO # default cambiato in 
+  AT+QNWPREFCFG="mode_pref",NR5G:LTE
 
-AT+C5GREG?
->+C5GREG: 0,0
-AT+C5GREG=1 # invia richiesta registrazione cella 5G
+  AT+QNWPREFCFG="nr5g_disable_mode"
+  +QNWPREFCFG: "nr5g_disable_mode",0
 
-AT+COPS?
->+COPS: 0,0,"spusu",7
+  AT+CEREG?
+  +CREG: 0,0
+  AT+CEREG=2 # invia richiesta registrazione cella 4G/LTE
 
-AT+CGACT?
->+CGACT: 1,1
->+CGACT: 2,1
->+CGACT: 3,0
-AT+CGACT=1 ERRORE
-AT+CGACT=1,1 ERRORE
+  AT+C5GREG?
+  +C5GREG: 0,0
+  AT+C5GREG=2 # invia richiesta registrazione cella 5G
 
-AT+QMAPWAC? (get current status of auto connect, 0=disabled 1=enabled)
-AT+QMAPWAC=1 (enable auto connect internet for ethernet)
+  AT+COPS?
+  +COPS: 0,0,"spusu",7
+
+  AT+CGACT?
+  +CGACT: 1,1
+  +CGACT: 2,1
+  +CGACT: 3,0
+  AT+CGACT=1 ERRORE
+  AT+CGACT=1,1 ERRORE
+
+  AT+QMAPWAC? (get current status of auto connect, 0=disabled 1=enabled)
+  AT+QMAPWAC=1 (enable auto connect internet for ethernet)
 
