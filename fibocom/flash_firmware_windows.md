@@ -26,15 +26,28 @@ Step 3.
 > Remember the number of the COM port described as "DM Port".
 
 Step 4.
-> Open QFIL
 
 > Ensure your firmware is downloaded and extracted from the zip and no spaces are in the path to it/where its saved. Click Load FW Files.
 
+> Open QFIL
 ![](./images/qfil1open.png)
+
+> Configurate QFIL
+![](./images/qfil2conf.png)
+
+Go to Configuration tab -> Firehose configuration:
+  >Download protocol can stay default Sahara.
+  >The device type is NAND.
+  >No validation.
+  >Don't use the auto backup restore QCN options on the right.
+  >Reset after download just means it'll reboot after it finishes so keep that checked.
+  >The big thing here is to select "Erase all before download". This will erase what you backed up into the xqcn and allow a full clean flash to occur with the 551 firmware.
+
+
 
 > In the new window, go to the `\update\firehose` folder of the firmware and select the `partition_complete` file or the `prog_firehose` file. Then click the Open button. 
 
-> If you downloaded your firmware with [QuecDeploy](https://github.com/iamromulan/QuecDeploy/releases) then go to C:\Quectel\firmware\<modem>\<type>\<firmware>\update\firehose\
+> If you downloaded your firmware with [QuecDeploy](https://github.com/iamromulan/QuecDeploy/releases) then go to C:\Fibocom\firmware\<modem>\<type>\<firmware>\update\firehose\
 
 ![](./images/qflash_sel_fw.png)
 
