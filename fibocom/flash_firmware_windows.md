@@ -26,7 +26,7 @@ Step 3.
 > Remember the number of the COM port described as "DM Port".
 
 Step 4.
-> Open QFlash 
+> Open QFIL
 
 
 > Ensure your firmware is downloaded and extracted from the zip and no spaces are in the path to it/where its saved. Click Load FW Files.
