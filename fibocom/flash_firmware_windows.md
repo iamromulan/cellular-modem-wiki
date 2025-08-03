@@ -99,16 +99,15 @@ Go to Software Donwload tab -> Restore
 
 Check CFUN again to confirm you can enter CFUN=1 now and that should be it.
 
-###############
-WIP
+WIP ############### WIP
 
-AT+CFUN?
-AT+CFUN=1
-+CME ERROR: 4
-+CFUN: 1
+ AT+CFUN?
+ AT+CFUN=1
+ +CME ERROR: 4
+ +CFUN: 1
 
-AT+CFUN=1,1
+ AT+CFUN=1,1
 
-###############
+WIP ############### WIP
 
 Double backup (qFil+Qpst) new modem firmware RM551E-GL now!
