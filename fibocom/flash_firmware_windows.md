@@ -25,6 +25,7 @@ Step 3.
 
 > Remember the number of the COM port described as "DM Port".
 
+
 Step 4.
 > Ensure your firmware is downloaded and extracted from the zip and no spaces are in the path to it/where its saved.
 
@@ -43,10 +44,12 @@ Step 4.
 
 ![](./images/qfil2conf.png)
 
+
 Step 5.
 > Select the COM port number as the DM port from step 3
 
 ![](./images/qfil3port.png)
+
 
 Step 6.
 > Get the ubi files and others. 
@@ -58,6 +61,7 @@ The zip file will be downloaded to "C:\Quectel\firmware\RM551EGL\Custom\RM551EGL
 > If you downloaded your firmware with [QuecDeploy](https://github.com/iamromulan/QuecDeploy/releases) then go to C:\Fibocom\firmware\<modem>\<type>\<firmware>\update\firehose\
 
 ![](./images/qfil4flash.png)
+
 
 Step 7.
 > Start updating modem firmware Clicking on Donwload button.
