@@ -27,9 +27,8 @@ Step 3.
 
 
 Step 4.
-> Ensure your firmware is downloaded and extracted from the zip and no spaces are in the path to it/where its saved.
 
-> Open QFIL
+> Open QFIL. Ensure your firmware is downloaded and extracted from the zip and no spaces are in the path to it/where its saved.
 
 ![](./images/qfil1open.png)
 
