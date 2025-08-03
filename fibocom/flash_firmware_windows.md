@@ -57,13 +57,10 @@ The zip file will be downloaded to "C:\Quectel\firmware\RM551EGL\Custom\RM551EGL
 
 > If you downloaded your firmware with [QuecDeploy](https://github.com/iamromulan/QuecDeploy/releases) then go to C:\Fibocom\firmware\<modem>\<type>\<firmware>\update\firehose\
 
-![](./images/qflash_sel_fw.png)
-
-
 Step 7.
 > Start updating modem firmware.
 
-![](./images/qflash_start.png)
+![](./images/qfil4flash.png)
 
 At the end of the flash process the modem will automatically reboot and QFlash shoudl say PASS!
 
