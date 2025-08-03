@@ -28,7 +28,7 @@ Step 3.
 
 Step 4.
 
-> Open QFIL. Ensure your firmware is downloaded and extracted from the zip and no spaces are in the path to it/where its saved.
+> Open QFIL.
 
 ![](./images/qfil1open.png)
 
@@ -51,9 +51,9 @@ Step 5.
 
 
 Step 6.
-> Get the ubi files and others. 
-> Copy everything in there into the firehose folder. Make sure the path to the firmware doesn't have any spaces in it at all, like "C:\Users\user name\firmware" is bad. "C:\Users\username\firmware" is good. This is why I just use C:\Quectel for QuecDeploy. Launch QuecDeploy. Firmware downloads -> RM551E-GL -> Custom Firmware -> RM551_xxxx_iamromulan_basic_eth
-The zip file will be downloaded to "C:\Quectel\firmware\RM551EGL\Custom\RM551EGL00AAR01A02M8G_2025_4_21_iamromulan_basic_eth"
+> Get the ubi files and others.
+> Copy everything in there into the firehose folder. Make sure the path to the firmware doesn't have any spaces in it at all, like "C:\Users\user name\firmware" is bad. "C:\Users\username\firmware" is good. This is why I just use C:\Quectel for QuecDeploy. Launch QuecDeploy. Firmware downloads -> RM551E-GL -> Custom Firmware -> RM551_xxxx_iamromulan_basic_eth.
+> The zip file will be downloaded to "C:\Quectel\firmware\RM551EGL\Custom\RM551EGL00AAR01A02M8G_2025_4_21_iamromulan_basic_eth"
 
 > In the new window, go to the `\update\firehose` folder of the firmware and select the `partition_complete` file or the `prog_firehose` file. Then click the Open button. 
 
