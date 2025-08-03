@@ -13,8 +13,8 @@ If you plan to use the RM551E-GL in an ethernet sled you need to edit some modem
   AT+CFUN=1,1 // reboot to apply
 
   AT+EGMR=0,7 // read IMEI or AT+GSN
-  +EGMR: "###############"
-  AT+EGMR=1,7,"###############" // [Repairs the IMEI to something else if incorrect]
+  +EGMR: "123456789012345"
+  AT+EGMR=1,7,"YOUR_IMEI_HERE" // [Repairs the IMEI to something else if incorrect]
   AT+CFUN=1,1
 
   AT+COPS? // query operator
