@@ -1,4 +1,4 @@
-> :book: WIP ############### content and formatting to fix
+> :book: WIP ############### content to revise
 
 # Sending AT Commands
 
