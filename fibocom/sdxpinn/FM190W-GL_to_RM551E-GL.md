@@ -1,4 +1,4 @@
-> :book: THIS NEED TO BE INTEGRATED INTO NEW CONTENT OR VICE-VERSA
+> :book: [THIS NEED TO BE INTEGRATED INTO NEW CONTENT OR VICE-VERSA](./flash_firmware_windows.md)
 
 Fibocom Modem Wiki
 =================================
