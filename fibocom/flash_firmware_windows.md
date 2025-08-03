@@ -27,12 +27,14 @@ Step 3.
 
 Step 4.
 
-> Ensure your firmware is downloaded and extracted from the zip and no spaces are in the path to it/where its saved. Click Load FW Files.
+> Ensure your firmware is downloaded and extracted from the zip and no spaces are in the path to it/where its saved.
 
 > Open QFIL
+
 ![](./images/qfil1open.png)
 
 > Configurate QFIL
+
 ![](./images/qfil2conf.png)
 
 Go to Configuration tab -> Firehose configuration:
