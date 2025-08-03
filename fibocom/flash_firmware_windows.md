@@ -26,7 +26,7 @@ Step 3.
 
 ![](./images/devman_ports.png)
 
-> Remember the number of the COM port described as "DM Port".
+> Remember the number of the COM port described as DIAGnostic "DM Port".
 
 
 Step 4.
