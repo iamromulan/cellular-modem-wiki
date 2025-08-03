@@ -1,9 +1,8 @@
 WIP ############### WIP
-WIP ############### WIP
 
-# AT Commands configuration
+# Sending AT Commands
 
-Iif you plan to use the RM551E-GL in an ethernet sled you need to edit some modem configurations. Use your favorite serial appplication (i.e TeraTerm)
+If you plan to use the RM551E-GL in an ethernet sled you need to edit some modem configurations. Use your favorite serial appplication (i.e TeraTerm)
 
   AT+QCFG="pcie/mode"
   AT+QCFG="pcie/mode",1
