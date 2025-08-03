@@ -50,23 +50,24 @@ Step 4.
 Step 5.
 > Select the COM port number as the DM port from step 3
 
+(port image to update: quectel-to-fibocom)\
 ![](./images/qfil3port.png)
 
 
 Step 6.
 > Get the ubi files and others.\
-> Copy everything in there into the firehose folder. Make sure the path to the firmware doesn't have any spaces in it at all, like "C:\Users\user name\firmware" is bad. "C:\Users\username\firmware" is good. This is why I just use C:\Quectel for QuecDeploy. Launch QuecDeploy. Firmware downloads -> RM551E-GL -> Custom Firmware -> RM551_xxxx_iamromulan_basic_eth.\
-> The zip file will be downloaded to "C:\Quectel\firmware\RM551EGL\Custom\RM551EGL00AAR01A02M8G_2025_4_21_iamromulan_basic_eth".\
+> Copy everything in there into the firehose folder. Make sure the path to the firmware doesn't have any spaces in it at all, like "C:\Users\user name\firmware" is bad. "C:\Users\username\firmware" is good. This is why I just use C:\Quectel for QuecDeploy. Launch QuecDeploy. Firmware downloads -> RM551E-GL -> Custom Firmware -> RM551_<text\>\_iamromulan_basic_eth.\
+> The zip file will be downloaded to "C:\Quectel\firmware\RM551EGL\Custom\RM551EGL_<text\>\_iamromulan_basic_eth".\
 > In the new window, go to the `\update\firehose` folder of the firmware and select the `partition_complete` file or the `prog_firehose` file. Then click the Open button.\
 > If you downloaded your firmware with [QuecDeploy](https://github.com/iamromulan/QuecDeploy/releases) then go to C:\Fibocom\firmware\<modem>\<type>\<firmware>\update\firehose.\
 
 
 Step 7.
 > Now go back in QFIL and select Flat Build.\
-> Programmer path, click browse, go to the "C:\Quectel\firmware\RM551EGL\Custom\RM551EGL00AAR01A02M8G_2025_4_21_iamromulan_basic_eth\update\firehose"
+> Programmer path, click browse, go to the "C:\Quectel\firmware\RM551EGL\Custom\RM551EGL_<text\>\_iamromulan_basic_eth\update\firehose"
 folder and select the "prog_firehose" file.\
 > Then below that click load XML, select the only file it'll show you (rawprogram_nand_p4K_b256K_update.xml), it'll ask for another one (patch_p4K_b256K.xml), same thing only one there.\
-> Finally hit download and watch it go. Log file is located in "C:\Users\gio\AppData\Roaming\Qualcomm\QFIL\COMPORT_12\port_trace.txt"
+> Finally hit download and watch it go. Log file is located in "C:\Users\\<user\>\AppData\Roaming\Qualcomm\QFIL\COMPORT_12\port_trace.txt"
 
 ![](./images/qfil4flash.png)
 
