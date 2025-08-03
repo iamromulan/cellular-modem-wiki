@@ -44,6 +44,13 @@ Step 4.
 
 ![](./images/qfil2conf.png)
 
+Step 5.
+> Select the COM port number as the DM port from step 3
+
+![](./images/qfil3port.png)
+
+
+
 
 > In the new window, go to the `\update\firehose` folder of the firmware and select the `partition_complete` file or the `prog_firehose` file. Then click the Open button. 
 
@@ -51,10 +58,9 @@ Step 4.
 
 ![](./images/qflash_sel_fw.png)
 
-Step 5.
-> Select the COM port number as the DM port from step 3 and set the baud rate to `460800`
 
-![](./images/portbaudqflash.png)
+
+
 
 Step 6.
 > Start updating modem firmware.
