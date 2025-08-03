@@ -2,7 +2,7 @@
 
 # Sending AT Commands
 
-If you plan to use the RM551E-GL in an ethernet sled you need to edit some modem configurations. Most of these steps are optional since the custom firmwares are pre-configured. Use your favorite serial appplication (i.e TeraTerm)
+If you plan to use the RM551E-GL in an ethernet sled you need to edit some modem configurations. Most of these steps are optional since the custom firmwares are pre-configured. Use your favorite serial appplication (i.e TeraTerm) on the AT Port of your serial connection. 
 
   AT+QCFG="pcie/mode" // query status
   AT+QCFG="pcie/mode",1 // set mode 
