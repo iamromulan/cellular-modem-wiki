@@ -79,6 +79,8 @@ folder and select the "prog_firehose" file.\
 > +RM551E-GL\
 > +Revision: RM551EGL00AAR01A02M8G -> RM551EGL00AAR01A04M8G
 
+![](./images/teraterm1open.png)
+
 > Once the flash completes wait for the ports to come back up in device manager. Once they come back, wait about 30 seconds +/- for the second reboot to occur. AT+QCFG= pcie/mode,1 and AT+QCFG=usbnet,1 are sent then it reboots. Once the second reboot occurs ethernet will be working with Luci and SSH acess at 192.168.224.1. Pre-set root password is iamromulan. Based on Stock firmware: RM551EGL00AAR01A02M8G (2024-12-23)
 
 > At the end of the flash process the modem will automatically reboot and QFIL shoudl say PASS!
