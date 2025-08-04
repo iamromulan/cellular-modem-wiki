@@ -20,14 +20,6 @@
 
 > Open QFIL. 
 
-> Go to Tools tab.\
-> QCN backup restore.\
-> Browse and give filename "C:\_<text\>\_\fibocom\fm190w_backup\00000000.qcn", SPC Code 000000, Enable Multi-SIM YES.\
-> Press Backup QCN.\
-> Wait for the load bar to finish and look for "Backup QCN Succeeded"
-
-> Close QCN Backup Restore window.
-
 > Go to Configuration tab -> Firehose configuration:\
 > Download protocol can stay default Sahara.\
 > The device type is NAND.\
@@ -37,3 +29,12 @@
 > The big thing here is to select \*"Erase all before download". This will erase what you backed up into the xqcn and allow a full clean flash to occur with the 551 firmware.
 
 > \*I've done one backup with this "flagged" and one "unflagged".
+
+> Go to Tools tab.\
+> QCN backup restore.\
+> Browse and give filename "C:\_<text\>\_\fibocom\fm190w_backup\00000000.qcn", SPC Code 000000, Enable Multi-SIM YES.\
+> Press Backup QCN.\
+> Wait for the load bar to finish and look for "Backup QCN Succeeded"
+
+> Close QCN Backup Restore window.
+
