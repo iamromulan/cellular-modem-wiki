@@ -1,5 +1,7 @@
 📖 WIP ############### content to revise
 
+# Flashing firmware
+
 > Open QFIL and make sure the Port is detected as per [Intro Config](./introduction.md#qfil-configuration)
 >> Select Flat Build.\
 >> Browse Programmer path to "C:\<path>\update\firehose" folder and select the "prog_firehose_xxx.elf" file.\
