@@ -2,31 +2,6 @@ Fibocom Modem Wiki
 =================================
 > :book: This is a living Wiki. Changes may be made as more discoveries are made or more community software is made. If you feel like you have information to contribute to this wiki please open a pull request.
 
-# Using QFIL to flash a modem
-
-These directions are written with Fibocom based M.2 modems in mind. 
-
-> Open QFIL.
-
-![](./images/qfil1open.png)
-
-> Configurate QFIL
->> Go to Configuration tab -> Firehose configuration:\
->> Download protocol can stay default Sahara.\
->> The device type is NAND.\
->> No validation.\
->> Don't use the auto backup restore QCN options on the right.\
->> Reset after download just means it'll reboot after it finishes so keep that checked.\
->> The big thing here is to select "Erase all before download". This will erase what you backed up into the xqcn and allow a full clean flash to occur with the 551 firmware.
-
-![](./images/qfil2conf.png)
-
-> Select the COM port number as the DM port
-
-![](./images/qfil3port.png)
-
-(port image to update: quectel-to-fibocom)
-
 
 > Get the ubi files and others.
 >> Copy everything in there into the firehose folder. Make sure the path to the firmware doesn't have any spaces in it at all, like "C:\Users\user name\firmware" is bad. "C:\Users\username\firmware" is good. This is why I just use C:\Quectel for QuecDeploy. Launch QuecDeploy. Firmware downloads -> RM551E-GL -> Custom Firmware -> RM551_<text\>\_iamromulan_basic_eth.\
