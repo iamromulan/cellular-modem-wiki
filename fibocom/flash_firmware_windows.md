@@ -56,9 +56,9 @@ Fibocom Modem Wiki
 > The module will automatically reboot, showing "Trying to communicate with phone" and after it completes "Memory Restore Completed" messages.
 
 > Open/Re-open a serial connection (i.e TeraTerm) on AT port to check CFUN again and confirm you entered CFUN: 1
->> AT+CFUN?;+CFUN=1
->>> +CFUN: 1
->>> +CME ERROR: 4 // double check you flagged "Allow ESN mismatch" in QPST Restore tab or you choosed a corrupted Xqcn file
+>> AT+CFUN?;+CFUN=1\
+>>> +CFUN: 1\
+>>> +CME ERROR: 4 // retry and make sure you flagg "Allow ESN mismatch" in QPST Restore tab or you choose a valid Xqcn file
 
 > If you are on windows system , you'll see a new ethernet network on "Control Panel\Network and Internet\Network Connections":
 
