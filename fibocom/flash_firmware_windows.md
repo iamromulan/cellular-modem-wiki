@@ -6,11 +6,11 @@ Fibocom Modem Wiki
 
 These directions are written with Fibocom based M.2 modems in mind. 
 
-> Step 1. Open QFIL.
+> Open QFIL.
  
 ![](./images/qfil1open.png)
 
-> Step 2. Configurate QFIL
+> Configurate QFIL
 >> Go to Configuration tab -> Firehose configuration:\
 >> Download protocol can stay default Sahara.\
 >> The device type is NAND.\
@@ -22,21 +22,21 @@ These directions are written with Fibocom based M.2 modems in mind.
 ![](./images/qfil2conf.png)
 
 
-> Step 3. Select the COM port number as the DM port
+> Select the COM port number as the DM port
 
 ![](./images/qfil3port.png)
 
 (port image to update: quectel-to-fibocom)
 
 
-> Step 4. Get the ubi files and others.
+> Get the ubi files and others.
 >> Copy everything in there into the firehose folder. Make sure the path to the firmware doesn't have any spaces in it at all, like "C:\Users\user name\firmware" is bad. "C:\Users\username\firmware" is good. This is why I just use C:\Quectel for QuecDeploy. Launch QuecDeploy. Firmware downloads -> RM551E-GL -> Custom Firmware -> RM551_<text\>\_iamromulan_basic_eth.\
 >> The zip file will be downloaded to "C:\Quectel\firmware\RM551EGL\Custom\RM551EGL_<text\>\_iamromulan_basic_eth".\
 >> In the new window, go to the `\update\firehose` folder of the firmware and select the `partition_complete` file or the `prog_firehose` file. Then click the Open button.\
 >> If you downloaded your firmware with [QuecDeploy](https://github.com/iamromulan/QuecDeploy/releases) then go to C:\Fibocom\firmware\<modem>\<type>\<firmware>\update\firehose.\
 
 
-> Step 5. Now go back in QFIL and select Flat Build.
+> Now go back in QFIL and select Flat Build.
 >> Programmer path, click browse, go to the "C:\Quectel\firmware\RM551EGL\Custom\RM551EGL_<text\>\_iamromulan_basic_eth\update\firehose"
 folder and select the "prog_firehose" file.\
 >> Then below that click load XML, select the only file it'll show you (rawprogram_nand_p4K_b256K_update.xml), it'll ask for another one (patch_p4K_b256K.xml), same thing only one there.\
