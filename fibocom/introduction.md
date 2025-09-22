@@ -8,7 +8,10 @@ To do: Add info here
 
 # Prerequisites for Windows PC
 
-> Install the latest NDIS Driver + ECM driver. Get it from [QuecDeploy](https://github.com/iamromulan/QuecDeploy/releases) or from my [Mega Public Folder](https://mega.nz/folder/CRFWlIpQ#grOByBgkfZe5uLMkX2M2XA) or https://www.dropbox.com/scl/fi/veni1yp97axjrp10dn46y/FbUSBDeviceSetup_v2.1.2.5-2.7z?rlkey=dtbw82bb5qjhjd1y71q0z62bz&st=3cby476k&dl=0
+> Install the latest NDIS Driver + ECM driver.\
+>> Get it from [QuecDeploy](https://github.com/iamromulan/QuecDeploy/releases) or
+>> from my [Mega Public Folder](https://mega.nz/folder/CRFWlIpQ#grOByBgkfZe5uLMkX2M2XA) or
+>> https://www.dropbox.com/scl/fi/veni1yp97axjrp10dn46y/FbUSBDeviceSetup_v2.1.2.5-2.7z?rlkey=dtbw82bb5qjhjd1y71q0z62bz&st=3cby476k&dl=0
 
 > Install QPST_2.7.496_installer.zip from https://mega.nz/folder/CRFWlIpQ#grOByBgkfZe5uLMkX2M2XA/file/ndt2RRyJ
 
