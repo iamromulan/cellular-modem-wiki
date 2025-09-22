@@ -40,18 +40,17 @@ Fibocom Modem Wiki
 >> +Revision: RM551EGL00AA<R01>A02M8G -> RM551EGL00AA<R01>A04M8G -> RM551EGL00AA<R02>A01M8G\
 >> +CFUN: 5
 
-## Very Important Note
+## Restore Radio Calibration
 > If AT+CFUN? gives >1 it means it's missing its xqcn and the radio won't work until a compatible one is restored.\
 > You'll grab the xqcn you previosly made from YOUR ORIGNAL module at LAST firmware version or\
 > if you didn't, I made available in my mega share I backed up from a real RM551 "https://mega.nz/folder/CRFWlIpQ#grOByBgkfZe5uLMkX2M2XA/file/LZ80TZLD".
 
-## Launch Qspt to Restore Radio Calibration
-> Launch Qpst Configuration -> Add new port (if not detected automatically) -> Look for DM port\
+> Proceed launching Qpst Configuration -> Add new port (if not detected automatically) -> Look for DM port\
 > Go to StartClients -> Software Donwload tab -> Restore\
 > Check allow "ESN mismatch"\
 > Browse and select the Xqcn file and click Start
 
-> During  the restore process you can see the modem status throught TeraTerm serial sessions:\
+> During the restore process you can see the modem status throught TeraTerm serial sessions:\
 > (CFUN: 5 > CFUN: 7 > Disconnected > READY).\
 > The module will automatically reboot, showing "Trying to communicate with phone" and after it completes "Memory Restore Completed" messages.
 
