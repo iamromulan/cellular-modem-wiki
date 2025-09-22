@@ -6,7 +6,8 @@ Fibocom Modem Wiki
 
 These directions are written with Fibocom based M.2 modems in mind. 
 
-> Open QFIL. 
+> Open QFIL.
+
 ![](./images/qfil1open.png)
 
 > Configurate QFIL
