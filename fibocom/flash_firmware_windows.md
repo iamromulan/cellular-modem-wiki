@@ -5,10 +5,11 @@ Fibocom Modem Wiki
 # Flashing firmware
 
 > Open QFIL and make sure the Port is detected as per [QFIL Config](./introduction.md#qfil-configuration--usage)
->> Select Flat Build.\
->> Browse Programmer path to "C:\<path>\update\firehose" folder and select the "prog_firehose_xxx.elf" file.\
->> Load XML and select the only file it'll show you (rawprogram_nand_p4K_b256K_update.xml), it'll ask for another one (patch_p4K_b256K.xml), same thing only one there.\
->> Finally hit download and watch it go. Log file is located in "C:\Users\\<user\>\AppData\Roaming\Qualcomm\QFIL\COMPORT_12\port_trace.txt"
+
+> Select Flat Build.\
+> Browse Programmer path to "C:\<path>\update\firehose" folder and select the "prog_firehose_xxx.elf" file.\
+> Load XML and select the only file it'll show you (rawprogram_nand_p4K_b256K_update.xml), it'll ask for another one (patch_p4K_b256K.xml), same thing only one there.\
+> Finally hit download and watch it go. Log file is located in "C:\Users\\<user\>\AppData\Roaming\Qualcomm\QFIL\COMPORT_12\port_trace.txt"
 
 ![](./images/qfil4flash.png)
 
@@ -26,19 +27,19 @@ Fibocom Modem Wiki
 
 > The module will reboot into EDL mode, as a Quectel model for the first time. At this point you'll want to have the Quectel drivers installed as it'll identify as a Quectel module over USB.\
 
-> Launch Serial Connection
->> TeraTerm (or for Qnavigator remember to uncheck automatic initialization)\
->> During rebooting process make sure you open a serial window on AT port, to watch what is going.
+> Launch Serial Connection\
+> TeraTerm (or for Qnavigator remember to uncheck automatic initialization)\
+> During rebooting process make sure you open a serial window on AT port, to watch what is going.
 
 ![](./images/teraterm1open.png)
 
->> Select serial "Quectel USB AT Port" -> Ok\
->> Check FUNctionality using ATI commands\
->> ATI;+CFUN?\
->> +Quectel\
->> +RM551E-GL\
->> +Revision: RM551EGL00AA<R01>A02M8G -> RM551EGL00AA<R01>A04M8G -> RM551EGL00AA<R02>A01M8G\
->> +CFUN: 5
+> Select serial "Quectel USB AT Port" -> Ok\
+> Check FUNctionality using ATI commands\
+> ATI;+CFUN?\
+> +Quectel\
+> +RM551E-GL\
+> +Revision: RM551EGL00AA<R01>A02M8G -> RM551EGL00AA<R01>A04M8G -> RM551EGL00AA<R02>A01M8G\
+> +CFUN: 5
 
 ![](./images/teraterm2cfun5.png)
 
@@ -59,9 +60,9 @@ Fibocom Modem Wiki
 > The module will automatically reboot, showing "Trying to communicate with phone" and after it completes "Memory Restore Completed" messages.
 
 > Open/Re-open a serial connection (i.e TeraTerm) on AT port to check CFUN again and confirm you entered CFUN: 1
->> AT+CFUN?;+CFUN=1\
->> +CFUN: 1\
->> +CME ERROR: 4 // retry and make sure you flagg "Allow ESN mismatch" in QPST Restore tab or you choose a valid Xqcn file
+> AT+CFUN?;+CFUN=1\
+> +CFUN: 1\
+> +CME ERROR: 4 // retry and make sure you flagg "Allow ESN mismatch" in QPST Restore tab or you choose a valid Xqcn file
 
 > If you are on windows system , you'll see a new ethernet network on "Control Panel\Network and Internet\Network Connections":
 
