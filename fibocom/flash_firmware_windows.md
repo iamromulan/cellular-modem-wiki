@@ -9,9 +9,7 @@ Fibocom Modem Wiki
 
 These directions are written with Fibocom based M.2 modems in mind. 
 
-
-
-Step 4.
+Step 1.
 
 > Open QFIL.
  
@@ -29,14 +27,14 @@ Step 4.
 ![](./images/qfil2conf.png)
 
 
-Step 5.
+Step 2.
 > Select the COM port number as the DM port from step 3
 
 (port image to update: quectel-to-fibocom)\
 ![](./images/qfil3port.png)
 
 
-Step 6.
+Step 3.
 > Get the ubi files and others.\
 > Copy everything in there into the firehose folder. Make sure the path to the firmware doesn't have any spaces in it at all, like "C:\Users\user name\firmware" is bad. "C:\Users\username\firmware" is good. This is why I just use C:\Quectel for QuecDeploy. Launch QuecDeploy. Firmware downloads -> RM551E-GL -> Custom Firmware -> RM551_<text\>\_iamromulan_basic_eth.\
 > The zip file will be downloaded to "C:\Quectel\firmware\RM551EGL\Custom\RM551EGL_<text\>\_iamromulan_basic_eth".\
@@ -44,7 +42,7 @@ Step 6.
 > If you downloaded your firmware with [QuecDeploy](https://github.com/iamromulan/QuecDeploy/releases) then go to C:\Fibocom\firmware\<modem>\<type>\<firmware>\update\firehose.\
 
 
-Step 7.
+Step 4.
 > Now go back in QFIL and select Flat Build.\
 > Programmer path, click browse, go to the "C:\Quectel\firmware\RM551EGL\Custom\RM551EGL_<text\>\_iamromulan_basic_eth\update\firehose"
 folder and select the "prog_firehose" file.\
