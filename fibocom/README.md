@@ -21,6 +21,5 @@ This is largely incomplete and could use some help from a Fibocom expert via PR!
 - [Form Factors](./formfactors.md)
 		- [SDXPINN Platform](./sdxpinn/README.md):
 			- Modems
-				- [FM190W-GL](./FM190W-GL/README.md)
 	  
 - [Appendix](./appendix.md)
