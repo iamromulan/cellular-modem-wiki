@@ -21,8 +21,6 @@ Fibocom Modem Wiki
 
 > Go to xQCN File field, browse backup directory, give filename and press Start. The file is created into "C:\<path>\DEADD00D_0.xqcn". Wait for the load bar get to the and and look for "Memory Backup Completed" message.
 
-![](./images/qpst2xqcn.png)
-
 > Next close QPST window completely even from the system tray.
 
 
