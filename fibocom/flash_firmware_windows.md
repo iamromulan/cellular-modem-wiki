@@ -26,7 +26,7 @@ Fibocom Modem Wiki
 > The module will reboot into EDL mode, as a Quectel model for the first time. At this point you'll want to have the Quectel drivers installed as it'll identify as a Quectel module over USB.\
 
 > Launch Serial Connection
->> TeraTerm or Qnavigator (remember to uncheck automatic initialization)\
+>> TeraTerm (or for Qnavigator remember to uncheck automatic initialization)\
 >> During rebooting process make sure you open a serial window on AT port, to watch what is going.
 
 ![](./images/teraterm1open.png)
