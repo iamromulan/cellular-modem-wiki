@@ -48,3 +48,26 @@ To do: Add info here
 > AT+QCFG= pcie/mode,1 and AT+QCFG=usbnet,1 are sent then it reboots.\
 > Once the second reboot occurs ethernet will be working with Luci and SSH acess at 192.168.224.1.\
 > Pre-set root password is "iamromulan".
+
+# QFIL configuration
+
+> Open QFIL.
+
+![](./images/qfil1open.png)
+
+> Go to Configuration tab -> Firehose configuration:
+>> Download protocol can stay default Sahara.\
+>> The device type is NAND.\
+>> No validation.\
+>> Don't use the auto backup restore QCN options on the right.\
+>> Reset after download just means it'll reboot after it finishes so keep that checked.\
+>> The big thing here is to select "Erase all before download". This will erase what you backed up into the xqcn and allow a full clean flash to occur with the 551 firmware.
+
+![](./images/qfil2conf.png)
+
+> Select the COM port number as the DM port
+
+![](./images/qfil3port.png)
+
+(port image to update: quectel-to-fibocom)
+
