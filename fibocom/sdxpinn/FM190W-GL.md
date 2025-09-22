@@ -10,4 +10,4 @@ The FM190W-GL is brand new and is currently in 01 phase (Production). The above 
 
 The Fibocom FM190W-GL is a cellular NR/LTE (5G/4G) M.2 B-Key modem module specially optimized for a variety of applications and usage scenarios utilizing the Qualcomm x75 platform.
 
-> :book: [Preliminary guide to convert a Fibocom FM190W-GL to an RM551E-GL](./FM190W-GL_to_RM551E-GL.md)
+> :book: [Preliminary guide to convert a Fibocom FM190W-GL to an RM551E-GL](./FM190W-GL/FM190W-GL_to_RM551E-GL.md)
