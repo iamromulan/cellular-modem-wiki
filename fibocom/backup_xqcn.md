@@ -3,7 +3,6 @@
 # Backup firmware with QPST
 
 > Open Qpst Configuration.
-
 >> Use the AutoAdd function to autoconnect to proper serial port "DEADD00D sn 4ec33ae0 DIAGnostic" or
 >> 
 >> Select Ports tab.
@@ -23,7 +22,6 @@
 (To backup few other things, like IMEI.)
 
 > Open QFIL.
-
 >> Go to Configuration tab -> Firehose configuration:\
 >> Download protocol can stay default Sahara.\
 >> The device type is NAND.\
