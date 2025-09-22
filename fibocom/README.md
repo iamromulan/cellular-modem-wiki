@@ -12,7 +12,7 @@ This is largely incomplete and could use some help from a Fibocom expert via PR!
 
 - [Introduction](./introduction.md)
 - [Backup xQCN](./backup_xqcn.md)
-- [Flashing Firmware](./flash_firmware_windows.md)
+- [Flash & Restore Firmware](./flash_firmware_windows.md)
 - [Send AT Commands](./at_commands.md)
 - [Install QuecManager](./quecmanager.md)
 
