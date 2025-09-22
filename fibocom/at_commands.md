@@ -35,7 +35,7 @@ If you plan to use the RM551E-GL in an ethernet sled you need to edit some modem
 > query status 3
 >> AT+QCAINFO;+CGACT?;+QMAPWAC? // "1" to enable auto connect internet for ethernet
 
-> query and set APN - status 4
+> query status 4 and set APN
 >> AT+CGDCONT?\
 >>  +CGDCONT: 1,"IPV4V6","","0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0",0,0,0,0,,,,,,,,,," // <MISSING_APN!!!>\
 >> AT+CGDCONT=1,"IPV4V6","<YOUR_APN_HERE>"
