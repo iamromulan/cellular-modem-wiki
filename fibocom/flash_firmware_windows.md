@@ -19,7 +19,7 @@ Fibocom Modem Wiki
 
 > If you get any errors ensure the USB connection is stable or try a different computer. Once the flash process makes it past the beginning loading bar phase do not interrupt the process or you could leave the modem in an unusable bricked state. You'll have to enter EDL manually to revive it if this happens.
 
-> Step 6. Rebooting
+> Rebooting
 >> The module will reboot into EDL mode, as a Quectel model for the first time. At this point you'll want to have the Quectel drivers installed as it'll identify as a Quectel module over USB.\
 >> Go into Qnavigator (uncheck automatic initialization) or your AT command program of choice and send ATI to confirm.
 
