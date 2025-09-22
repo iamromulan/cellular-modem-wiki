@@ -21,11 +21,14 @@ To do: Add info here
 
 # Connect to the modem
 
-> Connect modem to your computer, by USB, inserting the FM190W modem into m.2-to-usb adapter. If your Windows system autoconnects the the FM190W, go to "Control Panel\Network and Internet\Network Connections and Network" and disable network interface for the modem.
+> Connect modem to your computer, by USB, inserting the FM190W modem into m.2-to-usb adapter.\
+> If your Windows system autoconnects the the FM190W, go to "Control Panel\Network and Internet\Network Connections and Network" and disable network interface for the modem.
 
-> The FM190W (hardware version 01, rev4) is delivered in AT+GTUSBMODE=32 functionality and exposes 4 serial ports and you will get DIAG + MODEM + AT + PIPE + RMNET functionality. In case you need to change GTUSBMODE consult Fibocom AT Commands pdf guide on https://github.com/KFOq/Doc/blob/main/Fibocom_AT%20Commands%20User%20Manual_MBB_V2.4.pdf and use the serial port application (i.e TeraTerm) to send specific AT commands.
+> The FM190W (hardware version 01, rev4) is delivered in AT+GTUSBMODE=32 functionality and exposes 4 serial ports and you will get DIAG + MODEM + AT + PIPE + RMNET functionality.\
+> In case you need to change GTUSBMODE consult Fibocom AT Commands pdf guide on https://github.com/KFOq/Doc/blob/main/Fibocom_AT%20Commands%20User%20Manual_MBB_V2.4.pdf and use the serial port application (i.e TeraTerm) to send specific AT commands.
 
-> Go to device manager and check if the new COM ports are visible in the system. Restart your computer if the new COM ports are not visible.
+> Go to device manager and check if the new COM ports are visible in the system.\
+> Restart your computer if the new COM ports are not visible.
 
 ![](./images/devman_ports.png)
 
