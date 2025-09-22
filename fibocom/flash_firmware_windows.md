@@ -22,7 +22,7 @@ These directions are written with Fibocom based M.2 modems in mind.
 ![](./images/qfil2conf.png)
 
 
-> Step 3. Select the COM port number as the DM port from step 3
+> Step 3. Select the COM port number as the DM port
 
 ![](./images/qfil3port.png)
 (port image to update: quectel-to-fibocom)
