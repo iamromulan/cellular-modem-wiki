@@ -13,7 +13,7 @@ These directions are written with Fibocom based M.2 modems in mind.
  
 ![](./images/qfil1open.png)
 
-> Step 2. Configurate QFIL\
+> Step 2. Configurate QFIL
 >> Go to Configuration tab -> Firehose configuration:\
 >> Download protocol can stay default Sahara.\
 >> The device type is NAND.\
