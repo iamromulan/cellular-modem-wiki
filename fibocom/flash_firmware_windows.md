@@ -40,6 +40,8 @@ Fibocom Modem Wiki
 >> +Revision: RM551EGL00AA<R01>A02M8G -> RM551EGL00AA<R01>A04M8G -> RM551EGL00AA<R02>A01M8G\
 >> +CFUN: 5
 
+![](./images/teraterm2cfun5.png)
+
 ## Restore Radio Calibration
 > If AT+CFUN? gives >1 it means it's missing its xqcn and the radio won't work until a compatible one is restored.\
 > You'll grab the xqcn you previosly made from YOUR ORIGNAL module at LAST firmware version or\
