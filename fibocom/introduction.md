@@ -41,7 +41,7 @@ Fibocom Modem Wiki
 
 # QFIL Configuration & Usage
 
-> Open QFIL.
+> Open QFIL and select "Flat Build"
 
 ![](./images/qfil1open.png)
 
