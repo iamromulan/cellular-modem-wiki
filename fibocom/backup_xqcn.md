@@ -2,12 +2,14 @@
 
 # Backup factory firmware with QPST
 
-> Open Qpst Configuration and use the AutoAdd function to autoconnect to proper serial port (COM6) AutoAdd DEADD00D sn 4ec33ae0 [DIAGnostic] or DM Port.
-> Just ignore the other ports: (COM3) USB NMEA, (COM4) USB Modem, (COM5) AT.\
+> Open Qpst Configuration.\
+> Use the AutoAdd function to autoconnect to proper serial port DEADD00D sn 4ec33ae0 DIAGnostic.\
+> Just ignore the other ports: USB NMEA, USB Modem, AT.\
 > or\
 > Select Ports tab.\
 > Add New Port.\
-> Show serial and USB/QC diagnostic port only: NO.
+> Show serial and USB/QC diagnostic port only: NO.\
+> Add "USB DM Port".\
 
 > Navigate to Start Clients > Software Downloads > Backup tab.
 
