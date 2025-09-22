@@ -2,10 +2,6 @@ Fibocom Modem Wiki
 =================================
 > :book: This is a living Wiki. Changes may be made as more discoveries are made or more community software is made. If you feel like you have information to contribute to this wiki please open a pull request.
 
-# Introduction to Fibocom Modems
-
-To do: Add info here
-
 # Prerequisites for Windows PC
 
 > Install the latest NDIS Driver + ECM driver.\
@@ -42,12 +38,13 @@ To do: Add info here
 > You'll need a bunch of ubi files and others along with a firehose folder. Copy everything in there into the firehose folder. Make sure the path to the firmware doesn't have any spaces in it at all.\
 > This is why I just use C:\Quectel for QuecDeploy.
 
-# Firmware flashing
-> Once the flash completes wait for the ports to come back up in device manager.\
-> Once they come back, wait about 30 seconds +/- for the second reboot to occur.\
-> AT+QCFG= pcie/mode,1 and AT+QCFG=usbnet,1 are sent then it reboots.\
-> Once the second reboot occurs ethernet will be working with Luci and SSH acess at 192.168.224.1.\
-> Pre-set root password is "iamromulan".
+> Get the ubi files and others.
+>> Copy everything in there into the firehose folder. Make sure the path to the firmware doesn't have any spaces in it at all, like "C:\Users\user name\firmware" is bad. "C:\Users\username\firmware" is good. This is why I just use C:\Quectel for QuecDeploy. Launch QuecDeploy. Firmware downloads -> RM551E-GL -> Custom Firmware -> RM551_<text\>\_iamromulan_basic_eth.\
+
+>> The zip file will be downloaded to "C:\Quectel\firmware\RM551EGL\Custom\RM551EGL_<text\>\_iamromulan_basic_eth".\
+>> In the new window, go to the `\update\firehose` folder of the firmware and select the `partition_complete` file or the `prog_firehose` file. Then click the Open button.\
+>> If you downloaded your firmware with [QuecDeploy](https://github.com/iamromulan/QuecDeploy/releases) then go to C:\Fibocom\firmware\<modem>\<type>\<firmware>\update\firehose.\
+
 
 # QFIL configuration
 
@@ -71,3 +68,9 @@ To do: Add info here
 
 (port image to update: quectel-to-fibocom)
 
+# Firmware flashing
+> Once the flash completes wait for the ports to come back up in device manager.\
+> Once they come back, wait about 30 seconds +/- for the second reboot to occur.\
+> AT+QCFG= pcie/mode,1 and AT+QCFG=usbnet,1 are sent then it reboots.\
+> Once the second reboot occurs ethernet will be working with Luci and SSH acess at 192.168.224.1.\
+> Pre-set root password is "iamromulan".
