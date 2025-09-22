@@ -16,7 +16,7 @@ This is largely incomplete and could use some help from a Fibocom expert via PR!
 	- [Windows](./flash_firmware_windows.md)
 	- Linux/OpenWRT
 - Send [AT Commands](./at_commands.md)
-- Install [QuecManager](./quecmanger.md)
+- Install [QuecManager](./quecmanager.md)
 
 - [Form Factors](./formfactors.md)
 		- [SDXPINN Platform](./sdxpinn/README.md):
