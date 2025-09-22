@@ -8,25 +8,7 @@ Fibocom Modem Wiki
 # Using QFIL to flash a modem
 
 These directions are written with Fibocom based M.2 modems in mind. 
-### File Path Note
 
->:bulb: Both the path to Qflash and your extracted firmware must not have spaces in it. Example: C:\Quectel\Q flash\ is bad while C:\Quectel\Qflash\ is good. If you installed Qflash and got your firmware through [QuecDeploy](https://github.com/iamromulan/QuecDeploy/releases) then you don't have to worry about this. 
-
-
-Step 1.
-> Install the latest NDIS Driver (Note that only one driver can be installed at once besides the ECM driver) Get it from [QuecDeploy](https://github.com/iamromulan/QuecDeploy/releases) or from my [Mega Public Folder](https://mega.nz/folder/CRFWlIpQ#grOByBgkfZe5uLMkX2M2XA).
-
-
-Step 2.
-> Connect modem to your computer, by USB
-
-
-Step 3.
-> Go to device manager and check if the new COM ports are visible in the system. Restart your computer if the new COM ports are not visible.
-
-![](./images/devman_ports.png)
-
-> Remember the number of the COM port described as DIAGnostic "DM Port".
 
 
 Step 4.
