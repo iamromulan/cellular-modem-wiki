@@ -34,24 +34,32 @@ Fibocom Modem Wiki
 >> Select serial "Quectel USB AT Port" -> Ok\
 >> Check FUNctionality using ATI commands\
 >> ATI;+CFUN?
-  +Quectel
-  +RM551E-GL
-  +Revision: RM551EGL00AA<R01>A02M8G -> RM551EGL00AA<R01>A04M8G -> RM551EGL00AA<R02>A01M8G
-  +CFUN: 5
+>>> +Quectel
+>>> +RM551E-GL
+>>> +Revision: RM551EGL00AA<R01>A02M8G -> RM551EGL00AA<R01>A04M8G -> RM551EGL00AA<R02>A01M8G
+>>> +CFUN: 5
 
+# VERY PORTANT NOTE:
+> If AT+CFUN? gives >1 it means it's missing its xqcn and the radio won't work until a compatible one is restored.\
+> You'll grab the xqcn you previosly made from YOUR ORIGNAL module at LAST firmware version or\
+> if you didn't, I made available in my mega share I backed up from a real RM551 "https://mega.nz/folder/CRFWlIpQ#grOByBgkfZe5uLMkX2M2XA/file/LZ80TZLD".
 
-> It means it's missing its xqcn and the radio won't work until a compatible one is restored. You'll grab the xqcn I made available in my mega share I backed up from a real RM551 "https://mega.nz/folder/CRFWlIpQ#grOByBgkfZe5uLMkX2M2XA/file/LZ80TZLD" and restore it in QPST under the restore tab with following steps:
-  > Launch Qpst Configuration -> Add new port (if not detected automatically) -> Look for DM port\
-  > Go to Software Donwload tab -> Restore\
-  >  Check allow ESN mismatch\
-  >  Select the xqcn you downloaded from my mega and click Start. During  the restore process you can see the modem status throught TeraTerm serial sessions (CFUN: 5 > CFUN: 7 > Disconnected > READY). The module will automatically reboot, after it completes "Memory Restore Completed" message.
+# Launch Qspt to Restore radio calibration
+> Launch Qpst Configuration -> Add new port (if not detected automatically) -> Look for DM port\
+> Go to StartClients -> Software Donwload tab -> Restore\
+> Check allow "ESN mismatch"\
+> Browse and select the Xqcn file and click Start
 
-> Check CFUN again to confirm you can enter CFUN=1 now and that should be it.\
-> AT+CFUN?\
-> AT+CFUN=1\
-> +CFUN: 1\
-> +CME ERROR: 4 // in case you receive this error make sure you flagged "Allow ESN mismatch" in QPST Restoring.
+> During  the restore process you can see the modem status throught TeraTerm serial sessions:\
+> (CFUN: 5 > CFUN: 7 > Disconnected > READY).\
+> The module will automatically reboot, showing "Trying to communicate with phone" and after it completes "Memory Restore Completed" messages.
 
-> Double backup (qFil+Qpst) new modem firmware RM551E-GL now!
+> Open/Re-open a serial connection (i.e TeraTerm) on AT port to check CFUN again and confirm you entered CFUN: 1
+>> AT+CFUN?;+CFUN=1
+>>> +CFUN: 1
+>>> +CME ERROR: 4 // double check you flagged "Allow ESN mismatch" in QPST Restore tab or you choosed a corrupted Xqcn file
 
-> AT+CFUN=1,1
+> If you are on windows system , you'll see a new ethernet network on "Control Panel\Network and Internet\Network Connections":
+
+> Double backup (qFil+Qpst) new modem firmware now!
+
