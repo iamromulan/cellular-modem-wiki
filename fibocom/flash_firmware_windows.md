@@ -34,11 +34,11 @@ Fibocom Modem Wiki
 
 >> Select serial "Quectel USB AT Port" -> Ok\
 >> Check FUNctionality using ATI commands\
->> ATI;+CFUN?
->>> +Quectel\
->>> +RM551E-GL\
->>> +Revision: RM551EGL00AA<R01>A02M8G -> RM551EGL00AA<R01>A04M8G -> RM551EGL00AA<R02>A01M8G\
->>> +CFUN: 5
+>> ATI;+CFUN?\
+>> +Quectel\
+>> +RM551E-GL\
+>> +Revision: RM551EGL00AA<R01>A02M8G -> RM551EGL00AA<R01>A04M8G -> RM551EGL00AA<R02>A01M8G\
+>> +CFUN: 5
 
 ## Very Important Note
 > If AT+CFUN? gives >1 it means it's missing its xqcn and the radio won't work until a compatible one is restored.\
