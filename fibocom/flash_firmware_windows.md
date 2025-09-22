@@ -40,12 +40,12 @@ Fibocom Modem Wiki
 >>> +Revision: RM551EGL00AA<R01>A02M8G -> RM551EGL00AA<R01>A04M8G -> RM551EGL00AA<R02>A01M8G\
 >>> +CFUN: 5
 
-## Very Importsnt Note
+## Very Important Note
 > If AT+CFUN? gives >1 it means it's missing its xqcn and the radio won't work until a compatible one is restored.\
 > You'll grab the xqcn you previosly made from YOUR ORIGNAL module at LAST firmware version or\
 > if you didn't, I made available in my mega share I backed up from a real RM551 "https://mega.nz/folder/CRFWlIpQ#grOByBgkfZe5uLMkX2M2XA/file/LZ80TZLD".
 
-## Launch Qspt to Restore radio calibration
+## Launch Qspt to Restore Radio Calibration
 > Launch Qpst Configuration -> Add new port (if not detected automatically) -> Look for DM port\
 > Go to StartClients -> Software Donwload tab -> Restore\
 > Check allow "ESN mismatch"\
