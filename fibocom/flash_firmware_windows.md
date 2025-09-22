@@ -11,8 +11,8 @@ Fibocom Modem Wiki
 ![](./images/qfil4flash.png)
 
 > Once the flash completes wait for the ports to come back up in device manager. Once they come back, wait about 30 seconds +/- for the second reboot to occur.\
-> "AT+QCFG= pcie/mode,1" and "AT+QCFG=usbnet,1" are sent then it reboots.
-> Once the second reboot occurs ethernet will be working with Luci and SSH acess at 192.168.224.1.
+> "AT+QCFG= pcie/mode,1" and "AT+QCFG=usbnet,1" are sent then it reboots.\
+> Once the second reboot occurs ethernet will be working with Luci and SSH acess at 192.168.224.1.\
 > Pre-set root password is iamromulan.
 
 > At the end of the flash process the modem will automatically reboot and QFIL shoudl say PASS!
