@@ -15,9 +15,9 @@
 > Linux RM551E-GL 5.15.144-perf #1 SMP PREEMPT Mon Jun 23 02:28:02 UTC 2025 aarch64 GNU/Linux
 
 > ping 8.8.8.8 -c 3 # or press ctrl+x to exit from pinging \
-> in case you loose 100% packet try following tips:\
-> * run "AT+CFUN=1,1"\
-> * double check APN with AT+CGDCONT?\
+> in case you loose 100% packet try following tips:
+> * run "AT+CFUN=1,1"
+> * double check APN with AT+CGDCONT?
 > * power cycle the modem to regain connection
 
 > Manual toolkit installation via ADB \
