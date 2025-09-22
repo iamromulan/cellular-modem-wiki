@@ -45,6 +45,10 @@ Fibocom Modem Wiki
 
 ![](./images/qfil1open.png)
 
+> Select the COM port number as the DM port
+
+![](./images/qfil3port.png)
+
 > Go to Configuration tab -> Firehose configuration:
 >> Download protocol can stay default Sahara.\
 >> The device type is NAND.\
@@ -55,9 +59,4 @@ Fibocom Modem Wiki
 
 ![](./images/qfil2conf.png)
 
-> Select the COM port number as the DM port
-
-![](./images/qfil3port.png)
-
-(port image to update: quectel-to-fibocom)
 
