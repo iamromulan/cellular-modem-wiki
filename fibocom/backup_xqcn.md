@@ -7,7 +7,7 @@ Fibocom Modem Wiki
 
 > Open Qpst Configuration.
 
-![](./images/qspt1open.png)
+![](./images/qpst1open.png)
 
 >> Use the AutoAdd function to autoconnect to proper serial port "DEADD00D sn 4ec33ae0 DIAGnostic" or
 >> 
@@ -21,7 +21,7 @@ Fibocom Modem Wiki
 
 > Go to xQCN File field, browse backup directory, give filename and press Start. The file is created into "C:\<path>\DEADD00D_0.xqcn". Wait for the load bar get to the and and look for "Memory Backup Completed" message.
 
-![](./images/qspt2xqcn.png)
+![](./images/qpst2xqcn.png)
 
 > Next close QPST window completely even from the system tray.
 
