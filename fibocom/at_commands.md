@@ -7,7 +7,8 @@ Fibocom Modem Wiki
 If you plan to use the RM551E-GL in an ethernet sled you need to edit some modem configurations. Most of these steps are optional since the custom firmwares are pre-configured.
 
 > Use your favorite serial appplication (i.e TeraTerm) on the AT Port of your serial connection.
->> query status 0 // ADB status and unlock\
+
+>> query status 0 // ADB status & unlock\
 >> AT+QCFG="usbcfg" // query status\
 >> +QCFG: "usbcfg",0x2C7C,0x0122,1,1,1,1,1,<0>,0 // if initial response is locked <0>\
 >> AT+QSECCFG="adb_auth",""\
