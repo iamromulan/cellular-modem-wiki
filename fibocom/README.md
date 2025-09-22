@@ -11,6 +11,7 @@ This is largely incomplete and could use some help from a Fibocom expert via PR!
 > :point_down: Looking for the M.2 modem direct to ethernet guide? There's now a separate guide for each platform!
 
 - [Introduction](./introduction.md)
+- Backup xQCN(./backup_xqcn.md)
 - Flashing Firmware
 	- [Windows](./flash_firmware_windows.md)
 	- Linux/OpenWRT
