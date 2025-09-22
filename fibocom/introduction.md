@@ -39,11 +39,15 @@ Fibocom Modem Wiki
 > You'll need a bunch of ubi files and others along with a firehose folder. Copy everything in there into the firehose folder. Make sure the path to the firmware doesn't have any spaces in it at all, like "C:\Users\user name\firmware" is bad. "C:\Users\username\firmware" is good. This is why I just use C:.\
 > This is why I just use C:\Quectel for QuecDeploy.
 
-# QFIL configuration
+# QFIL Configuration & Usage
 
 > Open QFIL.
 
 ![](./images/qfil1open.png)
+
+> Select the COM port number as the DM port
+
+![](./images/qfil3port.png)
 
 > Go to Configuration tab -> Firehose configuration:
 >> Download protocol can stay default Sahara.\
@@ -54,5 +58,4 @@ Fibocom Modem Wiki
 >> The big thing here is to select "Erase all before download". This will erase what you backed up into the xqcn and allow a full clean flash to occur with the 551 firmware.
 
 ![](./images/qfil2conf.png)
-
 
