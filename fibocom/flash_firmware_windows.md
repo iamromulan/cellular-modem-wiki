@@ -44,22 +44,22 @@ folder and select the "prog_firehose" file.\
 
 ![](./images/qfil4flash.png)
 
-> Step 6. Rebooting
->> The module will reboot into EDL mode, as a Quectel model for the first time. At this point you'll want to have the Quectel drivers installed as it'll identify as a Quectel module over USB.\
->> Go into Qnavigator (uncheck automatic initialization) or your AT command program of choice and send ATI to confirm.
-
-> ATI\
-> +Quectel\
-> +RM551E-GL\
-> +Revision: RM551EGL00AAR01A02M8G -> RM551EGL00AAR01A04M8G
-
-![](./images/teraterm1open.png)
-
 > Once the flash completes wait for the ports to come back up in device manager. Once they come back, wait about 30 seconds +/- for the second reboot to occur. AT+QCFG= pcie/mode,1 and AT+QCFG=usbnet,1 are sent then it reboots. Once the second reboot occurs ethernet will be working with Luci and SSH acess at 192.168.224.1. Pre-set root password is iamromulan. Based on Stock firmware: RM551EGL00AAR01A02M8G (2024-12-23)
 
 > At the end of the flash process the modem will automatically reboot and QFIL shoudl say PASS!
 
 > If you get any errors ensure the USB connection is stable or try a different computer. Once the flash process makes it past the beginning loading bar phase do not interrupt the process or you could leave the modem in an unusable bricked state. You'll have to enter EDL manually to revive it if this happens.
+
+> Step 6. Rebooting
+>> The module will reboot into EDL mode, as a Quectel model for the first time. At this point you'll want to have the Quectel drivers installed as it'll identify as a Quectel module over USB.\
+>> Go into Qnavigator (uncheck automatic initialization) or your AT command program of choice and send ATI to confirm.
+
+![](./images/teraterm1open.png)
+
+> ATI\
+> +Quectel\
+> +RM551E-GL\
+> +Revision: RM551EGL00AAR01A02M8G -> RM551EGL00AAR01A04M8G
 
 > If you run AT+CFUN? You'll notice it's not 1 it's some other number.\
 > AT+CFUN?\
@@ -78,7 +78,5 @@ folder and select the "prog_firehose" file.\
 > +CME ERROR: 4 // in case you receive this error make sure you flagged "Allow ESN mismatch" in QPST Restoring.
 
 > Double backup (qFil+Qpst) new modem firmware RM551E-GL now!
-
-
 
 > AT+CFUN=1,1
