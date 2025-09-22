@@ -14,16 +14,17 @@ These directions are written with Fibocom based M.2 modems in mind.
  
 ![](./images/qfil1open.png)
 
-> Configurate QFIL\
-> Go to Configuration tab -> Firehose configuration:\
-> Download protocol can stay default Sahara.\
-> The device type is NAND.\
-> No validation.\
-> Don't use the auto backup restore QCN options on the right.\
-> Reset after download just means it'll reboot after it finishes so keep that checked.\
-> The big thing here is to select "Erase all before download". This will erase what you backed up into the xqcn and allow a full clean flash to occur with the 551 firmware.
+>> Configurate QFIL\
+>> Go to Configuration tab -> Firehose configuration:\
+>> Download protocol can stay default Sahara.\
+>> The device type is NAND.\
+>> No validation.\
+>> Don't use the auto backup restore QCN options on the right.\
+>> Reset after download just means it'll reboot after it finishes so keep that checked.\
+>> The big thing here is to select "Erase all before download". This will erase what you backed up into the xqcn and allow a full clean flash to occur with the 551 firmware.
 
 ![](./images/qfil2conf.png)
+
 
 > Step 2.
 >> Select the COM port number as the DM port from step 3
@@ -82,5 +83,7 @@ folder and select the "prog_firehose" file.\
 > +CME ERROR: 4 // in case you receive this error make sure you flagged "Allow ESN mismatch" in QPST Restoring.
 
 > Double backup (qFil+Qpst) new modem firmware RM551E-GL now!
+
+
 
 > AT+CFUN=1,1
