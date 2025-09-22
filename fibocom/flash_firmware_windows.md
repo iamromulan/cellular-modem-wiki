@@ -6,8 +6,7 @@ Fibocom Modem Wiki
 
 These directions are written with Fibocom based M.2 modems in mind. 
 
-> Open QFIL.
- 
+> Open QFIL. 
 ![](./images/qfil1open.png)
 
 > Configurate QFIL
@@ -20,7 +19,6 @@ These directions are written with Fibocom based M.2 modems in mind.
 >> The big thing here is to select "Erase all before download". This will erase what you backed up into the xqcn and allow a full clean flash to occur with the 551 firmware.
 
 ![](./images/qfil2conf.png)
-
 
 > Select the COM port number as the DM port
 
