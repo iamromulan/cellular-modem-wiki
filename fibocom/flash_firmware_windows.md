@@ -52,6 +52,8 @@ Fibocom Modem Wiki
 > Check allow "ESN mismatch"\
 > Browse and select the Xqcn file and click Start
 
+![](./images/qpst2xqcn.png)
+
 > During the restore process you can see the modem status throught TeraTerm serial sessions:\
 > (CFUN: 5 > CFUN: 7 > Disconnected > READY).\
 > The module will automatically reboot, showing "Trying to communicate with phone" and after it completes "Memory Restore Completed" messages.
