@@ -16,7 +16,7 @@
 
 > ping 8.8.8.8 -c 3 # or press ctrl+x to exit from pinging \
 > in case you loose 100% packet try following tips:
-> * run "AT+CFUN=1,1"
+> * run AT+CFUN=1,1
 > * double check APN with AT+CGDCONT?
 > * power cycle the modem to regain connection
 
