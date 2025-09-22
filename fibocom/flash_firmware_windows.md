@@ -2,7 +2,7 @@ Fibocom Modem Wiki
 =================================
 > :book: This is a living Wiki. Changes may be made as more discoveries are made or more community software is made. If you feel like you have information to contribute to this wiki please open a pull request.
 
-# Flashing firmware
+# Flashing Firmware
 
 > Open QFIL, go to Configuration tab -> Firehose configuration and select Port as per [QFIL Config](./introduction.md#qfil-configuration--usage)
 
@@ -42,7 +42,7 @@ Fibocom Modem Wiki
 
 ![](./images/teraterm2cfun5.png)
 
-## Restore Radio Calibration
+## NV Restore Radio Calibration
 > If AT+CFUN? gives >1 it means it's missing its xqcn and the radio won't work until a compatible one is restored.\
 > You'll grab the xqcn you previosly made from YOUR ORIGNAL module at LAST firmware version or\
 > if you didn't, I made available in my mega share I backed up from a real RM551 "https://mega.nz/folder/CRFWlIpQ#grOByBgkfZe5uLMkX2M2XA/file/LZ80TZLD".
