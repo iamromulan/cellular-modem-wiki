@@ -4,8 +4,8 @@
 
 > Launch PoweShell-> C:\Windows\system32> \
 > adb devices
-> * daemon not running; starting now at tcp:5037 \
-> * daemon started successfully \
+> \* daemon not running; starting now at tcp:5037 \
+> \* daemon started successfully \
 >   List of devices attached \
 >   cad1fce5	device \
 >   d3863fb8	device \
