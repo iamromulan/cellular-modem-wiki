@@ -2,7 +2,10 @@ Fibocom Modem Wiki
 =================================
 > :book: This is a living Wiki. Changes may be made as more discoveries are made or more community software is made. If you feel like you have information to contribute to this wiki please open a pull request.
 
-Open QFIL and select Flat Build.
+Open QFIL
+
+
+and select Flat Build.
 
 > If you downloaded your firmware with [QuecDeploy](https://github.com/iamromulan/QuecDeploy/releases) then go to C:\Fibocom\firmware\<modem>\<type>\<firmware>\update\firehose.\
 
