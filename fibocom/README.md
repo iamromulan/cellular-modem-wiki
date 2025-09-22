@@ -15,8 +15,8 @@ This is largely incomplete and could use some help from a Fibocom expert via PR!
 - Flashing Firmware
 	- [Windows](./flash_firmware_windows.md)
 	- Linux/OpenWRT
-- [AT Commands](./at_commands.md)
-- [QuecManager](./quecmanger.md)
+- Send [AT Commands](./at_commands.md)
+- Install [QuecManager](./quecmanger.md)
 
 - [Form Factors](./formfactors.md)
 		- [SDXPINN Platform](./sdxpinn/README.md):
