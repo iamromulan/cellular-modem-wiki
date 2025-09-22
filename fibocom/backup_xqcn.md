@@ -1,6 +1,6 @@
 > :book: WIP ############### images needed
 
-# Backup factory firmware with QPST
+# Backup firmware with QPST
 
 > Open Qpst Configuration.
 >> Use the AutoAdd function to autoconnect to proper serial port "DEADD00D sn 4ec33ae0 DIAGnostic" or
@@ -19,18 +19,17 @@
 
 > Close Qspt window
 
-# Backup factory firmware with QFIL as well
+# Backup firmware with QFIL as well
 (To backup few other things, like IMEI.)
 
-> Open QFIL. 
-
-> Go to Configuration tab -> Firehose configuration:\
-> Download protocol can stay default Sahara.\
-> The device type is NAND.\
-> No validation.\
-> Don't use the auto backup restore QCN options on the right.\
-> \*"Reset after download" just means it'll reboot after it finishes so keep that checked.\
-> The big thing here is to select \*"Erase all before download". This will erase what you backed up into the xqcn and allow a full clean flash to occur with the 551 firmware.
+> Open QFIL.
+>> Go to Configuration tab -> Firehose configuration:\
+>> Download protocol can stay default Sahara.\
+>> The device type is NAND.\
+>> No validation.\
+>> Don't use the auto backup restore QCN options on the right.\
+>> \*"Reset after download" just means it'll reboot after it finishes so keep that checked.\
+>> The big thing here is to select \*"Erase all before download". This will erase what you backed up into the xqcn and allow a full clean flash to occur with the 551 firmware.
 
 > \*I've done one backup with this "flagged" and one "unflagged".
 
