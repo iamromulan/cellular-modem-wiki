@@ -30,9 +30,9 @@ To do: Add info here
 
 # Launch QuecDeploy
 
-> Goto Firmware downloads -> RM551E-GL -> R01 -> Custom Firmware -> RM551EGL00AAR01A04M8G_2025_8_2_iamromulan_basic_eth (2025-08-02) -> Select the needed version
-> The zip file will be downloaded to "C:\Quectel\firmware\RM551EGL\R01\Custom\RM551EGL00AAR01A04M8G_2025_8_2_iamromulan_basic_eth"
-> Flash this if you plan to use the RM551E-GL in an ethernet sled. Once the flash completes wait for the ports to come back up in device manager. Once they come back, wait about 30 seconds +/- for the second reboot to occur. AT+QCFG= pcie/mode,1 and AT+QCFG=usbnet,1 are sent then it reboots. Once the second reboot occurs ethernet will be working with Luci and SSH acess at 192.168.224.1. Pre-set root password is "iamromulan". Based on Stock firmware: RM551EGL00AAR01A04M8G (2025-17-15). 
+> Goto Firmware downloads -> RM551E-GL -> R01 -> Custom Firmware -> Select the needed version
+> The zip file will be downloaded to "C:\Quectel\firmware\RM551EGL\R01\Custom\<version>_iamromulan_basic_eth"
+> Flash "basic_eth" if you plan to use the RM551E-GL in an ethernet sled.
 
 # File Path Note
 
@@ -41,5 +41,5 @@ To do: Add info here
 # Firmware flashing
 
 > You'll need a bunch of ubi files and others along with a firehose folder. Copy everything in there into the firehose folder. Make sure the path to the firmware doesn't have any spaces in it at all, like "C:\Users\<user name>\firmware" is bad. "C:\Users\<username>\firmware" is good. This is why I just use C:\Quectel for QuecDeploy.
-
+> Once the flash completes wait for the ports to come back up in device manager. Once they come back, wait about 30 seconds +/- for the second reboot to occur. AT+QCFG= pcie/mode,1 and AT+QCFG=usbnet,1 are sent then it reboots. Once the second reboot occurs ethernet will be working with Luci and SSH acess at 192.168.224.1. Pre-set root password is "iamromulan".
 
