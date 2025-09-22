@@ -4,9 +4,8 @@ Fibocom Modem Wiki
 
 # Flashing firmware
 
-> Open QFIL and make sure the Port is detected as per [QFIL Config](./introduction.md#qfil-configuration--usage)
+> Open QFIL, go to Configuration tab -> Firehose configuration and select Port as per [QFIL Config](./introduction.md#qfil-configuration--usage)
 
-> Select Flat Build.\
 > Browse Programmer path to "C:\<path>\update\firehose" folder and select the "prog_firehose_xxx.elf" file.\
 > Load XML and select the only file it'll show you (rawprogram_nand_p4K_b256K_update.xml), it'll ask for another one (patch_p4K_b256K.xml), same thing only one there.\
 > Finally hit download and watch it go. Log file is located in "C:\Users\\<user\>\AppData\Roaming\Qualcomm\QFIL\COMPORT_12\port_trace.txt"
