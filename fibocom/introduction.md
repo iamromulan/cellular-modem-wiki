@@ -34,17 +34,10 @@ Fibocom Modem Wiki
 
 > Goto Firmware downloads -> RM551E-GL -> R01 -> Custom Firmware -> Select the needed version.\
 > The zip file will be downloaded to "C:\Quectel\firmware\RM551EGL\R01\Custom\<version>_iamromulan_basic_eth".\
-> Flash "basic_eth" if you plan to use the RM551E-GL in an ethernet sled.\
-> You'll need a bunch of ubi files and others along with a firehose folder. Copy everything in there into the firehose folder. Make sure the path to the firmware doesn't have any spaces in it at all.\
+> Use "basic_eth" file if you plan to use the RM551E-GL in an ethernet sled.\
+
+> You'll need a bunch of ubi files and others along with a firehose folder. Copy everything in there into the firehose folder. Make sure the path to the firmware doesn't have any spaces in it at all, like "C:\Users\user name\firmware" is bad. "C:\Users\username\firmware" is good. This is why I just use C:.\
 > This is why I just use C:\Quectel for QuecDeploy.
-
-> Get the ubi files and others.
->> Copy everything in there into the firehose folder. Make sure the path to the firmware doesn't have any spaces in it at all, like "C:\Users\user name\firmware" is bad. "C:\Users\username\firmware" is good. This is why I just use C:\Quectel for QuecDeploy. Launch QuecDeploy. Firmware downloads -> RM551E-GL -> Custom Firmware -> RM551_<text\>\_iamromulan_basic_eth.\
-
->> The zip file will be downloaded to "C:\Quectel\firmware\RM551EGL\Custom\RM551EGL_<text\>\_iamromulan_basic_eth".\
->> In the new window, go to the `\update\firehose` folder of the firmware and select the `partition_complete` file or the `prog_firehose` file. Then click the Open button.\
->> If you downloaded your firmware with [QuecDeploy](https://github.com/iamromulan/QuecDeploy/releases) then go to C:\Fibocom\firmware\<modem>\<type>\<firmware>\update\firehose.\
-
 
 # QFIL configuration
 
