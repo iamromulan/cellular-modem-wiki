@@ -27,7 +27,7 @@ Fibocom Modem Wiki
 # Backup firmware with QFIL as well
 (To backup few other things, like IMEI.)
 
-> Open QFIL, go to Configuration tab -> Firehose configuration and select Port as per [Intro Config](./introduction.md#qfil-configuration)
+> Open QFIL, go to Configuration tab -> Firehose configuration and select Port as per [QFIL Config](./introduction.md#qfil-configuration--usage)
 
 >> Go to Tools tab.\
 >> QCN backup restore.\
