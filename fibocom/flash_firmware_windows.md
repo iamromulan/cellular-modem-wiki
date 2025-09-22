@@ -18,22 +18,23 @@ Fibocom Modem Wiki
 > At the end of the flash process the modem will automatically reboot and QFIL shoudl say PASS!\
 > If you get any errors ensure the USB connection is stable or try a different computer. Once the flash process makes it past the beginning loading bar phase do not interrupt the process or you could leave the modem in an unusable bricked state. You'll have to enter EDL manually to revive it if this happens.
 
+# Rebooting
+> The module will reboot into EDL mode, as a Quectel model for the first time. At this point you'll want to have the Quectel drivers installed as it'll identify as a Quectel module over USB.\
 
-
-> Rebooting
->> The module will reboot into EDL mode, as a Quectel model for the first time. At this point you'll want to have the Quectel drivers installed as it'll identify as a Quectel module over USB.\
->> Go into Qnavigator (uncheck automatic initialization) or your AT command program of choice and send ATI to confirm.
+# 5 Launch TeraTerm
+or Qnavigator (remember to uncheck automatic initialization) 
+> During rebooting process make sure you open a serial window on AT port, to watch what is going.
 
 ![](./images/teraterm1open.png)
 
-> ATI\
-> +Quectel\
-> +RM551E-GL\
-> +Revision: RM551EGL00AAR01A02M8G -> RM551EGL00AAR01A04M8G
+> Select serial "Quectel USB AT Port" -> Ok
+> Check FUNctionality using ATI commands
+> ATI;+CFUN?
+  +Quectel
+  +RM551E-GL
+  +Revision: RM551EGL00AA<R01>A02M8G -> RM551EGL00AA<R01>A04M8G -> RM551EGL00AA<R02>A01M8G
+  +CFUN: 5
 
-> If you run AT+CFUN? You'll notice it's not 1 it's some other number.\
-> AT+CFUN?\
-> +CFUN: 5
 
 > It means it's missing its xqcn and the radio won't work until a compatible one is restored. You'll grab the xqcn I made available in my mega share I backed up from a real RM551 "https://mega.nz/folder/CRFWlIpQ#grOByBgkfZe5uLMkX2M2XA/file/LZ80TZLD" and restore it in QPST under the restore tab with following steps:
   > Launch Qpst Configuration -> Add new port (if not detected automatically) -> Look for DM port\
