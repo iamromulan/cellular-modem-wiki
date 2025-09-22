@@ -17,6 +17,8 @@
 
 > Next close QPST completely even from the system tray.
 
+> Close Qspt window
+
 # Backup factory firmware with QFIL as well
 (To backup few other things, like IMEI.)
 
