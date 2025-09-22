@@ -28,6 +28,8 @@ Fibocom Modem Wiki
 
 > Open QFIL, go to Configuration tab -> Firehose configuration and select Port as per [QFIL Config](./introduction.md#qfil-configuration--usage)
 
+![](./images/qfil0backup.png)
+
 > Go to Tools tab.\
 > QCN backup restore.\
 > Browse and give filename "C:\<path>\00000000.qcn", SPC Code 000000, Enable Multi-SIM YES.\
