@@ -23,6 +23,7 @@
 (To backup few other things, like IMEI.)
 
 > Open QFIL.
+
 >> Go to Configuration tab -> Firehose configuration:\
 >> Download protocol can stay default Sahara.\
 >> The device type is NAND.\
@@ -30,6 +31,10 @@
 >> Don't use the auto backup restore QCN options on the right.\
 >> \*"Reset after download" just means it'll reboot after it finishes so keep that checked.\
 >> The big thing here is to select \*"Erase all before download". This will erase what you backed up into the xqcn and allow a full clean flash to occur with the 551 firmware.
+
+>> Select Port.\
+>> Flag "Show Non QDLoader/DIAG Port"\
+>> Choose "Quectel USB DM Port"
 
 >> Go to Tools tab.\
 >> QCN backup restore.\
