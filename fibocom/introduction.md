@@ -40,6 +40,6 @@ To do: Add info here
 
 # Firmware flashing
 
-> You'll need a bunch of ubi files and others along with a firehose folder. Copy everything in there into the firehose folder. Make sure the path to the firmware doesn't have any spaces in it at all, like "C:\Users\<user name>\firmware" is bad. "C:\Users\<username>\firmware" is good. This is why I just use C:\Quectel for QuecDeploy.
+> You'll need a bunch of ubi files and others along with a firehose folder. Copy everything in there into the firehose folder. Make sure the path to the firmware doesn't have any spaces in it at all, like "C:\Users\\<user name>\firmware" is bad. "C:\Users\<username>\firmware" is good. This is why I just use C:\Quectel for QuecDeploy.
 > Once the flash completes wait for the ports to come back up in device manager. Once they come back, wait about 30 seconds +/- for the second reboot to occur. AT+QCFG= pcie/mode,1 and AT+QCFG=usbnet,1 are sent then it reboots. Once the second reboot occurs ethernet will be working with Luci and SSH acess at 192.168.224.1. Pre-set root password is "iamromulan".
 
