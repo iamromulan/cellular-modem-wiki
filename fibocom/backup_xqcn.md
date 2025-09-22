@@ -9,7 +9,7 @@
 >> Add New Port.\
 >> "Show serial and USB/QC diagnostic port only": NO.\
 >> Add "USB DM Port".\
->> Just ignore the other ports "USB NMEA, USB Modem, AT".\
+>> Just ignore the other ports "USB NMEA, USB Modem, AT".
 
 > Navigate to Start Clients > Software Downloads > Backup tab.
 
