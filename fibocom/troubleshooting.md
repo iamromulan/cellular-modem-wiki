@@ -2,9 +2,9 @@
 
 # ADB operations
 
-> Launch PoweShell-> C:\Windows\system32>\
+> Launch PoweShell-> C:\Windows\system32>
 >> adb devices\
->> * daemon not running; starting now at tcp:5037\
+>> * daemon not running; starting now at tcp:5037 \
 >> * daemon started successfully\
 >>   List of devices attached\
 >>   cad1fce5	device\
