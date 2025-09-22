@@ -4,7 +4,7 @@ Fibocom Modem Wiki
 
 # Flashing firmware
 
-> Open QFIL and make sure the Port is detected as per [Intro Config](./introduction.md#qfil-configuration)
+> Open QFIL and make sure the Port is detected as per [QFIL Config](./introduction.md#qfil-configuration--usage)
 >> Select Flat Build.\
 >> Browse Programmer path to "C:\<path>\update\firehose" folder and select the "prog_firehose_xxx.elf" file.\
 >> Load XML and select the only file it'll show you (rawprogram_nand_p4K_b256K_update.xml), it'll ask for another one (patch_p4K_b256K.xml), same thing only one there.\
