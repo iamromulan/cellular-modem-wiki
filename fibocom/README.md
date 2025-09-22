@@ -22,7 +22,6 @@ This is largely incomplete and could use some help from a Fibocom expert via PR!
 		- [SDXPINN Platform](./sdxpinn/README.md):
 			- Modems
 				- [FM190W-GL](./FM190W-GL/README.md)
-					- [Preliminary FM190W-GL to Quectel RM551E-GL conversion guide](./FM190W-GL/FM190W-GL_to_RM551E-GL.md)
+		OBSOLETE	- [Preliminary FM190W-GL to Quectel RM551E-GL conversion guide](./FM190W-GL/FM190W-GL_to_RM551E-GL.md)
 	  
-- Community Projects
-	- Nothing Yet
+- [Appendix](./appendix.md)
