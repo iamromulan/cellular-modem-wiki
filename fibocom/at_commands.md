@@ -39,11 +39,9 @@ If you plan to use the RM551E-GL in an ethernet sled you need to edit some modem
 >>  +CGDCONT: 1,"IPV4V6","","0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0",0,0,0,0,,,,,,,,,," // <MISSING_APN!!!>\
 >> AT+CGDCONT=1,"IPV4V6","<YOUR_APN_HERE>"
 
+>> turn off and on FUNctionality to take effect\
+>> AT+CFUN=0;+CFUN=1\
+>> AT+CFUN=1,1
 
-// turn off and on FUNctionality to take effect
-AT+CFUN=0;+CFUN=1
-AT+CFUN=1,1
-
-// force all values to take effect
-POWER CYCLE the modem+m.2 adaptor to force effect to all changes
-
+>> force all values to take effect\
+>> POWER CYCLE the modem+m.2 adaptor to force effect to all changes
