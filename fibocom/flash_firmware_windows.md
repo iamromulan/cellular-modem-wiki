@@ -2,11 +2,9 @@ Fibocom Modem Wiki
 =================================
 > :book: This is a living Wiki. Changes may be made as more discoveries are made or more community software is made. If you feel like you have information to contribute to this wiki please open a pull request.
 
-Open QFIL and make sure the Port is detected as per [introduction.md#qfil-configuration]
-
-and select Flat Build.
-
-> If you downloaded your firmware with [QuecDeploy](https://github.com/iamromulan/QuecDeploy/releases) then go to C:\Fibocom\firmware\<modem>\<type>\<firmware>\update\firehose.\
+> Open QFIL and make sure the Port is detected as per [Intro Config](./introduction.md#qfil-configuration)
+>> Select Flat Build.\
+>> If you downloaded your firmware with [QuecDeploy](https://github.com/iamromulan/QuecDeploy/releases) then go to C:\Fibocom\firmware\<modem>\<type>\<firmware>\update\firehose.\
 
 >> In the new window, go to the `\update\firehose` folder of the firmware and select the `partition_complete` file or the `prog_firehose` file. Then click the Open button.\
 
