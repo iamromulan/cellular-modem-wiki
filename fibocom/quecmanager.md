@@ -28,3 +28,5 @@ Fibocom Modem Wiki
 >> Update lists\
 >> Select "sdxpinn-quecmanager" or "sdxpinn-quecmanager-beta"\
 >> Install
+
+Goto next step [Appendix](./appendix.md)
