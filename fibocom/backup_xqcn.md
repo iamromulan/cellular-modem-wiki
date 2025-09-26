@@ -5,8 +5,7 @@ Fibocom Modem Wiki
 
 # Backup firmware with QPST
 
-https://github.com/giorez/cellular-modem-wiki/edit/main/fibocom/flash_firmware_windows.md#nv-restore-radio-calibration
-
+During the flashing process the radio calibration will be erased, make sure you have valid backups as reported at [NV Restore Radio Calibration](./flash_firmware_windows.md#nv-restore-radio-calibration)
 
 > Open Qpst Configuration.
 
