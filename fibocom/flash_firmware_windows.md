@@ -10,7 +10,9 @@ Fibocom Modem Wiki
 > Load XML and select the only file it'll show you (rawprogram_nand_p4K_b256K_update.xml), it'll ask for another one (patch_p4K_b256K.xml), same thing only one there.\
 > Finally hit download and watch it go. Log file is located in "C:\Users\\<user\>\AppData\Roaming\Qualcomm\QFIL\COMPORT_12\port_trace.txt"
 
-![](./images/qfil4flash.png)
+![](./images/08_qfil_flash.png)
+
+![](./images/09_qfil_flash_success.png)
 
 > Once the flash completes wait for the ports to come back up in device manager.\
 > Once they come back, wait about 30 seconds +/- for the second reboot to occur.\
@@ -30,7 +32,7 @@ Fibocom Modem Wiki
 > TeraTerm (or for Qnavigator remember to uncheck automatic initialization)\
 > During rebooting process make sure you open a serial window on AT port, to watch what is going.
 
-![](./images/teraterm1open.png)
+![](./images/00_teraterm_open.png)
 
 > Select serial "Quectel USB AT Port" -> Ok\
 > Check FUNctionality using ATI commands\
@@ -40,7 +42,7 @@ Fibocom Modem Wiki
 > +Revision: RM551EGL00AA<R01>A02M8G -> RM551EGL00AA<R01>A04M8G -> RM551EGL00AA<R02>A01M8G\
 > +CFUN: 5
 
-![](./images/teraterm2cfun5.png)
+![](./images/10_teraterm_flashing_status.png)
 
 ## NV Restore Radio Calibration
 > If AT+CFUN? gives >1 it means it's missing its xqcn and the radio won't work until a compatible one is restored.\
@@ -52,7 +54,9 @@ Fibocom Modem Wiki
 > Check allow "ESN mismatch"\
 > Browse and select the Xqcn file and click Start
 
-![](./images/qpst3restore.png)
+![](./images/11_qpst_restore.png)
+
+![](./images/12_qpst_restore_success.png)
 
 > During the restore process you can see the modem status throught TeraTerm serial sessions:\
 > (CFUN: 5 > CFUN: 7 > Disconnected > READY).\
@@ -62,6 +66,8 @@ Fibocom Modem Wiki
 > AT+CFUN?;+CFUN=1\
 > +CFUN: 1\
 > +CME ERROR: 4 // retry and make sure you flagg "Allow ESN mismatch" in QPST Restore tab or you choose a valid Xqcn file
+
+![](./images/13_teraterm_cfun.png)
 
 > If you are on windows system , you'll see a new ethernet network on "Control Panel\Network and Internet\Network Connections":
 
