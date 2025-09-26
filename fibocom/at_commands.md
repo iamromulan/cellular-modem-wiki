@@ -14,6 +14,8 @@ If you plan to use the RM551E-GL in an ethernet sled you need to edit some modem
 >> AT+QSECCFG="adb_auth",""\
 >> AT+QCFG="usbcfg",0x2C7C,0x0122,1,1,1,1,1,1,0 // Enable ADB
 
+![](./images/14_teraterm_adb_unlock.png)
+
 > query status 1
 >> AT+QCFG="pcie/mode";+QCFG="usbnet";+EGMR=0,7;+CGDCONT?;+CEREG?;+C5GREG?;+COPS?;+QNWPREFCFG="mode_pref";+QMAP="WWAN"
 
@@ -24,6 +26,8 @@ If you plan to use the RM551E-GL in an ethernet sled you need to edit some modem
 >> AT+CEREG=2;+C5GREG=2\
 >> AT+QNWPREFCFG="mode_pref",NR5G:LTE\
 
+![](./images/15_teraterm_modem_setting1.png)
+
 > query status 2
 >> AT+QMBNCFG="AutoSel";+QMBNCFG="select";+QMBNCFG="list"
 
@@ -31,6 +35,8 @@ If you plan to use the RM551E-GL in an ethernet sled you need to edit some modem
 >> AT+QMBNCFG="AutoSel",0\
 >> AT+QMBNCFG="Deactivate" // if this option is already deactivated ì, yuo'll receive error\
 >> AT+QMBNCFG="select","ROW_Commercial"
+
+![](./images/15_teraterm_modem_setting2.png)
 
 > query status 3
 >> AT+QCAINFO;+CGACT?;+QMAPWAC? // "1" to enable auto connect internet for ethernet
