@@ -5,7 +5,7 @@ Fibocom Modem Wiki
 
 # Backup firmware with QPST
 
-During the flashing process the radio calibration will be erased, make sure you have valid backups as reported at [NV Restore Radio Calibration](./flash_firmware_windows.md#nv-restore-radio-calibration)
+> :book: During the flashing process the radio calibration will be erased, make sure you have valid backups as reported at [NV Restore Radio Calibration](./flash_firmware_windows.md#nv-restore-radio-calibration)
 
 > Open Qpst Configuration.
 
