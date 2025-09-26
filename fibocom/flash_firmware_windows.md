@@ -73,5 +73,5 @@ Fibocom Modem Wiki
 
 > Double backup (qFil+Qpst) new modem firmware now!
 
-Next step will be modem setting throught [AT Commands](./at_commands.md)
 
+Goto next step [AT Commands](./at_commands.md)
