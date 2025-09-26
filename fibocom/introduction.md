@@ -43,15 +43,15 @@ Fibocom Modem Wiki
 
 > Open QFIL and select "Flat Build"
 
-![](./images/qfil1open.png)
+![](./images/8_qfil_flash.png)
 
 > Select the COM port number as the DM port
 
-![](./images/qfil3port.png)
+![](./images/4_qfil_port.png)
 
 > Go to Configuration tab -> Firehose configuration:
 
-![](./images/qfil2conf.png)
+![](./images/5_qfil_config.png)
 
 > Download protocol can stay default Sahara.\
 > The device type is NAND.\
