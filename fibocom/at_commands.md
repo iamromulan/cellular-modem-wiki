@@ -24,7 +24,7 @@ If you plan to use the RM551E-GL in an ethernet sled you need to edit some modem
 >> AT+QCFG="pcie/mode",1;+QCFG="usbnet",1 // set Dual PHY 2.5\
 >> AT+CGDCONT=1,"IPV4V6","<YOUR_APN_HERE>"\
 >> AT+CEREG=2;+C5GREG=2\
->> AT+QNWPREFCFG="mode_pref",NR5G:LTE\
+>> AT+QNWPREFCFG="mode_pref",NR5G:LTE
 
 ![](./images/15_teraterm_modem_setting1.png)
 
