@@ -16,6 +16,8 @@ Fibocom Modem Wiki
 
 ![](./images/19_firefox_quecmanager.png)
 
+![](./images/20_firefox_quecmanager_success.png)
+
 > Or Use "menu" command
 >> Visit http://192.168.224.1/cgi-bin/luci/admin/services/ttyd \
 >> menu # /usr/bin/menu
