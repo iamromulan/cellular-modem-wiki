@@ -8,10 +8,11 @@ Fibocom Modem Wiki
 >> Visit http://192.168.224.1/cgi-bin/luci/admin/services/ttyd \
 >> RM551E-GL login:root / psw:iamromulan\
 >> opkg update\
+
 >> \# opkg upgrade sdxpinn-console-menu # (not needed for R02)\
 >> \# opkg upgrade sdxpinn-mount-fix # (not needed for R02)\
 >> \# opkg upgrade sdxpinn-patch # (not needed for R02)\
->> opkg update\
+
 >> opkg install sdxpinn-quecmanager # or sdxpinn-quecmanager-beta
 
 ![](./images/19_firefox_quecmanager.png)
