@@ -45,3 +45,4 @@ Fibocom Modem Wiki
 
 > Close QCN Backup Restore window.
 
+Goto next step [Flash & Restore](./flash_firmware_windows.md)
