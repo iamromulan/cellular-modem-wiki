@@ -5,6 +5,9 @@ Fibocom Modem Wiki
 
 # Backup firmware with QPST
 
+https://github.com/giorez/cellular-modem-wiki/edit/main/fibocom/flash_firmware_windows.md#nv-restore-radio-calibration
+
+
 > Open Qpst Configuration.
 
 > Use the AutoAdd function to autoconnect to proper serial port "DEADD00D sn 4ec33ae0 DIAGnostic" or\
