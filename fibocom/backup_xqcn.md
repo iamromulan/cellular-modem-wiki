@@ -14,13 +14,14 @@ Fibocom Modem Wiki
 > Add "USB DM Port".\
 > Just ignore the other ports "USB NMEA, USB Modem, AT".
 
-![](./images/qpst1open.png)
+![](./images/01_qpst_port.png)
 
 > Navigate to Start Clients > Software Downloads > Backup tab.
 
 > Go to xQCN File field, browse backup directory, give filename and press Start. The file is created into "C:\<path>\DEADD00D_0.xqcn". Wait for the load bar get to the and and look for "Memory Backup Completed" message.
 
-![](./images/qpst0backup.png)
+![](./images/02_qpst_backup.png)
+![](./images/03_qpst_backup_complete.png)
 
 > Next close QPST window completely even from the system tray.
 
@@ -30,13 +31,15 @@ Fibocom Modem Wiki
 
 > Open QFIL, go to Configuration tab -> Firehose configuration and select Port as per [QFIL Config](./introduction.md#qfil-configuration--usage)
 
-![](./images/qfil0backup.png)
+![](./images/06_qfil_backup.png)
 
 > Go to Tools tab.\
 > QCN backup restore.\
 > Browse and give filename "C:\<path>\00000000.qcn", SPC Code 000000, Enable Multi-SIM YES.\
 > Press Backup QCN.\
 > Wait for the load bar to finish and look for "Backup QCN Succeeded"
+
+![](./images/07_qfil_backup_success.png)
 
 > Close QCN Backup Restore window.
 
