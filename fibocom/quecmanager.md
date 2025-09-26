@@ -14,6 +14,8 @@ Fibocom Modem Wiki
 >> opkg update\
 >> opkg install sdxpinn-quecmanager # or sdxpinn-quecmanager-beta
 
+![](./images/19_firefox_quecmanager.png)
+
 > Or Use "menu" command
 >> Visit http://192.168.224.1/cgi-bin/luci/admin/services/ttyd \
 >> menu # /usr/bin/menu
