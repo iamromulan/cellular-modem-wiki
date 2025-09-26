@@ -22,4 +22,4 @@ This is largely incomplete and could use some help from a Fibocom expert via PR!
 				- [FM190W-GL](./FM190W-GL/README.md)
 - [Appendix](./appendix.md)
 
-Archived - [Preliminary FM190W-GL to Quectel RM551E-GL conversion guide](./FM190W-GL/FM190W-GL_to_RM551E-GL.md)
+- Archived [Preliminary FM190W-GL to Quectel RM551E-GL conversion guide](./FM190W-GL/FM190W-GL_to_RM551E-GL.md)
