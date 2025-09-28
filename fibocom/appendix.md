@@ -23,6 +23,10 @@
 > Manual toolkit installation via ADB \
 > cd /tmp && wget -O rcPCIe_SDXPINN_toolkit.sh https://raw.githubusercontent.com/iamromulan/quectel-rgmii-toolkit/SDXPINN/rcPCIe_SDXPINN_toolkit.sh && chmod +x rcPCIe_SDXPINN_toolkit.sh && ./rcPCIe_SDXPINN_toolkit.sh && cd /
 
+# Install zerotier
+Goto http://192.168.224.1/cgi-bin/luci/admin/services/ttyd
+
+
 # Troubleshooting
 In case you brick the modem you can try to send 1.8v to the test point on the back of the modem (see attached image)
 If you set GTUSBMODE=31, all the serial ports will be lost. To get back them back, put your modem into a openwrt router, and send this command:
