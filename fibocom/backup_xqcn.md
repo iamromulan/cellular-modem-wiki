@@ -9,11 +9,11 @@ Fibocom Modem Wiki
 
 > Open Qpst Configuration.
 
-> Use the AutoAdd function to autoconnect to proper serial port "DEADD00D sn 4ec33ae0 DIAGnostic" or\
-> Select Ports tab.\
+> Use the AutoAdd function to autoconnect to proper serial port "DEADD00D sn 4ec33ae0 DM Port"
+> If you can't see any port, select Ports tab.\
 > Add New Port.\
 > "Show serial and USB/QC diagnostic port only": NO.\
-> Add "USB DM Port".\
+> Select "USB DM Port".\
 > Just ignore the other ports "USB NMEA, USB Modem, AT".
 
 ![](./images/01_qpst_port.png)
