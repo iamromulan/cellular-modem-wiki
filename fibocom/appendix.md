@@ -23,12 +23,16 @@
 > Manual toolkit installation via ADB \
 > cd /tmp && wget -O rcPCIe_SDXPINN_toolkit.sh https://raw.githubusercontent.com/iamromulan/quectel-rgmii-toolkit/SDXPINN/rcPCIe_SDXPINN_toolkit.sh && chmod +x rcPCIe_SDXPINN_toolkit.sh && ./rcPCIe_SDXPINN_toolkit.sh && cd /
 
-# Install zerotier
+# Install zerotier WORK IN PROGRESS
 > Use ssh console at http://192.168.224.1/cgi-bin/luci/admin/services/ttyd
 >> opkg update\
 >> opkg install luci-app-zerotier\
 >> uci set zerotier.sample_config.enabled='1'\
 >> uci set zerotier.sample_config.join='<network_id>'\
+>> uci set zerotier.sample_config.allow_managed='1'\
+>> uci set zerotier.sample_config.allow_global='0'\
+>> uci set zerotier.sample_config.allow_default='0'\
+>> uci set zerotier.sample_config.allow_dns='0'\
 >> uci commit zerotier
 >> 
 >> // reboot module to take effect
