@@ -45,7 +45,7 @@ If you plan to use the RM551E-GL in an ethernet sled you need to edit some modem
 ![](./images/15_teraterm_modem_setting2.png)
 
 > // query status3
->> AT+QCAINFO
+>> AT+QCAINFO\
 >> AT+CGACT?\
 >> AT+QMAPWAC? // "1" to enable auto connect internet for ethernet
 
