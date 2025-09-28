@@ -4,26 +4,30 @@ Fibocom Modem Wiki
 
 # Install QuecManager
 
-> Use ssh console
->> Visit http://192.168.224.1/cgi-bin/luci/admin/services/ttyd \
+> You can choose from several options.
+> 
+> a) Use ssh console at http://192.168.224.1/cgi-bin/luci/admin/services/ttyd
 >> RM551E-GL login:root / psw:iamromulan\
->> opkg update
-
->> \# opkg upgrade sdxpinn-console-menu # (not needed for R02)\
->> \# opkg upgrade sdxpinn-mount-fix # (not needed for R02)\
->> \# opkg upgrade sdxpinn-patch # (not needed for R02)
-
->> opkg install sdxpinn-quecmanager # or sdxpinn-quecmanager-beta
+>> opkg update\
+>> \# opkg upgrade sdxpinn-console-menu #*\
+>> \# opkg upgrade sdxpinn-mount-fix #*\
+>> \# opkg upgrade sdxpinn-patch #*\
+>> opkg install sdxpinn-quecmanager # or sdxpinn-quecmanager-beta\
+\#\* (not needed for firrware version R02)
 
 ![](./images/19_firefox_quecmanager.png)
 
 ![](./images/20_firefox_quecmanager_success.png)
 
-> Or Use "menu" command
->> Visit http://192.168.224.1/cgi-bin/luci/admin/services/ttyd \
+> b) Use ssh console at http://192.168.224.1/cgi-bin/luci/admin/services/ttyd
 >> menu # /usr/bin/menu
 
-> Or use LuCI GUI
+> c) Use ssh console via Powershell
+>> adb shell
+>> / # opkg update
+>> / # opkg install sdxpinn-quecmanager-beta
+
+> d) Use LuCI Graphic User Interface
 >> Visit http://192.168.224.1/cgi-bin/luci/admin/system/opkg \
 >> Update lists\
 >> Select "sdxpinn-quecmanager" or "sdxpinn-quecmanager-beta"\
