@@ -65,8 +65,9 @@ Fibocom Modem Wiki
 > The module will automatically reboot, showing "Trying to communicate with phone" and after it completes "Memory Restore Completed" messages.
 
 > Open/Re-open a serial connection (i.e TeraTerm) on AT port to check CFUN again and confirm you entered CFUN: 1
-> AT+CFUN?;+CFUN=1\
+> AT+CFUN?\
 > +CFUN: 1\
+> AT+CFUN=1\
 > +CME ERROR: 4 // retry and make sure you flagg "Allow ESN mismatch" in QPST Restore tab or you choose a valid Xqcn file
 
 ![](./images/13_teraterm_cfun.png)
