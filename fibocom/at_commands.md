@@ -18,7 +18,8 @@ If you plan to use the RM551E-GL in an ethernet sled you need to edit some modem
 
 > // query status1
 >> AT+QCFG="pcie/mode";+QCFG="usbnet"\
->> AT+EGMR=0,7;+CGDCONT?\
+>> AT+EGMR=0,7
+>> AT+CGDCONT?\
 >> AT+CEREG?;+C5GREG?\
 >> AT+COPS?\
 >> AT+QNWPREFCFG="mode_pref"\
