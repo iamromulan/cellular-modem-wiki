@@ -53,4 +53,7 @@ If you plan to use the RM551E-GL in an ethernet sled you need to edit some modem
 > force all values to take effect
 >> POWER CYCLE the modem+m.2 adaptor to force effect to all changes
 
+> In case you mess-up your device during configuration, last chance is a factory reset, but you'll need to start-over. Use as last chance and at your own risk.
+>> AT+QCFG="ResetFactory"
+
 Goto next step [Install QuecManager](./quecmanager.md)
