@@ -24,13 +24,14 @@
 > cd /tmp && wget -O rcPCIe_SDXPINN_toolkit.sh https://raw.githubusercontent.com/iamromulan/quectel-rgmii-toolkit/SDXPINN/rcPCIe_SDXPINN_toolkit.sh && chmod +x rcPCIe_SDXPINN_toolkit.sh && ./rcPCIe_SDXPINN_toolkit.sh && cd /
 
 # Install zerotier
-Use ssh console at http://192.168.224.1/cgi-bin/luci/admin/services/ttyd
-opkg update
-opkg install luci-app-zerotier
-uci set zerotier.sample_config.enabled='1'
-uci set zerotier.sample_config.join='<network_id>'
-uci commit zerotier
-// reboot module to take effect
+> Use ssh console at http://192.168.224.1/cgi-bin/luci/admin/services/ttyd
+>> opkg update\
+>> opkg install luci-app-zerotier\
+>> uci set zerotier.sample_config.enabled='1'\
+>> uci set zerotier.sample_config.join='<network_id>'\
+>> uci commit zerotier
+>> 
+>> // reboot module to take effect
 
 # Troubleshooting
 In case you brick the modem you can try to send 1.8v to the test point on the back of the modem (see attached image)
