@@ -37,7 +37,7 @@
 >> uci commit zerotier
 >> 
 >> // reboot module to take effect\
->> Still missing firewall config to copmplete installation
+>> Still missing firewall & network interface config to complete installation
 
 # Troubleshooting
 In case you brick the modem you can try to send 1.8v to the test point on the back of the modem (see attached image)
