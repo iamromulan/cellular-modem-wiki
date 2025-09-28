@@ -36,7 +36,7 @@ Fibocom Modem Wiki
 
 > Select serial "Quectel USB AT Port" -> Ok\
 > Check FUNctionality using ATI commands\
-> ATI
+> ATI\
 > AT+CFUN?\
 > +Quectel\
 > +RM551E-GL\
