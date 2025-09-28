@@ -42,7 +42,7 @@ If you plan to use the RM551E-GL in an ethernet sled you need to edit some modem
 >> AT+QMBNCFG="Deactivate" // if this option is already deactivated ì, yuo'll receive error\
 >> AT+QMBNCFG="select","ROW_Commercial"
 
-![](./images/15_teraterm_modem_setting2.png)
+![](./images/16_teraterm_modem_setting2.png)
 
 > // query status3
 >> AT+QCAINFO\
