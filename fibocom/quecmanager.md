@@ -13,7 +13,7 @@ Fibocom Modem Wiki
 >> \#\* opkg install sdxpinn-firstboot\
 >> \#\* opkg install sdxpinn-mount-fix\
 >> \#\* opkg install sdxpinn-patch\
->> opkg install sdxpinn-quecmanager # or sdxpinn-quecmanager-beta\
+>> opkg install sdxpinn-quecmanager-beta # or opkg install sdxpinn-quecmanager-beta\
 >>
 >> \#\* (not needed for firmware version R02)
 
@@ -32,7 +32,7 @@ Fibocom Modem Wiki
 > d) Use LuCI Graphic User Interface
 >> Visit http://192.168.224.1/cgi-bin/luci/admin/system/opkg \
 >> Update lists\
->> Select "sdxpinn-quecmanager" or "sdxpinn-quecmanager-beta"\
+>> Select "sdxpinn-quecmanager-beta" or "sdxpinn-quecmanager"\
 >> Install
 
 Goto next step [Appendix](./appendix.md)
