@@ -13,7 +13,7 @@ Fibocom Modem Wiki
 >> \#\* opkg install sdxpinn-firstboot\
 >> \#\* opkg install sdxpinn-mount-fix\
 >> \#\* opkg install sdxpinn-patch\
->> opkg install sdxpinn-quecmanager-beta # or opkg install sdxpinn-quecmanager-beta\
+>> opkg install sdxpinn-quecmanager-beta # or opkg install sdxpinn-quecmanager-beta
 >>
 >> \#\* (not needed for firmware version R02)
 
