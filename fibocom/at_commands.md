@@ -58,12 +58,15 @@ If you plan to use the RM551E-GL in an ethernet sled you need to edit some modem
 > // turn off and on FUNctionality to take effect
 >> AT+CFUN=0\
 >> AT+CFUN=1\
->> AT+CFUN=1,1
+>> AT+CFUN=1,1 // force reboot
 
 > Force all values to take effect
 >> POWER CYCLE the modem+m.2 adaptor to force effect to all changes
 
 > In case you mess-up your device during configuration, last chance is a factory reset, but you'll need to start-over. Use as last chance and at your own risk.
->> AT+QCFG="ResetFactory"
+
+>> AT&F // Reset AT Command Settings to Factory Settings\
+>> AT+QCFG="ResetFactory" // Reset to Factory setting, it will cause module reboot\
+>> AT+CFUN=1,1 // force reboot
 
 Goto next step [Install QuecManager](./quecmanager.md)
