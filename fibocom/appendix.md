@@ -29,6 +29,7 @@
 >> opkg install luci-app-zerotier\
 >> uci set zerotier.sample_config.enabled='1'\
 >> uci set zerotier.sample_config.join='<network_id>'\
+>> uci set zerotier.global.secret="$(cat /var/lib/zerotier-one/identity.secret)" \
 >> uci set zerotier.sample_config.allow_managed='1'\
 >> uci set zerotier.sample_config.allow_global='0'\
 >> uci set zerotier.sample_config.allow_default='0'\
