@@ -24,7 +24,7 @@ Fibocom Modem Wiki
 > The FM190W (hardware version 01, rev4) is delivered in AT+GTUSBMODE=32 functionality and exposes 4 serial ports and you will get DIAG + MODEM + AT + PIPE + RMNET functionality.
 > 
 > In case you need to change GTUSBMODE consult Fibocom AT Commands pdf guide on https://github.com/KFOq/Doc/blob/main/Fibocom_AT%20Commands%20User%20Manual_MBB_V2.4.pdf and use the serial port application (i.e TeraTerm) to send specific AT commands.
-
+>
 > Go to device manager and check if the new COM ports are visible in the system.\
 > Restart your computer if the new COM ports are not visible.
 
