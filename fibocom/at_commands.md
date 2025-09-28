@@ -8,7 +8,7 @@ If you plan to use the RM551E-GL in an ethernet sled you need to edit some modem
 
 > Use your favorite serial appplication (i.e TeraTerm) on the AT Port of your serial connection.
 
-> query status 0 // ADB status & unlock
+> // query ADB status & unlock
 >> AT+QCFG="usbcfg" // query status\
 >> +QCFG: "usbcfg",0x2C7C,0x0122,1,1,1,1,1,<0>,0 // if initial response is locked <0>\
 >> AT+QSECCFG="adb_auth",""\
@@ -16,10 +16,15 @@ If you plan to use the RM551E-GL in an ethernet sled you need to edit some modem
 
 ![](./images/14_teraterm_adb_unlock.png)
 
-> query status 1
->> AT+QCFG="pcie/mode";+QCFG="usbnet";+EGMR=0,7;+CGDCONT?;+CEREG?;+C5GREG?;+COPS?;+QNWPREFCFG="mode_pref";+QMAP="WWAN"
+> // query status1
+>> AT+QCFG="pcie/mode";+QCFG="usbnet"\
+>> AT+EGMR=0,7;+CGDCONT?\
+>> AT+CEREG?;+C5GREG?\
+>> AT+COPS?\
+>> AT+QNWPREFCFG="mode_pref"\
+>> AT+QMAP="WWAN"
 
-> set values 1
+> // set values1
 >> AT+EGMR=1,7,"<YOUR_IMEI_HERE>" // repairs IMEI\
 >> AT+QCFG="pcie/mode",1;+QCFG="usbnet",1 // set Dual PHY 2.5\
 >> AT+CGDCONT=1,"IPV4V6","<YOUR_APN_HERE>"\
@@ -28,29 +33,33 @@ If you plan to use the RM551E-GL in an ethernet sled you need to edit some modem
 
 ![](./images/15_teraterm_modem_setting1.png)
 
-> query status 2
->> AT+QMBNCFG="AutoSel";+QMBNCFG="select";+QMBNCFG="list"
+> // query status2
+>> AT+QMBNCFG="AutoSel";+QMBNCFG="select"\
+>> AT+QMBNCFG="list"
 
-> set values 2
+> // set values2
 >> AT+QMBNCFG="AutoSel",0\
 >> AT+QMBNCFG="Deactivate" // if this option is already deactivated ì, yuo'll receive error\
 >> AT+QMBNCFG="select","ROW_Commercial"
 
 ![](./images/15_teraterm_modem_setting2.png)
 
-> query status 3
->> AT+QCAINFO;+CGACT?;+QMAPWAC? // "1" to enable auto connect internet for ethernet
+> // query status3
+>> AT+QCAINFO
+>> AT+CGACT?\
+>> AT+QMAPWAC? // "1" to enable auto connect internet for ethernet
 
-> query status 4 and set APN
+> // query status4 and set APN
 >> AT+CGDCONT?\
 >>  +CGDCONT: 1,"IPV4V6","","0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0",0,0,0,0,,,,,,,,,," // <MISSING_APN!!!>\
 >> AT+CGDCONT=1,"IPV4V6","<YOUR_APN_HERE>"
 
-> turn off and on FUNctionality to take effect
->> AT+CFUN=0;+CFUN=1\
+> // turn off and on FUNctionality to take effect
+>> AT+CFUN=0\
+>> AT+CFUN=1\
 >> AT+CFUN=1,1
 
-> force all values to take effect
+> Force all values to take effect
 >> POWER CYCLE the modem+m.2 adaptor to force effect to all changes
 
 > In case you mess-up your device during configuration, last chance is a factory reset, but you'll need to start-over. Use as last chance and at your own risk.
