@@ -9,9 +9,10 @@ Fibocom Modem Wiki
 > a) Use ssh console at http://192.168.224.1/cgi-bin/luci/admin/services/ttyd
 >> RM551E-GL login:root / psw:iamromulan\
 >> opkg update\
->> \#\* opkg upgrade sdxpinn-console-menu\
->> \#\* opkg upgrade sdxpinn-mount-fix\
->> \#\* opkg upgrade sdxpinn-patch\
+>> \#\* opkg install sdxpinn-console-menu\
+>> \#\* opkg install sdxpinn-firstboot\
+>> \#\* opkg install sdxpinn-mount-fix\
+>> \#\* opkg install sdxpinn-patch\
 >> opkg install sdxpinn-quecmanager # or sdxpinn-quecmanager-beta\
 >>
 >> \#\* (not needed for firmware version R02)
