@@ -25,21 +25,23 @@
 
 # Install zerotier WORK IN PROGRESS
 > Use ssh console at http://192.168.224.1/cgi-bin/luci/admin/services/ttyd
->> opkg remove luci-app-zerotier\
->> rm /etc/config/zerotier\
->> opkg update\
->> opkg install luci-app-zerotier\
->> uci set zerotier.sample_config.enabled='1'\
->> uci set zerotier.sample_config.join='<YOUR_NETWORK_IT>'\
->> uci set zerotier.global.secret="$(cat /var/lib/zerotier-one/identity.secret)" \
->> uci set zerotier.sample_config.allow_managed='1'\
->> uci set zerotier.sample_config.allow_global='0'\
->> uci set zerotier.sample_config.allow_default='0'\
->> uci set zerotier.sample_config.allow_dns='0'\
->> uci commit zerotier
->> 
->> // reboot module to take effect\
->> Still missing firewall & network interface config to complete installation
+> 
+> opkg remove luci-app-zerotier\
+> rm /etc/config/zerotier
+> 
+> opkg update\
+> opkg install luci-app-zerotier\
+> uci set zerotier.sample_config.enabled='1'\
+> uci set zerotier.sample_config.join='<YOUR_NETWORK_IT>'\
+> uci set zerotier.global.secret="$(cat /var/lib/zerotier-one/identity.secret)" \
+> uci set zerotier.sample_config.allow_managed='1'\
+> uci set zerotier.sample_config.allow_global='0'\
+> uci set zerotier.sample_config.allow_default='0'\
+> uci set zerotier.sample_config.allow_dns='0'\
+> uci commit zerotier
+> 
+> // reboot module to take effect ?\
+> Still missing firewall & network interface config to complete installation
 
 # Troubleshooting
 In case you brick the modem you can try to send 1.8v to the test point on the back of the modem (see attached image)
