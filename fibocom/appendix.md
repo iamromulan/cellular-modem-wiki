@@ -23,7 +23,7 @@
 > Manual toolkit installation via ADB \
 > cd /tmp && wget -O rcPCIe_SDXPINN_toolkit.sh https://raw.githubusercontent.com/iamromulan/quectel-rgmii-toolkit/SDXPINN/rcPCIe_SDXPINN_toolkit.sh && chmod +x rcPCIe_SDXPINN_toolkit.sh && ./rcPCIe_SDXPINN_toolkit.sh && cd /
 
-# Install zerotier WORK IN PROGRESS
+# Install ZeroTier \# WORK IN PROGRESS \#
 > Use ssh console at http://192.168.224.1/cgi-bin/luci/admin/services/ttyd
 > 
 > opkg remove luci-app-zerotier\
