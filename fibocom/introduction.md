@@ -25,14 +25,16 @@ Fibocom Modem Wiki
 > The FM190W (hardware version 01, rev4) is delivered in AT+GTUSBMODE=32 functionality and exposes 4 serial ports and you will get DIAG + MODEM + AT + PIPE + RMNET functionality. In case you need to change GTUSBMODE consult Fibocom AT Commands pdf guide on https://github.com/KFOq/Doc/blob/main/Fibocom_AT%20Commands%20User%20Manual_MBB_V2.4.pdf and use the serial port application (i.e TeraTerm) to send specific AT commands.
 
 # Launch QuecDeploy
+You'll need a bunch of ubi files and others along with a firehose folder. Copy everything in there into the firehose folder. Make sure the path to the firmware doesn't have any spaces in it at all.\
+  - "C:\Users\user name\firmware" is bad.\
+  - "C:\Users\username\firmware" is good.\
+  - This is why I just use C:\Quectel for QuecDeploy.
 
-- Goto Firmware downloads -> RM551E-GL -> R01 -> Custom Firmware -> Select the needed version
+- Goto Firmware downloads -> RM551E-GL -> R01 -> Custom Firmware -> Select "basic_eth" file if you plan to use the RM551E-GL in an ethernet sled.
 - The zip file will be downloaded to "C:\Quectel\firmware\RM551EGL\R01\Custom\<version>_iamromulan_basic_eth".
-- Use "basic_eth" file if you plan to use the RM551E-GL in an ethernet sled.
 
 > [!NOTE]
-> You'll need a bunch of ubi files and others along with a firehose folder. Copy everything in there into the firehose folder. Make sure the path to the firmware doesn't have any spaces in it at all, like "C:\Users\user name\firmware" is bad. "C:\Users\username\firmware" is good. This is why I just use C:.\
-> This is why I just use C:\Quectel for QuecDeploy.
+> 
 
 # QFIL Configuration & Usage
 
