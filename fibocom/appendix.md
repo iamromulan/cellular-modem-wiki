@@ -25,6 +25,8 @@
 
 # Install zerotier WORK IN PROGRESS
 > Use ssh console at http://192.168.224.1/cgi-bin/luci/admin/services/ttyd
+>> opkg remove luci-app-zerotier\
+>> rm /etc/config/zerotier\
 >> opkg update\
 >> opkg install luci-app-zerotier\
 >> uci set zerotier.sample_config.enabled='1'\
