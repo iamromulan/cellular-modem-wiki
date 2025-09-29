@@ -1,6 +1,6 @@
 # APPEDIX
 
-# ADB operations
+# ADB Operations
 
 > Launch PoweShell-> C:\Windows\system32> \
 > adb devices\
