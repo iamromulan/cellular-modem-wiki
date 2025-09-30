@@ -11,13 +11,11 @@ Welcome to the Quectel Modem Wiki! For each modem I am in possession of I create
 > :point_down: Looking for the M.2 modem direct to ethernet guide? There's now a separate guide for each platform!
 
 - [Introduction](./introduction.md)
-- Flashing Firmware
-	- [Windows](./flash_firmware_windows.md)
-	- Linux/OpenWRT (needs added)
-- Sending AT Commands
-	- [Windows](qnavagator_guide.md)
-	- Linux/OpenWRT (needs added)
-- [Common AT Commands](./Quectel_AT_list.md) 
+- [Preparing enviroment](./prepare_env.md)
+- [Backup Actual Firmware](./backup.md)
+- [Flashing Firmware](./flash_firmware_windows.md)
+- [Sending AT Commands](qnavigator_guide.md)
+    - [Common AT Commands](./Quectel_AT_list.md) 
 - [Form Factors](./formfactors.md)
 	- [Quectel M.2 Modems](./m.2_formfactor.md) ( :arrow_left: Basics/Getting Started and more)
 		- [SDXPRAIRIE Platform](./sdxprairie/README.md):
