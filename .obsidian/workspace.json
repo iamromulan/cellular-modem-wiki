@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "quectel/sdxlemur/sdxlemur_enter_EDL_mode.md",
+                "file": "README.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "sdxlemur_enter_EDL_mode"
+              "title": "README"
             }
           }
         ]
@@ -161,6 +161,7 @@
   },
   "left-ribbon": {
     "hiddenItems": {
+      "bases:Create new base": false,
       "switcher:Open quick switcher": false,
       "graph:Open graph view": false,
       "canvas:Create new canvas": false,
@@ -171,6 +172,7 @@
   },
   "active": "8f9d3ac052428f77",
   "lastOpenFiles": [
+    "quectel/sdxlemur/sdxlemur_enter_EDL_mode.md",
     "quectel/sdxprairie/sdxprairie_enter_EDL_mode.md",
     "quectel/sdxpinn/sdxpinn_enter_EDL_mode.md",
     "quectel/Quectel_AT_list.md",
@@ -196,7 +198,6 @@
     "quectel/sdxpinn/RM551E-GL.md",
     "quectel/sdxpinn/RM550V-GL.md",
     "quectel/sdxpinn/README.md",
-    "quectel/sdxlemur/sdxlemur_m.2_to_eth.md",
     "quectel/sdxlemur/images/iamromulantoolkit.png",
     "quectel/sdxlemur/images/iamromulantoolkit.png.crdownload",
     "quectel/sdxprairie/images/iamromulantoolkit.png",

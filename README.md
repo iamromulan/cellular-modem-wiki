@@ -21,6 +21,8 @@ To keeps things nice, this wiki will be organized into sub-wikis based on modem 
 
 # :arrow_right: [Forums/Discussions](https://github.com/iamromulan/cellular-modem-wiki/discussions):arrow_left:
 
+# :arrow_right: [Our Brand new Discord Group/Server](https://discord.gg/vGjJEMTDb5):arrow_left:
+
 # :arrow_right: [Mega Public Folder](https://mega.nz/folder/CRFWlIpQ#grOByBgkfZe5uLMkX2M2XA) :arrow_left:
 # Contributing
 
